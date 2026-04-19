@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DevLog — Blog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+  <!-- marked.js for markdown rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    /* ── Loading / Error states ── */
+    .page-loading {
+      position: fixed; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 14px;
+      background: var(--bg); z-index: 100;
+      transition: opacity .3s ease;
+    }
+    .page-loading.hidden { opacity: 0; pointer-events: none; }
+    .loading-logo {
+      font-family: var(--font-serif);
+      font-size: 1.2rem; font-weight: 600;
+      color: var(--text-primary);
+    }
+    .loading-spinner {
+      width: 28px; height: 28px;
+      border: 2px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+    }
+    .loading-text { font-size: .82rem; color: var(--text-faint); }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .error-state {
+      max-width: 480px; margin: 80px auto; padding: 0 24px;
+      text-align: center; display: none;
+    }
+    .error-state.show { display: block; }
+    .error-state h2 {
+      font-family: var(--font-serif); font-size: 1.4rem;
+      color: var(--text-primary); margin-bottom: 12px;
+    }
+    .error-state p { font-size: .9rem; color: var(--text-muted); line-height: 1.7; }
+    .error-state code {
+      font-family: var(--font-mono); font-size: .82em;
+      background: var(--surface-2); border: 1px solid var(--border);
+      color: var(--accent); padding: .1em .4em; border-radius: 4px;
+    }
+
+    /* ── Rendered Markdown in content-body ── */
+    .content-body h1 { display: none; } /* suppress H1 since part-title handles it */
+
+    /* Override marked defaults to match our design system */
+    .content-body blockquote {
+      border-left: 3px solid var(--accent);
+      padding: 10px 16px; margin: 1.4em 0;
+      background: var(--accent-soft);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-style: italic;
+    }
+    .content-body blockquote p { color: var(--text-muted); margin: 0; }
+    .content-body table {
+      width: 100%; border-collapse: collapse; font-size: .88rem;
+      margin: 1.4em 0; border: 1px solid var(--border);
+      border-radius: var(--radius-sm); overflow: hidden;
+    }
+    .content-body th {
+      background: var(--surface-2); padding: 8px 14px;
+      text-align: left; font-weight: 600; font-size: .8rem;
+      color: var(--text-primary); border-bottom: 1px solid var(--border);
+    }
+    .content-body td {
+      padding: 8px 14px; border-bottom: 1px solid var(--border);
+      color: var(--text-body);
+    }
+    .content-body tr:last-child td { border-bottom: none; }
+    .content-body pre {
+      margin: 1.6em 0;
+      border-radius: var(--radius-md); overflow: hidden;
+      box-shadow: var(--shadow-md), 0 0 0 1px var(--code-border);
+      background: var(--code-bg) !important;
+    }
+    .content-body pre code {
+      font-family: var(--font-mono) !important;
+      font-size: .8rem !important; line-height: 1.8 !important;
+      color: var(--code-text) !important;
+      background: none !important; border: none !important;
+      padding: 18px 20px !important; display: block !important;
+      overflow-x: auto !important; white-space: pre !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Loading overlay -->
+  <div class="page-loading" id="pageLoading">
+    <div class="loading-logo">DevLog</div>
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Memuat konten...</div>
+  </div>
+
+  <!-- ═══ NAVBAR ═══ -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../index.html" class="site-logo">
+        DevLog
+        <span class="logo-badge" id="navBadge">Blog</span>
+      </a>
+      <nav class="header-nav">
+        <a href="../../index.html">Beranda</a>
+        <a href="#" class="active" id="navTopicLink">Loading...</a>
+      </nav>
+      <div class="header-right">
+        <div class="header-meta" id="navMeta"></div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle Dark Mode">
+          <svg id="themeToggleIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="top-progress"><div class="top-progress-fill" id="topFill"></div></div>
+
+  <!-- Error state (shown if fetch fails) -->
+  <div class="error-state" id="errorState" style="padding-top: calc(var(--nav-h) + 80px);">
+    <h2>Konten tidak ditemukan</h2>
+    <p id="errorMsg">Gagal memuat konten blog. Pastikan file <code>parts.json</code> sudah ada di repository dan konfigurasi sudah benar.</p>
+    <br />
+    <a href="../../index.html" class="btn" style="display:inline-flex;align-items:center;gap:7px;">← Kembali ke Beranda</a>
+  </div>
+
+  <!-- ═══ BLOG LAYOUT (rendered dynamically) ═══ -->
+  <div class="blog-layout" id="blogLayout" style="display:none;">
+
+    <!-- LEFT SIDEBAR -->
+    <nav class="left-sidebar" aria-label="Navigasi Part">
+      <a href="../../index.html" class="sidebar-back">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Kembali
+      </a>
+      <p class="sidebar-section-label" id="sidebarTopicLabel">Blog</p>
+      <ul class="part-nav" id="partNav"></ul>
+    </nav>
+
+    <!-- MAIN -->
+    <div>
+      <main class="main-content" id="mainContent"></main>
+
+      <footer class="site-footer">
+        <div class="footer-inner">
+          <div class="footer-brand">
+            <a href="../../index.html" class="site-logo" style="font-family:var(--font-serif);font-size:1.05rem;font-weight:600;">
+              DevLog <span class="logo-badge" id="footerBadge">Blog</span>
+            </a>
+            <p id="footerDesc">Dokumentasi perjalanan belajar.</p>
+          </div>
+          <div>
+            <p class="footer-col-title">Part</p>
+            <ul class="footer-links" id="footerPartLinks"></ul>
+          </div>
+          <div>
+            <p class="footer-col-title">Tautan</p>
+            <ul class="footer-links">
+              <li><a href="../../index.html">← Beranda</a></li>
+              <li><a href="https://github.com/" target="_blank">GitHub</a></li>
+            </ul>
+          </div>
+          <div class="footer-bottom">
+            <span>© 2025 DevLog</span>
+            <span>SMK · RPL · Dibuat dengan ☕</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+  </div>
+
+  <script src="../../assets/js/main.js"></script>
+  <script>
+  /* ═══════════════════════════════════════════════════
+     BLOG READER — fetch parts.json → render dinamis
+  ═══════════════════════════════════════════════════ */
+
+  // Konfigurasi — sesuaikan dengan repo lo
+  // Format: https://raw.githubusercontent.com/{username}/{repo}/{branch}/
+  const CONFIG = {
+    // Ambil dari URL param ?topic=laravel, fallback ke 'laravel'
+    topicId:  new URLSearchParams(location.search).get('topic') || detectTopicFromPath(),
+    // Raw GitHub base URL — GANTI ini sesuai username dan repo kamu
+    // Atau biarkan kosong ('') untuk mode local file (buka langsung dari folder)
+    rawBase: '',
+    // Contoh jika sudah deploy:
+    // rawBase: 'https://raw.githubusercontent.com/username/devlog/main/',
+  };
+
+  function detectTopicFromPath() {
+    // Auto-detect dari path: blog/laravel/index.html → 'laravel'
+    const parts = location.pathname.split('/');
+    const blogIdx = parts.indexOf('blog');
+    if (blogIdx !== -1 && parts[blogIdx + 1]) return parts[blogIdx + 1];
+    return 'laravel';
+  }
+
+  async function loadBlog() {
+    const { topicId, rawBase } = CONFIG;
+
+    try {
+      // Determine data URL
+      let dataUrl;
+      if (rawBase) {
+        dataUrl = `${rawBase}data/${topicId}/parts.json`;
+      } else {
+        // Local — path relatif dari blog/[topicId]/ ke data/
+        dataUrl = `../../data/${topicId}/parts.json`;
+      }
+
+      const res  = await fetch(dataUrl + '?t=' + Date.now()); // cache bust
+      if (!res.ok) throw new Error(`HTTP ${res.status} — ${dataUrl}`);
+      const data = await res.json();
+
+      renderBlog(data, topicId);
+
+    } catch(e) {
+      document.getElementById('errorMsg').textContent =
+        `Error: ${e.message}. Pastikan file data/${topicId}/parts.json ada dan dapat diakses.`;
+      document.getElementById('errorState').classList.add('show');
+      document.getElementById('pageLoading').classList.add('hidden');
+    }
+  }
+
+  function renderBlog(data, topicId) {
+    const parts = data.parts || [];
+
+    // Update nav + meta
+    document.title = `DevLog — ${data.title || topicId}`;
+    document.getElementById('navBadge').textContent      = topicId.charAt(0).toUpperCase() + topicId.slice(1);
+    document.getElementById('navTopicLink').textContent  = data.title || topicId;
+    document.getElementById('sidebarTopicLabel').textContent = data.title || topicId;
+    document.getElementById('footerBadge').textContent   = topicId.charAt(0).toUpperCase() + topicId.slice(1);
+    document.getElementById('footerDesc').textContent    = `Dokumentasi belajar ${data.title || topicId}.`;
+
+    // Render sidebar nav
+    const partNav = document.getElementById('partNav');
+    partNav.innerHTML = parts.map((part, idx) => `
+      <li>
+        <a href="#part-${part.id || idx}" data-part="part-${part.id || idx}">
+          <span class="part-num">${part.partNumber ?? idx}</span>
+          ${escHtml(part.title)}
+        </a>
+        <ul class="toc-sub ${idx === 0 ? 'open' : ''}" id="toc-part-${part.id || idx}">
+          ${extractHeadings(part.content).map(h =>
+            `<li><a href="#${h.id}">${escHtml(h.text)}</a></li>`
+          ).join('')}
+        </ul>
+      </li>
+    `).join('');
+
+    // Render footer part links
+    document.getElementById('footerPartLinks').innerHTML = parts.map((part, idx) =>
+      `<li><a href="#part-${part.id || idx}">${part.partNumber ?? idx} — ${escHtml(part.title)}</a></li>`
+    ).join('');
+
+    // Render main content
+    const main = document.getElementById('mainContent');
+    main.innerHTML = parts.map((part, idx) => renderPart(part, idx, parts.length)).join('');
+
+    // Show layout, hide loading
+    document.getElementById('blogLayout').style.display = 'grid';
+    requestAnimationFrame(() => {
+      document.getElementById('pageLoading').classList.add('hidden');
+    });
+  }
+
+  function renderPart(part, idx, total) {
+    const partId  = `part-${part.id || idx}`;
+    const prevIdx = idx - 1;
+    const nextIdx = idx + 1;
+
+    // Render markdown content
+    marked.setOptions({ breaks: true, gfm: true });
+    const htmlContent = marked.parse(part.content || '');
+
+    // Objectives
+    const objectivesHtml = part.objectives && part.objectives.length ? `
+      <div class="objectives-box">
+        <div class="objectives-header">🎯 Tujuan Pembelajaran</div>
+        <div class="objectives-body">
+          <ul>${part.objectives.map(o => `<li>${escHtml(o)}</li>`).join('')}</ul>
+        </div>
+      </div>
+    ` : '';
+
+    // Reflection
+    const reflectionHtml = part.reflection && part.reflection.length ? `
+      <div class="reflection-box">
+        <p class="reflection-header">Refleksi</p>
+        <ul class="reflection-questions">
+          ${part.reflection.map(q => `<li>${escHtml(q)}</li>`).join('')}
+        </ul>
+      </div>
+    ` : '';
+
+    // References
+    const refsHtml = part.references && part.references.length ? `
+      <div class="references-box">
+        <div class="references-header">📚 Referensi</div>
+        <ul class="references-list">
+          ${part.references.map((ref, i) => `
+            <li>
+              <span class="ref-num">${ref.num || i+1}</span>
+              <span class="ref-text">
+                ${ref.url
+                  ? `<a href="${escHtml(ref.url)}" target="_blank" rel="noopener">${escHtml(ref.text)}</a>`
+                  : escHtml(ref.text)
+                }
+              </span>
+            </li>
+          `).join('')}
+        </ul>
+      </div>
+    ` : '';
+
+    // Tags
+    const tagsHtml = part.tags && part.tags.length ? `
+      <div class="tag-row">
+        ${part.tags.map(t => `<span class="tag">${escHtml(t)}</span>`).join('')}
+      </div>
+    ` : '';
+
+    // Prev/Next nav
+    const prevHtml = prevIdx >= 0 ? `
+      <a href="#part-${part.id ? allPartIds[prevIdx] : prevIdx}" class="part-nav-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Part ${prevIdx}
+      </a>
+    ` : '<span></span>';
+
+    const nextHtml = nextIdx < total ? `
+      <a href="#part-${part.id ? allPartIds[nextIdx] : nextIdx}" class="part-nav-btn next">
+        Part ${nextIdx}
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    ` : `
+      <a href="../../index.html" class="part-nav-btn next">
+        Kembali ke Beranda
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    `;
+
+    return `
+      <section class="part-section" id="${partId}">
+        <div class="part-header">
+          <p class="part-label">
+            <span class="part-label-line"></span>
+            ${escHtml(part.label || `Part ${idx}`)}
+          </p>
+          <h1 class="part-title">${escHtml(part.title)}</h1>
+          <div class="part-meta">
+            <span class="part-meta-item">📅 ${escHtml(part.date || '')}</span>
+            <span class="meta-dot"></span>
+            <span class="part-meta-item">⏱ ~${escHtml(String(part.readTime || '?'))} menit</span>
+            <span class="meta-dot"></span>
+            <span class="part-meta-item">🏷 ${escHtml(part.type || 'Teori')}</span>
+          </div>
+          ${part.intro ? `<div class="part-intro">${escHtml(part.intro)}</div>` : ''}
+        </div>
+
+        <div class="content-body">
+          ${objectivesHtml}
+          ${htmlContent}
+        </div>
+
+        ${reflectionHtml}
+        ${refsHtml}
+        ${tagsHtml}
+
+        <div class="part-footer-nav">
+          ${prevHtml}
+          ${nextHtml}
+        </div>
+      </section>
+    `;
+  }
+
+  // Extract H2/H3 headings from markdown for ToC
+  function extractHeadings(md) {
+    if (!md) return [];
+    const headings = [];
+    const lines = md.split('\n');
+    lines.forEach(line => {
+      const m = line.match(/^(#{2,3})\s+(.+)/);
+      if (m) {
+        const text = m[2].trim();
+        const id   = text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+        headings.push({ level: m[1].length, text, id });
+      }
+    });
+    return headings;
+  }
+
+  // Collect all part IDs for nav (used in prev/next)
+  let allPartIds = [];
+
+  function escHtml(str) {
+    return String(str)
+      .replace(/&/g,'&amp;').replace(/"/g,'&quot;')
+      .replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  // Kick off
+  loadBlog();
+  </script>
+</body>
+</html>

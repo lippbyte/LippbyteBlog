@@ -1,0 +1,12 @@
+[
+  {
+    "id": "laravel",
+    "title": "Dokumentasi Belajar Laravel",
+    "category": "PHP · Framework",
+    "description": "Catatan lengkap belajar Laravel dari nol — pengenalan MVC, routing, Eloquent ORM, CRUD, autentikasi, hingga deployment.",
+    "emoji": "⚡",
+    "color": "linear-gradient(135deg, #ff6b35 0%, #e8441a 55%, #c73a14 100%)",
+    "status": "active",
+    "year": "2025"
+  }
+]
