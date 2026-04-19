@@ -1,32 +1,23 @@
-<!-- Highlight text/bold/strong -->
-<strong class="font-semibold text-text-primary">
-<em>
+Setelah menjalankan tes manual, ada beberapa hal yang perlu diperbaiki:
+walaupun bukan bug yang fatal, tapi mengganggu kenyamanan gua sebagai penulis, terutama pada estetika:
+1. pada mentadata atau info dasar id/slug, beberapa sudah live preview, kecuali:
+    - tipe
+    - refleksi
+    - referensi
+    - tags
 
-<!-- -Image (atur ukuran) -->
-<figure class="my-8">
-              <div class="img-image text-sm">
-                <img src="img/frameworkphp.jpg" alt="Framework PHP">
-              </div>
-              <figcaption class="text-center text-xs text-text-faint mt-2 italic"><strong>Gambar 1</strong> — Framework PHP.</figcaption>
-            </figure>
+2. Pada kolom split ataupun preview, tambahkan supaya antarmuka bisa discroll ke bawah, 
+karena saat ini hanya bisa scroll terbatas pada konten yang sudah di tulis, tambahkan sedikit space agar tidak kaku
 
-<!-- -Fun fact (Catatan) -->
-<div class="callout callout-note">
-              <span class="callout-icon text-base shrink-0 leading-7">💡</span>
-              <div class="callout-body flex-1">
-                <p class="callout-title text-\[.73rem] font-bold tracking-wider uppercase mb-1">Fun Fact</p>
-                <p class="text-sm leading-relaxed">Hingga awal 2026, repositori utama Laravel telah melampaui 80.000+ stars, menjadikannya framework PHP dengan dukungan komunitas terbesar di platform tersebut.</p>
-              </div>
-            </div>
+3. Ini yang paling menggangu gua, yaitu warna dan font pada preview tidak sesuai dengan template, 
+terutama pada dark mode, warna font tidak terbaca, dan juga font nya terlalu besar, 
+perbaiki agar sesuai dengan template yang ada di folder template
 
-<!-- -menulis <> gunakan &lt; -->
+4. Semua elemen sesuaikan dengan template yang ada di folder template
 
-<!-- -menulis code/terminal -->
-<div class="code-block"><div class="code-titlebar"><div class="traffic-lights flex items-center gap-1.5"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
-            </div><span class="code-filename font-mono text-xs text-zinc-500">web.php</span></div><pre><code>
-//code disini
-          </code></pre></div>
 
-<!-- -membuat poin poin/list -->
-<ul class="pl-6">
-<li><strong class="font-semibold text-text-primary">
+Ada beberapa pertanyaan gua selanjutnya, yang lebih teknis mengarah ke konten:
+1. setelah berhasil kirim ke github, selanjutnya apa yang harus dilakukan?
+2. apakah langsung merge? atau ada proses lain?
+3. dimana blog yang telah dibuat dapat dilihat? apakah mirip dengan blog lainnya yang telah manual gua buat?
+
