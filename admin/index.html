@@ -4,8 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lippbyte Admin — CMS Panel</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      corePlugins: { preflight: false },
+      theme: {
+        extend: {
+          fontFamily: { serif: ['Lora','serif'], sans: ['DM Sans','sans-serif'], mono: ['JetBrains Mono','monospace'] },
+          colors: {
+            bg: 'var(--bg)', surface: 'var(--surface)', 'surface-2': 'var(--surface-2)',
+            border: 'var(--border)', 'border-strong': 'var(--border-strong)',
+            'text-primary': 'var(--text-primary)', 'text-body': 'var(--text-body)',
+            'text-muted': 'var(--text-muted)', 'text-faint': 'var(--text-faint)',
+            accent: 'var(--accent)', 'accent-hover': 'var(--accent-hover)',
+            'accent-soft': 'var(--accent-soft)', 'accent-mid': 'var(--accent-mid)',
+          }
+        }
+      }
+    }
+  </script>
   <!-- Link relative to your blog's UI for accurate preview matching -->
   <link rel="stylesheet" href="../blog/template/css/style.css" id="previewCss" />
   <style>
@@ -62,10 +82,10 @@
     .panes { flex: 1; display: flex; overflow: hidden; }
     .pane-write, .pane-preview { flex: 1; height: 100%; display: flex; flex-direction: column; overflow: hidden; }
     .pane-write { border-right: 1px solid var(--cms-border); }
-    .pane-write textarea { flex: 1; background: var(--cms-bg); color: var(--cms-text); border: none; padding: 20px; font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.6; resize: none; outline: none; overflow-y: auto; }
-    .pane-preview { padding: 40px; background: var(--cms-bg); color: var(--cms-text); overflow-y: auto; }
+    .pane-write textarea { flex: 1; background: var(--cms-bg); color: var(--cms-text); border: none; padding: 20px 20px 50vh 20px; font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.6; resize: none; outline: none; overflow-y: auto; }
+    .pane-preview { padding: 40px 40px 50vh 40px; background: var(--bg); color: var(--text-body); overflow-y: auto; font-family: 'DM Sans', sans-serif; font-size: 16px; line-height: 1.75; }
     
-    .meta-panel { width: 320px; border-left: 1px solid var(--cms-border); background: var(--cms-surface); display: flex; flex-direction: column; overflow-y: auto; }
+    .meta-panel { width: 320px; border-left: 1px solid var(--cms-border); background: var(--cms-surface); display: flex; flex-direction: column; overflow-y: auto; padding-bottom: 50vh; }
     .meta-section { padding: 15px; border-bottom: 1px solid var(--cms-border); }
     .form-group { margin-bottom: 15px; }
     .form-label { display: block; font-size: 11px; font-weight: 600; color: var(--cms-text-dim); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
@@ -289,6 +309,7 @@
       let saved = localStorage.getItem('lipp_cms');
       let theme = localStorage.getItem('lipp_theme') || 'dark-mode';
       document.body.className = theme;
+      if (theme === 'dark-mode') document.documentElement.className = 'dark';
       
       if(saved) {
         config = JSON.parse(saved);
@@ -299,8 +320,9 @@
     };
     
     function toggleTheme() {
-      let isDark = document.body.className === 'dark-mode';
+      let isDark = document.body.className.includes('dark-mode');
       document.body.className = isDark ? 'light-mode' : 'dark-mode';
+      document.documentElement.className = isDark ? '' : 'dark';
       localStorage.setItem('lipp_theme', document.body.className);
     }
 
@@ -351,7 +373,13 @@
         topics = JSON.parse(atob(res.content));
         let sel = document.getElementById('topicSelect');
         sel.innerHTML = topics.map(t => `<option value="${t.id}">${t.title}</option>`).join('');
-        if(topics.length > 0) { currentTopicId = topics[0].id; await loadTopicData(); }
+        if(topics.length > 0) { 
+          if(!currentTopicId || !topics.find(t=>t.id===currentTopicId)) {
+            currentTopicId = topics[0].id; 
+          }
+          sel.value = currentTopicId;
+          await loadTopicData(); 
+        }
       } catch(e) {
         console.error(e); showToast('Gagal muat topics.json. Cek Token/Repo.');
       }
@@ -382,6 +410,7 @@
       await ghReq(`data/${id}/parts.json`, 'PUT', JSON.stringify(defaultParts, null, 2));
       await ghReq(`data/${id}/meta.json`, 'PUT', JSON.stringify({id, title}, null, 2));
       
+      currentTopicId = id; // Set the newly created topic as the active one
       showToast('Topik dibuat! Silakan tambah Part.');
       initData();
     }
@@ -484,15 +513,21 @@
       
       let objHtml = '';
       if(p.objectives.length>0) {
-        objHtml = `<div class="objectives-box"><div class="objectives-header text-[.72rem] font-bold tracking-[.1em] uppercase text-text-muted">🎯 Tujuan Pembelajaran</div><div class="objectives-body p-4"><ul class="pl-5">${p.objectives.map(o=>`<li class="text-sm text-text-body py-0.5">${o}</li>`).join('')}</ul></div></div>`;
+        objHtml = `<div class="objectives-box"><div class="objectives-header text-[.72rem] font-bold tracking-[.1em] uppercase text-text-muted">🎯 Tujuan Pembelajaran</div><div class="objectives-body p-4"><ul class="pl-5">${p.objectives.map(o=>`<li class="text-sm text-text-body py-0.5">${escHtml(o)}</li>`).join('')}</ul></div></div>`;
       }
       
+      let tagsHtml = p.tags && p.tags.length ? `<div class="tag-row flex flex-wrap gap-1.5 mt-7">${p.tags.map(t=>`<span class="tag text-[.73rem] font-medium px-2.5 py-0.5">${escHtml(t)}</span>`).join('')}</div>` : '';
+      let refHtml = p.reflection && p.reflection.length ? `<div class="reflection-box"><p class="reflection-header flex items-center gap-2.5 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5">Refleksi</p><p class="text-sm text-text-body leading-7 mb-3">Renungkan materi ini:</p><ul class="reflection-questions list-none p-0">${p.reflection.map(r=>`<li class="text-sm text-text-muted">${escHtml(r)}</li>`).join('')}</ul></div>` : '';
+      let refsLst = p.references && p.references.length ? `<div class="references-box"><div class="references-header text-[.72rem] font-bold tracking-[.1em] uppercase text-text-muted">📚 Referensi</div><ul class="references-list list-none p-0 m-0">${p.references.map((r,i)=>`<li class="p-3 flex items-start gap-2.5 text-sm"><span class="ref-num text-[.72rem] font-bold shrink-0 mt-0.5">${escHtml(r.num)||i+1}</span><span class="ref-text text-text-muted leading-relaxed">${r.url?`<a href="${r.url}" target="_blank" class="text-accent font-medium">${escHtml(r.text)}</a>`:escHtml(r.text)}</span></li>`).join('')}</ul></div>` : '';
+
       html += `<div class="content-body" style="font-size:16px; line-height:1.8; color:var(--text-body);">${objHtml}${marked.parse(p.content||'')}</div>`;
+      html += refHtml + refsLst + tagsHtml;
       
       document.getElementById('previewContent').innerHTML = html;
     }
 
     document.getElementById('mdEditor').addEventListener('input', updatePreview);
+    document.querySelectorAll('.meta-panel input, .meta-panel textarea, .meta-panel select').forEach(el => el.addEventListener('change', updatePreview));
     document.querySelectorAll('.meta-panel input, .meta-panel textarea').forEach(el => el.addEventListener('input', updatePreview));
 
     function setView(mode) {

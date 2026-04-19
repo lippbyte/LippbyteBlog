@@ -1,0 +1,52 @@
+{
+  "topic": "ultramilk-stroberi",
+  "title": "Ultramilk Stroberi",
+  "updatedAt": "2026-04-19T14:33:50.721Z",
+  "parts": [
+    {
+      "id": "pendahuluan",
+      "partNumber": 0,
+      "title": "Ultramilk Stroberi",
+      "label": "Percobaan",
+      "type": "Teori",
+      "date": "2026-04-12",
+      "readTime": "12",
+      "intro": "ultramilk varian stroberi adalah rasa terenak menurut admin",
+      "tags": [
+        "Ultramilk",
+        "Susu",
+        "Pink"
+      ],
+      "objectives": [
+        "mengetahui alasan admin menyukai ultramilk stroberi",
+        "ini tujuan kedua "
+      ],
+      "reflection": [
+        "kita dapat mengetahui nya sekarang"
+      ],
+      "references": [
+        {
+          "num": "1",
+          "text": "contoh",
+          "url": "https://percobaan.com"
+        }
+      ],
+      "content": "**admin menyukai stroberi karena rasanya enak.**\n*stroberi punya rasa manis, tapi gak kemanisan*\n`ultramilk adalah produk yang menjual susu cair`\n## salah satu varian nya adalah rasa stroberi\n### dengan warna pink pada kemasan\n- walaupun ultramilk fullcream juga enak,\n> **Catatan**\n> tetapi admin lebih menyukai rasa stroberi yang segar dan nikmat\n```php\noleh karena itu admin menyukai ultramilk stroberi\n```"
+    },
+    {
+      "id": "part-1",
+      "partNumber": 1,
+      "title": "Judul Baru",
+      "label": "Part 1",
+      "type": "Teori",
+      "date": "2026-04-19",
+      "readTime": "10",
+      "intro": "",
+      "tags": [],
+      "objectives": [],
+      "reflection": [],
+      "references": [],
+      "content": ""
+    }
+  ]
+}
