@@ -351,7 +351,13 @@
         topics = JSON.parse(atob(res.content));
         let sel = document.getElementById('topicSelect');
         sel.innerHTML = topics.map(t => `<option value="${t.id}">${t.title}</option>`).join('');
-        if(topics.length > 0) { currentTopicId = topics[0].id; await loadTopicData(); }
+        if(topics.length > 0) { 
+          if(!currentTopicId || !topics.find(t=>t.id===currentTopicId)) {
+            currentTopicId = topics[0].id; 
+          }
+          sel.value = currentTopicId;
+          await loadTopicData(); 
+        }
       } catch(e) {
         console.error(e); showToast('Gagal muat topics.json. Cek Token/Repo.');
       }
@@ -382,6 +388,7 @@
       await ghReq(`data/${id}/parts.json`, 'PUT', JSON.stringify(defaultParts, null, 2));
       await ghReq(`data/${id}/meta.json`, 'PUT', JSON.stringify({id, title}, null, 2));
       
+      currentTopicId = id; // Set the newly created topic as the active one
       showToast('Topik dibuat! Silakan tambah Part.');
       initData();
     }
