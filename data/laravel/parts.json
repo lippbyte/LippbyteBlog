@@ -1,0 +1,61 @@
+{
+  "topic": "laravel",
+  "title": "Dokumentasi Belajar Laravel",
+  "updatedAt": "2026-04-19T13:47:52.443Z",
+  "parts": [
+    {
+      "id": "pengenalan",
+      "partNumber": 0,
+      "title": "Pengenalan Laravel",
+      "label": "Pendahuluan",
+      "type": "Teori",
+      "date": "2025-04-03",
+      "readTime": "10",
+      "intro": "Sebelum mulai menulis kode, penting untuk memahami apa itu Laravel, mengapa framework ini digunakan secara luas, dan bagaimana ia membantu developer membangun aplikasi web lebih cepat.",
+      "tags": [
+        "Laravel",
+        "PHP",
+        "MVC",
+        "Framework"
+      ],
+      "objectives": [
+        "Memahami definisi dan sejarah singkat Laravel sebagai PHP framework",
+        "Mengenal fitur-fitur utama yang membuat Laravel populer",
+        "Memahami konsep arsitektur MVC (Model-View-Controller)"
+      ],
+      "reflection": [
+        "Apa perbedaan mendasar antara PHP murni dan menggunakan framework seperti Laravel?",
+        "Dalam arsitektur MVC, bagian mana yang paling berperan saat user mengklik tombol Login?",
+        "Mengapa pemisahan tanggung jawab (separation of concerns) itu penting?"
+      ],
+      "references": [
+        {
+          "num": "1",
+          "text": "Laravel Official Documentation",
+          "url": "https://laravel.com/docs"
+        },
+        {
+          "num": "2",
+          "text": "Laracasts â Platform video tutorial Laravel",
+          "url": "https://laracasts.com"
+        }
+      ],
+      "content": "## Apa itu Laravel?\n\n**Laravel** adalah PHP web framework open-source yang dibuat oleh **Taylor Otwell** dan pertama dirilis tahun 2011. Laravel dirancang agar pengembangan web terasa menyenangkan tanpa mengorbankan fungsionalitas.\n\nFramework ini mengikuti pola arsitektur **MVC** dan menyediakan berbagai fitur bawaan â routing, autentikasi, session, caching â sehingga developer tidak perlu membangun semuanya dari nol.\n\n## Fitur Unggulan\n\n- **Eloquent ORM** â Interaksi database elegan dengan pendekatan Active Record.\n- **Blade Templating** â Template engine powerful yang mendukung inheritance.\n- **Artisan CLI** â Command-line tool bawaan untuk mempercepat development.\n- **Migrations** â Version control untuk skema database.\n\n## Arsitektur MVC\n\nLaravel menggunakan pola **Model-View-Controller** dengan pemisahan tanggung jawab yang jelas:\n\n- **Model** â Data dan logika bisnis, berinteraksi dengan database via Eloquent.\n- **View** â Tampilan yang dilihat pengguna, ditulis dengan Blade.\n- **Controller** â Penghubung Model dan View, memproses request dan mengembalikan response."
+    },
+    {
+      "id": "part-1",
+      "partNumber": 1,
+      "title": "Judul Baru",
+      "label": "Part 1",
+      "type": "Teori",
+      "date": "2026-04-19",
+      "readTime": "10",
+      "intro": "",
+      "tags": [],
+      "objectives": [],
+      "reflection": [],
+      "references": [],
+      "content": "Ini adalah teks biasa.\n\n> **Catatan**\n> Ini adalah sebuah info catatan."
+    }
+  ]
+}

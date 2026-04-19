@@ -1,0 +1,32 @@
+<!-- Highlight text/bold/strong -->
+<strong class="font-semibold text-text-primary">
+<em>
+
+<!-- -Image (atur ukuran) -->
+<figure class="my-8">
+              <div class="img-image text-sm">
+                <img src="img/frameworkphp.jpg" alt="Framework PHP">
+              </div>
+              <figcaption class="text-center text-xs text-text-faint mt-2 italic"><strong>Gambar 1</strong> — Framework PHP.</figcaption>
+            </figure>
+
+<!-- -Fun fact (Catatan) -->
+<div class="callout callout-note">
+              <span class="callout-icon text-base shrink-0 leading-7">💡</span>
+              <div class="callout-body flex-1">
+                <p class="callout-title text-\[.73rem] font-bold tracking-wider uppercase mb-1">Fun Fact</p>
+                <p class="text-sm leading-relaxed">Hingga awal 2026, repositori utama Laravel telah melampaui 80.000+ stars, menjadikannya framework PHP dengan dukungan komunitas terbesar di platform tersebut.</p>
+              </div>
+            </div>
+
+<!-- -menulis <> gunakan &lt; -->
+
+<!-- -menulis code/terminal -->
+<div class="code-block"><div class="code-titlebar"><div class="traffic-lights flex items-center gap-1.5"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+            </div><span class="code-filename font-mono text-xs text-zinc-500">web.php</span></div><pre><code>
+//code disini
+          </code></pre></div>
+
+<!-- -membuat poin poin/list -->
+<ul class="pl-6">
+<li><strong class="font-semibold text-text-primary">

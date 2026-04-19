@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DevLog Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <!-- marked.js for markdown parsing -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    :root {
+      --bg:           #0f0f0e;
+      --surface:      #1a1a18;
+      --surface-2:    #242422;
+      --surface-3:    #2e2e2a;
+      --border:       #333330;
+      --border-strong:#4a4a45;
+      --text:         #f0ede8;
+      --text-muted:   #8a8780;
+      --text-faint:   #555450;
+      --accent:       #e8441a;
+      --accent-hover: #f06530;
+      --accent-soft:  #2a1408;
+      --accent-mid:   #4a2010;
+      --green:        #22c55e;
+      --green-soft:   #052e16;
+      --yellow:       #fbbf24;
+      --yellow-soft:  #451a03;
+      --red:          #ef4444;
+      --red-soft:     #450a0a;
+      --radius:       10px;
+      --radius-sm:    6px;
+      --radius-lg:    16px;
+      --font-sans:    'DM Sans', system-ui, sans-serif;
+      --font-serif:   'Lora', serif;
+      --font-mono:    'JetBrains Mono', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: 14px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); text-decoration: none; }
+
+    /* ── Layout ── */
+    .app { display: flex; flex-direction: column; height: 100vh; }
+
+    /* ── Top Bar ── */
+    .topbar {
+      height: 52px; flex-shrink: 0;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 20px; gap: 16px;
+    }
+    .topbar-logo {
+      font-family: var(--font-serif);
+      font-size: 1rem; font-weight: 600;
+      color: var(--text);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .topbar-badge {
+      font-size: .55rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      background: var(--accent); color: #fff;
+      padding: 2px 7px; border-radius: 100px;
+    }
+    .topbar-right { display: flex; align-items: center; gap: 8px; }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 14px; border-radius: var(--radius-sm);
+      font-size: .82rem; font-weight: 600;
+      border: 1px solid var(--border);
+      background: var(--surface-2); color: var(--text-muted);
+      cursor: pointer; transition: all .15s;
+    }
+    .btn:hover { border-color: var(--border-strong); color: var(--text); }
+    .btn-accent {
+      background: var(--accent); color: #fff;
+      border-color: transparent;
+    }
+    .btn-accent:hover { background: var(--accent-hover); color: #fff; }
+    .btn-ghost { background: transparent; border-color: transparent; }
+    .btn-ghost:hover { background: var(--surface-2); border-color: var(--border); }
+    .btn-danger { background: var(--red-soft); color: var(--red); border-color: #7f1d1d; }
+    .btn-danger:hover { background: #7f1d1d; color: #fff; }
+    .btn svg { flex-shrink: 0; }
+
+    /* ── Main content ── */
+    .workspace {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      flex: 1; overflow: hidden;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      overflow: hidden;
+    }
+    .sidebar-header {
+      padding: 14px 16px 10px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .sidebar-title {
+      font-size: .65rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--text-faint);
+    }
+    .topic-tabs {
+      padding: 8px;
+      border-bottom: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .topic-tab {
+      display: flex; align-items: center; gap: 8px;
+      padding: 7px 10px; border-radius: var(--radius-sm);
+      cursor: pointer; transition: background .12s;
+      font-size: .82rem; color: var(--text-muted);
+      border: none; background: none; text-align: left; width: 100%;
+    }
+    .topic-tab:hover { background: var(--surface-2); color: var(--text); }
+    .topic-tab.active { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+    .topic-tab-emoji { font-size: 1rem; flex-shrink: 0; }
+
+    .parts-list {
+      flex: 1; overflow-y: auto; padding: 8px;
+      scrollbar-width: thin; scrollbar-color: var(--border) transparent;
+    }
+    .parts-list-label {
+      font-size: .6rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--text-faint); padding: 6px 8px 4px;
+    }
+    .part-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 10px; border-radius: var(--radius-sm);
+      cursor: pointer; transition: background .12s;
+      border: none; background: none; width: 100%; text-align: left;
+    }
+    .part-item:hover { background: var(--surface-2); }
+    .part-item.active { background: var(--surface-3); }
+    .part-item-num {
+      width: 20px; height: 20px;
+      background: var(--surface-3); border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .65rem; font-weight: 700; color: var(--text-faint);
+      flex-shrink: 0;
+    }
+    .part-item.active .part-item-num { background: var(--accent-mid); color: var(--accent); }
+    .part-item-title {
+      font-size: .82rem; color: var(--text-muted);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      flex: 1;
+    }
+    .part-item.active .part-item-title { color: var(--text); font-weight: 500; }
+
+    .sidebar-footer {
+      padding: 10px 8px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── Editor Area ── */
+    .editor-area {
+      display: flex; flex-direction: column; overflow: hidden;
+    }
+    .editor-toolbar {
+      height: 46px; flex-shrink: 0;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center;
+      padding: 0 16px; gap: 6px;
+    }
+    .toolbar-sep {
+      width: 1px; height: 20px;
+      background: var(--border); margin: 0 4px;
+    }
+    .toolbar-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 30px; height: 30px;
+      border-radius: var(--radius-sm);
+      border: none; background: none;
+      color: var(--text-muted); cursor: pointer;
+      font-family: var(--font-mono); font-size: .8rem;
+      transition: background .12s, color .12s;
+    }
+    .toolbar-btn:hover { background: var(--surface-2); color: var(--text); }
+    .toolbar-btn.active { background: var(--accent-soft); color: var(--accent); }
+    .toolbar-spacer { flex: 1; }
+    .view-toggle {
+      display: flex; border: 1px solid var(--border);
+      border-radius: var(--radius-sm); overflow: hidden;
+    }
+    .view-btn {
+      padding: 5px 12px; font-size: .75rem; font-weight: 500;
+      border: none; background: none; color: var(--text-muted);
+      cursor: pointer; transition: background .12s, color .12s;
+    }
+    .view-btn.active { background: var(--accent); color: #fff; }
+
+    /* ── Editor / Preview pane ── */
+    .editor-body {
+      flex: 1; display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+    }
+    .editor-body.view-editor { grid-template-columns: 1fr 0; }
+    .editor-body.view-preview { grid-template-columns: 0 1fr; }
+
+    .editor-pane {
+      display: flex; flex-direction: column;
+      border-right: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .editor-pane-label {
+      padding: 8px 16px;
+      font-size: .62rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--text-faint);
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    textarea.md-editor {
+      flex: 1; width: 100%; resize: none;
+      background: var(--bg); color: var(--text);
+      border: none; outline: none;
+      font-family: var(--font-mono);
+      font-size: .82rem; line-height: 1.8;
+      padding: 20px 24px;
+      scrollbar-width: thin; scrollbar-color: var(--border) transparent;
+      tab-size: 2;
+    }
+
+    .preview-pane {
+      overflow-y: auto; padding: 24px 32px;
+      background: var(--bg);
+      scrollbar-width: thin; scrollbar-color: var(--border) transparent;
+    }
+    .preview-pane-label {
+      font-size: .62rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--text-faint); margin-bottom: 20px;
+    }
+
+    /* Preview markdown styles */
+    .md-preview h1, .md-preview h2, .md-preview h3 {
+      font-family: var(--font-serif); color: var(--text);
+      margin-top: 1.8em; margin-bottom: .5em; line-height: 1.3;
+    }
+    .md-preview h1 { font-size: 1.5rem; }
+    .md-preview h2 { font-size: 1.2rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+    .md-preview h3 { font-size: 1rem; }
+    .md-preview p { color: var(--text-muted); margin-bottom: .8em; font-size: .9rem; line-height: 1.7; }
+    .md-preview ul, .md-preview ol { padding-left: 1.4em; color: var(--text-muted); margin-bottom: .8em; }
+    .md-preview li { font-size: .9rem; line-height: 1.65; margin-bottom: .2em; }
+    .md-preview strong { color: var(--text); font-weight: 600; }
+    .md-preview code {
+      font-family: var(--font-mono); font-size: .8em;
+      background: var(--surface-2); border: 1px solid var(--border);
+      color: var(--accent); padding: .1em .4em; border-radius: 4px;
+    }
+    .md-preview pre {
+      background: var(--surface-2); border: 1px solid var(--border);
+      border-radius: 8px; padding: 16px; overflow-x: auto; margin: 1em 0;
+    }
+    .md-preview pre code {
+      background: none; border: none; color: #a3e635;
+      padding: 0; font-size: .8rem; line-height: 1.7;
+    }
+    .md-preview blockquote {
+      border-left: 3px solid var(--accent);
+      padding: 8px 16px; margin: 1em 0;
+      background: var(--accent-soft); border-radius: 0 6px 6px 0;
+      color: var(--text-muted);
+    }
+    .md-preview hr { border: none; border-top: 1px solid var(--border); margin: 1.5em 0; }
+    .md-preview a { color: var(--accent); }
+
+    /* ── Metadata panel (right side form) ── */
+    .meta-panel {
+      width: 280px; flex-shrink: 0;
+      background: var(--surface);
+      border-left: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      overflow-y: auto;
+    }
+    .meta-header {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      font-size: .65rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase; color: var(--text-faint);
+    }
+    .meta-body { padding: 16px; display: flex; flex-direction: column; gap: 14px; flex: 1; }
+    .meta-footer {
+      padding: 12px 16px;
+      border-top: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: 8px;
+    }
+
+    .field { display: flex; flex-direction: column; gap: 5px; }
+    .field-label {
+      font-size: .65rem; font-weight: 700;
+      letter-spacing: .08em; text-transform: uppercase;
+      color: var(--text-faint);
+    }
+    .field input, .field textarea, .field select {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text); font-family: var(--font-sans);
+      font-size: .82rem; padding: 7px 10px;
+      outline: none; transition: border-color .15s;
+      width: 100%;
+    }
+    .field input:focus, .field textarea:focus, .field select:focus {
+      border-color: var(--accent);
+    }
+    .field textarea { resize: vertical; min-height: 72px; line-height: 1.5; }
+    .field select option { background: var(--surface); }
+
+    /* Dynamic list fields (objectives, reflection, refs, tags) */
+    .list-field { display: flex; flex-direction: column; gap: 6px; }
+    .list-item {
+      display: flex; align-items: flex-start; gap: 6px;
+    }
+    .list-item input, .list-item textarea {
+      flex: 1; background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text); font-family: var(--font-sans);
+      font-size: .8rem; padding: 6px 8px;
+      outline: none; transition: border-color .15s;
+    }
+    .list-item input:focus, .list-item textarea:focus { border-color: var(--accent); }
+    .list-item-remove {
+      width: 24px; height: 26px; flex-shrink: 0;
+      border: 1px solid var(--border); border-radius: var(--radius-sm);
+      background: none; color: var(--text-faint);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: .9rem; transition: all .12s;
+      margin-top: 1px;
+    }
+    .list-item-remove:hover { background: var(--red-soft); color: var(--red); border-color: #7f1d1d; }
+    .list-add {
+      font-size: .75rem; font-weight: 500; color: var(--accent);
+      background: none; border: 1px dashed var(--border);
+      border-radius: var(--radius-sm); padding: 5px 10px;
+      cursor: pointer; transition: all .12s; width: 100%;
+      text-align: left;
+    }
+    .list-add:hover { border-color: var(--accent); background: var(--accent-soft); }
+
+    /* Status toast */
+    .toast {
+      position: fixed; bottom: 24px; right: 24px; z-index: 999;
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 18px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); box-shadow: 0 8px 30px rgba(0,0,0,.5);
+      font-size: .85rem; font-weight: 500;
+      transform: translateY(12px); opacity: 0;
+      transition: all .25s ease;
+      pointer-events: none;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .toast.success { border-color: #15803d; color: var(--green); }
+    .toast.error   { border-color: #7f1d1d; color: var(--red); }
+    .toast.loading { border-color: var(--border-strong); color: var(--text-muted); }
+
+    /* Setup modal */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 500;
+      background: rgba(0,0,0,.75);
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+    }
+    .modal-overlay.hidden { display: none; }
+    .modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px; width: 100%; max-width: 480px;
+      box-shadow: 0 24px 60px rgba(0,0,0,.6);
+    }
+    .modal h2 {
+      font-family: var(--font-serif);
+      font-size: 1.3rem; margin-bottom: 6px; color: var(--text);
+    }
+    .modal p { font-size: .85rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 20px; }
+    .modal .field { margin-bottom: 14px; }
+    .modal-footer { display: flex; gap: 8px; justify-content: flex-end; margin-top: 24px; }
+    .modal-note {
+      font-size: .78rem; color: var(--text-faint);
+      background: var(--surface-2); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 10px 12px; margin-bottom: 16px;
+      line-height: 1.6;
+    }
+    .modal-note a { color: var(--accent); }
+    .modal-step {
+      display: flex; gap: 10px; align-items: flex-start;
+      margin-bottom: 10px;
+    }
+    .step-num {
+      width: 22px; height: 22px; flex-shrink: 0;
+      background: var(--accent); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .7rem; font-weight: 700; color: #fff;
+    }
+    .step-text { font-size: .82rem; color: var(--text-muted); line-height: 1.55; }
+    .step-text strong { color: var(--text); }
+
+    /* Empty state */
+    .empty-state {
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 12px; color: var(--text-faint); text-align: center;
+      padding: 40px;
+    }
+    .empty-state svg { opacity: .3; }
+    .empty-state p { font-size: .85rem; line-height: 1.6; max-width: 280px; }
+
+    /* New Part modal */
+    .new-part-modal {
+      position: fixed; inset: 0; z-index: 400;
+      background: rgba(0,0,0,.7);
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+    }
+    .new-part-modal.hidden { display: none; }
+    .new-part-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px; width: 100%; max-width: 420px;
+    }
+    .new-part-box h3 { font-family: var(--font-serif); font-size: 1.1rem; margin-bottom: 16px; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    /* Connected badge */
+    .connected-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: .72rem; font-weight: 500;
+      color: var(--green); background: var(--green-soft);
+      border: 1px solid #15803d;
+      padding: 3px 8px; border-radius: 100px;
+    }
+    .connected-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+
+    .disconnected-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: .72rem; font-weight: 500;
+      color: var(--yellow); background: var(--yellow-soft);
+      border: 1px solid #b45309;
+      padding: 3px 8px; border-radius: 100px; cursor: pointer;
+    }
+
+    @media (max-width: 900px) {
+      .workspace { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .meta-panel { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════
+     SETUP MODAL
+═══════════════════════════════════ -->
+<div class="modal-overlay" id="setupModal">
+  <div class="modal">
+    <h2>Setup GitHub Connection</h2>
+    <p>Admin panel ini menggunakan GitHub API untuk menyimpan konten langsung ke repository kamu. Ikuti langkah berikut:</p>
+
+    <div class="modal-step">
+      <span class="step-num">1</span>
+      <span class="step-text">Buka <a href="https://github.com/settings/tokens/new" target="_blank">github.com/settings/tokens/new</a> dan buat <strong>Personal Access Token (Classic)</strong></span>
+    </div>
+    <div class="modal-step">
+      <span class="step-num">2</span>
+      <span class="step-text">Centang scope <strong>repo</strong> (full control of private repositories)</span>
+    </div>
+    <div class="modal-step">
+      <span class="step-num">3</span>
+      <span class="step-text">Copy token-nya dan paste di bawah. Token hanya disimpan di browser kamu (localStorage), tidak dikirim ke server manapun.</span>
+    </div>
+
+    <div class="modal-note">
+      ⚠️ Jangan share token ini ke siapapun. Kalau repo lo <strong>public</strong>, pastikan token hanya punya akses ke repo yang diperlukan saja.
+    </div>
+
+    <div class="field">
+      <label class="field-label">GitHub Username</label>
+      <input type="text" id="setupUsername" placeholder="contoh: johndoe" autocomplete="off" />
+    </div>
+    <div class="field">
+      <label class="field-label">Repository Name</label>
+      <input type="text" id="setupRepo" placeholder="contoh: devlog" autocomplete="off" />
+    </div>
+    <div class="field">
+      <label class="field-label">Branch</label>
+      <input type="text" id="setupBranch" placeholder="main" value="main" autocomplete="off" />
+    </div>
+    <div class="field">
+      <label class="field-label">Personal Access Token</label>
+      <input type="password" id="setupToken" placeholder="ghp_xxxxxxxxxxxx" autocomplete="off" />
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn btn-accent" id="setupSaveBtn" onclick="saveSetup()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg>
+        Simpan & Lanjutkan
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     NEW PART MODAL
+═══════════════════════════════════ -->
+<div class="new-part-modal hidden" id="newPartModal">
+  <div class="new-part-box">
+    <h3>Tambah Part Baru</h3>
+    <div class="field" style="margin-bottom:12px;">
+      <label class="field-label">Judul Part</label>
+      <input type="text" id="newPartTitle" placeholder="contoh: Routing & Views" />
+    </div>
+    <div class="field" style="margin-bottom:12px;">
+      <label class="field-label">Label</label>
+      <input type="text" id="newPartLabel" placeholder="contoh: Part 2" />
+    </div>
+    <div class="field" style="margin-bottom:20px;">
+      <label class="field-label">Tipe</label>
+      <select id="newPartType">
+        <option value="Teori">Teori</option>
+        <option value="Praktik">Praktik</option>
+        <option value="Deployment">Deployment</option>
+      </select>
+    </div>
+    <div style="display:flex;gap:8px;justify-content:flex-end;">
+      <button class="btn" onclick="closeNewPartModal()">Batal</button>
+      <button class="btn btn-accent" onclick="addNewPart()">Buat Part</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     MAIN APP
+═══════════════════════════════════ -->
+<div class="app">
+
+  <!-- Top Bar -->
+  <div class="topbar">
+    <div class="topbar-logo">
+      DevLog <span class="topbar-badge">Admin</span>
+    </div>
+    <div class="topbar-right">
+      <div id="connectionBadge" class="disconnected-badge" onclick="showSetup()">
+        ⚠️ Belum terhubung
+      </div>
+      <a href="../index.html" class="btn btn-ghost" style="font-size:.78rem;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Lihat Blog
+      </a>
+    </div>
+  </div>
+
+  <!-- Workspace -->
+  <div class="workspace">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <span class="sidebar-title">Topik Blog</span>
+      </div>
+
+      <div class="topic-tabs" id="topicTabs">
+        <!-- Rendered by JS -->
+      </div>
+
+      <div style="padding:8px 16px 6px; display:flex; align-items:center; justify-content:space-between;">
+        <span class="parts-list-label" style="padding:0;">Part</span>
+        <button class="btn btn-ghost" style="padding:3px 8px;font-size:.72rem;" onclick="showNewPartModal()">
+          + Tambah
+        </button>
+      </div>
+
+      <div class="parts-list" id="partsList">
+        <!-- Rendered by JS -->
+      </div>
+
+      <div class="sidebar-footer">
+        <button class="btn" style="width:100%;justify-content:center;font-size:.78rem;" onclick="showSetup()">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+          Pengaturan GitHub
+        </button>
+      </div>
+    </div>
+
+    <!-- Editor Area -->
+    <div class="editor-area" id="editorArea">
+
+      <!-- Empty state -->
+      <div class="empty-state" id="emptyState">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        <p>Pilih part dari sidebar untuk mulai mengedit, atau buat part baru.</p>
+      </div>
+
+      <!-- Editor (hidden until part selected) -->
+      <div id="editorMain" style="display:none; flex:1; display:none; flex-direction:column; overflow:hidden;">
+
+        <!-- Toolbar -->
+        <div class="editor-toolbar">
+          <button class="toolbar-btn" title="Bold" onclick="insertMd('**','**')"><b>B</b></button>
+          <button class="toolbar-btn" title="Italic" onclick="insertMd('*','*')"><i>I</i></button>
+          <button class="toolbar-btn" title="Inline code" onclick="insertMd('`','`')" style="font-family:var(--font-mono);">`</button>
+          <div class="toolbar-sep"></div>
+          <button class="toolbar-btn" title="Heading 2" onclick="insertMdLine('## ')">H2</button>
+          <button class="toolbar-btn" title="Heading 3" onclick="insertMdLine('### ')">H3</button>
+          <div class="toolbar-sep"></div>
+          <button class="toolbar-btn" title="Bullet list" onclick="insertMdLine('- ')">•</button>
+          <button class="toolbar-btn" title="Numbered list" onclick="insertMdLine('1. ')">1.</button>
+          <div class="toolbar-sep"></div>
+          <button class="toolbar-btn" title="Code block" onclick="insertCodeBlock()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </button>
+          <button class="toolbar-btn" title="Blockquote" onclick="insertMdLine('> ')">❝</button>
+          <button class="toolbar-btn" title="Horizontal rule" onclick="insertMdLine('---')">—</button>
+          <div class="toolbar-spacer"></div>
+
+          <div class="view-toggle">
+            <button class="view-btn active" id="viewBtnEdit" onclick="setView('split')">Split</button>
+            <button class="view-btn" id="viewBtnSplit" onclick="setView('editor')">Editor</button>
+            <button class="view-btn" id="viewBtnPreview" onclick="setView('preview')">Preview</button>
+          </div>
+        </div>
+
+        <!-- Editor + Preview -->
+        <div class="editor-body" id="editorBody">
+          <div class="editor-pane">
+            <div class="editor-pane-label">Markdown</div>
+            <textarea
+              class="md-editor"
+              id="mdEditor"
+              placeholder="Tulis konten dalam format Markdown...
+
+# Heading 1
+## Heading 2
+
+**bold** dan *italic*
+
+- Item list
+- Item list
+
+```php
+// contoh code block
+echo 'Hello World';
+```
+"
+              oninput="updatePreview()"
+            ></textarea>
+          </div>
+
+          <div class="preview-pane" id="previewPane">
+            <div class="preview-pane-label">Preview</div>
+            <div class="md-preview" id="mdPreview"></div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /.editor-area -->
+
+    <!-- Metadata Panel -->
+    <div class="meta-panel" id="metaPanel" style="display:none;">
+      <div class="meta-header">Metadata Part</div>
+      <div class="meta-body">
+
+        <div class="field">
+          <label class="field-label">Judul Part</label>
+          <input type="text" id="metaTitle" placeholder="Pengenalan Laravel" oninput="markDirty()" />
+        </div>
+
+        <div class="field">
+          <label class="field-label">Label</label>
+          <input type="text" id="metaLabel" placeholder="Pendahuluan / Part 1 / ..." oninput="markDirty()" />
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div class="field">
+            <label class="field-label">Tipe</label>
+            <select id="metaType" onchange="markDirty()">
+              <option value="Teori">Teori</option>
+              <option value="Praktik">Praktik</option>
+              <option value="Deployment">Deployment</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="field-label">Est. Baca (menit)</label>
+            <input type="number" id="metaReadTime" value="10" min="1" oninput="markDirty()" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="field-label">Tanggal</label>
+          <input type="date" id="metaDate" oninput="markDirty()" />
+        </div>
+
+        <div class="field">
+          <label class="field-label">Intro (kalimat pembuka)</label>
+          <textarea id="metaIntro" rows="3" placeholder="Kalimat pengantar yang muncul di bawah judul..." oninput="markDirty()"></textarea>
+        </div>
+
+        <!-- Objectives -->
+        <div class="field">
+          <label class="field-label">🎯 Tujuan Pembelajaran</label>
+          <div class="list-field" id="objectivesList"></div>
+          <button class="list-add" onclick="addListItem('objectives')">+ Tambah tujuan</button>
+        </div>
+
+        <!-- Reflection questions -->
+        <div class="field">
+          <label class="field-label">💭 Pertanyaan Refleksi</label>
+          <div class="list-field" id="reflectionList"></div>
+          <button class="list-add" onclick="addListItem('reflection')">+ Tambah pertanyaan</button>
+        </div>
+
+        <!-- References -->
+        <div class="field">
+          <label class="field-label">📚 Referensi</label>
+          <div class="list-field" id="referencesList"></div>
+          <button class="list-add" onclick="addListItem('references')">+ Tambah referensi</button>
+        </div>
+
+        <!-- Tags -->
+        <div class="field">
+          <label class="field-label">Tags (pisahkan dengan koma)</label>
+          <input type="text" id="metaTags" placeholder="Laravel, PHP, MVC" oninput="markDirty()" />
+        </div>
+
+      </div>
+      <div class="meta-footer">
+        <button class="btn btn-accent" style="justify-content:center;" id="publishBtn" onclick="publishPart()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Publish ke GitHub
+        </button>
+        <button class="btn btn-danger" style="justify-content:center;" id="deleteBtn" onclick="deletePart()">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>
+          Hapus Part
+        </button>
+      </div>
+    </div>
+
+  </div><!-- /.workspace -->
+</div><!-- /.app -->
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ═══════════════════════════════════════════════════
+   DEVLOG ADMIN — GitHub API CMS
+   State management + GitHub API + Markdown editor
+═══════════════════════════════════════════════════ */
+
+// ── State ──
+let state = {
+  config: null,          // { username, repo, branch, token }
+  topics: [],            // from data/topics.json
+  activeTopic: null,     // topic id string
+  topicData: {},         // { [topicId]: { parts: [...], sha: '...' } }
+  activePartIdx: null,   // index in parts array
+  dirty: false,
+};
+
+// ── Init ──
+document.addEventListener('DOMContentLoaded', () => {
+  loadConfig();
+  setTodayDate();
+});
+
+function setTodayDate() {
+  const today = new Date().toISOString().split('T')[0];
+  if (document.getElementById('metaDate')) {
+    document.getElementById('metaDate').value = today;
+  }
+}
+
+// ── Config / Setup ──
+function loadConfig() {
+  const saved = localStorage.getItem('devlog_config');
+  if (saved) {
+    state.config = JSON.parse(saved);
+    updateConnectionBadge(true);
+    loadTopics();
+  } else {
+    document.getElementById('setupModal').classList.remove('hidden');
+  }
+}
+
+function saveSetup() {
+  const username = document.getElementById('setupUsername').value.trim();
+  const repo     = document.getElementById('setupRepo').value.trim();
+  const branch   = document.getElementById('setupBranch').value.trim() || 'main';
+  const token    = document.getElementById('setupToken').value.trim();
+
+  if (!username || !repo || !token) {
+    showToast('Lengkapi semua field ya!', 'error'); return;
+  }
+
+  state.config = { username, repo, branch, token };
+  localStorage.setItem('devlog_config', JSON.stringify(state.config));
+  document.getElementById('setupModal').classList.add('hidden');
+  updateConnectionBadge(true);
+  showToast('Tersambung ke GitHub!', 'success');
+  loadTopics();
+}
+
+function showSetup() {
+  if (state.config) {
+    document.getElementById('setupUsername').value = state.config.username;
+    document.getElementById('setupRepo').value     = state.config.repo;
+    document.getElementById('setupBranch').value   = state.config.branch;
+    document.getElementById('setupToken').value    = state.config.token;
+  }
+  document.getElementById('setupModal').classList.remove('hidden');
+}
+
+function updateConnectionBadge(connected) {
+  const badge = document.getElementById('connectionBadge');
+  if (connected && state.config) {
+    badge.className = 'connected-badge';
+    badge.innerHTML = `<span class="connected-dot"></span>${state.config.username}/${state.config.repo}`;
+    badge.onclick = showSetup;
+  } else {
+    badge.className = 'disconnected-badge';
+    badge.innerHTML = '⚠️ Belum terhubung';
+    badge.onclick = showSetup;
+  }
+}
+
+// ── GitHub API helpers ──
+async function ghFetch(path, method = 'GET', body = null) {
+  const { username, repo, branch, token } = state.config;
+  const url = `https://api.github.com/repos/${username}/${repo}/contents/${path}`;
+  const opts = {
+    method,
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Accept': 'application/vnd.github.v3+json',
+      'Content-Type': 'application/json',
+    },
+  };
+  if (body) opts.body = JSON.stringify(body);
+  const res = await fetch(url, opts);
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.message || `HTTP ${res.status}`);
+  }
+  return res.json();
+}
+
+async function ghGetFile(path) {
+  try {
+    const data = await ghFetch(path);
+    const content = JSON.parse(atob(data.content.replace(/\n/g, '')));
+    return { content, sha: data.sha };
+  } catch (e) {
+    if (e.message.includes('404') || e.message.includes('Not Found')) return null;
+    throw e;
+  }
+}
+
+async function ghPutFile(path, content, sha = null, message = 'Update content') {
+  const body = {
+    message,
+    content: btoa(unescape(encodeURIComponent(JSON.stringify(content, null, 2)))),
+    branch: state.config.branch,
+  };
+  if (sha) body.sha = sha;
+  return ghFetch(path, 'PUT', body);
+}
+
+// ── Load Topics ──
+async function loadTopics() {
+  if (!state.config) return;
+  try {
+    const result = await ghGetFile('data/topics.json');
+    if (result) {
+      state.topics = result.content;
+    } else {
+      // File doesn't exist yet — use default
+      state.topics = [{ id: 'laravel', title: 'Dokumentasi Belajar Laravel', emoji: '⚡' }];
+    }
+    renderTopicTabs();
+    if (state.topics.length > 0) {
+      selectTopic(state.topics[0].id);
+    }
+  } catch(e) {
+    showToast('Gagal load topics: ' + e.message, 'error');
+  }
+}
+
+function renderTopicTabs() {
+  const container = document.getElementById('topicTabs');
+  container.innerHTML = state.topics.map(t => `
+    <button class="topic-tab ${state.activeTopic === t.id ? 'active' : ''}"
+            onclick="selectTopic('${t.id}')">
+      <span class="topic-tab-emoji">${t.emoji || '📁'}</span>
+      <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;">${t.title}</span>
+    </button>
+  `).join('');
+}
+
+// ── Select Topic ──
+async function selectTopic(topicId) {
+  state.activeTopic = topicId;
+  state.activePartIdx = null;
+  renderTopicTabs();
+  showEmptyState();
+
+  if (!state.topicData[topicId]) {
+    showToast('Memuat data...', 'loading');
+    try {
+      const result = await ghGetFile(`data/${topicId}/parts.json`);
+      if (result) {
+        state.topicData[topicId] = { parts: result.content.parts || [], sha: result.sha };
+      } else {
+        state.topicData[topicId] = { parts: [], sha: null };
+      }
+    } catch(e) {
+      showToast('Gagal load parts: ' + e.message, 'error');
+      state.topicData[topicId] = { parts: [], sha: null };
+    }
+  }
+  renderPartsList();
+}
+
+function renderPartsList() {
+  const container = document.getElementById('partsList');
+  const data = state.topicData[state.activeTopic];
+  if (!data || data.parts.length === 0) {
+    container.innerHTML = `<p style="padding:12px 16px;font-size:.78rem;color:var(--text-faint);">Belum ada part. Klik "+ Tambah" untuk mulai.</p>`;
+    return;
+  }
+  container.innerHTML = data.parts.map((part, idx) => `
+    <button class="part-item ${state.activePartIdx === idx ? 'active' : ''}"
+            onclick="selectPart(${idx})">
+      <span class="part-item-num">${part.partNumber ?? idx}</span>
+      <span class="part-item-title">${part.title || 'Part ' + idx}</span>
+    </button>
+  `).join('');
+}
+
+// ── Select Part ──
+function selectPart(idx) {
+  state.activePartIdx = idx;
+  state.dirty = false;
+  renderPartsList();
+  showEditor();
+
+  const part = state.topicData[state.activeTopic].parts[idx];
+  loadPartIntoForm(part);
+}
+
+function loadPartIntoForm(part) {
+  document.getElementById('metaTitle').value    = part.title    || '';
+  document.getElementById('metaLabel').value    = part.label    || '';
+  document.getElementById('metaType').value     = part.type     || 'Teori';
+  document.getElementById('metaReadTime').value = part.readTime || '10';
+  document.getElementById('metaDate').value     = part.date     || new Date().toISOString().split('T')[0];
+  document.getElementById('metaIntro').value    = part.intro    || '';
+  document.getElementById('metaTags').value     = (part.tags || []).join(', ');
+  document.getElementById('mdEditor').value     = part.content  || '';
+
+  renderListField('objectives', part.objectives || []);
+  renderListField('reflection', part.reflection || []);
+  renderReferencesList(part.references || []);
+
+  updatePreview();
+}
+
+// ── Dynamic list fields ──
+function renderListField(type, items) {
+  const container = document.getElementById(type + 'List');
+  container.innerHTML = '';
+  items.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'list-item';
+    div.innerHTML = `
+      <input type="text" value="${escHtml(item)}" placeholder="..." oninput="markDirty()" data-list="${type}" data-idx="${i}" />
+      <button class="list-item-remove" onclick="removeListItem('${type}', ${i})">×</button>
+    `;
+    container.appendChild(div);
+  });
+}
+
+function renderReferencesList(refs) {
+  const container = document.getElementById('referencesList');
+  container.innerHTML = '';
+  refs.forEach((ref, i) => {
+    const div = document.createElement('div');
+    div.className = 'list-item';
+    div.style.flexDirection = 'column';
+    div.innerHTML = `
+      <div style="display:flex;gap:6px;width:100%;">
+        <input type="text" value="${escHtml(ref.text || '')}" placeholder="Judul referensi" style="flex:1;" oninput="markDirty()" data-ref-field="text" data-idx="${i}" />
+        <button class="list-item-remove" onclick="removeListItem('references', ${i})">×</button>
+      </div>
+      <input type="url" value="${escHtml(ref.url || '')}" placeholder="https://..." style="width:100%;margin-top:4px;" oninput="markDirty()" data-ref-field="url" data-idx="${i}" />
+    `;
+    container.appendChild(div);
+  });
+}
+
+function addListItem(type) {
+  markDirty();
+  if (type === 'references') {
+    const refs = getRefsList();
+    refs.push({ text: '', url: '' });
+    renderReferencesList(refs);
+  } else {
+    const items = getListItems(type);
+    items.push('');
+    renderListField(type, items);
+  }
+  // Focus last input
+  const container = document.getElementById(type + 'List');
+  const inputs = container.querySelectorAll('input');
+  if (inputs.length) inputs[inputs.length - 1].focus();
+}
+
+function removeListItem(type, idx) {
+  markDirty();
+  if (type === 'references') {
+    const refs = getRefsList();
+    refs.splice(idx, 1);
+    renderReferencesList(refs);
+  } else {
+    const items = getListItems(type);
+    items.splice(idx, 1);
+    renderListField(type, items);
+  }
+}
+
+function getListItems(type) {
+  const container = document.getElementById(type + 'List');
+  return Array.from(container.querySelectorAll('input')).map(i => i.value);
+}
+
+function getRefsList() {
+  const container = document.getElementById('referencesList');
+  const items = container.querySelectorAll('.list-item');
+  return Array.from(items).map((item, idx) => ({
+    num: String(idx + 1),
+    text: (item.querySelector('[data-ref-field="text"]') || {}).value || '',
+    url:  (item.querySelector('[data-ref-field="url"]')  || {}).value || '',
+  }));
+}
+
+// ── Collect form data into part object ──
+function collectFormData() {
+  const idx  = state.activePartIdx;
+  const existing = state.topicData[state.activeTopic].parts[idx];
+  return {
+    ...existing,
+    title:      document.getElementById('metaTitle').value.trim(),
+    label:      document.getElementById('metaLabel').value.trim(),
+    type:       document.getElementById('metaType').value,
+    readTime:   document.getElementById('metaReadTime').value,
+    date:       document.getElementById('metaDate').value,
+    intro:      document.getElementById('metaIntro').value.trim(),
+    content:    document.getElementById('mdEditor').value,
+    objectives: getListItems('objectives').filter(Boolean),
+    reflection: getListItems('reflection').filter(Boolean),
+    references: getRefsList(),
+    tags:       document.getElementById('metaTags').value.split(',').map(t => t.trim()).filter(Boolean),
+  };
+}
+
+// ── Publish to GitHub ──
+async function publishPart() {
+  if (!state.config) { showSetup(); return; }
+  if (state.activePartIdx === null) { showToast('Pilih part dulu!', 'error'); return; }
+
+  const btn = document.getElementById('publishBtn');
+  btn.disabled = true;
+  btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="animation:spin 1s linear infinite"><path d="M21 12a9 9 0 1 1-6.22-8.56"/></svg> Menyimpan...`;
+
+  try {
+    // Update part in local state
+    const updatedPart = collectFormData();
+    state.topicData[state.activeTopic].parts[state.activePartIdx] = updatedPart;
+
+    // Build file content
+    const topicId   = state.activeTopic;
+    const topicMeta = state.topics.find(t => t.id === topicId) || {};
+    const fileContent = {
+      topic:     topicId,
+      title:     topicMeta.title || topicId,
+      updatedAt: new Date().toISOString(),
+      parts:     state.topicData[topicId].parts,
+    };
+
+    // Push to GitHub
+    const path    = `data/${topicId}/parts.json`;
+    const sha     = state.topicData[topicId].sha;
+    const message = `Update ${topicId}: ${updatedPart.title}`;
+    const result  = await ghPutFile(path, fileContent, sha, message);
+
+    // Update SHA for next save
+    state.topicData[topicId].sha = result.content.sha;
+    state.dirty = false;
+
+    // Update sidebar
+    renderPartsList();
+    showToast('✓ Berhasil dipublish ke GitHub!', 'success');
+
+  } catch(e) {
+    showToast('Gagal publish: ' + e.message, 'error');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Publish ke GitHub`;
+  }
+}
+
+// ── Delete Part ──
+async function deletePart() {
+  if (state.activePartIdx === null) return;
+  const part = state.topicData[state.activeTopic].parts[state.activePartIdx];
+  if (!confirm(`Hapus part "${part.title}"? Aksi ini tidak bisa dibatalkan.`)) return;
+
+  state.topicData[state.activeTopic].parts.splice(state.activePartIdx, 1);
+  state.activePartIdx = null;
+  showEmptyState();
+  renderPartsList();
+
+  // Renumber
+  state.topicData[state.activeTopic].parts.forEach((p, i) => { p.partNumber = i; });
+
+  // Push to GitHub
+  try {
+    const topicId = state.activeTopic;
+    const topicMeta = state.topics.find(t => t.id === topicId) || {};
+    const fileContent = {
+      topic: topicId, title: topicMeta.title || topicId,
+      updatedAt: new Date().toISOString(),
+      parts: state.topicData[topicId].parts,
+    };
+    const sha = state.topicData[topicId].sha;
+    const result = await ghPutFile(`data/${topicId}/parts.json`, fileContent, sha, `Delete part: ${part.title}`);
+    state.topicData[topicId].sha = result.content.sha;
+    showToast('Part dihapus.', 'success');
+  } catch(e) {
+    showToast('Gagal hapus di GitHub: ' + e.message, 'error');
+  }
+}
+
+// ── New Part ──
+function showNewPartModal() { document.getElementById('newPartModal').classList.remove('hidden'); }
+function closeNewPartModal() { document.getElementById('newPartModal').classList.add('hidden'); }
+
+function addNewPart() {
+  const title = document.getElementById('newPartTitle').value.trim();
+  if (!title) { showToast('Isi judul part dulu!', 'error'); return; }
+
+  const topic    = state.activeTopic;
+  const parts    = state.topicData[topic]?.parts || [];
+  const partNum  = parts.length;
+  const newPart  = {
+    id:          title.toLowerCase().replace(/[^a-z0-9]+/g,'-'),
+    partNumber:  partNum,
+    title,
+    label:       document.getElementById('newPartLabel').value.trim() || `Part ${partNum}`,
+    type:        document.getElementById('newPartType').value,
+    date:        new Date().toISOString().split('T')[0],
+    readTime:    '10',
+    intro:       '',
+    objectives:  [],
+    content:     `## Pendahuluan\n\nTulis konten kamu di sini...\n`,
+    reflection:  [],
+    references:  [],
+    tags:        [],
+  };
+
+  if (!state.topicData[topic]) state.topicData[topic] = { parts: [], sha: null };
+  state.topicData[topic].parts.push(newPart);
+
+  closeNewPartModal();
+  document.getElementById('newPartTitle').value = '';
+  document.getElementById('newPartLabel').value = '';
+  renderPartsList();
+  selectPart(partNum);
+  showToast('Part baru dibuat! Jangan lupa publish.', 'success');
+}
+
+// ── Markdown editor helpers ──
+function insertMd(before, after) {
+  const ta   = document.getElementById('mdEditor');
+  const sel  = ta.value.substring(ta.selectionStart, ta.selectionEnd);
+  const text = before + (sel || 'teks') + after;
+  insertAtCursor(ta, text);
+  updatePreview(); markDirty();
+}
+
+function insertMdLine(prefix) {
+  const ta   = document.getElementById('mdEditor');
+  const pos  = ta.selectionStart;
+  const lineStart = ta.value.lastIndexOf('\n', pos - 1) + 1;
+  ta.setSelectionRange(lineStart, lineStart);
+  insertAtCursor(ta, prefix);
+  updatePreview(); markDirty();
+}
+
+function insertCodeBlock() {
+  const ta = document.getElementById('mdEditor');
+  insertAtCursor(ta, '```php\n// kode kamu di sini\n```\n');
+  updatePreview(); markDirty();
+}
+
+function insertAtCursor(ta, text) {
+  const start = ta.selectionStart;
+  ta.value = ta.value.substring(0, start) + text + ta.value.substring(ta.selectionEnd);
+  ta.selectionStart = ta.selectionEnd = start + text.length;
+  ta.focus();
+}
+
+function updatePreview() {
+  const md  = document.getElementById('mdEditor').value;
+  const out = document.getElementById('mdPreview');
+  if (out) out.innerHTML = marked.parse(md);
+}
+
+// ── View toggle ──
+function setView(mode) {
+  const body = document.getElementById('editorBody');
+  const btns = { split: 'viewBtnEdit', editor: 'viewBtnSplit', preview: 'viewBtnPreview' };
+  Object.values(btns).forEach(id => document.getElementById(id)?.classList.remove('active'));
+  document.getElementById(btns[mode])?.classList.add('active');
+
+  body.className = 'editor-body';
+  if (mode === 'editor')  body.classList.add('view-editor');
+  if (mode === 'preview') body.classList.add('view-preview');
+}
+
+// ── UI state ──
+function showEmptyState() {
+  document.getElementById('emptyState').style.display = 'flex';
+  document.getElementById('editorMain').style.display = 'none';
+  document.getElementById('metaPanel').style.display  = 'none';
+}
+
+function showEditor() {
+  document.getElementById('emptyState').style.display = 'none';
+  document.getElementById('editorMain').style.display = 'flex';
+  document.getElementById('metaPanel').style.display  = 'flex';
+}
+
+function markDirty() { state.dirty = true; }
+
+// ── Toast notifications ──
+let toastTimer;
+function showToast(msg, type = 'loading') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = `toast ${type} show`;
+  clearTimeout(toastTimer);
+  if (type !== 'loading') {
+    toastTimer = setTimeout(() => { t.classList.remove('show'); }, 3500);
+  }
+}
+
+// ── Warn before leaving with unsaved changes ──
+window.addEventListener('beforeunload', e => {
+  if (state.dirty) { e.preventDefault(); e.returnValue = ''; }
+});
+
+// ── Helpers ──
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// CSS spin animation for loading button
+const style = document.createElement('style');
+style.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
+document.head.appendChild(style);
+</script>
+</body>
+</html>
