@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Lippbyte — Dokumentasi Belajar [JUDUL TOPIK]" />
+  <title>Lippbyte — [JUDUL TOPIK]</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { serif: ['Lora','serif'], sans: ['DM Sans','sans-serif'], mono: ['JetBrains Mono','monospace'] },
+          colors: {
+            bg: 'var(--bg)', surface: 'var(--surface)', 'surface-2': 'var(--surface-2)',
+            border: 'var(--border)', 'border-strong': 'var(--border-strong)',
+            'text-primary': 'var(--text-primary)', 'text-body': 'var(--text-body)',
+            'text-muted': 'var(--text-muted)', 'text-faint': 'var(--text-faint)',
+            accent: 'var(--accent)', 'accent-hover': 'var(--accent-hover)',
+            'accent-soft': 'var(--accent-soft)', 'accent-mid': 'var(--accent-mid)',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="font-sans text-base leading-7">
+
+  <!-- TOP NAVBAR -->
+  <header class="site-header fixed top-0 left-0 right-0 z-[200] h-14 bg-[var(--bg-translucent)] backdrop-blur-[14px] border-b border-border">
+    <div class="header-inner max-w-[1280px] mx-auto px-6 h-full flex items-center justify-between gap-4">
+      <a href="../../home/index.html" class="site-logo font-serif text-lg font-semibold text-text-primary tracking-tight flex items-center gap-2">
+        Lippbyte
+        <!-- ✏️ Jangan ganti badge blog -->
+        <span class="logo-badge font-sans text-[.65rem] font-bold tracking-wider uppercase bg-accent text-white px-2 py-0.5 rounded-full">Blog</span>
+      </a>
+      <div class="flex items-center gap-3">
+        <!-- Tombol Kembali ke Home -->
+        <a href="../../home/index.html" class="nav-home-btn flex items-center gap-1.5 text-xs font-medium text-text-muted px-3 py-1.5 rounded-lg border border-border bg-surface hover:border-accent hover:text-accent hover:bg-accent-soft transition-all duration-200">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Home
+        </a>
+        <!-- Tombol Toggle Dark Mode -->
+        <button id="themeToggle" class="p-1.5 rounded-md bg-surface-2 text-text-muted hover:text-accent border border-border transition-colors duration-200" aria-label="Toggle Dark Mode">
+          <svg id="themeToggleIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- READING PROGRESS -->
+  <div class="top-progress"><div class="top-progress-fill" id="topFill"></div></div>
+
+  <div class="layout grid grid-cols-[272px_1fr] max-w-[1280px] mx-auto min-h-screen pt-14 max-[960px]:grid-cols-1">
+
+    <!-- LEFT SIDEBAR -->
+    <nav class="left-sidebar sticky top-14 h-[calc(100vh-56px)] overflow-y-auto border-r border-border py-7 max-[960px]:static max-[960px]:h-auto" aria-label="Navigasi Part">
+
+      <!-- Sidebar Back Button -->
+      <a href="../../home/index.html" class="sidebar-back flex items-center gap-2 px-5 pb-4 mb-4 text-xs font-medium text-text-muted border-b border-border hover:text-accent transition-colors">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Kembali ke Beranda
+      </a>
+
+      <p class="sidebar-section-label text-[.67rem] font-bold tracking-[.12em] uppercase text-text-faint px-5 mb-2">Dokumentasi</p>
+      <ul class="part-nav list-none p-0 m-0" id="partNav">
+        <!-- ✏️ Part 0 / Pendahuluan -->
+        <li>
+          <a href="#pendahuluan" class="active nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="pendahuluan">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">0</span>
+            <span class="nav-text flex-1">Pendahuluan</span>
+            <span class="nav-progress-ring" data-section="pendahuluan">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+          <ul class="toc-sub open list-none p-0 m-0">
+            <li><a href="#sub-1a" class="block py-1 px-5 pl-[50px] text-xs text-text-faint border-l-2 border-transparent">Sub Topik A</a></li>
+            <li><a href="#sub-1b" class="block py-1 px-5 pl-[50px] text-xs text-text-faint border-l-2 border-transparent">Sub Topik B</a></li>
+          </ul>
+        </li>
+        <!-- ✏️ Part 1 -->
+        <li>
+          <a href="#part1" class="nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="part1">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">1</span>
+            <span class="nav-text flex-1">Judul Part 1</span>
+            <span class="nav-progress-ring" data-section="part1">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+          <ul class="toc-sub list-none p-0 m-0" id="toc-part1">
+            <li><a href="#p1-sub1" class="block py-1 px-5 pl-[50px] text-xs text-text-faint border-l-2 border-transparent">Sub Topik 1</a></li>
+            <li><a href="#p1-sub2" class="block py-1 px-5 pl-[50px] text-xs text-text-faint border-l-2 border-transparent">Sub Topik 2</a></li>
+          </ul>
+        </li>
+        <!-- ✏️ Part 2 -->
+        <li>
+          <a href="#part2" class="nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="part2">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">2</span>
+            <span class="nav-text flex-1">Judul Part 2</span>
+            <span class="nav-progress-ring" data-section="part2">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+          <ul class="toc-sub list-none p-0 m-0" id="toc-part2">
+            <li><a href="#p2-sub1" class="block py-1 px-5 pl-[50px] text-xs text-text-faint border-l-2 border-transparent">Sub Topik 1</a></li>
+            <li><a href="#p2-sub2" class="block py-1 px-5 pl-[50px] text-xs text-text-faint border-l-2 border-transparent">Sub Topik 2</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- Sidebar: Blog Lainnya -->
+      <div class="sidebar-other-blogs mt-6 pt-5 border-t border-border px-5">
+        <p class="text-[.67rem] font-bold tracking-[.12em] uppercase text-text-faint mb-3">Blog Lainnya</p>
+        <a href="../laravel-blog/index.html" class="flex items-center gap-2 py-1.5 text-xs text-text-muted hover:text-accent transition-colors">
+          <span>⚡</span> Belajar Laravel
+        </a>
+        <!-- ✏️ Tambahkan blog lainnya di sini -->
+      </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div>
+      <main class="main-content px-12 pb-28 max-w-[820px] max-[960px]:px-5">
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- ✏️ PART 0 — PENDAHULUAN                -->
+        <!-- ═══════════════════════════════════════ -->
+        <section class="part-section pt-16 pb-8 border-b border-border" id="pendahuluan">
+          <div class="part-header mb-9">
+            <p class="part-label inline-flex items-center gap-2 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5"><span class="part-label-line w-5 h-0.5 bg-accent"></span> Pendahuluan</p>
+            <h1 class="part-title font-serif text-[clamp(1.6rem,3.5vw,2.15rem)] font-semibold leading-snug text-text-primary tracking-tight mb-5">Judul Pendahuluan Topik</h1>
+            <div class="part-meta flex flex-wrap items-center gap-x-4 gap-y-1.5 text-sm text-text-muted">
+              <span class="flex items-center gap-1">📅 DD Bulan YYYY</span>
+              <span class="w-1 h-1 rounded-full bg-border-strong"></span>
+              <span class="flex items-center gap-1">⏱ ~10 menit baca</span>
+              <span class="w-1 h-1 rounded-full bg-border-strong"></span>
+              <span class="flex items-center gap-1">🏷 Teori</span>
+            </div>
+            <!-- ── Intro / Sinopsis ── -->
+            <div class="part-intro mt-5 p-4 bg-surface border border-border rounded-[10px] text-[.95rem] leading-7 text-text-muted italic border-l-[3px] border-l-accent">
+              Tuliskan ringkasan singkat tentang apa yang akan dipelajari pada bagian ini. Jelaskan konteks dan relevansinya secara umum.
+            </div>
+          </div>
+
+          <div class="content-body">
+
+            <!-- ── DIV TUJUAN PEMBELAJARAN ── -->
+            <div class="objectives-box">
+              <div class="objectives-header text-[.72rem] font-bold tracking-[.1em] uppercase text-text-muted">🎯 Tujuan Pembelajaran</div>
+              <div class="objectives-body p-4">
+                <ul class="pl-5">
+                  <li class="text-sm text-text-body py-0.5">Tujuan pertama yang ingin dicapai</li>
+                  <li class="text-sm text-text-body py-0.5">Tujuan kedua — memahami konsep dasar topik</li>
+                  <li class="text-sm text-text-body py-0.5">Tujuan ketiga — mampu mengimplementasikan secara praktis</li>
+                  <li class="text-sm text-text-body py-0.5">Tujuan keempat — mengevaluasi hasil pembelajaran</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- ── SUB TOPIK A ── -->
+            <h2 id="sub-1a" class="font-serif text-xl font-semibold text-text-primary tracking-tight">Sub Topik A: Definisi dan Konsep</h2>
+
+            <!-- ── DIV PARAGRAF DENGAN JUSTIFY ── -->
+            <p class="text-justify">
+              <strong class="font-semibold text-text-primary">Lorem ipsum dolor</strong> sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            </p>
+            <p class="text-justify">
+              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Dalam konteks pembelajaran, pemahaman mendalam tentang konsep dasar merupakan fondasi yang sangat penting sebelum melanjutkan ke tahap implementasi.
+            </p>
+
+            <!-- ── DIV CATATAN (NOTE) ── -->
+            <div class="callout callout-note">
+              <span class="callout-icon text-base shrink-0 leading-7">💡</span>
+              <div class="callout-body flex-1">
+                <p class="callout-title text-[.73rem] font-bold tracking-wider uppercase mb-1">Catatan</p>
+                <p class="text-sm leading-relaxed">Ini adalah contoh callout tipe <strong>catatan</strong>. Gunakan untuk memberikan informasi tambahan atau konteks penting yang membantu pemahaman pembaca.</p>
+              </div>
+            </div>
+
+            <!-- ── DIV PERINGATAN (WARNING) ── -->
+            <div class="callout callout-warn">
+              <span class="callout-icon text-base shrink-0 leading-7">⚠️</span>
+              <div class="callout-body flex-1">
+                <p class="callout-title text-[.73rem] font-bold tracking-wider uppercase mb-1">Perhatian</p>
+                <p class="text-sm leading-relaxed">Ini adalah contoh callout tipe <strong>peringatan</strong>. Gunakan untuk mengingatkan pembaca tentang hal-hal yang perlu diperhatikan.</p>
+              </div>
+            </div>
+
+            <!-- ── DIV TIPS ── -->
+            <div class="callout callout-tip">
+              <span class="callout-icon text-base shrink-0 leading-7">✅</span>
+              <div class="callout-body flex-1">
+                <p class="callout-title text-[.73rem] font-bold tracking-wider uppercase mb-1">Tips</p>
+                <p class="text-sm leading-relaxed">Ini adalah contoh callout tipe <strong>tips</strong>. Gunakan untuk memberikan saran atau best practice kepada pembaca.</p>
+              </div>
+            </div>
+
+            <!-- ── SUB TOPIK B ── -->
+            <h2 id="sub-1b" class="font-serif text-xl font-semibold text-text-primary tracking-tight">Sub Topik B: Fitur dan Keunggulan</h2>
+
+            <p class="text-justify">Berikut adalah daftar fitur atau poin penting yang perlu dipahami:</p>
+            <ul class="pl-6">
+              <li><strong class="font-semibold text-text-primary">Fitur Pertama</strong> — Deskripsi singkat tentang fitur pertama dan manfaatnya.</li>
+              <li><strong class="font-semibold text-text-primary">Fitur Kedua</strong> — Deskripsi singkat tentang fitur kedua dan bagaimana cara kerjanya.</li>
+              <li><strong class="font-semibold text-text-primary">Fitur Ketiga</strong> — Deskripsi singkat tentang fitur ketiga beserta contoh penggunaannya.</li>
+            </ul>
+
+            <!-- ── DIV CODE BLOCK ── -->
+            <div class="code-block"><div class="code-titlebar"><div class="traffic-lights flex items-center gap-1.5"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span></div><span class="code-filename font-mono text-xs text-zinc-500">contoh-file.ext</span></div><pre><code><span class="cm"># Contoh kode atau perintah</span>
+<span class="kw">contoh</span> <span class="fn">perintah</span>(<span class="st">'parameter'</span>);
+
+<span class="cm"># Kode tambahan</span>
+<span class="vr">$variabel</span> = <span class="st">"nilai"</span>;</code></pre></div>
+
+            <!-- ── DIV IMAGE / GAMBAR ── -->
+            <figure class="my-8">
+              <div class="img-placeholder text-sm">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <span>Ganti dengan gambar ilustrasi yang relevan</span>
+              </div>
+              <figcaption class="text-center text-xs text-text-faint mt-2 italic"><strong>Gambar 1</strong> — Keterangan gambar atau diagram.</figcaption>
+            </figure>
+
+            <!-- ── DIV IMAGE DENGAN FILE (contoh) ── -->
+            <!--
+            <figure class="my-8">
+              <img src="img/nama-gambar.png" alt="Deskripsi gambar" />
+              <figcaption class="text-center text-xs text-text-faint mt-2 italic"><strong>Gambar 2</strong> — Keterangan gambar.</figcaption>
+            </figure>
+            -->
+          </div>
+
+          <!-- ── DIV REFLEKSI (DARK-SAFE) ── -->
+          <div class="reflection-box">
+            <p class="reflection-header flex items-center gap-2.5 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5">Refleksi</p>
+            <p class="text-sm text-text-body leading-7 mb-3">Setelah mempelajari bagian pendahuluan ini, coba jawab pertanyaan-pertanyaan berikut untuk mengukur pemahamanmu:</p>
+            <ul class="reflection-questions list-none p-0">
+              <li class="text-sm text-text-muted">Pertanyaan refleksi pertama — Apa yang kamu pahami dari konsep dasar topik ini?</li>
+              <li class="text-sm text-text-muted">Pertanyaan refleksi kedua — Bagaimana konsep ini bisa diterapkan di situasi nyata?</li>
+              <li class="text-sm text-text-muted">Pertanyaan refleksi ketiga — Apa tantangan terbesar dalam memahami materi ini?</li>
+            </ul>
+          </div>
+
+          <!-- ── DIV REFERENSI ── -->
+          <div class="references-box">
+            <div class="references-header text-[.72rem] font-bold tracking-[.1em] uppercase text-text-muted">📚 Referensi</div>
+            <ul class="references-list list-none p-0 m-0">
+              <li class="p-3 flex items-start gap-2.5 text-sm"><span class="ref-num text-[.72rem] font-bold shrink-0 mt-0.5">1</span><span class="ref-text text-text-muted leading-relaxed"><a href="https://example.com" target="_blank" class="text-accent font-medium">Nama Referensi Pertama</a> — Deskripsi singkat referensi.</span></li>
+              <li class="p-3 flex items-start gap-2.5 text-sm"><span class="ref-num text-[.72rem] font-bold shrink-0 mt-0.5">2</span><span class="ref-text text-text-muted leading-relaxed">Penulis, A. (Tahun). <em>Judul Buku atau Artikel</em>. Penerbit.</span></li>
+              <li class="p-3 flex items-start gap-2.5 text-sm"><span class="ref-num text-[.72rem] font-bold shrink-0 mt-0.5">3</span><span class="ref-text text-text-muted leading-relaxed"><a href="https://example.com" target="_blank" class="text-accent font-medium">Tutorial Online</a> — Platform atau sumber belajar online.</span></li>
+            </ul>
+          </div>
+
+          <!-- ── DIV TAG ── -->
+          <div class="tag-row flex flex-wrap gap-1.5 mt-7">
+            <span class="tag text-[.73rem] font-medium px-2.5 py-0.5">Tag1</span>
+            <span class="tag text-[.73rem] font-medium px-2.5 py-0.5">Tag2</span>
+            <span class="tag text-[.73rem] font-medium px-2.5 py-0.5">Tag3</span>
+            <span class="tag text-[.73rem] font-medium px-2.5 py-0.5">Pendahuluan</span>
+          </div>
+
+          <!-- ── NAVIGASI ANTAR-PART ── -->
+          <div class="part-footer-nav flex justify-between items-center gap-4 mt-10 pt-6 border-t border-border">
+            <span></span>
+            <a href="#part1" class="part-nav-btn flex items-center flex-row-reverse gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline cursor-pointer">
+              Part 1: Judul Part 1
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- ✏️ PART 1 — JUDUL PART 1               -->
+        <!-- ═══════════════════════════════════════ -->
+        <section class="part-section pt-16 pb-8 border-b border-border" id="part1">
+          <div class="part-header mb-9">
+            <p class="part-label inline-flex items-center gap-2 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5"><span class="part-label-line w-5 h-0.5 bg-accent"></span> Part 1</p>
+            <h1 class="part-title font-serif text-[clamp(1.6rem,3.5vw,2.15rem)] font-semibold leading-snug text-text-primary tracking-tight mb-5">Judul Part 1</h1>
+            <div class="part-meta flex flex-wrap items-center gap-x-4 gap-y-1.5 text-sm text-text-muted">
+              <span>📅 DD Bulan YYYY</span><span class="w-1 h-1 rounded-full bg-border-strong"></span><span>⏱ ~15 menit baca</span><span class="w-1 h-1 rounded-full bg-border-strong"></span><span>🏷 Praktik</span>
+            </div>
+            <div class="part-intro mt-5 p-4 bg-surface border border-border rounded-[10px] text-[.95rem] leading-7 text-text-muted italic border-l-[3px] border-l-accent">Deskripsi singkat tentang apa yang akan dipelajari di Part 1. Jelaskan konteks dan tujuan secara ringkas.</div>
+          </div>
+
+          <div class="content-body">
+            <div class="objectives-box"><div class="objectives-header text-[.72rem] font-bold tracking-[.1em] uppercase text-text-muted">🎯 Tujuan Pembelajaran</div><div class="objectives-body p-4"><ul class="pl-5"><li class="text-sm text-text-body py-0.5">Tujuan pembelajaran pertama di Part 1</li><li class="text-sm text-text-body py-0.5">Tujuan pembelajaran kedua di Part 1</li><li class="text-sm text-text-body py-0.5">Tujuan pembelajaran ketiga di Part 1</li></ul></div></div>
+
+            <h2 id="p1-sub1" class="font-serif text-xl font-semibold text-text-primary tracking-tight">Sub Topik 1</h2>
+            <p class="text-justify">Konten pembahasan untuk sub topik 1. Tuliskan penjelasan lengkap yang mudah dipahami dengan contoh-contoh yang relevan. Pastikan setiap paragraf memiliki alur pembahasan yang jelas dan terstruktur.</p>
+
+            <div class="code-block"><div class="code-titlebar"><div class="traffic-lights flex items-center gap-1.5"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span></div><span class="code-filename font-mono text-xs text-zinc-500">contoh.ext</span></div><pre><code><span class="cm"># Contoh kode untuk Part 1</span>
+<span class="kw">perintah</span> <span class="fn">fungsi</span>(<span class="st">'argumen'</span>)</code></pre></div>
+
+            <h2 id="p1-sub2" class="font-serif text-xl font-semibold text-text-primary tracking-tight">Sub Topik 2</h2>
+            <p class="text-justify">Konten pembahasan untuk sub topik 2. Jelaskan secara detail dengan langkah-langkah yang bisa diikuti pembaca.</p>
+
+            <div class="callout callout-tip"><span class="callout-icon text-base shrink-0 leading-7">✅</span><div class="callout-body flex-1"><p class="callout-title text-[.73rem] font-bold tracking-wider uppercase mb-1">Tips</p><p class="text-sm leading-relaxed">Berikan tips praktis yang bermanfaat untuk pembaca di sini.</p></div></div>
+          </div>
+
+          <div class="reflection-box"><p class="reflection-header flex items-center gap-2.5 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5">Refleksi</p><p class="text-sm text-text-body leading-7 mb-3">Setelah menyelesaikan Part 1, renungkan:</p><ul class="reflection-questions list-none p-0"><li class="text-sm text-text-muted">Apa yang paling menarik dari materi ini?</li><li class="text-sm text-text-muted">Bagaimana cara menerapkan konsep ini dalam project nyata?</li></ul></div>
+
+          <div class="references-box"><div class="references-header text-[.72rem] font-bold tracking-[.1em] uppercase text-text-muted">📚 Referensi</div><ul class="references-list list-none p-0 m-0"><li class="p-3 flex items-start gap-2.5 text-sm"><span class="ref-num text-[.72rem] font-bold shrink-0 mt-0.5">1</span><span class="ref-text text-text-muted"><a href="https://example.com" target="_blank" class="text-accent font-medium">Referensi Part 1</a></span></li></ul></div>
+
+          <div class="tag-row flex flex-wrap gap-1.5 mt-7"><span class="tag text-[.73rem] font-medium px-2.5 py-0.5">Part1</span><span class="tag text-[.73rem] font-medium px-2.5 py-0.5">Praktik</span></div>
+
+          <div class="part-footer-nav flex justify-between items-center gap-4 mt-10 pt-6 border-t border-border">
+            <a href="#pendahuluan" class="part-nav-btn flex items-center gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Pendahuluan</a>
+            <a href="#part2" class="part-nav-btn flex items-center flex-row-reverse gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline">Part 2: Judul Part 2<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- ✏️ PART 2 — JUDUL PART 2 (PENUTUP)     -->
+        <!-- ═══════════════════════════════════════ -->
+        <section class="part-section pt-16 pb-8" id="part2">
+          <div class="part-header mb-9">
+            <p class="part-label inline-flex items-center gap-2 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5"><span class="part-label-line w-5 h-0.5 bg-accent"></span> Part 2 · Penutup</p>
+            <h1 class="part-title font-serif text-[clamp(1.6rem,3.5vw,2.15rem)] font-semibold leading-snug text-text-primary tracking-tight mb-5">Judul Part 2 & Penutup</h1>
+            <div class="part-meta flex flex-wrap items-center gap-x-4 gap-y-1.5 text-sm text-text-muted">
+              <span>📅 DD Bulan YYYY</span><span class="w-1 h-1 rounded-full bg-border-strong"></span><span>⏱ ~15 menit baca</span><span class="w-1 h-1 rounded-full bg-border-strong"></span><span>🏷 Praktik</span>
+            </div>
+            <div class="part-intro mt-5 p-4 bg-surface border border-border rounded-[10px] text-[.95rem] leading-7 text-text-muted italic border-l-[3px] border-l-accent">Deskripsi singkat tentang Part 2 dan penutup dokumentasi.</div>
+          </div>
+
+          <div class="content-body">
+            <div class="objectives-box"><div class="objectives-header text-[.72rem] font-bold tracking-[.1em] uppercase text-text-muted">🎯 Tujuan Pembelajaran</div><div class="objectives-body p-4"><ul class="pl-5"><li class="text-sm text-text-body py-0.5">Tujuan pembelajaran Part 2</li><li class="text-sm text-text-body py-0.5">Merefleksikan keseluruhan proses pembelajaran</li></ul></div></div>
+
+            <h2 id="p2-sub1" class="font-serif text-xl font-semibold text-text-primary tracking-tight">Sub Topik 1</h2>
+            <p class="text-justify">Konten pembahasan Part 2 sub topik 1. Tuliskan konten yang relevan dengan topik penutup dan ringkasan dari apa yang sudah dipelajari.</p>
+
+            <h2 id="p2-sub2" class="font-serif text-xl font-semibold text-text-primary tracking-tight">Penutup</h2>
+            <p class="text-justify">Selamat! Kamu telah menyelesaikan seluruh dokumentasi pembelajaran ini. Tuliskan ringkasan dan motivasi untuk pembaca.</p>
+          </div>
+
+          <div class="reflection-box"><p class="reflection-header flex items-center gap-2.5 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5">Refleksi Akhir</p><p class="text-sm text-text-body leading-7 mb-3">Luangkan waktu untuk merefleksikan perjalanan belajarmu:</p><ul class="reflection-questions list-none p-0"><li class="text-sm text-text-muted">Apa bagian yang paling sulit dipahami?</li><li class="text-sm text-text-muted">Fitur apa yang ingin kamu eksplorasi lebih lanjut?</li><li class="text-sm text-text-muted">Bagaimana pengalaman ini bisa kamu aplikasikan?</li></ul></div>
+
+          <div class="references-box"><div class="references-header text-[.72rem] font-bold tracking-[.1em] uppercase text-text-muted">📚 Referensi Keseluruhan</div><ul class="references-list list-none p-0 m-0"><li class="p-3 flex items-start gap-2.5 text-sm"><span class="ref-num text-[.72rem] font-bold shrink-0 mt-0.5">1</span><span class="ref-text text-text-muted"><a href="https://example.com" target="_blank" class="text-accent font-medium">Dokumentasi Resmi</a></span></li><li class="p-3 flex items-start gap-2.5 text-sm"><span class="ref-num text-[.72rem] font-bold shrink-0 mt-0.5">2</span><span class="ref-text text-text-muted"><a href="https://example.com" target="_blank" class="text-accent font-medium">Platform Belajar</a></span></li></ul></div>
+
+          <div class="tag-row flex flex-wrap gap-1.5 mt-7"><span class="tag text-[.73rem] font-medium px-2.5 py-0.5">Penutup</span><span class="tag text-[.73rem] font-medium px-2.5 py-0.5">Rangkuman</span></div>
+
+          <div class="part-footer-nav flex justify-between items-center gap-4 mt-10 pt-6 border-t border-border">
+            <a href="#part1" class="part-nav-btn flex items-center gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Part 1</a>
+            <a href="../../home/index.html" class="part-nav-btn flex items-center flex-row-reverse gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline bg-accent-soft border-accent-mid">
+              🏠 Kembali ke Beranda
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- SITE FOOTER -->
+      <footer class="site-footer col-span-full border-t border-border bg-surface">
+        <div class="footer-inner max-w-[1280px] mx-auto py-10 px-6 grid grid-cols-3 gap-8 max-[960px]:grid-cols-2 max-[600px]:grid-cols-1">
+          <div class="footer-brand">
+            <div class="font-serif text-lg font-semibold mb-2.5 flex items-center gap-2">
+              Lippbyte <span class="logo-badge font-sans text-[.65rem] font-bold tracking-wider uppercase bg-accent text-white px-2 py-0.5 rounded-full">Blog</span>
+            </div>
+            <p class="text-sm text-text-faint leading-relaxed">Dokumentasi perjalanan belajar — disesuaikan dengan topik</p> 
+          </div>
+          <div>
+            <p class="footer-col-title text-[.72rem] font-bold tracking-[.1em] uppercase text-text-faint mb-3">Navigasi</p>
+            <ul class="footer-links list-none p-0">
+              <li><a href="#pendahuluan" class="text-sm text-text-muted">Pendahuluan</a></li>
+              <li class="mt-1.5"><a href="#part1" class="text-sm text-text-muted">Part 1 — Judul Part 1</a></li>
+              <li class="mt-1.5"><a href="#part2" class="text-sm text-text-muted">Part 2 — Judul Part 2</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="footer-col-title text-[.72rem] font-bold tracking-[.1em] uppercase text-text-faint mb-3">Link</p>
+            <ul class="footer-links list-none p-0">
+              <li><a href="https://lippbyte.github.io/" class="text-sm text-text-muted" target="_blank">Lippbyte</a></li>
+              <li><a href="../../home/index.html" class="text-sm text-text-muted">Home</a></li>
+              <li><a href="../../home/index.html#blog-list" class="text-sm text-text-muted">Blog</a></li>
+              <li><a href="https://linkedin.com/in/muhammad-khalifa-72611b3b8" target="_blank" class="text-sm text-text-muted">LinkedIn</a></li>
+              <li><a href="https://github.com/lippbyte" target="_blank" class="text-sm text-text-muted">GitHub</a></li>
+            </ul>
+          </div>
+          <div class="footer-bottom col-span-full pt-6 border-t border-border flex justify-between items-center flex-wrap gap-2 text-xs text-text-faint">
+            <span>© 2026 Lippbyte · [Judul Topik]</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Lippbyte — Segarnya Ultramilk Stroberi: Pilihan Lezat untuk Setiap Momen" />
+  <title>Lippbyte — Segarnya Ultramilk Stroberi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { serif: ['Lora','serif'], sans: ['DM Sans','sans-serif'], mono: ['JetBrains Mono','monospace'] },
+          colors: {
+            bg: 'var(--bg)', surface: 'var(--surface)', 'surface-2': 'var(--surface-2)',
+            border: 'var(--border)', 'border-strong': 'var(--border-strong)',
+            'text-primary': 'var(--text-primary)', 'text-body': 'var(--text-body)',
+            'text-muted': 'var(--text-muted)', 'text-faint': 'var(--text-faint)',
+            accent: 'var(--accent)', 'accent-hover': 'var(--accent-hover)',
+            'accent-soft': 'var(--accent-soft)', 'accent-mid': 'var(--accent-mid)',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="font-sans text-base leading-7">
+
+  <!-- TOP NAVBAR -->
+  <header class="site-header fixed top-0 left-0 right-0 z-[200] h-14 bg-[var(--bg-translucent)] backdrop-blur-[14px] border-b border-border">
+    <div class="header-inner max-w-[1280px] mx-auto px-6 h-full flex items-center justify-between gap-4">
+      <a href="../../home/index.html" class="site-logo font-serif text-lg font-semibold text-text-primary tracking-tight flex items-center gap-2">
+        Lippbyte
+        <span class="logo-badge font-sans text-[.65rem] font-bold tracking-wider uppercase bg-accent text-white px-2 py-0.5 rounded-full">Minuman</span>
+      </a>
+      <div class="flex items-center gap-3">
+        <a href="../../home/index.html" class="nav-home-btn flex items-center gap-1.5 text-xs font-medium text-text-muted px-3 py-1.5 rounded-lg border border-border bg-surface hover:border-accent hover:text-accent hover:bg-accent-soft transition-all duration-200">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Home
+        </a>
+        <button id="themeToggle" class="p-1.5 rounded-md bg-surface-2 text-text-muted hover:text-accent border border-border transition-colors duration-200" aria-label="Toggle Dark Mode">
+          <svg id="themeToggleIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- READING PROGRESS -->
+  <div class="top-progress"><div class="top-progress-fill" id="topFill"></div></div>
+
+  <div class="layout grid grid-cols-[272px_1fr] max-w-[1280px] mx-auto min-h-screen pt-14 max-[960px]:grid-cols-1">
+
+    <!-- LEFT SIDEBAR -->
+    <nav class="left-sidebar sticky top-14 h-[calc(100vh-56px)] overflow-y-auto border-r border-border py-7 max-[960px]:static max-[960px]:h-auto" aria-label="Navigasi Part">
+      <a href="../../home/index.html" class="sidebar-back flex items-center gap-2 px-5 pb-4 mb-4 text-xs font-medium text-text-muted border-b border-border hover:text-accent transition-colors">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Kembali ke Beranda
+      </a>
+
+      <p class="sidebar-section-label text-[.67rem] font-bold tracking-[.12em] uppercase text-text-faint px-5 mb-2">Daftar Isi</p>
+      <ul class="part-nav list-none p-0 m-0" id="partNav">
+        <li>
+          <a href="#pendahuluan" class="active nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="pendahuluan">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">1</span>
+            <span class="nav-text flex-1">Pendahuluan</span>
+            <span class="nav-progress-ring" data-section="pendahuluan">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#profil-rasa" class="nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="profil-rasa">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">2</span>
+            <span class="nav-text flex-1">Profil Rasa</span>
+            <span class="nav-progress-ring" data-section="profil-rasa">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#manfaat-sehat" class="nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="manfaat-sehat">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">3</span>
+            <span class="nav-text flex-1">Manfaat Sehat</span>
+            <span class="nav-progress-ring" data-section="manfaat-sehat">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#momen-terbaik" class="nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="momen-terbaik">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">4</span>
+            <span class="nav-text flex-1">Momen Terbaik</span>
+            <span class="nav-progress-ring" data-section="momen-terbaik">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#kesimpulan" class="nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="kesimpulan">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">5</span>
+            <span class="nav-text flex-1">Kesimpulan</span>
+            <span class="nav-progress-ring" data-section="kesimpulan">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar-other-blogs mt-6 pt-5 border-t border-border px-5">
+        <p class="text-[.67rem] font-bold tracking-[.12em] uppercase text-text-faint mb-3">Blog Lainnya</p>
+        <a href="index.html" class="flex items-center gap-2 py-1.5 text-xs text-text-muted hover:text-accent transition-colors">
+          <span>🥛</span> Semua Topik Susu
+        </a>
+      </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div>
+      <main class="main-content px-12 pb-28 max-w-[820px] max-[960px]:px-5">
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- PART 1 — PENDAHULUAN                    -->
+        <!-- ═══════════════════════════════════════ -->
+        <section class="part-section pt-16 pb-8 border-b border-border" id="pendahuluan">
+          <div class="part-header mb-9">
+            <p class="part-label inline-flex items-center gap-2 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5"><span class="part-label-line w-5 h-0.5 bg-accent"></span> Bagian 1</p>
+            <h1 class="part-title font-serif text-[clamp(1.6rem,3.5vw,2.15rem)] font-semibold leading-snug text-text-primary tracking-tight mb-5">Kenapa Ultramilk Stroberi Begitu Dicintai?</h1>
+            <div class="part-meta flex flex-wrap items-center gap-x-4 gap-y-1.5 text-sm text-text-muted">
+              <span class="flex items-center gap-1">⏱ 4 menit membaca</span>
+              <span class="w-1 h-1 rounded-full bg-border-strong"></span>
+              <span class="flex items-center gap-1">🏷 Gaya Hidup & Nutrisi</span>
+            </div>
+            <div class="part-intro mt-5 p-4 bg-surface border border-border rounded-[10px] text-[.95rem] leading-7 text-text-muted italic border-l-[3px] border-l-accent">
+              Jelajahi kelezatan dan manfaat Ultramilk Stroberi, minuman susu favorit yang menyegarkan dan penuh nutrisi untuk segala usia.
+            </div>
+          </div>
+
+          <div class="content-body">
+            <p class="text-justify">
+              Siapa yang tidak kenal dengan kemasan merah muda ikonik dari <strong class="text-text-primary font-semibold">Ultra Milk Stroberi</strong>? Di Indonesia, minuman ini bukan sekadar susu rasa biasa; ia adalah teman setia dalam berbagai momen kehidupan. Mulai dari anak-anak yang bersemangat menyambut kotak susunya di jam istirahat sekolah, mahasiswa yang butuh asupan energi cepat, hingga orang dewasa yang merindukan rasa nyaman di tengah kesibukan.
+            </p>
+            <p class="text-justify">
+              Popularitasnya yang universal bukan tanpa alasan. Perpaduan antara kualitas susu sapi segar Ultra Jaya yang sudah melegenda dengan sentuhan rasa buah stroberi yang ceria menciptakan daya tarik yang sulit ditolak. Mari kita bedah lebih dalam mengapa susu rasa stroberi ini selalu punya tempat spesial di hati (dan kulkas) kita semua!
+            </p>
+
+            <div class="callout callout-note">
+              <span class="callout-icon text-base shrink-0 leading-7">💡</span>
+              <div class="callout-body flex-1">
+                <p class="callout-title text-[.73rem] font-bold tracking-wider uppercase mb-1">Tahukah Kamu?</p>
+                <p class="text-sm leading-relaxed">Warna merah muda pada kemasannya telah menjadi identitas yang sangat melekat bagi pencinta susu rasa stroberi di seluruh penjuru negeri.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="part-footer-nav flex justify-between items-center gap-4 mt-10 pt-6 border-t border-border">
+            <span></span>
+            <a href="#profil-rasa" class="part-nav-btn flex items-center flex-row-reverse gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline cursor-pointer">
+              Bagian 2: Profil Rasa
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- PART 2 — PROFIL RASA                    -->
+        <!-- ═══════════════════════════════════════ -->
+        <section class="part-section pt-16 pb-8 border-b border-border" id="profil-rasa">
+          <div class="part-header mb-9">
+            <p class="part-label inline-flex items-center gap-2 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5"><span class="part-label-line w-5 h-0.5 bg-accent"></span> Bagian 2</p>
+            <h1 class="part-title font-serif text-[clamp(1.6rem,3.5vw,2.15rem)] font-semibold leading-snug text-text-primary tracking-tight mb-5">Profil Rasa yang Menggoda: Manisnya Stroberi Alami</h1>
+            <div class="part-intro mt-5 p-4 bg-surface border border-border rounded-[10px] text-[.95rem] leading-7 text-text-muted italic border-l-[3px] border-l-accent">
+              Deskripsi rasa unik Ultramilk Stroberi: perpaduan sempurna susu segar dengan aroma dan manisnya buah stroberi.
+            </div>
+          </div>
+
+          <div class="content-body">
+            <p class="text-justify">
+              Satu hal yang membuat Ultra Milk Stroberi menonjol di tumpukan rak supermarket adalah <strong class="text-text-primary font-semibold">keseimbangan rasanya</strong>. Saat pertama kali mencicipinya, lidah kamu akan disambut oleh tekstur susu yang lembut dan *creamy*. Tidak lama kemudian, aroma stroberi yang segar mulai merebak, diikuti oleh rasa manis yang pas—tidak berlebihan, namun cukup untuk memberikan ledakan kebahagiaan.
+            </p>
+            
+            <figure class="my-8">
+              <img src="img/ultramilk_strawberry_fresh.png" alt="Kesegaran Ultra Milk Stroberi dan Buah Stroberi" />
+              <figcaption class="text-center text-xs text-text-faint mt-2 italic"><strong>Gambar 1</strong> — Paduan sempurna susu segar dan buah stroberi alami yang menggugah selera.</figcaption>
+            </figure>
+
+            <p class="text-justify">
+              Dibandingkan dengan varian lain seperti cokelat yang cenderung berat dan kaya, atau moka yang lebih kuat aromanya, varian stroberi menawarkan pengalaman yang lebih ringan dan menyegarkan (*refreshing*). Ini menjadikannya pilihan ideal saat kamu tidak ingin sesuatu yang terlalu mengenyangkan, tapi tetap mendambakan rasa yang memanjakan.
+            </p>
+
+            <div class="callout callout-tip">
+              <span class="callout-icon text-base shrink-0 leading-7">✅</span>
+              <div class="callout-body flex-1">
+                <p class="callout-title text-[.73rem] font-bold tracking-wider uppercase mb-1">Tips Kuliner</p>
+                <p class="text-sm leading-relaxed">Ingin rasa yang lebih mewah? Cobalah jadikan Ultra Milk Stroberi sebagai bahan dasar *strawberry smoothie* dengan menambahkan potongan buah beri asli!</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="part-footer-nav flex justify-between items-center gap-4 mt-10 pt-6 border-t border-border">
+            <a href="#pendahuluan" class="part-nav-btn flex items-center gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Pendahuluan</a>
+            <a href="#manfaat-sehat" class="part-nav-btn flex items-center flex-row-reverse gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline">Bagian 3: Manfaat Sehat<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- PART 3 — MANFAAT SEHAT                   -->
+        <!-- ═══════════════════════════════════════ -->
+        <section class="part-section pt-16 pb-8 border-b border-border" id="manfaat-sehat">
+          <div class="part-header mb-9">
+            <p class="part-label inline-flex items-center gap-2 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5"><span class="part-label-line w-5 h-0.5 bg-accent"></span> Bagian 3</p>
+            <h1 class="part-title font-serif text-[clamp(1.6rem,3.5vw,2.15rem)] font-semibold leading-snug text-text-primary tracking-tight mb-5">Manfaat Sehat di Setiap Tegukan</h1>
+            <div class="part-intro mt-5 p-4 bg-surface border border-border rounded-[10px] text-[.95rem] leading-7 text-text-muted italic border-l-[3px] border-l-accent">
+              Uraikan kandungan nutrisi utama dalam Ultramilk Stroberi (kalsium, vitamin D, protein) dan manfaatnya bagi tubuh.
+            </div>
+          </div>
+
+          <div class="content-body">
+            <div class="objectives-box">
+              <div class="objectives-header text-[.72rem] font-bold tracking-[.1em] uppercase text-text-muted">🎯 Nutrisi Utama</div>
+              <div class="objectives-body p-4">
+                <ul class="pl-5">
+                  <li class="text-sm text-text-body py-0.5"><strong>Kalsium</strong> — Menjaga kesehatan tulang dan gigi agar tetap kuat.</li>
+                  <li class="text-sm text-text-body py-0.5"><strong>Vitamin D</strong> — Membantu penyerapan kalsium secara maksimal oleh tubuh.</li>
+                  <li class="text-sm text-text-body py-0.5"><strong>Protein</strong> — Penting untuk pertumbuhan sel dan pemulihan energi setelah beraktivitas.</li>
+                  <li class="text-sm text-text-body py-0.5"><strong>Vitamin & Mineral Lain</strong> — Menjaga daya tahan tubuh tetap prima setiap hari.</li>
+                </ul>
+              </div>
+            </div>
+
+            <p class="text-justify">
+              Menikmati Ultra Milk Stroberi bukan cuma soal memuaskan keinginan lidah, tapi juga cara yang enak untuk memenuhi kebutuhan nutrisi harian kamu. Bagi para remaja yang sedang dalam masa pertumbuhan dan dewasa muda dengan jadwal padat, kandungan protein dan kalsiumnya sangat membantu menjaga stamina dan kekuatan tulang.
+            </p>
+            <p class="text-justify">
+               Ini adalah solusi cerdas untuk orang tua yang ingin anak-anaknya rajin minum susu tanpa harus dipaksa. Dengan rasa yang enak, anak-anak akan menganggapnya sebagai camilan lezat, sementara orang tua bisa tenang mengetahui si kecil mendapatkan nutrisi yang dibutuhkan.
+            </p>
+
+            <div class="callout callout-warn">
+              <span class="callout-icon text-base shrink-0 leading-7">⚠️</span>
+              <div class="callout-body flex-1">
+                <p class="callout-title text-[.73rem] font-bold tracking-wider uppercase mb-1">Penting</p>
+                <p class="text-sm leading-relaxed">Meskipun memberikan energi tambahan, pastikan untuk tetap mengonsumsi air putih yang cukup dan makanan bergizi seimbang lainnya dalam pola makan harian kamu.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="part-footer-nav flex justify-between items-center gap-4 mt-10 pt-6 border-t border-border">
+            <a href="#profil-rasa" class="part-nav-btn flex items-center gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Profil Rasa</a>
+            <a href="#momen-terbaik" class="part-nav-btn flex items-center flex-row-reverse gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline">Bagian 4: Momen Terbaik<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- PART 4 — MOMEN TERBAIK                  -->
+        <!-- ═══════════════════════════════════════ -->
+        <section class="part-section pt-16 pb-8 border-b border-border" id="momen-terbaik">
+          <div class="part-header mb-9">
+            <p class="part-label inline-flex items-center gap-2 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5"><span class="part-label-line w-5 h-0.5 bg-accent"></span> Bagian 4</p>
+            <h1 class="part-title font-serif text-[clamp(1.6rem,3.5vw,2.15rem)] font-semibold leading-snug text-text-primary tracking-tight mb-5">Momen Terbaik Menikmati Ultramilk Stroberi</h1>
+            <div class="part-intro mt-5 p-4 bg-surface border border-border rounded-[10px] text-[.95rem] leading-7 text-text-muted italic border-l-[3px] border-l-accent">
+              Ide kapan dan bagaimana menikmati kesegaran susu stroberi ini dalam aktivitas sehari-hari.
+            </div>
+          </div>
+
+          <div class="content-body">
+            <p class="text-justify">
+              Kapan waktu paling pas untuk membuka sekotak Ultra Milk Stroberi? Jawabannya: <strong class="text-text-primary font-semibold">kapan saja!</strong> Namun, ada beberapa momen yang bisa menjadi jauh lebih istimewa jika ditemani si pink ini:
+            </p>
+            <ul class="pl-6 list-disc">
+              <li><strong class="text-text-primary font-medium">Sarapan Cepat:</strong> Saat kamu terburu-buru mengejar kereta atau bus, susu ini memberikan asupan energi awal yang praktis.</li>
+              <li><strong class="text-text-primary font-medium">Teman Belajar:</strong> Butuh selingan saat otak mulai panas mengerjakan tugas? Kesegarannya bisa mengembalikan fokus kamu.</li>
+              <li><strong class="text-text-primary font-medium">Pelepas Dahaga:</strong> Sesaat setelah berolahraga atau berjalan di bawah terik matahari, rasanya sangat melegakan.</li>
+              <li><strong class="text-text-primary font-medium">Camilan Sehat:</strong> Daripada jajan yang tidak jelas kandungannya, lebih baik pilih susu bernutrisi.</li>
+            </ul>
+
+            <div class="callout callout-tip">
+              <span class="callout-icon text-base shrink-0 leading-7">🥛</span>
+              <div class="callout-body flex-1">
+                <p class="callout-title text-[.73rem] font-bold tracking-wider uppercase mb-1">Pro Tip</p>
+                <p class="text-sm leading-relaxed">Ultramilk Stroberi mutlak dinikmati dalam kondisi <strong class="font-bold">dingin dari kulkas</strong>. Kesegarannya akan meningkat berkali-kali lipat!</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="part-footer-nav flex justify-between items-center gap-4 mt-10 pt-6 border-t border-border">
+            <a href="#manfaat-sehat" class="part-nav-btn flex items-center gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Manfaat Sehat</a>
+            <a href="#kesimpulan" class="part-nav-btn flex items-center flex-row-reverse gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline">Bagian 5: Kesimpulan<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- PART 5 — KESIMPULAN                     -->
+        <!-- ═══════════════════════════════════════ -->
+        <section class="part-section pt-16 pb-8" id="kesimpulan">
+          <div class="part-header mb-9">
+            <p class="part-label inline-flex items-center gap-2 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5"><span class="part-label-line w-5 h-0.5 bg-accent"></span> Bagian 5 · Penutup</p>
+            <h1 class="part-title font-serif text-[clamp(1.6rem,3.5vw,2.15rem)] font-semibold leading-snug text-text-primary tracking-tight mb-5">Lebih dari Sekadar Susu Biasa</h1>
+            <div class="part-intro mt-5 p-4 bg-surface border border-border rounded-[10px] text-[.95rem] leading-7 text-text-muted italic border-l-[3px] border-l-accent">
+              Kesimpulan mengapa Ultramilk Stroberi tetap menjadi pilihan utama masyarakat Indonesia.
+            </div>
+          </div>
+
+          <div class="content-body">
+            <p class="text-justify">
+              Secara keseluruhan, Ultra Milk Stroberi bukanlah sekadar produk yang lewat dalam tren sesaat. Ia adalah gabungan antara <strong class="text-text-primary font-semibold">rasa yang lezat, nutrisi yang terjamin, dan kepraktisan</strong> yang menyesuaikan dengan gaya hidup aktif masa kini. Di tengah banyaknya pilihan minuman modern, kesederhanaan rasa stroberi alami yang autentik tetap tak tergantikan.
+            </p>
+            <p class="text-justify">
+              Jadi, sudahkah kamu menyiapkan stok susu stroberi kesukaanmu di kulkas hari ini? Ingat, satu tegukan kesegaran bisa mengubah momen biasa kamu menjadi lebih ceria!
+            </p>
+          </div>
+
+          <div class="reflection-box">
+            <p class="reflection-header flex items-center gap-2.5 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5">Refleksi</p>
+            <p class="text-sm text-text-body leading-7 mb-3">Setelah membaca artikel ini, mari renungkan kebiasaan sehat kita:</p>
+            <ul class="reflection-questions list-none p-0">
+              <li class="text-sm text-text-muted">Kapankah waktu favorit kamu untuk menikmati Ultra Milk Stroberi?</li>
+              <li class="text-sm text-text-muted">Apakah kamu sudah memenuhi kebutuhan kalsium harianmu dengan cara yang menyenangkan?</li>
+            </ul>
+          </div>
+
+          <div class="part-footer-nav flex justify-between items-center gap-4 mt-10 pt-6 border-t border-border">
+            <a href="#momen-terbaik" class="part-nav-btn flex items-center gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Momen Terbaik</a>
+            <a href="../../home/index.html" class="part-nav-btn flex items-center flex-row-reverse gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline bg-accent-soft border-accent-mid">
+              🏠 Kembali ke Beranda
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- SITE FOOTER -->
+      <footer class="site-footer col-span-full border-t border-border bg-surface">
+        <div class="footer-inner max-w-[1280px] mx-auto py-10 px-6 grid grid-cols-3 gap-8 max-[960px]:grid-cols-2 max-[600px]:grid-cols-1">
+          <div class="footer-brand">
+            <div class="font-serif text-lg font-semibold mb-2.5 flex items-center gap-2">
+              Lippbyte <span class="logo-badge font-sans text-[.65rem] font-bold tracking-wider uppercase bg-accent text-white px-2 py-0.5 rounded-full">Minuman</span>
+            </div>
+            <p class="text-sm text-text-faint leading-relaxed">Berbagi info menarik tentang gaya hidup dan kuliner favorit kamu.</p>
+          </div>
+          <div>
+            <p class="footer-col-title text-[.72rem] font-bold tracking-[.1em] uppercase text-text-faint mb-3">Navigasi</p>
+            <ul class="footer-links list-none p-0">
+              <li><a href="#pendahuluan" class="text-sm text-text-muted">Pendahuluan</a></li>
+              <li class="mt-1.5"><a href="#profil-rasa" class="text-sm text-text-muted">Profil Rasa</a></li>
+              <li class="mt-1.5"><a href="#manfaat-sehat" class="text-sm text-text-muted">Manfaat Sehat</a></li>
+              <li class="mt-1.5"><a href="#momen-terbaik" class="text-sm text-text-muted">Momen Terbaik</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="footer-col-title text-[.72rem] font-bold tracking-[.1em] uppercase text-text-faint mb-3">Link</p>
+            <ul class="footer-links list-none p-0">
+              <li><a href="../../home/index.html" class="text-sm text-text-muted">🏠 Beranda</a></li>
+              <li class="mt-1.5"><a href="https://github.com/lippbyte" target="_blank" class="text-sm text-text-muted">GitHub</a></li>
+            </ul>
+          </div>
+          <div class="footer-bottom col-span-full pt-6 border-t border-border flex justify-between items-center flex-wrap gap-2 text-xs text-text-faint">
+            <span>© 2026 Lippbyte · Muhammad Khalifa</span>
+            <span>Segarnya Ultra Milk, Segarnya Hidupmu 🍓</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

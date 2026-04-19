@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Ulasan mendalam serial Netflix 'Can This Love Be Translated'. Kim Seon-ho dan Go Yoon-jung dalam kisah cinta yang melampaui bahasa." />
+  <title>The K-Drama Compass — Membedah 'Can This Love Be Translated'</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { serif: ['Lora','serif'], sans: ['DM Sans','sans-serif'], mono: ['JetBrains Mono','monospace'] },
+          colors: {
+            bg: 'var(--bg)', surface: 'var(--surface)', 'surface-2': 'var(--surface-2)',
+            border: 'var(--border)', 'border-strong': 'var(--border-strong)',
+            'text-primary': 'var(--text-primary)', 'text-body': 'var(--text-body)',
+            'text-muted': 'var(--text-muted)', 'text-faint': 'var(--text-faint)',
+            accent: 'var(--accent)', 'accent-hover': 'var(--accent-hover)',
+            'accent-soft': 'var(--accent-soft)', 'accent-mid': 'var(--accent-mid)',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="font-sans text-base leading-7">
+
+  <!-- TOP NAVBAR -->
+  <header class="site-header fixed top-0 left-0 right-0 z-[200] h-14 bg-[var(--bg-translucent)] backdrop-blur-[14px] border-b border-border">
+    <div class="header-inner max-w-[1280px] mx-auto px-6 h-full flex items-center justify-between gap-4">
+      <a href="../../home/index.html" class="site-logo font-serif text-lg font-semibold text-text-primary tracking-tight flex items-center gap-2">
+        The K-Drama Compass
+        <span class="logo-badge font-sans text-[.65rem] font-bold tracking-wider uppercase bg-accent text-white px-2 py-0.5 rounded-full">Blog</span>
+      </a>
+      <div class="flex items-center gap-3">
+        <a href="../../home/index.html" class="nav-home-btn flex items-center gap-1.5 text-xs font-medium text-text-muted px-3 py-1.5 rounded-lg border border-border bg-surface hover:border-accent hover:text-accent hover:bg-accent-soft transition-all duration-200">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Home
+        </a>
+        <button id="themeToggle" class="p-1.5 rounded-md bg-surface-2 text-text-muted hover:text-accent border border-border transition-colors duration-200" aria-label="Toggle Dark Mode">
+          <svg id="themeToggleIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- READING PROGRESS -->
+  <div class="top-progress"><div class="top-progress-fill" id="topFill"></div></div>
+
+  <div class="layout grid grid-cols-[272px_1fr] max-w-[1280px] mx-auto min-h-screen pt-14 max-[960px]:grid-cols-1">
+
+    <!-- LEFT SIDEBAR -->
+    <nav class="left-sidebar sticky top-14 h-[calc(100vh-56px)] overflow-y-auto border-r border-border py-7 max-[960px]:static max-[960px]:h-auto" aria-label="Navigasi Part">
+
+      <a href="../../home/index.html" class="sidebar-back flex items-center gap-2 px-5 pb-4 mb-4 text-xs font-medium text-text-muted border-b border-border hover:text-accent transition-colors">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Kembali ke Beranda
+      </a>
+
+      <p class="sidebar-section-label text-[.67rem] font-bold tracking-[.12em] uppercase text-text-faint px-5 mb-2">Review Serial</p>
+      <ul class="part-nav list-none p-0 m-0" id="partNav">
+        <li>
+          <a href="#pendahuluan" class="active nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="pendahuluan">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">0</span>
+            <span class="nav-text flex-1">Pendahuluan</span>
+            <span class="nav-progress-ring" data-section="pendahuluan">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#inti-cerita" class="nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="inti-cerita">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">1</span>
+            <span class="nav-text flex-1">Inti Cerita</span>
+            <span class="nav-progress-ring" data-section="inti-cerita">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#duo-bintang" class="nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="duo-bintang">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">2</span>
+            <span class="nav-text flex-1">Duo Bintang</span>
+            <span class="nav-progress-ring" data-section="duo-bintang">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#hong-sisters" class="nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="hong-sisters">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">3</span>
+            <span class="nav-text flex-1">Hong Sisters</span>
+            <span class="nav-progress-ring" data-section="hong-sisters">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#analisis" class="nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="analisis">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">4</span>
+            <span class="nav-text flex-1">Analisis Mendalam</span>
+            <span class="nav-progress-ring" data-section="analisis">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#komunitas" class="nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="komunitas">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">5</span>
+            <span class="nav-text flex-1">Hasil Komunitas</span>
+            <span class="nav-progress-ring" data-section="komunitas">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#kesimpulan" class="nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="kesimpulan">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">6</span>
+            <span class="nav-text flex-1">Kesimpulan</span>
+            <span class="nav-progress-ring" data-section="kesimpulan">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar-other-blogs mt-6 pt-5 border-t border-border px-5">
+        <p class="text-[.67rem] font-bold tracking-[.12em] uppercase text-text-faint mb-3">Blog Lainnya</p>
+        <a href="../laravel-blog/index.html" class="flex items-center gap-2 py-1.5 text-xs text-text-muted hover:text-accent transition-colors">
+          <span>⚡</span> Belajar Laravel
+        </a>
+      </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div>
+      <main class="main-content px-12 pb-28 max-w-[820px] max-[960px]:px-5">
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- PART 0 — PENDAHULUAN                -->
+        <!-- ═══════════════════════════════════════ -->
+        <section class="part-section pt-16 pb-8 border-b border-border" id="pendahuluan">
+          <div class="part-header mb-9">
+            <p class="part-label inline-flex items-center gap-2 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5"><span class="part-label-line w-5 h-0.5 bg-accent"></span> Pendahuluan</p>
+            <h1 class="part-title font-serif text-[clamp(1.6rem,3.5vw,2.15rem)] font-semibold leading-snug text-text-primary tracking-tight mb-5">Membedah 'Can This Love Be Translated': Ketika Bahasa Cinta Melampaui Kata dan Batasan</h1>
+            <div class="part-meta flex flex-wrap items-center gap-x-4 gap-y-1.5 text-sm text-text-muted">
+              <span class="flex items-center gap-1">📅 13 April 2026</span>
+              <span class="w-1 h-1 rounded-full bg-border-strong"></span>
+              <span class="flex items-center gap-1">⏱ 9 menit baca</span>
+              <span class="w-1 h-1 rounded-full bg-border-strong"></span>
+              <span class="flex items-center gap-1">🏷 Netflix Original</span>
+            </div>
+            <div class="part-intro mt-5 p-4 bg-surface border border-border rounded-[10px] text-[.95rem] leading-7 text-text-muted italic border-l-[3px] border-l-accent">
+              Serial Netflix 'Can This Love Be Translated' siap memukau dengan premis unik tentang seorang penerjemah dan bintang global, mengeksplorasi bahasa cinta yang melampaui hambatan lisan. Bersiaplah untuk kisah romantis yang cerdas dan penuh makna dari tangan dingin Hong Sisters.
+            </div>
+          </div>
+
+          <div class="content-body">
+            <p class="text-justify mb-6">
+              Fenomena K-drama terus mendunia, tidak hanya karena kualitas produksinya yang semakin premium, tetapi juga karena keberanian para kreatornya untuk mengeksplorasi premis-premis yang semakin segar dan relevan. Di tengah banjirnya judul-judul baru, satu nama yang terus mencuri perhatian adalah <strong class="text-accent underline decoration-accent-soft underline-offset-4 font-semibold">"Can This Love Be Translated"</strong>. Sebagai salah satu proyek paling dinantikan dari Netflix, serial ini menjanjikan sesuatu yang lebih dalam dari sekadar drama romantis biasa; ia menjanjikan sebuah narasi cerdas tentang bagaimana manusia saling memahami di tengah perbedaan yang nyata.
+            </p>
+            <p class="text-justify mb-6">
+              Menurut pendapat saya, tema komunikasi dan bahasa dalam hubungan modern adalah pendekatan yang sangat menjanjikan untuk drama romantis kontemporer. Di era digital di mana kita sering kali 'berbicara' tetapi tidak benar-benar 'berkomunikasi', melihat isu ini diangkat melalui lensa romansa lintas budaya terasa sangat segar dan sangat relevan. Judulnya sendiri seolah-olah memprovokasi pemikiran kita: apakah cinta memang butuh diterjemahkan? Ataukah ada bahasa universal yang melampaui kosakata mana pun? Ini adalah pertanyaan mendalam yang membuat saya sangat antusias untuk segera menyelami serial ini.
+            </p>
+
+            <div class="callout callout-note mb-6">
+              <div class="callout-body flex-1">
+                <p class="callout-title text-[.73rem] font-bold tracking-wider uppercase mb-1">Fakta Singkat</p>
+                <ul class="text-sm leading-relaxed list-disc pl-4">
+                  <li><strong>Platform:</strong> Netflix Original Series</li>
+                  <li><strong>Genre:</strong> Romantis, Drama, Komedi</li>
+                  <li><strong>Inti Premis:</strong> Kisah cinta antara seorang penerjemah dan seorang bintang global dengan tantangan komunikasi dan budaya.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="part-footer-nav flex justify-between items-center gap-4 mt-10 pt-6 border-t border-border">
+            <span></span>
+            <a href="#inti-cerita" class="part-nav-btn flex items-center flex-row-reverse gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline cursor-pointer">
+              Seksi 1: Inti Cerita
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- PART 1 — INTI CERITA                  -->
+        <!-- ═══════════════════════════════════════ -->
+        <section class="part-section pt-16 pb-8 border-b border-border" id="inti-cerita">
+          <div class="part-header mb-9">
+            <p class="part-label inline-flex items-center gap-2 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5"><span class="part-label-line w-5 h-0.5 bg-accent"></span> Part 1</p>
+            <h1 class="part-title font-serif text-[clamp(1.6rem,3.5vw,2.15rem)] font-semibold leading-snug text-text-primary tracking-tight mb-5">Lebih dari Sekadar Kata, Ini Tentang Hati dan Pemahaman</h1>
+          </div>
+
+          <div class="content-body">
+            <p class="text-justify mb-6">
+              Plot utama *Can This Love Be Translated* berpusat pada dinamika menarik antara dua karakter dari dunia yang bertolak belakang. Kita akan diperkenalkan dengan seorang penerjemah yang sangat handal, pribadinya mungkin reflektif dan penuh ketelitian dalam memilih kata. Di sisi lain, ada seorang bintang global yang terbiasa hidup dalam sorotan kamera, di mana setiap gerak-geriknya dinilai dan sering kali disalahartikan oleh publik. Interaksi mereka bukan sekadar urusan menerjemahkan dokumen atau pidato, melainkan tentang menjembatani jurang komunikasi yang lebar.
+            </p>
+            <p class="text-justify mb-6">
+              Serial ini nampaknya akan mengeksplorasi miskomunikasi dari sudut pandang yang sangat luas. Bukan hanya soal perbedaan bahasa verbal yang jelas, tetapi juga faktor-faktor halus seperti perbedaan gaya hidup yang kontras, ekspektasi pribadi terhadap sebuah hubungan, serta pengaruh budaya yang membentuk cara pandang seseorang. Bagi saya, ini adalah potensi terbesar serial ini: kemampuannya untuk menyentuh isu universal tentang pemahaman dan empati. Kita semua pernah merasakan betapa sulitnya benar-benar dipahami oleh orang lain, bahkan ketika kita berbicara dalam bahasa yang sama.
+            </p>
+
+            <div class="callout callout-tip mb-6">
+               <div class="callout-body flex-1">
+                 <p class="callout-title text-[.73rem] font-bold tracking-wider uppercase mb-1">Konflik Sentral</p>
+                 <p class="text-sm leading-relaxed">Kesenjangan komunikasi antara dua individu dari dunia yang sangat berbeda, di mana penerjemahan tidak hanya sebatas kata-kata, melainkan emosi, nuansa budaya, dan niat di balik setiap ucapan.</p>
+               </div>
+            </div>
+
+            <p class="text-justify">
+              Melihat bagaimana kedua karakter utama ini akan belajar 'menerjemahkan' hati masing-masing akan memberikan refleksi yang mendalam bagi penonton. Saya yakin ini bukan hanya sekadar tontonan yang menghibur secara visual, tetapi juga sebuah pemantik diskusi tentang bagaimana kita seharusnya lebih peka terhadap niat di balik kata-kata orang-orang di sekitar kita.
+            </p>
+          </div>
+
+          <div class="part-footer-nav flex justify-between items-center gap-4 mt-10 pt-6 border-t border-border">
+            <a href="#pendahuluan" class="part-nav-btn flex items-center gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Pendahuluan</a>
+            <a href="#duo-bintang" class="part-nav-btn flex items-center flex-row-reverse gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline">Seksi 2: Duo Bintang<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- PART 2 — DUO BINTANG                  -->
+        <!-- ═══════════════════════════════════════ -->
+        <section class="part-section pt-16 pb-8 border-b border-border" id="duo-bintang">
+          <div class="part-header mb-9">
+            <p class="part-label inline-flex items-center gap-2 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5"><span class="part-label-line w-5 h-0.5 bg-accent"></span> Part 2</p>
+            <h1 class="part-title font-serif text-[clamp(1.6rem,3.5vw,2.15rem)] font-semibold leading-snug text-text-primary tracking-tight mb-5">Duo Bintang yang Dinanti: Chemistry di Balik Layar</h1>
+          </div>
+
+          <div class="content-body">
+            <p class="text-justify mb-6">
+              Salah satu magnet terbesar serial ini tentu saja adalah jajaran pemeran utamanya. <strong class="text-text-primary font-semibold">Kim Seon-ho</strong> dan <strong class="text-text-primary font-semibold">Go Yoon-jung</strong> adalah dua nama yang saat ini sedang berada di puncak popularitas global, dan mempertemukan mereka dalam satu layar adalah keputusan yang sangat jenius dari tim produksi. Keduanya memiliki rekam jejak yang solid dalam membangun chemistry yang memukau dengan lawan main mereka, sesuatu yang sangat krusial untuk drama bertema romansa-komunikasi seperti ini.
+            </p>
+            <p class="text-justify mb-6">
+              Kim Seon-ho, yang memenangkan hati jutaan orang melalui perannya di *Start-Up* dan *Hometown Cha-Cha-Cha*, kabarnya akan memerankan sang bintang global. Karismanya yang hangat namun bisa terlihat rapuh di saat yang bersamaan adalah aset besar untuk karakter yang sering disalahpahami. Sementara itu, Go Yoon-jung yang terus naik daun lewat *Alchemy of Souls Part 2*, *Moving*, dan *Sweet Home*, akan mengambil peran sebagai sang penerjemah berbakat. Aktingnya yang ekspresif dan kemampuannya membawakan karakter dengan kedalaman emosi yang kuat akan menjadi kontras yang sempurna bagi peran Seon-ho.
+            </p>
+
+            <figure class="my-8">
+              <div class="img-placeholder text-sm p-12 bg-surface border border-dashed border-border flex flex-col items-center justify-center opacity-70">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <span class="mt-4 font-medium italic text-center text-text-muted">Bayangkan Chemistry Kim Seon-ho & Go Yoon-jung di sini!</span>
+              </div>
+              <figcaption class="text-center text-xs text-text-faint mt-2 italic">Dua bintang papan atas dengan kemampuan akting dan karisma visual yang luar biasa.</figcaption>
+            </figure>
+
+            <p class="text-justify">
+              Secara pribadi, saya sangat penasaran melihat dinamika antara dua aktor dengan pesona yang begitu kuat ini. Go Yoon-jung memiliki cara unik dalam menyampaikan emosi melalui tatapan matanya, yang saya rasa akan sangat menarik ketika harus 'berhadapan' dengan karakter Kim Seon-ho yang mungkin lebih ekspresif dan energik sebagai seorang idola global. Antisipasi terhadap chemistry mereka bukan sekadar soal tampang, tetapi tentang bagaimana mereka akan menghidupkan karakter-karakter yang memiliki lapisan emosi yang kompleks.
+            </p>
+          </div>
+
+          <div class="part-footer-nav flex justify-between items-center gap-4 mt-10 pt-6 border-t border-border">
+            <a href="#inti-cerita" class="part-nav-btn flex items-center gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Inti Cerita</a>
+            <a href="#hong-sisters" class="part-nav-btn flex items-center flex-row-reverse gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline">Seksi 3: Hong Sisters<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- PART 3 — HONG SISTERS                 -->
+        <!-- ═══════════════════════════════════════ -->
+        <section class="part-section pt-16 pb-8 border-b border-border" id="hong-sisters">
+          <div class="part-header mb-9">
+            <p class="part-label inline-flex items-center gap-2 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5"><span class="part-label-line w-5 h-0.5 bg-accent"></span> Part 3</p>
+            <h1 class="part-title font-serif text-[clamp(1.6rem,3.5vw,2.15rem)] font-semibold leading-snug text-text-primary tracking-tight mb-5">Sentuhan Ajaib Hong Sisters: Jaminan Kualitas Cerita?</h1>
+          </div>
+
+          <div class="content-body">
+            <p class="text-justify mb-6">
+              Bagi para penggemar setia K-drama, nama <strong class="text-accent font-semibold italic">Hong Sisters</strong> (Hong Jung-eun dan Hong Mi-ran) adalah jaminan mutu. Duo penulis skenario legendaris ini telah melahirkan deretan karya ikonik yang sukses besar di pasar global, sebut saja *Hotel Del Luna*, *Alchemy of Souls*, *Master's Sun*, hingga *My Girlfriend is a Gumiho*. Gaya penulisan mereka sangat khas: perpaduan antara elemen yang terkadang fantastis atau unik dengan romansa yang manis, komedi yang segar, dan yang paling penting—dialog-dialog yang cerdas dan tajam.
+            </p>
+            <p class="text-justify mb-6">
+              Keterlibatan mereka dalam serial ini adalah sinyal kuat bahwa kita tidak akan sekadar disuguhi alur yang klise. Bagi saya pribadi, nama Hong Sisters saja sudah menjadi jaminan untuk plot yang tidak biasa dan penulisan karakter yang penuh warna. Mereka memiliki kemampuan luar biasa untuk membuat penonton tertawa terbahak-bahak di satu momen, namun menangis tersedu-sedu di momen berikutnya karena kedalaman emosi yang mereka bangun.
+            </p>
+
+            <div class="callout callout-note mb-6">
+              <div class="callout-body flex-1">
+                <p class="callout-title text-[.73rem] font-bold tracking-wider uppercase mb-1">Portofolio Ikonik</p>
+                <p class="text-sm leading-relaxed italic">Hotel Del Luna, Alchemy of Souls, Master's Sun, You're Beautiful, My Girlfriend is a Gumiho, A Korean Odyssey.</p>
+              </div>
+            </div>
+
+            <p class="text-justify">
+              Dalam *Can This Love Be Translated*, saya sangat menantikan bagaimana mereka mengolah tema komunikasi ini ke dalam dialog-dialog yang menjadi ciri khas mereka. Hong Sisters sering kali menggunakan metafora-metafora cerdas untuk menggambarkan hubungan antar manusia, dan premis 'penerjemahan cinta' ini adalah taman bermain yang sempurna bagi kreativitas mereka. Saya berekspektasi akan ada banyak kutipan-kutipan berkesan yang akan sering dibagikan oleh fans di media sosial nantinya.
+            </p>
+          </div>
+
+          <div class="part-footer-nav flex justify-between items-center gap-4 mt-10 pt-6 border-t border-border">
+            <a href="#duo-bintang" class="part-nav-btn flex items-center gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Duo Bintang</a>
+            <a href="#analisis" class="part-nav-btn flex items-center flex-row-reverse gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline">Seksi 4: Analisis<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- PART 4 — ANALISIS                     -->
+        <!-- ═══════════════════════════════════════ -->
+        <section class="part-section pt-16 pb-8 border-b border-border" id="analisis">
+          <div class="part-header mb-9">
+            <p class="part-label inline-flex items-center gap-2 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5"><span class="part-label-line w-5 h-0.5 bg-accent"></span> Part 4</p>
+            <h1 class="part-title font-serif text-[clamp(1.6rem,3.5vw,2.15rem)] font-semibold leading-snug text-text-primary tracking-tight mb-5">Mengapa Serial Ini Layak Ditonton: Sebuah Analisis Mendalam</h1>
+          </div>
+
+          <div class="content-body">
+            <p class="text-justify mb-6">
+              Jika kita menggabungkan semua elemen yang ada—premis yang orisinal, jajaran aktor papan atas, dan penulis skenario legendaris—maka kita akan mendapatkan formula untuk sebuah mahakarya. Namun, lebih dari sekadar nama besar, urgensi dari serial ini terletak pada pesan yang dibawanya. Tantangan komunikasi lintas budaya dan personal adalah sesuatu yang beresonansi kuat dengan audiens global saat ini. Kita hidup di dunia yang semakin terkoneksi, namun paradoxnya, kita sering kali merasa semakin sulit untuk benar-benar memahami satu sama lain.
+            </p>
+            <p class="text-justify mb-6">
+              Analisis saya menunjukkan bahwa drama ini berpotensi menjadi 'game-changer' dalam genre rom-com Korea. Ia tidak hanya menawarkan 'skinship' atau adegan romantis yang manis, tetapi melampaui standar biasa dengan kedalaman eksplorasi emosionalnya. Ia memaksa kita untuk melihat kembali bagaimana kita berbicara, bagaimana kita mendengarkan, dan bagaimana kita mencoba memahami orang lain yang memiliki cara pandang yang berbeda dari kita.
+            </p>
+
+            <div class="callout callout-tip mb-6 text-center">
+               <div class="callout-body flex-1">
+                 <p class="text-sm font-semibold italic">"Kombinasi antara kekuatan narasi Hong Sisters dan karisma visual para pemeran menjanjikan produksi berkualitas tinggi dengan cerita yang kuat."</p>
+               </div>
+            </div>
+
+            <p class="text-justify">
+              Saya sangat percaya bahwa kombinasi ini akan menghasilkan tontonan yang tak hanya menghibur, tapi juga menggugah hati. Keputusan Netflix untuk menggarap serial ini sebagai original series juga menunjukkan komitmen mereka untuk membawa konten yang memiliki daya tarik universal. Bagi siapa pun yang mencari cerita romantis yang cerdas, bermakna, dan memiliki eksekusi yang memukau, serial ini adalah jawaban yang sangat tepat.
+            </p>
+          </div>
+
+          <div class="part-footer-nav flex justify-between items-center gap-4 mt-10 pt-6 border-t border-border">
+            <a href="#hong-sisters" class="part-nav-btn flex items-center gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Hong Sisters</a>
+            <a href="#komunitas" class="part-nav-btn flex items-center flex-row-reverse gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline">Seksi 5: Komunitas<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- PART 5 — KOMUNITAS                    -->
+        <!-- ═══════════════════════════════════════ -->
+        <section class="part-section pt-16 pb-8 border-b border-border" id="komunitas">
+          <div class="part-header mb-9">
+            <p class="part-label inline-flex items-center gap-2 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5"><span class="part-label-line w-5 h-0.5 bg-accent"></span> Part 5</p>
+            <h1 class="part-title font-serif text-[clamp(1.6rem,3.5vw,2.15rem)] font-semibold leading-snug text-text-primary tracking-tight mb-5">Antisipasi dan Harapan Komunitas: Suara Para Penggemar</h1>
+          </div>
+
+          <div class="content-body">
+            <p class="text-justify mb-6">
+              Sejak pertama kali diumumkan, *Can This Love Be Translated* telah memicu gelombang diskusi yang sangat panas di berbagai komunitas penggemar K-drama. Di platform seperti Twitter, Instagram, dan forum K-drama internasional, fans sudah sibuk membedah setiap penggalan berita terkait produksi ini. Banyak yang mengharapkan alur cerita yang cerdas dan menyentuh khas Hong Sisters, serta penantian panjang untuk melihat performa akting 'Sennada' (Kim Seon-ho) kembali ke layar kaca dalam balutan drama romantis.
+            </p>
+            <p class="text-justify mb-6">
+              Opini pribadi saya mengenai fenomena ini adalah betapa kuatnya rasa antusiasme ini dalam membangun 'hype' yang sehat. Antisipasi ini tidak hanya datang dari penggemar masing-masing aktor, tetapi juga dari mereka yang merindukan drama rom-com dengan kualitas penulisan naskah yang berbobot. Banyak teori-teori bermunculan, mulai dari spekulasi tentang bahasa apa saja yang akan digunakan, hingga bagaimana konflik budaya antara sang bintang dan sang penerjemah akan memuncak.
+            </p>
+
+            <div class="reflection-box bg-surface-2 border border-border p-5 rounded-xl mb-6">
+               <p class="text-sm italic text-text-muted mb-0">"Fans mengharapkan chemistry yang kuat dan realistis, serta penggambaran yang autentik tentang tantangan komunikasi di dunia hiburan global."</p>
+            </div>
+
+            <p class="text-justify">
+              Respon komunitas yang begitu masif ini menunjukkan bahwa penonton sudah sangat siap untuk menyelami kisah ini. Diskusi-diskusi yang hangat ini menambahkan lapisan kegembiraan tersendiri sebelum penayangannya, membuktikan bahwa sebuah karya yang direncanakan dengan matang akan selalu menemukan tempat di hati audiensnya bahkan sebelum dirilis secara resmi.
+            </p>
+          </div>
+
+          <div class="part-footer-nav flex justify-between items-center gap-4 mt-10 pt-6 border-t border-border">
+            <a href="#analisis" class="part-nav-btn flex items-center gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Analisis</a>
+            <a href="#kesimpulan" class="part-nav-btn flex items-center flex-row-reverse gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline">Seksi 6: Kesimpulan<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- PART 6 — KESIMPULAN                   -->
+        <!-- ═══════════════════════════════════════ -->
+        <section class="part-section pt-16 pb-8" id="kesimpulan">
+          <div class="part-header mb-9">
+            <p class="part-label inline-flex items-center gap-2 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5"><span class="part-label-line w-5 h-0.5 bg-accent"></span> Part 6 · Penutup</p>
+            <h1 class="part-title font-serif text-[clamp(1.6rem,3.5vw,2.15rem)] font-semibold leading-snug text-text-primary tracking-tight mb-5">Siapkah Hati Kita Diterjemahkan?</h1>
+            <div class="part-intro mt-5 p-4 bg-surface border border-border rounded-[10px] text-[.95rem] leading-7 text-text-muted italic border-l-[3px] border-l-accent">
+              Kombinasi premis unik yang segar, jajaran pemeran menjanjikan, dan penulis skenario handal menjadikan drama ini sangat dinanti-nantikan. Bersiaplah untuk pengalaman yang tak terlupakan!
+            </div>
+          </div>
+
+          <div class="content-body">
+            <p class="text-justify mb-6">
+              Sebagai penutup, serial *Can This Love Be Translated* adalah rangkuman dari semua aspek yang membuat K-drama begitu dicintai: keberanian dalam bercerita, kualitas akting yang mendalam, dan pemahaman yang tajam tentang emosi manusia. Dengan menyatukan Kim Seon-ho dan Go Yoon-jung di bawah arahan pena Hong Sisters, serial ini memiliki semua bahan baku untuk menjadi klasik masa depan di genre romantis.
+            </p>
+            <p class="text-justify mb-6">
+              Saya sangat yakin bahwa drama ini akan menjadi 'must-watch' bagi siapa pun yang mencari cerita yang tidak hanya sekadar 'lucu' atau 'manis', tetapi juga mencerdaskan dan menyentuh hati. Ia menantang kita untuk bertanya pada diri sendiri apakah kita sudah cukup berusaha untuk 'menerjemahkan' kasih sayang kita kepada orang lain dengan cara yang tepat.
+            </p>
+
+            <div class="references-box mb-6">
+              <div class="references-header text-[.72rem] font-bold tracking-[.1em] uppercase text-text-muted">📺 Info Penayangan</div>
+              <ul class="references-list list-none p-0 m-0">
+                <li class="p-4 text-sm text-text-muted italic">Tunggu pengumuman resmi tanggal rilis dan bersiap untuk menyaksikan serial ini eksklusif hanya di <strong class="text-accent underline">Netflix</strong>!</li>
+              </ul>
+            </div>
+
+            <p class="text-justify">
+              Mari kita nantikan bersama penayangannya. Siapkan camilan, siapkan tisu (karena ini adalah Hong Sisters!), dan yang paling penting, siapkan hati Anda untuk merasakan bagaimana bahasa cinta akan melampaui segala batasan kata dan budaya. Sampai jumpa di ulasan episode per episode-nya nanti!
+            </p>
+          </div>
+
+          <div class="part-footer-nav flex justify-between items-center gap-4 mt-10 pt-6 border-t border-border">
+            <a href="#komunitas" class="part-nav-btn flex items-center gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Komunitas</a>
+            <a href="../../home/index.html" class="part-nav-btn flex items-center flex-row-reverse gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline bg-accent-soft border-accent-mid">
+              🏠 Kembali ke Beranda
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- SITE FOOTER -->
+      <footer class="site-footer col-span-full border-t border-border bg-surface">
+        <div class="footer-inner max-w-[1280px] mx-auto py-10 px-6 grid grid-cols-3 gap-8 max-[960px]:grid-cols-2 max-[600px]:grid-cols-1">
+          <div class="footer-brand">
+            <div class="font-serif text-lg font-semibold mb-2.5 flex items-center gap-2">
+              The K-Drama Compass <span class="logo-badge font-sans text-[.65rem] font-bold tracking-wider uppercase bg-accent text-white px-2 py-0.5 rounded-full">Blog</span>
+            </div>
+            <p class="text-sm text-text-faint leading-relaxed">Wawasan mendalam tentang dunia hiburan Korea — dari sudut pandang penikmat sejati.</p>
+          </div>
+          <div>
+            <p class="footer-col-title text-[.72rem] font-bold tracking-[.1em] uppercase text-text-faint mb-3">Navigasi Review</p>
+            <ul class="footer-links list-none p-0">
+              <li><a href="#pendahuluan" class="text-sm text-text-muted">Pendahuluan</a></li>
+              <li class="mt-1.5"><a href="#inti-cerita" class="text-sm text-text-muted">Part 1 — Inti Cerita</a></li>
+              <li class="mt-1.5"><a href="#duo-bintang" class="text-sm text-text-muted">Part 2 — Duo Bintang</a></li>
+              <li class="mt-1.5"><a href="#hong-sisters" class="text-sm text-text-muted">Part 3 — Hong Sisters</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="footer-col-title text-[.72rem] font-bold tracking-[.1em] uppercase text-text-faint mb-3">Link Cepat</p>
+            <ul class="footer-links list-none p-0">
+              <li><a href="../../home/index.html" class="text-sm text-text-muted">🏠 Beranda</a></li>
+              <li class="mt-1.5"><a href="../laravel-blog/index.html" class="text-sm text-text-muted">⚡ Blog Laravel</a></li>
+              <li class="mt-1.5"><a href="https://netflix.com" target="_blank" class="text-sm text-text-muted">Netflix</a></li>
+            </ul>
+          </div>
+          <div class="footer-bottom col-span-full pt-6 border-t border-border flex justify-between items-center flex-wrap gap-2 text-xs text-text-faint">
+            <span>© 2026 The K-Drama Compass · Muhammad Khalifa</span>
+            <span>Dibuat dengan ☕ dan dedikasi untuk K-Drama</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Lippbyte — Blog dokumentasi pembelajaran, riset, dan tulisan ilmiah." />
+  <title>Lippbyte — Blog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+  <!-- ═══ NAVBAR ═══ -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="site-logo">
+        Lippbyte
+        <span class="logo-badge">Blog</span>
+      </a>
+      <div class="header-right">
+        <nav class="header-nav">
+        <a href="index.html" class="active">Beranda</a>
+        <a href="#blog-list">Semua Post</a>
+      </nav>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle Dark Mode">
+          <svg id="themeToggleIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══ MAIN ═══ -->
+  <main>
+    <div class="index-wrap">
+
+      <!-- HERO / PROFILE -->
+      <section class="hero">
+        <div class="hero-content">
+          <p class="hero-label">
+            <span class="hero-label-dot"></span>
+            Software Development Learner
+          </p>
+          <h1 class="hero-name">
+            Halo, saya<br><em>Muhammad Khalifa</em>
+          </h1>
+          <p class="hero-bio">
+            Saya adalah siswa SMK jurusan RPL yang mempelajari tentang perkembangan teknologi.
+            Blog ini adalah catatan perjalanan saya, dari hal-hal yang sedang saya pelajari,
+            kumpulan tulisan, sampai dokumentasi project.
+          </p>
+          <br>
+
+          <div class="hero-links">
+            <a href="#blog-list" class="hero-link primary">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+              Baca Blog
+            </a>
+            <a href="https://github.com/lippbyte" target="_blank" class="hero-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.18c-3.34.72-4.04-1.42-4.04-1.42-.54-1.38-1.33-1.74-1.33-1.74-1.08-.74.08-.72.08-.72 1.2.08 1.83 1.23 1.83 1.23 1.06 1.82 2.8 1.3 3.48.99.1-.77.41-1.3.75-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.23-3.22-.12-.3-.53-1.52.12-3.17 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02.005 2.04.14 3 .4 2.28-1.55 3.28-1.23 3.28-1.23.65 1.65.24 2.87.12 3.17.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.82 1.1.82 2.22v3.29c0 .32.22.7.83.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </a>
+            <a href="https://linkedin.com/in/muhammad-khalifa-72611b3b8" target="_blank" class="hero-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+              LinkedIn
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Loop Slider Tags -->
+      <div class="hero-tags-wrapper">
+        <div class="hero-tags" id="heroTagsSlider">
+          <span class="hero-tag">💻 Programming</span>
+          <span class="hero-tag">🌐 Web Development</span>
+          <span class="hero-tag">🤖 AI & Automation</span>
+          <span class="hero-tag">🚀 Projects</span>
+          <span class="hero-tag">📚 Learning Journey</span>
+          <span class="hero-tag">🧩 Problem Solving</span>
+          <span class="hero-tag">⚙️ System Thinking</span>
+          <span class="hero-tag">⏱️ Productivity</span>
+          <span class="hero-tag">💭 Reflection</span>
+          <span class="hero-tag">📊 Data Science</span>
+          <!-- Duplicated for seamless loop -->
+          <span class="hero-tag">💻 Programming</span>
+          <span class="hero-tag">🌐 Web Development</span>
+          <span class="hero-tag">🤖 AI & Automation</span>
+          <span class="hero-tag">🚀 Projects</span>
+          <span class="hero-tag">📚 Learning Journey</span>
+          <span class="hero-tag">🧩 Problem Solving</span>
+          <span class="hero-tag">⚙️ System Thinking</span>
+          <span class="hero-tag">⏱️ Productivity</span>
+          <span class="hero-tag">💭 Reflection</span>
+          <span class="hero-tag">📊 Data Science</span>
+        </div>
+      </div>
+      <br>
+
+      <!-- BLOG LIST -->
+      <section id="blog-list">
+        <div class="section-header">
+          <h2 class="section-title">Semua Blog Post</h2>
+          <span class="section-sub" style="color:var(--accent);font-weight:500;font-size:.82rem;">Lihat Semua →</span>
+        </div>
+
+        <div class="blog-grid">
+
+          <!-- CARD: Laravel -->
+          <a href="../blog/laravel-blog/index.html" class="blog-card">
+            <div class="card-cover">
+              <img src="assets/img/laravel.jpg" alt="Laravel">
+            </div>
+            <div class="card-body">
+              <p class="card-category">PHP · Framework</p>
+              <h3 class="card-title">Dokumentasi Belajar Laravel</h3>
+              <p class="card-desc">Catatan lengkap dari nol — pengenalan Framework, MVC, routing, Eloquent ORM, CRUD, autentikasi, hingga deployment.</p>
+              <div class="card-footer">
+                <span class="card-meta">2026 · 7 part</span>
+                <span class="card-parts-badge card-done">✓ Selesai</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- COMING SOON: Python -->
+          <div class="blog-card" style="opacity:.45; cursor:default; pointer-events:none;">
+            <div class="card-cover" style="background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);">
+              <span style="font-size:2.8rem;">🐍</span>
+            </div>
+            <div class="card-body">
+              <p class="card-category">Python · Backend</p>
+              <h3 class="card-title">Dokumentasi Belajar Python</h3>
+              <p class="card-desc">Dari sintaks dasar, OOP, koneksi database, hingga proyek kecil berbasis Python.</p>
+              <div class="card-footer">
+                <span class="card-meta">Coming soon</span>
+                <span class="card-parts-badge">🔒 Belum tersedia</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- COMING SOON: JavaScript -->
+          <div class="blog-card" style="opacity:.45; cursor:default; pointer-events:none;">
+            <div class="card-cover" style="background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%);">
+              <span style="font-size:2.8rem;">🌐</span>
+            </div>
+            <div class="card-body">
+              <p class="card-category">JavaScript · Web</p>
+              <h3 class="card-title">Dokumentasi Belajar JavaScript</h3>
+              <p class="card-desc">DOM manipulation, ES6+, async/await, fetch API, dan pengembangan web modern.</p>
+              <div class="card-footer">
+                <span class="card-meta">Coming soon</span>
+                <span class="card-parts-badge">🔒 Belum tersedia</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="site-logo" style="font-family:var(--font-serif);font-size:1.05rem;font-weight:600;">
+          Lippbyte <span class="logo-badge">Blog</span>
+        </div>
+        <p>A journey of a student who wants to become a system thinking & architect backend with AI assisted. 
+        Then a Problem Solver & Build Real Solutions from real life problems. All content is written based on direct learning experience.</p>
+      </div>
+      <div>
+        <p class="footer-col-title">Blog Post</p>
+        <ul class="footer-links">
+          <li><a href="../blog/laravel-blog/index.html">Dokumentasi Belajar Laravel</a></li>
+          <li><a href="#" style="opacity:.4;pointer-events:none;">🐍 Belajar Python (soon)</a></li>
+          <li><a href="#" style="opacity:.4;pointer-events:none;">🌐 Belajar JavaScript (soon)</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Tentang</p>
+        <ul class="footer-links">
+          <li><a href="https://lippbyte.github.io/" target="_blank class="text-sm text-text-muted">Lippbyte</a></li>
+          <li><a href="https://github.com/lippbyte" target="_blank">GitHub</a></li>
+          <li><a href="https://linkedin.com/in/muhammad-khalifa-72611b3b8" target="_blank">LinkedIn</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Lippbyte · Muhammad Khalifa</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Eksplorasi peran kompleks Iran di kancah global: Geopolitik, identitas Syiah, nuklir, dan warisan budaya Persia yang sering disalahpahami." />
+  <title>Lippbyte — Iran di Panggung Dunia: Menjelajahi Peran yang Kompleks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { serif: ['Lora','serif'], sans: ['DM Sans','sans-serif'], mono: ['JetBrains Mono','monospace'] },
+          colors: {
+            bg: 'var(--bg)', surface: 'var(--surface)', 'surface-2': 'var(--surface-2)',
+            border: 'var(--border)', 'border-strong': 'var(--border-strong)',
+            'text-primary': 'var(--text-primary)', 'text-body': 'var(--text-body)',
+            'text-muted': 'var(--text-muted)', 'text-faint': 'var(--text-faint)',
+            accent: 'var(--accent)', 'accent-hover': 'var(--accent-hover)',
+            'accent-soft': 'var(--accent-soft)', 'accent-mid': 'var(--accent-mid)',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="font-sans text-base leading-7">
+
+  <!-- TOP NAVBAR -->
+  <header class="site-header fixed top-0 left-0 right-0 z-[200] h-14 bg-[var(--bg-translucent)] backdrop-blur-[14px] border-b border-border">
+    <div class="header-inner max-w-[1280px] mx-auto px-6 h-full flex items-center justify-between gap-4">
+      <a href="../../home/index.html" class="site-logo font-serif text-lg font-semibold text-text-primary tracking-tight flex items-center gap-2">
+        Lippbyte
+        <span class="logo-badge font-sans text-[.65rem] font-bold tracking-wider uppercase bg-accent text-white px-2 py-0.5 rounded-full">Blog</span>
+      </a>
+      <div class="flex items-center gap-3">
+        <a href="../../home/index.html" class="nav-home-btn flex items-center gap-1.5 text-xs font-medium text-text-muted px-3 py-1.5 rounded-lg border border-border bg-surface hover:border-accent hover:text-accent hover:bg-accent-soft transition-all duration-200">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Home
+        </a>
+        <button id="themeToggle" class="p-1.5 rounded-md bg-surface-2 text-text-muted hover:text-accent border border-border transition-colors duration-200" aria-label="Toggle Dark Mode">
+          <svg id="themeToggleIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- READING PROGRESS -->
+  <div class="top-progress"><div class="top-progress-fill" id="topFill"></div></div>
+
+  <div class="layout grid grid-cols-[272px_1fr] max-w-[1280px] mx-auto min-h-screen pt-14 max-[960px]:grid-cols-1">
+
+    <!-- LEFT SIDEBAR -->
+    <nav class="left-sidebar sticky top-14 h-[calc(100vh-56px)] overflow-y-auto border-r border-border py-7 max-[960px]:static max-[960px]:h-auto" aria-label="Navigasi Part">
+      <a href="../../home/index.html" class="sidebar-back flex items-center gap-2 px-5 pb-4 mb-4 text-xs font-medium text-text-muted border-b border-border hover:text-accent transition-colors">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Kembali ke Beranda
+      </a>
+
+      <p class="sidebar-section-label text-[.67rem] font-bold tracking-[.12em] uppercase text-text-faint px-5 mb-2">Daftar Isi</p>
+      <ul class="part-nav list-none p-0 m-0" id="partNav">
+        <li>
+          <a href="#pendahuluan" class="active nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="pendahuluan">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">0</span>
+            <span class="nav-text flex-1">Pendahuluan</span>
+            <span class="nav-progress-ring" data-section="pendahuluan">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#jejak-sejarah" class="nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="jejak-sejarah">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">1</span>
+            <span class="nav-text flex-1">Jejak & Identitas</span>
+            <span class="nav-progress-ring" data-section="jejak-sejarah">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#kekuatan-regional" class="nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="kekuatan-regional">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">2</span>
+            <span class="nav-text flex-1">Kekuatan Regional</span>
+            <span class="nav-progress-ring" data-section="kekuatan-regional">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#dilema-nuklir" class="nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="dilema-nuklir">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">3</span>
+            <span class="nav-text flex-1">Dilema Nuklir</span>
+            <span class="nav-progress-ring" data-section="dilema-nuklir">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#ekonomi-sanksi" class="nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="ekonomi-sanksi">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">4</span>
+            <span class="nav-text flex-1">Ekonomi & Sanksi</span>
+            <span class="nav-progress-ring" data-section="ekonomi-sanksi">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#diplomasi-budaya" class="nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="diplomasi-budaya">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">5</span>
+            <span class="nav-text flex-1">Diplomasi Budaya</span>
+            <span class="nav-progress-ring" data-section="diplomasi-budaya">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#masa-depan" class="nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="masa-depan">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">6</span>
+            <span class="nav-text flex-1">Masa Depan</span>
+            <span class="nav-progress-ring" data-section="masa-depan">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-container">
+      <main class="main-content px-12 pb-28 max-w-[820px] max-[960px]:px-5">
+        <article>
+          <!-- HEADER ARTIKEL -->
+          <header class="pt-16 pb-8 border-b border-border mb-12" id="pendahuluan">
+            <p class="part-label inline-flex items-center gap-2 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5"><span class="part-label-line w-5 h-0.5 bg-accent"></span> Analisis Geopolitik</p>
+            <h1 class="part-title font-serif text-[clamp(1.8rem,4vw,2.5rem)] font-semibold leading-tight text-text-primary tracking-tight mb-6">Iran di Panggung Dunia: Menjelajahi Peran yang Kompleks dan Sering Disalahpahami</h1>
+            
+            <div class="part-meta flex flex-wrap items-center gap-x-4 gap-y-1.5 text-sm text-text-muted mb-8">
+              <span class="flex items-center gap-1">📅 14 April 2026</span>
+              <span class="w-1 h-1 rounded-full bg-border-strong"></span>
+              <span class="flex items-center gap-1">⏱ 10-12 menit baca</span>
+            </div>
+
+            <!-- RINGKASAN / INTRO -->
+            <div class="part-intro p-6 bg-surface border border-border rounded-[10px] text-[1.05rem] leading-7 text-text-body italic border-l-[4px] border-l-accent shadow-sm">
+              Artikel ini menyelami peran multifaset Iran di kancah global, dari pengaruh geopolitik dan energi hingga program nuklir dan identitas budaya, menyoroti kompleksitas yang seringkali disalahpahami oleh dunia luar.
+            </div>
+          </header>
+
+          <div class="content-body">
+            <!-- SEKSI 0: Pendahuluan -->
+            <section class="mb-14">
+              <p class="text-justify mb-6">
+                Berbicara tentang Iran seringkali terasa seperti menyentuh sebuah teka-teki kuno yang dibalut dengan kabut politik modern. Di layar-layar televisi dan berita global, Iran kerap ditampilkan dalam bingkai yang sangat simplistis—biasanya di antara dua kutub: ancaman geopolitik yang konstan atau negara tertutup dengan ambisi yang berbahaya. Namun, bagi siapa pun yang bersedia melihat lebih dekat, Iran adalah negara dengan sejarah ribuan tahun yang pengaruhnya terhadap peradaban manusia tak terbantahkan.
+              </p>
+              <p class="text-justify mb-6">
+                Menurut pandangan saya, narasi tentang Iran di media seringkali terlalu ekstrem dan kekurangan nuansa. Kita terlalu cepat melabeli tanpa memahami akar sejarah dan posisi strategisnya. Padahal, Iran terletak tepat di jantung Timur Tengah, sebuah posisi "choke point" yang menjadikannya pemain kunci dalam stabilitas energi global dan keamanan regional.
+              </p>
+              
+              <div class="callout callout-note">
+                <span class="callout-icon text-lg">🌍</span>
+                <div class="callout-body">
+                  <p class="callout-title">Konteks Strategis</p>
+                  <p class="text-sm">Iran adalah rumah bagi peradaban tertua di dunia, dengan Kekaisaran Persia pernah menjadi salah satu yang terbesar dalam sejarah. Dengan populasi mencapai <strong>88 juta jiwa</strong> dan posisi sebagai negara mayoritas Syiah terbesar, setiap langkah Teheran beresonansi jauh melampaui batas negaranya.</p>
+                </div>
+              </div>
+              
+              <p class="text-justify mt-6">
+                Artikel ini tidak bermaksud untuk membela atau menghujat, melainkan mencoba membedah kompleksitas Iran dari berbagai sudut—sejarah, ideologi, kekuatan regional, hingga diplomasi budayanya. Memahami Iran bukan hanya tentang memahami politik hari ini, tapi tentang mengakui eksistensi sebuah kekuatan lama yang sedang menavigasi jalannya di dunia modern yang semakin terfragmentasi.
+              </p>
+            </section>
+
+            <!-- SEKSI 1: Jejak Sejarah -->
+            <section id="jejak-sejarah" class="mb-14 scroll-mt-20">
+              <h2 class="font-serif text-2xl font-semibold text-text-primary mb-6">Jejak Sejarah dan Identitas Syiah: Fondasi Peran Iran</h2>
+              <p class="text-justify mb-6">
+                Identitas Iran hari ini adalah hasil perkawinan silang antara kebanggaan nasional sebagai pewaris Kekaisaran Persia dan semangat religius dari Revolusi Islam 1979. Revolusi tersebut bukan sekadar pergantian kekuasaan, melainkan gempa tektonik yang mengubah arah negara secara menyeluruh. Dari sekutu utama Barat di bawah monarki Pahlavi, Iran bertransformasi menjadi Republik Islam teokratis yang menempatkan diri sebagai alternatif terhadap pengaruh hegemonik kekuatan luar.
+              </p>
+              <p class="text-justify mb-6">
+                Saya sering merasa bahwa pihak luar, terutama pengamat Barat, sering menginterpretasikan identitas Syiah Iran secara keliru. Mereka melihatnya semata sebagai alat politik, padahal nuansa teologis dan identitas Syiah telah mendarah daging dalam cara pandang masyarakat Iran terhadap keadilan dan perlawanan. Identitas ini seringkali menjadi lensa utama dunia luar untuk melihat Iran, namun jarang sekali yang benar-benar memahami bagaimana nuansa "Wilayat al-Faqih" (Perwalian Ahli Hukum Islam) bekerja dalam struktur politik yang unik.
+              </p>
+              
+              <div class="callout callout-tip">
+                <span class="callout-icon text-lg">📜</span>
+                <div class="callout-body">
+                  <p class="callout-title">Identitas & Teokrasi</p>
+                  <p class="text-sm">Sekitar 90-95% populasi Iran menganut Islam Syiah. Pasca-1979, sistem politik didasarkan pada kepemimpinan ulama, sementara pengaruh budaya Persia kuno tetap hidup dalam seni dan sastra, menciptakan dualitas identitas yang unik di kawasan.</p>
+                </div>
+              </div>
+              
+              <p class="text-justify mt-6">
+                Ketegangan sejarah dengan Arab Saudi (yang mayoritas Sunni) juga bukan sekadar masalah sektarian. Ini adalah persaingan kepemimpinan regional yang dibalut dengan bahasa agama. Namun, di balik kerumitan teokratis ini, orang Iran tetaplah orang Persia yang bangga pada akar budayanya—sebuah fondasi yang seringkali jauh lebih kuat daripada retorika politik hari ini.
+              </p>
+            </section>
+
+            <!-- SEKSI 2: Kekuatan Regional -->
+            <section id="kekuatan-regional" class="mb-14 scroll-mt-20">
+              <h2 class="font-serif text-2xl font-semibold text-text-primary mb-6">Iran sebagai Kekuatan Regional: Aksi, Reaksi, dan 'Poros Perlawanan'</h2>
+              <p class="text-justify mb-6">
+                Iran adalah "grandmaster" dalam permainan catur regional di Timur Tengah. Dengan dukungan terhadap apa yang disebut sebagai *Axis of Resistance* atau Poros Perlawanan, Teheran telah berhasil memproyeksikan kekuasaannya jauh di luar perbatasannya sendiri. Dari Hizbullah di Lebanon hingga milisi di Irak dan Suriah, serta pemberontak Houthi di Yaman, Iran telah membangun jaringan aktor non-negara yang sangat efektif untuk melindungi kepentingannya.
+              </p>
+              <p class="text-justify mb-6">
+                Opini pribadi saya: sulit bagi Iran untuk tidak terlibat dalam dinamika regional ini. Jika kita melihat peta geografi dan mengingat sejarah panjang intervensi asing di wilayah tersebut, strategi Iran untuk membangun pertahanan di luar wilayahnya sendiri adalah langkah yang rasional (meskipun kontroversial secara internasional). Ini adalah campuran antara strategi defensif untuk mencegah ancaman mendekati wilayah domestiknya dan upaya ofensif untuk menjadi pemain utama yang tidak bisa diabaikan dalam setiap meja negosiasi.
+              </p>
+
+              <figure class="my-8">
+                <div class="img-placeholder text-center p-8 bg-surface-2 border border-border rounded-lg italic text-text-muted">
+                  <p>[Visualisasi Peta Pengaruh Regional Iran di Timur Tengah]</p>
+                  <p class="text-xs mt-2 font-sans opacity-70">Menampilkan Selat Hormuz dan koneksi ke Lebanon, Suriah, Irak, dan Yaman.</p>
+                </div>
+                <figcaption class="text-center text-xs text-text-faint mt-3 italic">Selat Hormuz sendiri merupakan jalur vital bagi 20% pasokan minyak dunia, memberi Teheran pengaruh ekonomi yang masif.</figcaption>
+              </figure>
+
+              <p class="text-justify">
+                Peran Korps Garda Revolusi Islam (IRGC), khususnya Pasukan Quds, dalam mendukung pemerintah Suriah melawan kelompok oposisi dan memerangi ISIS telah memfestivalkan peran Iran sebagai kekuatan militer yang nyata. Di sisi lain, ini menciptakan ketegangan abadi dengan Israel dan Amerika Serikat, memicu siklus aksi dan reaksi yang terus membuat kawasan ini berada di ambang konflik besar.
+              </p>
+             section>
+
+            <!-- SEKSI 3: Dilema Nuklir -->
+            <section id="dilema-nuklir" class="mb-14 scroll-mt-20">
+              <h2 class="font-serif text-2xl font-semibold text-text-primary mb-6">Dilema Nuklir dan Sanksi: Tekanan Global yang Tak Berujung</h2>
+              <p class="text-justify mb-6">
+                Mungkin tidak ada isu tunggal yang mendefinisikan hubungan Iran dengan dunia lebih kuat daripada program nuklirnya. Sejak penandatanganan JCPOA (Joint Comprehensive Plan of Action) pada 2015, harapan sempat membumbung tinggi bahwa Iran akan berintegrasi lebih jauh ke dalam ekonomi global. Namun, keputusan AS untuk menarik diri secara sepihak pada 2018 di bawah administrasi Trump telah menghancurkan kepercayaan tersebut dan memicu eskalasi baru.
+              </p>
+              <p class="text-justify mb-6">
+                Saya melihat program nuklir ini bukan sekadar masalah teknis atau militer. Di mata banyak warga Iran, penguasaan teknologi nuklir adalah simbol kedaulatan nasional dan martabat ilmiah. Terlepas dari tekanan internasional yang masif dan sanksi yang mencekik, kemampuan untuk memperkaya uranium—bahkan hingga tingkat 60% seperti yang dilaporkan baru-baru ini—dilihat sebagai bukti ketahanan bangsa di bawah tekanan.
+              </p>
+
+              <div class="callout callout-warn">
+                <span class="callout-icon text-lg">⚠️</span>
+                <div class="callout-body">
+                  <p class="callout-title">Status Nuklir</p>
+                  <p class="text-sm">Pasca penarikan AS dari JCPOA, Iran secara bertahap mengurangi komitmennya. Meskipun Teheran bersikeras programnya untuk tujuan damai, IAEA melaporkan pengayaan uranium yang jauh melampaui kebutuhan sipil standar (3,67%), menciptakan kebuntuan diplomasi yang sangat berisiko tinggi.</p>
+                </div>
+              </div>
+
+              <p class="text-justify mt-6">
+                Dilema ini menempatkan Iran dalam posisi yang sulit: antara kebutuhan ekonomi untuk lepas dari sanksi dan keinginan strategis untuk mempertahankan daya tawar nuklir. Tanpa adanya jaminan keamanan yang kredibel, Teheran tampaknya tidak akan melepaskan aset paling berharganya ini dalam waktu dekat.
+              </p>
+            </section>
+
+            <!-- SEKSI 4: Ekonomi Sanksi -->
+            <section id="ekonomi-sanksi" class="mb-14 scroll-mt-20">
+              <h2 class="font-serif text-2xl font-semibold text-text-primary mb-6">Ekonomi di Bawah Bayang-bayang Sanksi dan Aspirasi Domestik</h2>
+              <p class="text-justify mb-6">
+                Dampak nyata dari politik global Iran dirasakan paling berat oleh meja makan rakyatnya. Sanksi ekonomi yang bertubi-tubi telah memukul sektor minyak—tulang punggung negara—secara drastis. Inflasi dua digit yang berkepanjangan dan pengangguran di kalangan pemuda telah menjadi pemandangan sehari-hari di kota-kota besar seperti Teheran dan Tabriz.
+              </p>
+              <p class="text-justify mb-6">
+                Namun, ada sebuah refleksi pribadi yang harus saya catat di sini: ada ketahanan (resilience) yang luar biasa pada rakyat Iran. Meskipun menghadapi kesulitan hidup yang ekstrem karena keterbatasan akses ke pasar global, mereka terus menunjukkan inovasi. Upaya pemerintah untuk mendiversifikasi ekonomi menuju sektor non-minyak seperti teknologi, pertanian, dan manufaktur domestik seringkali diremehkan, padahal kemandirian ekonomi yang dipaksakan ini telah melahirkan ekosistem industri yang cukup tangguh di dalam negeri.
+              </p>
+
+              <div class="objectives-box">
+                <div class="objectives-header text-xs">📊 Statistik Ekonomi</div>
+                <div class="objectives-body p-4 text-sm leading-6">
+                  <ul class="list-disc pl-5">
+                    <li>Cadangan gas alam terbesar kedua di dunia.</li>
+                    <li>Cadangan minyak mentah terbesar keempat di dunia.</li>
+                    <li>Inflasi diproyeksikan tetap tinggi oleh IMF akibat keterbatasan perdagangan internasional.</li>
+                    <li>Fokus pada "Resistive Economy" untuk mengurangi ketergantungan pada impor Barat.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <p class="text-justify mt-6">
+                Rakyat Iran, terutama populasi mudanya yang sangat berpendidikan, tetap memiliki aspirasi tinggi untuk masa depan yang lebih terbuka. Ketegangan antara aspirasi ini dan realitas sanksi pemerintah menciptakan dinamika domestik yang sangat cair, yang sewaktu-waktu bisa menjadi faktor penentu masa depan politik negara tersebut.
+              </p>
+            </section>
+
+            <!-- SEKSI 5: Diplomasi Budaya -->
+            <section id="diplomasi-budaya" class="mb-14 scroll-mt-20">
+              <h2 class="font-serif text-2xl font-semibold text-text-primary mb-6">Dari Teheran ke Dunia: Diplomasi, Kebudayaan, dan Pengaruh Lunak</h2>
+              <p class="text-justify mb-6">
+                Jika kita hanya melihat Iran melalui moncong senjata dan reaktor nuklir, kita kehilangan separuh dari cerita yang sebenarnya. Iran memiliki "Soft Power" yang tak tertandingi di kawasan: budaya Persia. Seni, sinema, dan sastra Iran terus mengalir ke seluruh penjuru dunia, menawarkan wajah yang jauh lebih humanis dan intelektual daripada yang ditampilkan di berita politik.
+              </p>
+              <p class="text-justify mb-6">
+                Menurut opini saya, kekayaan budaya ini adalah kontribusi historis yang tak ternilai bagi peradaban dunia. Penyair seperti Rumi dan Hafez bukan hanya milik Iran, tapi milik dunia. Sinema Iran kontemporer di festival film seperti Fajr atau Cannes secara konsisten memenangkan penghargaan internasional karena kedalaman narasinya. Kita tidak boleh membiarkan konflik politik membutakan kita dari fakta bahwa Iran adalah salah satu mercusuar kebudayaan dunia yang masih bertahan hingga hari ini.
+              </p>
+              
+              <div class="callout callout-note">
+                <span class="callout-icon text-lg">🎭</span>
+                <div class="callout-body">
+                  <p class="callout-title">Soft Power & Identitas</p>
+                  <p class="text-sm">Iran adalah anggota pendiri OPEC dan aktif dalam Gerakan Non-Blok. Di sisi lain, investasi dalam sains dan teknologi (bioteknologi dan antariksa) menunjukkan ambisi untuk menjadi kekuatan ilmiah di tengah isolasi diplomatik.</p>
+                </div>
+              </div>
+              
+              <p class="text-justify mt-6">
+                Melalui jalur budaya inilah Iran seringkali mencoba melakukan diplomasi pintu belakang. Upaya untuk memproyeksikan citra diri yang berbeda dari narasi konflik seringkali dilakukan melalui seni, menunjukkan bahwa di bawah lapisan pemerintah yang keras, terdapat masyarakat yang penuh dengan kreativitas dan sejarah yang panjang.
+              </p>
+            </section>
+
+            <!-- SEKSI 6: Masa Depan -->
+            <section id="masa-depan" class="mb-14 scroll-mt-20">
+              <h2 class="font-serif text-2xl font-semibold text-text-primary mb-6">Masa Depan Iran: Penuh Tantangan dan Potensi yang Belum Tergali</h2>
+              <p class="text-justify mb-6">
+                Menavigasi masa depan adalah tantangan terbesar Iran. Dengan suksesi kepemimpinan yang membayangi di depan mata dan tekanan sosial dari populasi muda yang semakin terhubung dengan globalisasi, status quo saat ini mungkin tidak akan bertahan selamanya. Namun, potensi Iran sangatlah besar—sumber daya alam yang melimpah, posisi strategis, dan sumber daya manusia yang berkualitas tinggi.
+              </p>
+              <p class="text-justify mb-6">
+                Sebagai kesimpulan, saya mengajak kita semua untuk melihat Iran dengan lensa yang lebih kritis namun bernuansa. Masa depan Iran akan sangat tergantung pada bagaimana ia menyeimbangkan antara kedaulatan ideologi dan tuntutan kesejahteraan rakyatnya. Apakah ia akan tetap menjadi "pariah" yang menentang sistem atau berhasil bertransformasi menjadi kekuatan regional yang bertanggung jawab dan terintegrasi?
+              </p>
+
+              <div class="reflection-box">
+                <p class="reflection-header text-sm">Refleksi Akhir</p>
+                <p class="text-sm italic mb-4">Memahami Iran memerlukan pandangan holistik, jauh dari simplifikasi hitam-putih. Masa depan negara ini bukan hanya soal nuklir, tapi soal bagaimana peradaban kuno ini menemukan identitasnya di abad ke-21 yang serba cepat.</p>
+                <ul class="list-none p-0 text-sm text-text-muted space-y-2">
+                  <li class="pl-4 border-l-2 border-accent">Strategi suksesi kepemimpinan domestik.</li>
+                  <li class="pl-4 border-l-2 border-accent">Negosiasi ulang tatanan keamanan regional.</li>
+                  <li class="pl-4 border-l-2 border-accent">Integrasi populasi muda berpendidikan ke dalam arus global.</li>
+                </ul>
+              </div>
+
+              <div class="tag-row flex flex-wrap gap-2 mt-10">
+                <span class="tag px-3 py-1 text-xs">Geopolitik</span>
+                <span class="tag px-3 py-1 text-xs">Iran</span>
+                <span class="tag px-3 py-1 text-xs">Timur Tengah</span>
+                <span class="tag px-3 py-1 text-xs">Sejarah</span>
+                <span class="tag px-3 py-1 text-xs">Analisis Dunia</span>
+              </div>
+            </section>
+          </div>
+
+          <!-- FOOTER ARTIKEL -->
+          <footer class="mt-16 pt-8 border-t border-border flex justify-between">
+            <a href="../perang-iran-irak-analisis/index.html" class="part-nav-btn flex items-center gap-2 py-2 px-4 text-sm font-medium text-text-muted no-underline border border-border rounded-lg hover:bg-accent-soft transition-colors">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              <span>Artikel Sebelumnya</span>
+            </a>
+            <a href="../../home/index.html" class="part-nav-btn flex items-center gap-2 py-2 px-4 text-sm font-medium text-text-muted no-underline border border-border rounded-lg hover:bg-accent-soft transition-colors">
+              <span>Home</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </footer>
+        </article>
+      </main>
+
+      <!-- SITE FOOTER -->
+      <footer class="site-footer border-t border-border bg-surface mt-20">
+        <div class="footer-inner max-w-[1280px] mx-auto py-10 px-6 grid grid-cols-3 gap-8 max-[960px]:grid-cols-2 max-[600px]:grid-cols-1">
+          <div class="footer-brand">
+            <div class="font-serif text-lg font-semibold mb-2.5 flex items-center gap-2 text-text-primary">
+              Lippbyte <span class="logo-badge font-sans text-[.65rem] font-bold tracking-wider uppercase bg-accent text-white px-2 py-0.5 rounded-full">Blog</span>
+            </div>
+            <p class="text-sm text-text-faint leading-relaxed">Platform dokumentasi belajar dan analisis mendalam tentang berbagai topik menarik di dunia.</p>
+          </div>
+          <div>
+            <p class="footer-col-title text-[.67rem] font-bold tracking-[.12em] uppercase text-text-faint mb-3">Tautan Cepat</p>
+            <ul class="footer-links list-none p-0">
+              <li><a href="../../home/index.html" class="text-sm text-text-muted hover:text-accent">Beranda</a></li>
+              <li class="mt-1.5"><a href="../laravel-blog/index.html" class="text-sm text-text-muted hover:text-accent">Blog Laravel</a></li>
+            </ul>
+          </div>
+          <div class="footer-bottom col-span-full pt-6 border-t border-border flex justify-between items-center text-xs text-text-faint">
+            <span>© 2026 Lippbyte</span>
+            <span>Created with ☕ and Geopolitical Passion</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

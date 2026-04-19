@@ -1,0 +1,68 @@
+{
+  "judul": "Panduan Lengkap CRUD dengan Eloquent ORM di Laravel 5.7",
+  "slug": "panduan-lengkap-crud-eloquent-laravel-5-7",
+  "ringkasan": "Dokumen ini menyajikan panduan komprehensif untuk mengimplementasikan operasi CRUD (Create, Read, Update, Delete) menggunakan Eloquent ORM dalam kerangka kerja Laravel 5.7. Pembaca akan mempelajari cara membuat model, mengkonfigurasi properti kunci seperti `$table` dan `$fillable`, serta memodifikasi controller untuk mengelola data siswa secara efisien.",
+  "estimasi_baca": "12 menit membaca",
+  "poin_utama": [
+    "Membuat dan mengkonfigurasi Eloquent Model (`Siswa.php`).",
+    "Memahami variabel `$table` dan `$fillable` untuk mass assignment.",
+    "Menerapkan operasi CREATE, READ, UPDATE, DELETE menggunakan Eloquent.",
+    "Menggunakan method `find()` untuk mengambil data berdasarkan primary key.",
+    "Perbandingan antara Eloquent ORM dan DB Facades.",
+    "Latihan studi kasus untuk memperdalam pemahaman praktis."
+  ],
+  "seksi": [
+    {
+      "judul_seksi": "Memahami Eloquent ORM: Fondasi Interaksi Database di Laravel",
+      "petunjuk_konten": "Jelaskan apa itu Eloquent ORM, mengapa ini menjadi fitur inti Laravel, dan manfaatnya dalam menyederhanakan interaksi database dibandingkan dengan query SQL mentah atau DB Facades. Perkenalkan bahwa artikel ini akan memandu pembaca langkah demi langkah dalam menerapkan CRUD.",
+      "kutipan_dokumen": "ELOQUENT - Laravel 5.7 – PWPB SMK Negeri 4 Bandung"
+    },
+    {
+      "judul_seksi": "Memulai dengan Eloquent: Membuat Model dan Konfigurasi Dasar",
+      "petunjuk_konten": "Pandu pembaca dalam membuat model baru, misalnya `Siswa.php`, di folder `app`. Jelaskan peran penting variabel `$table` untuk menentukan nama tabel di database, dan `$fillable` untuk mengizinkan mass assignment, lengkap dengan tautan referensi Laravel.",
+      "kutipan_dokumen": "$table\nVariabel untuk menentukan nama tabel pada database untuk model ini.\n$fillable\nVariabel untuk menentukan field apa saja yang akan di-fill / di-insert ke\ntabel pada model ini. Biasanya digunakan untuk mass-assignment\nReferensi: https://laravel.com/docs/5.7/eloquent#mass-assignment"
+    },
+    {
+      "judul_seksi": "Melihat Data (Read): Memodifikasi Fungsi Index di Controller",
+      "petunjuk_konten": "Jelaskan bagaimana memodifikasi fungsi `index` dalam `SiswaController.php` untuk mengambil dan menampilkan semua data siswa menggunakan Eloquent. Tekankan kesamaan metode yang dipanggil dengan DB Facades.",
+      "kutipan_dokumen": "MODIFY CONTROLLER FUNCTION INDEX\nSeluruh method yang dipanggil setelah inisialisasi Eloquent sama dengan\npenggunaan DB Facades"
+    },
+    {
+      "judul_seksi": "Menyimpan Data Baru (Create): Implementasi Fungsi Store",
+      "petunjuk_konten": "Uraikan langkah-langkah untuk memodifikasi fungsi `store` di `SiswaController.php` untuk menyimpan data siswa baru ke database menggunakan Eloquent ORM. Sertakan contoh dasar proses insert data.",
+      "kutipan_dokumen": "MODIFY CONTROLLER FUNCTION STORE\nORM Eloquent for Inserting Data"
+    },
+    {
+      "judul_seksi": "Memperbarui Data yang Ada (Update): Fungsi Update",
+      "petunjuk_konten": "Pandu pembaca dalam memodifikasi fungsi `update` di `SiswaController.php` untuk memperbarui data siswa yang sudah ada. Jelaskan proses mengambil data berdasarkan ID dan kemudian melakukan update.",
+      "kutipan_dokumen": "MODIFY CONTROLLER FUNCTION UPDATE\nORM Eloquent for Updating Data"
+    },
+    {
+      "judul_seksi": "Mencari Data Spesifik dengan Method `find()`",
+      "petunjuk_konten": "Fokus pada method `find()` pada Eloquent Model. Jelaskan fungsinya untuk mencari data berdasarkan primary key (umumnya `id`), bagaimana mengaturnya jika primary key berbeda melalui `$primaryKey`, dan tampilkan contoh query SQL yang setara.",
+      "kutipan_dokumen": "\\App\\Siswa::find($id)\nMethod find hanya ada pada Eloquent Model, digunakan untuk mencari\ndata pada model berdasarkan primary key. Biasanya primary key yang\ndicari adalah id. Selain id anda dapat mengaturnya pada model dengan\nmeng-override variabel public $primaryKey\nJika dalam Query SQL, fungsi diatas akan menciptakan query sebagai\nberikut:\nSELECT * FROM t_siswa WHERE id = ‘$id’"
+    },
+    {
+      "judul_seksi": "Menghapus Data (Delete): Implementasi Fungsi Destroy",
+      "petunjuk_konten": "Jelaskan cara memodifikasi fungsi `destroy` di `SiswaController.php` untuk menghapus data siswa dari database menggunakan Eloquent.",
+      "kutipan_dokumen": "MODIFY CONTROLLER FUNCTION DESTROY"
+    },
+    {
+      "judul_seksi": "Tantangan Praktis: Mengasah Kemampuan Eloquent Anda Melalui Studi Kasus",
+      "petunjuk_konten": "Sajikan tiga studi kasus dari dokumen sebagai latihan praktis. Ini termasuk mengaplikasikan CRUD ke tabel `t_kelas`, membuat tabel baru (`t_guru`) dengan migration dan CRUD menggunakan ORM, serta tantangan untuk menjelaskan perbedaan antara DB Facades dan Eloquent.",
+      "kutipan_dokumen": "STUDI KASUS\nStudi Kasus 1\nLakukan hal yang sama seperti yang sudah dijelaskan pada slide\nsebelumnya untuk tabel t_kelas (Create, Edit dan Delete).\nStudi Kasus 2\nBuatlah tabel baru untuk menyimpan data guru dengan field nip,\nnama_guru, jenis_kelamin, alamat. Buatlah migration nya, dan view\nuntuk CRUD nya. Cobalah gunakan metode ORM untuk insert dan\nupdate data untuk tabel data guru tersebut\nStudi Kasus 3\nBisakah anda menjelaskan perbedaan yang signifikan antara penggunaan\nDB Facades dan Eloquent?"
+    },
+    {
+      "judul_seksi": "Eloquent ORM vs. DB Facades: Kapan dan Mengapa Menggunakannya?",
+      "petunjuk_konten": "Berdasarkan Studi Kasus 3, diskusikan secara mendalam perbedaan signifikan antara penggunaan Eloquent ORM dan DB Facades. Jelaskan kelebihan dan kekurangan masing-masing, serta skenario penggunaan terbaik untuk setiap pendekatan dalam pengembangan aplikasi Laravel.",
+      "kutipan_dokumen": "Bisakah anda menjelaskan perbedaan yang signifikan antara penggunaan DB Facades dan Eloquent?"
+    }
+  ],
+  "instruksi_agent": {
+    "template_dasar": "index.html",
+    "referensi_style": "css/style.css",
+    "nada": "Informatif, edukatif, teknis, dan praktis. Gunakan bahasa yang jelas dan mudah dipahami oleh developer pemula maupun menengah.",
+    "target_pembaca": "Developer Laravel pemula, siswa SMK/mahasiswa jurusan RPL/TI, programmer yang ingin memahami fundamental Eloquent ORM di Laravel 5.7."
+  },
+  "cursor_prompt": "Buat halaman blog HTML lengkap berdasarkan struktur dan konten JSON yang diberikan. Pastikan setiap 'judul_seksi' menggunakan tag <h2>, dan 'petunjuk_konten' serta 'kutipan_dokumen' berada dalam paragraf atau blok kode yang sesuai (gunakan tag <pre><code> untuk kutipan dokumen yang berisi kode atau konfigurasi). Tambahkan navigasi internal jika memungkinkan. Sertakan bagian pendahuluan dan kesimpulan. Pastikan output HTML bersih, valid, dan mematuhi referensi style 'css/style.css'. Gunakan struktur semantik HTML5."
+}

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Selami dunia drama romantis Netflix terbaru, 'Can This Love be Translated?'. Artikel ini akan mengupas tuntas alur cerita yang unik, performa akting, serta pesan mendalam." />
+  <title>Lippbyte — Can This Love Be Translated?</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { serif: ['Lora','serif'], sans: ['DM Sans','sans-serif'], mono: ['JetBrains Mono','monospace'] },
+          colors: {
+            bg: 'var(--bg)', surface: 'var(--surface)', 'surface-2': 'var(--surface-2)',
+            border: 'var(--border)', 'border-strong': 'var(--border-strong)',
+            'text-primary': 'var(--text-primary)', 'text-body': 'var(--text-body)',
+            'text-muted': 'var(--text-muted)', 'text-faint': 'var(--text-faint)',
+            accent: 'var(--accent)', 'accent-hover': 'var(--accent-hover)',
+            'accent-soft': 'var(--accent-soft)', 'accent-mid': 'var(--accent-mid)',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="font-sans text-base leading-7">
+
+  <!-- TOP NAVBAR -->
+  <header class="site-header fixed top-0 left-0 right-0 z-[200] h-14 bg-[var(--bg-translucent)] backdrop-blur-[14px] border-b border-border">
+    <div class="header-inner max-w-[1280px] mx-auto px-6 h-full flex items-center justify-between gap-4">
+      <a href="../../home/index.html" class="site-logo font-serif text-lg font-semibold text-text-primary tracking-tight flex items-center gap-2">
+        Lippbyte
+        <span class="logo-badge font-sans text-[.65rem] font-bold tracking-wider uppercase bg-accent text-white px-2 py-0.5 rounded-full">Blog</span>
+      </a>
+      <div class="flex items-center gap-3">
+        <a href="../../home/index.html" class="nav-home-btn flex items-center gap-1.5 text-xs font-medium text-text-muted px-3 py-1.5 rounded-lg border border-border bg-surface hover:border-accent hover:text-accent hover:bg-accent-soft transition-all duration-200">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Home
+        </a>
+        <button id="themeToggle" class="p-1.5 rounded-md bg-surface-2 text-text-muted hover:text-accent border border-border transition-colors duration-200" aria-label="Toggle Dark Mode">
+          <svg id="themeToggleIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- READING PROGRESS -->
+  <div class="top-progress"><div class="top-progress-fill" id="topFill"></div></div>
+
+  <div class="layout grid grid-cols-[272px_1fr] max-w-[1280px] mx-auto min-h-screen pt-14 max-[960px]:grid-cols-1">
+
+    <!-- LEFT SIDEBAR -->
+    <nav class="left-sidebar sticky top-14 h-[calc(100vh-56px)] overflow-y-auto border-r border-border py-7 max-[960px]:static max-[960px]:h-auto" aria-label="Navigasi Ulasan">
+      <a href="../../home/index.html" class="sidebar-back flex items-center gap-2 px-5 pb-4 mb-4 text-xs font-medium text-text-muted border-b border-border hover:text-accent transition-colors">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Kembali ke Beranda
+      </a>
+
+      <p class="sidebar-section-label text-[.67rem] font-bold tracking-[.12em] uppercase text-text-faint px-5 mb-2">Daftar Isi</p>
+      <ul class="part-nav list-none p-0 m-0" id="partNav">
+        <li>
+          <a href="#pengantar" class="active nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="pengantar">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">1</span>
+            <span class="nav-text flex-1">Pengantar</span>
+            <span class="nav-progress-ring" data-section="pengantar">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#premis" class="nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="premis">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">2</span>
+            <span class="nav-text flex-1">Premis & Alur</span>
+            <span class="nav-progress-ring" data-section="premis">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#karakter" class="nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="karakter">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">3</span>
+            <span class="nav-text flex-1">Karakter & Akting</span>
+            <span class="nav-progress-ring" data-section="karakter">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#tema" class="nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="tema">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">4</span>
+            <span class="nav-text flex-1">Tema & Pesan</span>
+            <span class="nav-progress-ring" data-section="tema">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#produksi" class="nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="produksi">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">5</span>
+            <span class="nav-text flex-1">Produksi & Visual</span>
+            <span class="nav-progress-ring" data-section="produksi">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#pro-kontra" class="nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="pro-kontra">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">6</span>
+            <span class="nav-text flex-1">Kelebihan & Kekurangan</span>
+            <span class="nav-progress-ring" data-section="pro-kontra">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="#kesimpulan" class="nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="kesimpulan">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">7</span>
+            <span class="nav-text flex-1">Kesimpulan</span>
+            <span class="nav-progress-ring" data-section="kesimpulan">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar-other-blogs mt-6 pt-5 border-t border-border px-5">
+        <p class="text-[.67rem] font-bold tracking-[.12em] uppercase text-text-faint mb-3">Blog Lainnya</p>
+        <a href="../template/index.html" class="flex items-center gap-2 py-1.5 text-xs text-text-muted hover:text-accent transition-colors">
+          <span>🎥</span> Review Film Lainnya
+        </a>
+      </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div>
+      <main class="main-content px-12 pb-28 max-w-[820px] max-[960px]:px-5">
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- PART 1 — PENGANTAR                      -->
+        <!-- ═══════════════════════════════════════ -->
+        <section class="part-section pt-16 pb-8 border-b border-border" id="pengantar">
+          <div class="part-header mb-9">
+            <p class="part-label inline-flex items-center gap-2 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5"><span class="part-label-line w-5 h-0.5 bg-accent"></span> Review Drama</p>
+            <h1 class="part-title font-serif text-[clamp(1.6rem,3.5vw,2.15rem)] font-semibold leading-snug text-text-primary tracking-tight mb-5">Review Mendalam: Can This Love be Translated?</h1>
+            <div class="part-meta flex flex-wrap items-center gap-x-4 gap-y-1.5 text-sm text-text-muted">
+              <span class="flex items-center gap-1">⏱ 7 menit membaca</span>
+              <span class="w-1 h-1 rounded-full bg-border-strong"></span>
+              <span class="flex items-center gap-1">🏷 Netflix Korea</span>
+              <span class="w-1 h-1 rounded-full bg-border-strong"></span>
+              <span class="flex items-center gap-1">⭐ 8.5/10</span>
+            </div>
+            <div class="part-intro mt-5 p-4 bg-surface border border-border rounded-[10px] text-[.95rem] leading-7 text-text-muted italic border-l-[3px] border-l-accent">
+              Selami dunia drama romantis Netflix terbaru, 'Can This Love be Translated?'. Artikel ini akan mengupas tuntas alur cerita yang unik, performa akting, serta pesan mendalam di balik kisah cinta seorang penerjemah dan bintang papan atas.
+            </div>
+          </div>
+
+          <div class="content-body">
+            <p class="text-justify">
+              Netflix kembali menghadirkan mahakarya romansa yang tidak hanya memanjakan mata, tetapi juga menyentuh hati. <strong class="text-text-primary font-semibold">Can This Love be Translated?</strong> hadir sebagai angin segar di tengah gempuran drama bertema balas dendam. Menariknya, serial ini diproduksi oleh tim kreatif yang memiliki sentuhan magis serupa dengan duo di balik <em class="italic">Our Beloved Summer</em>, membawa estetika melankolis namun hangat yang sangat khas.
+            </p>
+            <p class="text-justify">
+              Dibintangi oleh Kim Seon-ho yang kembali ke layar kaca dengan pesona "boy next door"-nya, bersanding dengan Go Youn-jung yang sedang naik daun, drama ini menjanjikan kemistri yang meluap melampaui batasan dialog.
+            </p>
+
+            <figure class="my-8">
+              <img src="img/review_header.png" alt="Kim Seon-ho dan Go Youn-jung di Can This Love be Translated?" />
+              <figcaption class="text-center text-xs text-text-faint mt-2 italic"><strong>Gambar 1</strong> — Visual sinematik yang menangkap esensi romansa lintas budaya di Can This Love be Translated?.</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- PART 2 — PREMIS & ALUR                  -->
+        <!-- ═══════════════════════════════════════ -->
+        <section class="part-section pt-16 pb-8 border-b border-border" id="premis">
+          <div class="part-header mb-9">
+            <p class="part-label inline-flex items-center gap-2 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5"><span class="part-label-line w-5 h-0.5 bg-accent"></span> Analisis Cerita</p>
+            <h1 class="part-title font-serif text-[clamp(1.6rem,3.5vw,2.15rem)] font-semibold leading-snug text-text-primary tracking-tight mb-5">Premis & Alur Cerita: Ketika Bahasa Menjadi Jembatan Sekaligus Dinding</h1>
+          </div>
+
+          <div class="content-body">
+            <p class="text-justify">
+              Cerita ini berpusat pada <strong class="text-text-primary font-semibold">Joo Ho-jin (Kim Seon-ho)</strong>, seorang penerjemah multibahasa yang sangat teliti, yang tiba-tiba mendapatkan tugas terbesar dalam kariernya: menjadi penerjemah pribadi bagi <strong class="text-text-primary font-semibold">Cha Mu-hee (Go Youn-jung)</strong>, seorang bintang global yang sedang berada di puncak popularitasnya.
+            </p>
+            <p class="text-justify">
+              Dinamika unik tercipta ketika Ho-jin menyadari bahwa tugasnya bukan sekadar menerjemahkan kata demi kata dari satu bahasa ke bahasa lain. Ia harus menerjemahkan <em class="italic">perasaan</em> di balik kata-kata Mu-hee yang sering kali disalahpahami oleh media dan penggemar. Namun, ironisnya, Ho-jin sendiri sering kali kesulitan menerjemahkan debar jantungnya sendiri saat berada di dekat sang aktris.
+            </p>
+
+            <div class="callout callout-note">
+              <span class="callout-icon text-base shrink-0 leading-7">🔍</span>
+              <div class="callout-body flex-1">
+                <p class="callout-title text-[.73rem] font-bold tracking-wider uppercase mb-1">Sorotan Premis</p>
+                <p class="text-sm leading-relaxed">Drama ini mengeksplorasi konsep bahwa komunikasi sejati tidak selalu tentang kosa kata yang tepat, melainkan tentang niat dan empati di balik penyampaiannya.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- PART 3 — KARAKTER & AKTING              -->
+        <!-- ═══════════════════════════════════════ -->
+        <section class="part-section pt-16 pb-8 border-b border-border" id="karakter">
+          <div class="part-header mb-9">
+            <p class="part-label inline-flex items-center gap-2 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5"><span class="part-label-line w-5 h-0.5 bg-accent"></span> Performa</p>
+            <h1 class="part-title font-serif text-[clamp(1.6rem,3.5vw,2.15rem)] font-semibold leading-snug text-text-primary tracking-tight mb-5">Karakter & Akting: Harmoni di Balik Perbedaan</h1>
+          </div>
+
+          <div class="content-body">
+            <p class="text-justify">
+              <strong class="text-text-primary font-semibold">Kim Seon-ho</strong> membuktikan sekali lagi mengapa ia disebut sebagai "dimple prince" dengan kemampuan akting emosional yang mumpuni. Perannya sebagai Ho-jin menuntutnya untuk tampil tenang namun rapuh secara bersamaan. Di sisi lain, <strong class="text-text-primary font-semibold">Go Youn-jung</strong> memberikan performa yang mengejutkan sebagai Mu-hee; ia berhasil menampilkan sisi manusiawi dari seorang megabintang yang sering kali merasa kesepian di balik gemerlap lampu kamera.
+            </p>
+            <p class="text-justify">
+              Kemistri antara keduanya terasa sangat organik. Mereka mampu menyampaikan emosi yang kompleks melalui tatapan mata dan mikro-ekspresi, terutama saat karakter mereka berhadapan dengan perbedaan budaya yang sempat menciptakan jarak.
+            </p>
+
+            <div class="callout callout-tip">
+              <span class="callout-icon text-base shrink-0 leading-7">✨</span>
+              <div class="callout-body flex-1">
+                <p class="callout-title text-[.73rem] font-bold tracking-wider uppercase mb-1">Momen Terbaik</p>
+                <p class="text-sm leading-relaxed">Perhatikan adegan di mana Ho-jin menerjemahkan puisi untuk Mu-hee di bawah cahaya bulan. Akting tanpa suara mereka sangat memukau!</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- PART 4 — TEMA & PESAN                  -->
+        <!-- ═══════════════════════════════════════ -->
+        <section class="part-section pt-16 pb-8 border-b border-border" id="tema">
+          <div class="part-header mb-9">
+            <p class="part-label inline-flex items-center gap-2 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5"><span class="part-label-line w-5 h-0.5 bg-accent"></span> Filosofi Hubungan</p>
+            <h1 class="part-title font-serif text-[clamp(1.6rem,3.5vw,2.15rem)] font-semibold leading-snug text-text-primary tracking-tight mb-5">Tema & Pesan: Lebih dari Sekadar Romansa</h1>
+          </div>
+
+          <div class="content-body">
+            <p class="text-justify">
+              Drama ini mengajukan pertanyaan filosofis yang menarik: <em class="italic">"Apakah cinta memang butuh terjemahan?"</em> Melalui perjalanan Ho-jin dan Mu-hee, kita diajak merenungkan tantangan komunikasi yang tidak hanya terjadi antar bahasa, melainkan antar hati manusia.
+            </p>
+            
+            <figure class="my-8">
+              <img src="img/translation_desk.png" alt="Aroma Pekerjaan Penerjemah" />
+              <figcaption class="text-center text-xs text-text-faint mt-2 italic"><strong>Gambar 2</strong> — Detail artistik meja kerja Ho-jin yang mencerminkan ketelitian dan dedikasinya pada bahasa.</figcaption>
+            </figure>
+
+            <p class="text-justify">
+              Pesan mendalam tentang pemahaman budaya dan kesalahpahaman yang disengaja (atau tidak) menjadi inti dari narasi ini. Terkadang, satu pelukan terasa jauh lebih bermakna daripada seribu kata yang diterjemahkan dengan sempurna.
+            </p>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- PART 5 — PRODUKSI & VISUAL              -->
+        <!-- ═══════════════════════════════════════ -->
+        <section class="part-section pt-16 pb-8 border-b border-border" id="produksi">
+          <div class="part-header mb-9">
+            <p class="part-label inline-flex items-center gap-2 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5"><span class="part-label-line w-5 h-0.5 bg-accent"></span> Estetika</p>
+            <h1 class="part-title font-serif text-[clamp(1.6rem,3.5vw,2.15rem)] font-semibold leading-snug text-text-primary tracking-tight mb-5">Produksi & Sinematografi: Estetika Visual yang Menawan</h1>
+          </div>
+
+          <div class="content-body">
+            <p class="text-justify">
+              Kualitas produksi Netflix sekali lagi tidak mengecewakan. Sinematografinya menggunakan palet warna yang hangat dan lembut, menciptakan suasana yang romantis namun realistis. Pengambilan gambar di lokasi-lokasi internasional memberikan skala yang luas pada cerita, sementara musik latarnya (OST) sangat efektif dalam membangun emosi penonton.
+            </p>
+            <p class="text-justify">
+              Apresiasi khusus perlu diberikan pada detail artistik dalam setiap set, yang secara implisit mendukung penceritaan tentang perbedaan latar belakang kedua karakter utama.
+            </p>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- PART 6 — PRO & KONTRA                   -->
+        <!-- ═══════════════════════════════════════ -->
+        <section class="part-section pt-16 pb-8 border-b border-border" id="pro-kontra">
+          <div class="part-header mb-9">
+            <p class="part-label inline-flex items-center gap-2 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5"><span class="part-label-line w-5 h-0.5 bg-accent"></span> Penilaian Objektif</p>
+            <h1 class="part-title font-serif text-[clamp(1.6rem,3.5vw,2.15rem)] font-semibold leading-snug text-text-primary tracking-tight mb-5">Kelebihan & Kekurangan: Apakah Layak Ditonton?</h1>
+          </div>
+
+          <div class="content-body">
+            <div class="grid grid-cols-2 gap-6 max-[600px]:grid-cols-1">
+              <div class="bg-surface p-5 border border-tip-border/30 rounded-xl">
+                <p class="font-bold text-tip-text mb-3 flex items-center gap-2">✅ Kelebihan</p>
+                <ul class="text-sm space-y-2 list-disc pl-4 text-text-body">
+                  <li>Kemistri pemeran utama yang luar biasa kuat.</li>
+                  <li>Premis unik tentang profesi penerjemah.</li>
+                  <li>Sinematografi level film layar lebar.</li>
+                  <li>OST yang sangat membekas di telinga.</li>
+                </ul>
+              </div>
+              <div class="bg-surface p-5 border border-warn-border/30 rounded-xl">
+                <p class="font-bold text-warn-text mb-3 flex items-center gap-2">❌ Kekurangan</p>
+                <ul class="text-sm space-y-2 list-disc pl-4 text-text-body">
+                  <li>Pacing di beberapa episode tengah terasa agak melambat.</li>
+                  <li>Beberapa konflik sampingan terasa kurang tereksplorasi.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- PART 7 — KESIMPULAN                     -->
+        <!-- ═══════════════════════════════════════ -->
+        <section class="part-section pt-16 pb-8" id="kesimpulan">
+          <div class="part-header mb-9">
+            <p class="part-label inline-flex items-center gap-2 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5"><span class="part-label-line w-5 h-0.5 bg-accent"></span> Penutup</p>
+            <h1 class="part-title font-serif text-[clamp(1.6rem,3.5vw,2.15rem)] font-semibold leading-snug text-text-primary tracking-tight mb-5">Kesimpulan & Rekomendasi: Sebuah Terjemahan yang Berhasil?</h1>
+          </div>
+
+          <div class="content-body">
+            <p class="text-justify">
+              <strong class="text-text-primary font-semibold">Can This Love be Translated?</strong> adalah sebuah mahakarya romansa modern yang berhasil menyampaikan pesannya dengan indah. Meskipun memiliki sedikit catatan pada pacing, serial ini tetap menjadi rekomendasi utama bagi kamu penggemar drama Korea yang mencari kedalaman emosi dan estetika visual.
+            </p>
+            <p class="text-justify">
+              Drama ini sangat cocok bagi penonton yang menyukai kisah cinta yang matang, penuh dilema komunikasi, dan tentu saja, bagi para penggemar Kim Seon-ho dan Go Youn-jung. Ini adalah bukti bahwa cinta, pada akhirnya, adalah bahasa universal yang paling kuat.
+            </p>
+
+            <div class="reflection-box">
+              <p class="reflection-header flex items-center gap-2.5 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5">Rating Akhir</p>
+              <div class="flex items-center gap-4 mb-4">
+                <span class="text-4xl font-serif font-bold text-text-primary">8.5</span>
+                <div class="flex flex-col">
+                  <span class="text-xs font-bold uppercase tracking-wider text-text-faint">Skor Lippbyte</span>
+                  <div class="flex gap-1 text-accent">
+                    ★★★★◐
+                  </div>
+                </div>
+              </div>
+              <p class="text-sm text-text-muted">Wajib tonton untuk pencinta genre romantis-melankolis.</p>
+            </div>
+          </div>
+
+          <div class="part-footer-nav flex justify-between items-center gap-4 mt-10 pt-6 border-t border-border">
+            <a href="#pro-kontra" class="part-nav-btn flex items-center gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Pro & Kontra</a>
+            <a href="../../home/index.html" class="part-nav-btn flex items-center flex-row-reverse gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline bg-accent-soft border-accent-mid">
+              🏠 Kembali ke Beranda
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- SITE FOOTER -->
+      <footer class="site-footer col-span-full border-t border-border bg-surface">
+        <div class="footer-inner max-w-[1280px] mx-auto py-10 px-6 grid grid-cols-3 gap-8 max-[960px]:grid-cols-2 max-[600px]:grid-cols-1">
+          <div class="footer-brand">
+            <div class="font-serif text-lg font-semibold mb-2.5 flex items-center gap-2">
+              Lippbyte <span class="logo-badge font-sans text-[.65rem] font-bold tracking-wider uppercase bg-accent text-white px-2 py-0.5 rounded-full">Blog</span>
+            </div>
+            <p class="text-sm text-text-faint leading-relaxed">Platform ulasan film dan drama Korea terpercaya — dipandu oleh semangat sinematik.</p>
+          </div>
+          <div>
+            <p class="footer-col-title text-[.72rem] font-bold tracking-[.1em] uppercase text-text-faint mb-3">Navigasi Review</p>
+            <ul class="footer-links list-none p-0">
+              <li><a href="#pengantar" class="text-sm text-text-muted">Pengantar</a></li>
+              <li class="mt-1.5"><a href="#premis" class="text-sm text-text-muted">Premis Alur</a></li>
+              <li class="mt-1.5"><a href="#karakter" class="text-sm text-text-muted">Karakter</a></li>
+              <li class="mt-1.5"><a href="#kesimpulan" class="text-sm text-text-muted">Kesimpulan</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="footer-col-title text-[.72rem] font-bold tracking-[.1em] uppercase text-text-faint mb-3">Link</p>
+            <ul class="footer-links list-none p-0">
+              <li><a href="../../home/index.html" class="text-sm text-text-muted">🏠 Beranda</a></li>
+              <li class="mt-1.5"><a href="https://github.com/lippbyte" target="_blank" class="text-sm text-text-muted">GitHub</a></li>
+            </ul>
+          </div>
+          <div class="footer-bottom col-span-full pt-6 border-t border-border flex justify-between items-center flex-wrap gap-2 text-xs text-text-faint">
+            <span>© 2026 Lippbyte · Muhammad Khalifa</span>
+            <span>Semoga ulasan ini membantu pencarian tontonanmu 🍿</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

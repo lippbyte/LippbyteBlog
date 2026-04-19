@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Perang Iran-Irak (1980-1988): Analisis mendalam tentang delapan tahun tragedi, warisan luka, dan pelajaran yang terlupakan dari konflik paling brutal di Timur Tengah." />
+  <title>Lippbyte — Perang Iran-Irak: Delapan Tahun Tragedi, Warisan Luka, dan Pelajaran yang Terlupakan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { serif: ['Lora','serif'], sans: ['DM Sans','sans-serif'], mono: ['JetBrains Mono','monospace'] },
+          colors: {
+            bg: 'var(--bg)', surface: 'var(--surface)', 'surface-2': 'var(--surface-2)',
+            border: 'var(--border)', 'border-strong': 'var(--border-strong)',
+            'text-primary': 'var(--text-primary)', 'text-body': 'var(--text-body)',
+            'text-muted': 'var(--text-muted)', 'text-faint': 'var(--text-faint)',
+            accent: 'var(--accent)', 'accent-hover': 'var(--accent-hover)',
+            'accent-soft': 'var(--accent-soft)', 'accent-mid': 'var(--accent-mid)',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="font-sans text-base leading-7">
+
+  <!-- TOP NAVBAR -->
+  <header class="site-header fixed top-0 left-0 right-0 z-[200] h-14 bg-[var(--bg-translucent)] backdrop-blur-[14px] border-b border-border">
+    <div class="header-inner max-w-[1280px] mx-auto px-6 h-full flex items-center justify-between gap-4">
+      <a href="../../home/index.html" class="site-logo font-serif text-lg font-semibold text-text-primary tracking-tight flex items-center gap-2">
+        Lippbyte
+        <span class="logo-badge font-sans text-[.65rem] font-bold tracking-wider uppercase bg-accent text-white px-2 py-0.5 rounded-full">Blog</span>
+      </a>
+      <div class="flex items-center gap-3">
+        <a href="../../home/index.html" class="nav-home-btn flex items-center gap-1.5 text-xs font-medium text-text-muted px-3 py-1.5 rounded-lg border border-border bg-surface hover:border-accent hover:text-accent hover:bg-accent-soft transition-all duration-200">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Home
+        </a>
+        <button id="themeToggle" class="p-1.5 rounded-md bg-surface-2 text-text-muted hover:text-accent border border-border transition-colors duration-200" aria-label="Toggle Dark Mode">
+          <svg id="themeToggleIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- READING PROGRESS -->
+  <div class="top-progress"><div class="top-progress-fill" id="topFill"></div></div>
+
+  <div class="layout grid grid-cols-[272px_1fr] max-w-[1280px] mx-auto min-h-screen pt-14 max-[960px]:grid-cols-1">
+
+    <!-- LEFT SIDEBAR -->
+    <nav class="left-sidebar sticky top-14 h-[calc(100vh-56px)] overflow-y-auto border-r border-border py-7 max-[960px]:static max-[960px]:h-auto" aria-label="Navigasi Seksi">
+
+      <a href="../../home/index.html" class="sidebar-back flex items-center gap-2 px-5 pb-4 mb-4 text-xs font-medium text-text-muted border-b border-border hover:text-accent transition-colors">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Kembali ke Beranda
+      </a>
+
+      <p class="sidebar-section-label text-[.67rem] font-bold tracking-[.12em] uppercase text-text-faint px-5 mb-2">Analisis Sejarah</p>
+      <ul class="part-nav list-none p-0 m-0" id="partNav">
+        <!-- Seksi 0: Pendahuluan -->
+        <li>
+          <a href="#pendahuluan" class="active nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="pendahuluan">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">0</span>
+            <span class="nav-text flex-1">Pendahuluan</span>
+            <span class="nav-progress-ring" data-section="pendahuluan">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+        </li>
+        <!-- Seksi 1: Akar Konflik -->
+        <li>
+          <a href="#akar-konflik" class="nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="akar-konflik">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">1</span>
+            <span class="nav-text flex-1">Akar Konflik</span>
+            <span class="nav-progress-ring" data-section="akar-konflik">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+        </li>
+        <!-- Seksi 2: Invasi & Perlawanan -->
+        <li>
+          <a href="#invasi-perlawanan" class="nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="invasi-perlawanan">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">2</span>
+            <span class="nav-text flex-1">Invasi & Perlawanan</span>
+            <span class="nav-progress-ring" data-section="invasi-perlawanan">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+        </li>
+        <!-- Seksi 3: Kekejaman -->
+        <li>
+          <a href="#kekejaman" class="nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="kekejaman">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">3</span>
+            <span class="nav-text flex-1">Perang Attrisi</span>
+            <span class="nav-progress-ring" data-section="kekejaman">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+        </li>
+        <!-- Seksi 4: Intervensi -->
+        <li>
+          <a href="#intervensi" class="nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="intervensi">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">4</span>
+            <span class="nav-text flex-1">Intervensi Global</span>
+            <span class="nav-progress-ring" data-section="intervensi">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+        </li>
+        <!-- Seksi 5: Akhir Pahit -->
+        <li>
+          <a href="#akhir-pahit" class="nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="akhir-pahit">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">5</span>
+            <span class="nav-text flex-1">Akhir yang Pahit</span>
+            <span class="nav-progress-ring" data-section="akhir-pahit">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+        </li>
+        <!-- Seksi 6: Warisan Luka -->
+        <li>
+          <a href="#warisan-luka" class="nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="warisan-luka">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">6</span>
+            <span class="nav-text flex-1">Warisan Luka</span>
+            <span class="nav-progress-ring" data-section="warisan-luka">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+        </li>
+        <!-- Seksi 7: Pelajaran -->
+        <li>
+          <a href="#pelajaran" class="nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="pelajaran">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">7</span>
+            <span class="nav-text flex-1">Pelajaran</span>
+            <span class="nav-progress-ring" data-section="pelajaran">
+              <svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg>
+            </span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Sidebar: Blog Lainnya -->
+      <div class="sidebar-other-blogs mt-6 pt-5 border-t border-border px-5">
+        <p class="text-[.67rem] font-bold tracking-[.12em] uppercase text-text-faint mb-3">Blog Lainnya</p>
+        <a href="../laravel-blog/index.html" class="flex items-center gap-2 py-1.5 text-xs text-text-muted hover:text-accent transition-colors">
+          <span>⚡</span> Belajar Laravel
+        </a>
+        <a href="../ulasan-can-this-love-be-translated/index.html" class="flex items-center gap-2 py-1.5 text-xs text-text-muted hover:text-accent transition-colors">
+          <span>🎬</span> Review K-Drama
+        </a>
+      </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div>
+      <main class="main-content px-12 pb-28 max-w-[820px] max-[960px]:px-5">
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- SEKSI 0 — PENDAHULUAN                  -->
+        <!-- ═══════════════════════════════════════ -->
+        <section class="part-section pt-16 pb-8 border-b border-border" id="pendahuluan">
+          <div class="part-header mb-9">
+            <p class="part-label inline-flex items-center gap-2 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5"><span class="part-label-line w-5 h-0.5 bg-accent"></span> Pendahuluan</p>
+            <h1 class="part-title font-serif text-[clamp(1.6rem,3.5vw,2.15rem)] font-semibold leading-snug text-text-primary tracking-tight mb-5">Perang Iran-Irak: Delapan Tahun Tragedi, Warisan Luka, dan Pelajaran yang Terlupakan</h1>
+            <div class="part-meta flex flex-wrap items-center gap-x-4 gap-y-1.5 text-sm text-text-muted">
+              <span class="flex items-center gap-1">📅 14 April 2026</span>
+              <span class="w-1 h-1 rounded-full bg-border-strong"></span>
+              <span class="flex items-center gap-1">⏱ 6-8 menit baca</span>
+              <span class="w-1 h-1 rounded-full bg-border-strong"></span>
+              <span class="flex items-center gap-1">🏷 Sejarah & Geopolitik</span>
+            </div>
+            <div class="part-intro mt-5 p-4 bg-surface border border-border rounded-[10px] text-[.95rem] leading-7 text-text-muted italic border-l-[3px] border-l-accent">
+              Perang Iran-Irak (1980-1988) adalah salah satu konflik paling brutal di abad ke-20, menelan jutaan korban jiwa dan membentuk ulang peta geopolitik Timur Tengah. Artikel ini menelusuri akar, fase krusial, dampak, dan pelajaran abadi dari tragedi yang sering terlupakan ini.
+            </div>
+          </div>
+
+          <div class="content-body">
+            <p class="text-justify mb-6">
+              <strong class="font-semibold text-text-primary">Bayangkan sebuah perang yang berlangsung selama delapan tahun penuh</strong> — hampir tiga ribu hari tanpa henti — di mana dua negara tetangga saling menghancurkan dengan kekuatan militer konvensional, senjata kimia terlarang, dan gelombang demi gelombang nyawa manusia yang dikorbankan di garis depan. Perang Iran-Irak, yang dimulai pada September 1980 dan baru berakhir pada Agustus 1988, adalah salah satu konflik konvensional terlama di abad ke-20. Namun ironisnya, perang ini sering kali hanya menjadi catatan kaki dalam buku-buku sejarah dunia, tertutupi oleh narasi-narasi besar lainnya yang dianggap lebih "relevan" bagi tatanan global.
+            </p>
+            <p class="text-justify mb-6">
+              Saya selalu merasa terganggu oleh betapa mudahnya dunia melupakan tragedi ini. Diperkirakan antara <strong class="text-accent font-semibold">1 hingga 2 juta orang</strong> — militer dan sipil — kehilangan nyawa mereka dalam konflik ini, dan kerugian ekonomi kedua negara mencapai triliunan dolar. Angka-angka ini bukan sekadar statistik; di balik setiap digit, ada keluarga yang hancur, ada mimpi yang tidak pernah terwujud, ada generasi yang tumbuh dalam bayang-bayang trauma. Dan yang paling memilukan, pola-pola yang memicu perang ini — ambisi kekuasaan, ketakutan terhadap perbedaan, dan kegagalan diplomasi — terus berulang di berbagai belahan dunia lainnya.
+            </p>
+            <p class="text-justify mb-6">
+              Mengapa kita harus peduli dengan perang yang terjadi empat dekade silam? Karena sejarah, ketika tidak dipelajari dengan sungguh-sungguh, cenderung mengulang dirinya sendiri. Dan pelajaran dari Perang Iran-Irak — tentang bahaya nasionalisme yang membabi buta, tentang betapa mudahnya propaganda menggerakkan jutaan orang menuju kehancuran, dan tentang kegagalan masyarakat internasional dalam mencegah kekejaman — adalah pelajaran yang tetap relevan hingga hari ini.
+            </p>
+
+            <div class="callout callout-note mb-6">
+              <span class="callout-icon text-base shrink-0 leading-7">💡</span>
+              <div class="callout-body flex-1">
+                <p class="callout-title text-[.73rem] font-bold tracking-wider uppercase mb-1">Fakta Kunci</p>
+                <ul class="text-sm leading-relaxed list-disc pl-4">
+                  <li><strong>Durasi:</strong> September 1980 – Agustus 1988 (8 tahun)</li>
+                  <li><strong>Korban Jiwa:</strong> Diperkirakan 1–2 juta orang (militer & sipil)</li>
+                  <li><strong>Kerugian Ekonomi:</strong> Triliunan dolar AS</li>
+                  <li><strong>Status:</strong> Konflik konvensional terlama abad ke-20</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="part-footer-nav flex justify-between items-center gap-4 mt-10 pt-6 border-t border-border">
+            <span></span>
+            <a href="#akar-konflik" class="part-nav-btn flex items-center flex-row-reverse gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline cursor-pointer">
+              Seksi 1: Akar Konflik
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- SEKSI 1 — AKAR KONFLIK                 -->
+        <!-- ═══════════════════════════════════════ -->
+        <section class="part-section pt-16 pb-8 border-b border-border" id="akar-konflik">
+          <div class="part-header mb-9">
+            <p class="part-label inline-flex items-center gap-2 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5"><span class="part-label-line w-5 h-0.5 bg-accent"></span> Part 1</p>
+            <h1 class="part-title font-serif text-[clamp(1.6rem,3.5vw,2.15rem)] font-semibold leading-snug text-text-primary tracking-tight mb-5">Akar Konflik: Benih-Benih Ketegangan Sejarah dan Politik</h1>
+          </div>
+
+          <div class="content-body">
+            <p class="text-justify mb-6">
+              Perang tidak pernah muncul dari ruang hampa. Setiap konflik bersenjata selalu memiliki akar yang dalam, tumbuh dari lapisan-lapisan sejarah, dendam, ambisi, dan ketakutan yang saling berkelindan. Perang Iran-Irak adalah contoh sempurna dari apa yang terjadi ketika semua faktor pemicu ini bertemu pada satu titik waktu yang genting — menciptakan apa yang bisa disebut sebagai <strong class="text-accent font-semibold italic">"badai yang sempurna"</strong> untuk konflik.
+            </p>
+            <p class="text-justify mb-6">
+              Di jantung perselisihan ini terdapat <strong class="font-semibold text-text-primary">Shatt al-Arab</strong> (atau Arvand Rud dalam bahasa Persia), jalur air strategis yang terbentuk dari pertemuan Sungai Tigris dan Eufrat sebelum bermuara ke Teluk Persia. Jalur air ini bukan sekadar sungai; ia adalah urat nadi ekonomi kedua negara, jalur utama bagi ekspor minyak dan perdagangan maritim. Perselisihan atas kedaulatan Shatt al-Arab telah berlangsung selama berabad-abad, menjadi sumber ketegangan kronis antara Iran dan Irak. Perjanjian Algiers 1975 sempat meredakan ketegangan ini dengan menetapkan garis batas di tengah jalur air (<em>thalweg</em>), tetapi kesepakatan ini dicapai dalam kondisi yang merugikan Irak — sebuah luka yang terus membekas di benak Saddam Hussein.
+            </p>
+            <p class="text-justify mb-6">
+              Kemudian datanglah <strong class="font-semibold text-text-primary">Revolusi Iran tahun 1979</strong>, sebuah peristiwa yang mengguncang seluruh tatanan geopolitik Timur Tengah. Jatuhnya Shah Mohammad Reza Pahlavi dan bangkitnya Republik Islam di bawah Ayatollah Ruhollah Khomeini menciptakan gelombang kejut yang meresahkan para penguasa di kawasan, terutama Saddam Hussein. Retorika revolusioner Khomeini yang menyerukan kaum tertindas di seluruh dunia Muslim untuk bangkit melawan para tiran sangat mengkhawatirkan rezim Ba'athis Irak — apalagi mengingat mayoritas populasi Irak adalah Muslim Syiah yang berpotensi tersulut oleh seruan tersebut.
+            </p>
+
+            <div class="callout callout-warn mb-6">
+              <span class="callout-icon text-base shrink-0 leading-7">⚠️</span>
+              <div class="callout-body flex-1">
+                <p class="callout-title text-[.73rem] font-bold tracking-wider uppercase mb-1">Titik Kritis</p>
+                <p class="text-sm leading-relaxed">Saddam Hussein secara sepihak mengingkari Perjanjian Algiers 1975 pada 17 September 1980, hanya lima hari sebelum melancarkan invasi besar-besaran ke Iran. Keputusan ini menghapus satu-satunya kerangka diplomatik yang masih tersisa antara kedua negara.</p>
+              </div>
+            </div>
+
+            <p class="text-justify mb-6">
+              Saddam Hussein melihat Iran pasca-revolusi yang sedang kacau — militernya dilucuti, perwira-perwira senior dieksekusi atau dipenjara, dan hubungan dengan sekutu Barat terputus — sebagai peluang emas untuk mengklaim kepemimpinan regional. Dengan menguasai Shatt al-Arab dan merebut provinsi Khuzestan yang kaya minyak (yang juga memiliki populasi Arab yang signifikan), Saddam berkhayal bahwa ia bisa menjadi pemimpin tak tertandingi di dunia Arab. Ambisi ini, dibalut dengan ketakutan nyata akan ekspor revolusi Syiah, menjadi bahan bakar fatal yang menyulut api perang.
+            </p>
+            <p class="text-justify mb-6">
+              Yang perlu kita pahami — dan ini adalah refleksi pribadi saya — adalah bahwa perang ini bukan semata-mata tentang perbatasan atau sungai. Ia adalah tentang ego kekuasaan, tentang ketakutan yang tidak dikelola melalui diplomasi, dan tentang pemimpin yang dengan mudah mempertaruhkan jutaan nyawa demi agenda pribadinya. Pola yang sama, dalam berbagai skala, terus kita saksikan di dunia modern.
+            </p>
+          </div>
+
+          <div class="part-footer-nav flex justify-between items-center gap-4 mt-10 pt-6 border-t border-border">
+            <a href="#pendahuluan" class="part-nav-btn flex items-center gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Pendahuluan</a>
+            <a href="#invasi-perlawanan" class="part-nav-btn flex items-center flex-row-reverse gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline">Seksi 2: Invasi & Perlawanan<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- SEKSI 2 — INVASI & PERLAWANAN           -->
+        <!-- ═══════════════════════════════════════ -->
+        <section class="part-section pt-16 pb-8 border-b border-border" id="invasi-perlawanan">
+          <div class="part-header mb-9">
+            <p class="part-label inline-flex items-center gap-2 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5"><span class="part-label-line w-5 h-0.5 bg-accent"></span> Part 2</p>
+            <h1 class="part-title font-serif text-[clamp(1.6rem,3.5vw,2.15rem)] font-semibold leading-snug text-text-primary tracking-tight mb-5">Invasi dan Perlawanan: Ketika Irak Menyerang dan Iran Bangkit</h1>
+          </div>
+
+          <div class="content-body">
+            <p class="text-justify mb-6">
+              Pada <strong class="text-accent font-semibold">22 September 1980</strong>, pasukan udara Irak melancarkan serangan mendadak terhadap pangkalan-pangkalan udara Iran, diikuti oleh invasi darat besar-besaran yang melibatkan enam divisi tentara Irak menyeberangi perbatasan internasional. Target utamanya jelas: provinsi Khuzestan di barat daya Iran, daerah dataran rendah yang kaya minyak dan secara strategis memberi Irak akses penuh ke Shatt al-Arab. Saddam Hussein mengharapkan kemenangan cepat — sebuah <em>blitzkrieg</em> ala Timur Tengah yang akan memaksa Iran bertekuk lutut dalam hitungan minggu.
+            </p>
+            <p class="text-justify mb-6">
+              Pada tahap awal, kalkulasi Saddam tampak tepat. Militer Iran memang dalam kondisi yang menyedihkan. Revolusi Islam telah melucuti sebagian besar struktur komando militer warisan Shah — ribuan perwira berpengalaman dieksekusi, dipenjara, atau melarikan diri ke luar negeri. Pasokan suku cadang untuk persenjataan buatan Barat (terutama Amerika Serikat) terputus total akibat embargo. Pasukan Irak berhasil merebut kota-kota penting di Khuzestan, termasuk kota pelabuhan Khorramshahr setelah pertempuran berdarah yang sangat brutal.
+            </p>
+
+            <div class="callout callout-note mb-6">
+              <span class="callout-icon text-base shrink-0 leading-7">💡</span>
+              <div class="callout-body flex-1">
+                <p class="callout-title text-[.73rem] font-bold tracking-wider uppercase mb-1">Pertempuran Khorramshahr</p>
+                <p class="text-sm leading-relaxed">Kota Khorramshahr menjadi simbol perlawanan Iran. Pertempurannya yang berlangsung selama 34 hari begitu dahsyat sehingga kota ini dijuluki <em>"Khuninshahr"</em> — kota darah. Iran berhasil merebut kembali kota ini pada Mei 1982, menjadi titik balik moral yang sangat penting.</p>
+              </div>
+            </div>
+
+            <p class="text-justify mb-6">
+              Namun, apa yang terjadi selanjutnya mengejutkan seluruh dunia. Alih-alih runtuh, Iran justru bangkit dengan kekuatan yang tidak terduga. <strong class="font-semibold text-text-primary">Garda Revolusi Islam (Pasdaran)</strong>, pasukan paramiliter yang lahir dari rahim revolusi, menjadi tulang punggung perlawanan. Mereka diperkuat oleh <em>Basij</em> — milisi rakyat yang terdiri dari relawan, termasuk pria dan remaja yang dengan penuh keyakinan ideologis bergegas ke garis depan. Semangat revolusioner dan religius yang masih berkobar menjadi bahan bakar perlawanan yang tidak pernah diperhitungkan oleh Saddam.
+            </p>
+            <p class="text-justify mb-6">
+              Ada sebuah pelajaran yang sangat kuat di sini, dan ini menurut saya selalu diremehkan oleh para pengamat militer Barat: <strong class="font-semibold text-text-primary">kekuatan ideologi dalam perang tidak boleh diukur semata-mata dengan logika materialis</strong>. Iran pada tahun 1980-an tidak memiliki keunggulan persenjataan, tidak memiliki dukungan internasional, dan militer konvensionalnya dalam kondisi paling lemah. Tetapi semangat untuk mempertahankan tanah air yang baru saja "dibebaskan" dari tirani — dikombinasikan dengan narasi religius tentang pengorbanan — menciptakan kekuatan tempur yang melampaui perhitungan di atas kertas.
+            </p>
+            <p class="text-justify mb-6">
+              Pada tahun 1982, Iran berhasil memukul mundur sebagian besar pasukan Irak dari wilayahnya sendiri, mengubah dinamika perang secara fundamental. Dari perang defensif, Iran bertransformasi menjadi pihak penyerang, membawa pertempuran ke wilayah Irak. Keputusan untuk tidak berhenti di garis perbatasan dan terus menyerang — dengan tujuan menggulingkan rezim Ba'athis Saddam — adalah keputusan yang pada akhirnya akan memperpanjang perang selama enam tahun lagi dan menelan korban jiwa yang jauh lebih besar.
+            </p>
+          </div>
+
+          <div class="part-footer-nav flex justify-between items-center gap-4 mt-10 pt-6 border-t border-border">
+            <a href="#akar-konflik" class="part-nav-btn flex items-center gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Akar Konflik</a>
+            <a href="#kekejaman" class="part-nav-btn flex items-center flex-row-reverse gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline">Seksi 3: Perang Attrisi<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- SEKSI 3 — PERANG ATTRISI & KEKEJAMAN   -->
+        <!-- ═══════════════════════════════════════ -->
+        <section class="part-section pt-16 pb-8 border-b border-border" id="kekejaman">
+          <div class="part-header mb-9">
+            <p class="part-label inline-flex items-center gap-2 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5"><span class="part-label-line w-5 h-0.5 bg-accent"></span> Part 3</p>
+            <h1 class="part-title font-serif text-[clamp(1.6rem,3.5vw,2.15rem)] font-semibold leading-snug text-text-primary tracking-tight mb-5">Perang Attrisi dan Kekejaman: Korban Jiwa dan Senjata Terlarang</h1>
+          </div>
+
+          <div class="content-body">
+            <p class="text-justify mb-6">
+              Setelah Iran berhasil memukul mundur pasukan Irak pada 1982, perang berubah menjadi sesuatu yang menakutkan dalam kebrutalan dan kesia-siaannya. Garis depan membeku, dan pertempuran merosot menjadi <strong class="font-semibold text-text-primary">perang parit yang statis</strong> — sebuah mimpi buruk yang mengingatkan dunia pada horor Perang Dunia I, enam dekade sebelumnya. Pasukan dari kedua pihak berhadap-hadapan di sepanjang garis depan yang hampir tidak bergerak, saling menghujani dengan artileri, saling melancarkan serangan-serangan frontal yang selalu berakhir dengan tumpukan mayat dan sedikit sekali perubahan wilayah.
+            </p>
+            <p class="text-justify mb-6">
+              Iran, dengan keunggulan numerik dalam sumber daya manusia tetapi kekurangan dalam persenjataan modern, mengandalkan taktik yang oleh media Barat disebut sebagai <em>"gelombang manusia"</em> (<em>human wave attacks</em>). Ribuan anggota Basij — banyak di antaranya remaja yang masih sangat muda — dikerahkan dalam serangan-serangan frontal terhadap posisi pertahanan Irak yang diperkuat. Mereka maju dengan keyakinan bahwa mati syahid di medan perang adalah kehormatan tertinggi. Bagi saya, ini adalah salah satu aspek paling tragis dari perang ini: bagaimana ideologi dan manipulasi religius bisa mengubah anak-anak muda menjadi umpan meriam, dan bagaimana sebuah negara bisa menganggap ini sebagai strategi yang dapat diterima.
+            </p>
+
+            <div class="callout callout-warn mb-6">
+              <span class="callout-icon text-base shrink-0 leading-7">⚠️</span>
+              <div class="callout-body flex-1">
+                <p class="callout-title text-[.73rem] font-bold tracking-wider uppercase mb-1">Noda Hitam Peradaban</p>
+                <p class="text-sm leading-relaxed">Irak secara ekstensif menggunakan senjata kimia — <strong>gas mustard, sarin, dan tabun</strong> — terhadap pasukan Iran dan populasi sipil Kurdi. Tragedi Halabja pada 16 Maret 1988 menewaskan sekitar <strong>5.000 warga sipil</strong> dalam satu serangan kimia, menjadi salah satu kekejaman terburuk abad ke-20.</p>
+              </div>
+            </div>
+
+            <p class="text-justify mb-6">
+              Namun kekejaman terbesar dalam perang ini datang dari penggunaan <strong class="text-accent font-semibold">senjata kimia oleh rezim Irak</strong>. Ini bukan sekadar insiden terisolasi — ini adalah kampanye sistematis. Irak menggunakan gas mustard, sarin, dan tabun secara luas di medan perang, menargetkan tidak hanya pasukan Iran di garis depan, tetapi juga populasi sipil Kurdi di utara Irak yang dianggap bersimpati dengan Iran. Tragedi yang paling mengerikan dan paling diingat adalah <strong class="font-semibold text-text-primary">serangan kimia terhadap kota Halabja</strong> pada 16 Maret 1988, yang menewaskan sekitar 5.000 warga sipil — pria, wanita, anak-anak, dan bayi — dalam hitungan menit.
+            </p>
+            <p class="text-justify mb-6">
+              Saya harus jujur mengatakan bahwa setiap kali saya membaca tentang Halabja, ada kemarahan yang sangat dalam yang sulit untuk saya artikulasikan. Gambar-gambar korban yang membeku dalam detik-detik terakhir kehidupan mereka — ibu yang memeluk bayinya, anak-anak yang jatuh di jalanan — adalah bukti betapa rendahnya manusia bisa jatuh ketika kekuasaan tidak terkendali. Dan yang membuat luka ini semakin perih adalah diamnya komunitas internasional saat itu. Dunia tahu apa yang terjadi, dan dunia memilih untuk berpaling.
+            </p>
+            <p class="text-justify mb-6">
+              Selain kekejaman di medan perang, kedua pihak juga melancarkan apa yang dikenal sebagai <strong class="font-semibold text-text-primary">"Perang Kota-kota"</strong> (<em>War of the Cities</em>) — serangkaian serangan rudal dan artileri yang secara sengaja menargetkan pusat-pusat kota dan populasi sipil. Tujuannya bukan militer, melainkan psikologis: menghancurkan moral rakyat musuh. Baghdad dan Teheran, bersama kota-kota besar lainnya, dihujani serangan tanpa pandang bulu, mengubah rumah-rumah, sekolah, dan rumah sakit menjadi reruntuhan.
+            </p>
+          </div>
+
+          <div class="part-footer-nav flex justify-between items-center gap-4 mt-10 pt-6 border-t border-border">
+            <a href="#invasi-perlawanan" class="part-nav-btn flex items-center gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Invasi & Perlawanan</a>
+            <a href="#intervensi" class="part-nav-btn flex items-center flex-row-reverse gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline">Seksi 4: Intervensi Global<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- SEKSI 4 — INTERVENSI INTERNASIONAL     -->
+        <!-- ═══════════════════════════════════════ -->
+        <section class="part-section pt-16 pb-8 border-b border-border" id="intervensi">
+          <div class="part-header mb-9">
+            <p class="part-label inline-flex items-center gap-2 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5"><span class="part-label-line w-5 h-0.5 bg-accent"></span> Part 4</p>
+            <h1 class="part-title font-serif text-[clamp(1.6rem,3.5vw,2.15rem)] font-semibold leading-snug text-text-primary tracking-tight mb-5">Intervensi Internasional: Kekuatan Global di Balik Layar</h1>
+          </div>
+
+          <div class="content-body">
+            <p class="text-justify mb-6">
+              Salah satu aspek paling sinis dari Perang Iran-Irak adalah peran kekuatan-kekuatan global dan regional yang turut menyulut dan memperpanjang konflik ini — sering kali untuk kepentingan geopolitik mereka sendiri. Perang ini tidak berlangsung dalam isolasi; ia adalah panggung tempat rivalitas Perang Dingin, kepentingan minyak, dan kalkulasi regional saling bertemu dan bersilangan dengan cara yang sangat merugikan kedua bangsa yang berperang.
+            </p>
+            <p class="text-justify mb-6">
+              <strong class="font-semibold text-text-primary">Amerika Serikat</strong>, yang masih menanggung luka dari Krisis Penyanderaan Kedutaan Iran 1979-1981, memilih untuk mendukung Irak secara diam-diam namun substansial. Washington menyediakan intelijen satelit, dukungan logistik, pinjaman pertanian yang dialihkan untuk pembelian senjata, dan yang paling kontroversial, membantu Irak dalam menargetkan posisi-posisi Iran — bahkan ketika mereka tahu bahwa Irak menggunakan senjata kimia. Negara-negara Teluk seperti Arab Saudi dan Kuwait mengucurkan miliaran dolar bantuan finansial kepada Irak, takut bahwa kemenangan Iran akan mengekspor revolusi Syiah ke tanah mereka. Uni Soviet, meskipun memiliki hubungan yang kompleks dengan kedua pihak, juga menjadi pemasok senjata utama bagi Irak.
+            </p>
+
+            <div class="callout callout-tip mb-6">
+              <span class="callout-icon text-base shrink-0 leading-7">✅</span>
+              <div class="callout-body flex-1">
+                <p class="callout-title text-[.73rem] font-bold tracking-wider uppercase mb-1">Iran-Contra Affair (1985-1987)</p>
+                <p class="text-sm leading-relaxed">Dalam salah satu skandal politik terbesar dalam sejarah AS, terungkap bahwa pejabat senior administrasi Reagan secara rahasia menjual senjata ke Iran — negara yang secara resmi mereka embargo — untuk mendanai pemberontak Contra di Nikaragua. Ironisnya, AS mendukung Irak secara terbuka sambil diam-diam mempersenjatai Iran.</p>
+              </div>
+            </div>
+
+            <p class="text-justify mb-6">
+              Di sisi lain, Iran banyak mengandalkan <strong class="font-semibold text-text-primary">pasar gelap senjata</strong> dan jaringan-jaringan tidak resmi untuk memenuhi kebutuhan persenjataannya. Isolasi internasional yang mereka alami memaksa mereka untuk membeli senjata dari sumber-sumber yang tidak konvensional, termasuk dari Israel (yang memiliki kepentingan sendiri dalam melemahkan Irak), Korea Utara, China, dan pedagang senjata internasional. Skandal Iran-Contra pada 1985-1987 mengungkap salah satu dimensi paling memalukan dari intervensi internasional ini: penjualan senjata rahasia oleh AS sendiri ke Iran — negara yang secara resmi mereka embargo dan musuhi.
+            </p>
+            <p class="text-justify mb-6">
+              Saya perlu menyatakan kekecewaan mendalam saya terhadap sikap komunitas internasional selama konflik ini. Apa yang kita saksikan bukanlah upaya jujur untuk menghentikan perang, melainkan <strong class="text-accent font-semibold italic">manipulasi konflik untuk keuntungan pihak luar</strong>. Prinsip terkenal yang dikutip secara anonim dari pejabat AS pada masa itu — <em>"kita ingin kedua pihak saling melemahkan"</em> — mencerminkan sinisme yang luar biasa. Jutaan orang Iran dan Irak membayar harga dari permainan kekuasaan ini dengan darah mereka, sementara negara-negara adidaya meraup keuntungan dari penjualan senjata dan posisi geopolitik yang menguat.
+            </p>
+            <p class="text-justify">
+              Fakta bahwa Dewan Keamanan PBB baru mengeluarkan resolusi yang benar-benar menuntut gencatan senjata (Resolusi 598) pada Juli 1987 — hampir tujuh tahun setelah perang dimulai — adalah bukti nyata kegagalan institusi internasional dalam melindungi nyawa manusia ketika kepentingan politik negara-negara besar turut bermain.
+            </p>
+          </div>
+
+          <div class="part-footer-nav flex justify-between items-center gap-4 mt-10 pt-6 border-t border-border">
+            <a href="#kekejaman" class="part-nav-btn flex items-center gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Perang Attrisi</a>
+            <a href="#akhir-pahit" class="part-nav-btn flex items-center flex-row-reverse gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline">Seksi 5: Akhir yang Pahit<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- SEKSI 5 — AKHIR YANG PAHIT             -->
+        <!-- ═══════════════════════════════════════ -->
+        <section class="part-section pt-16 pb-8 border-b border-border" id="akhir-pahit">
+          <div class="part-header mb-9">
+            <p class="part-label inline-flex items-center gap-2 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5"><span class="part-label-line w-5 h-0.5 bg-accent"></span> Part 5</p>
+            <h1 class="part-title font-serif text-[clamp(1.6rem,3.5vw,2.15rem)] font-semibold leading-snug text-text-primary tracking-tight mb-5">Akhir yang Pahit: Gencatan Senjata dan Penerimaan Resolusi 598</h1>
+          </div>
+
+          <div class="content-body">
+            <p class="text-justify mb-6">
+              Menjelang akhir tahun 1987 dan awal 1988, kelelahan perang telah mencapai titik yang tak tertahankan bagi kedua belah pihak. Iran, yang telah mengorbankan ratusan ribu nyawa dalam ofensif-ofensif berdarah yang berulang kali gagal menembus pertahanan Irak, menghadapi krisis moral dan logistik yang sangat berat. Ekonomi Iran yang sudah tertekan oleh embargo dan perang semakin memburuk, sementara semangat revolusioner yang semula menjadi mesin perang mulai memudar di hadapan kenyataan pahit bahwa kemenangan militer total tampak semakin mustahil.
+            </p>
+            <p class="text-justify mb-6">
+              Pada <strong class="text-accent font-semibold">20 Juli 1987</strong>, Dewan Keamanan PBB akhirnya mengesahkan <strong class="font-semibold text-text-primary">Resolusi 598</strong>, yang menyerukan gencatan senjata segera, penarikan pasukan ke perbatasan internasional, pertukaran tawanan perang, dan pembentukan komisi untuk menentukan tanggung jawab atas dimulainya konflik. Irak segera menerima resolusi ini, karena posisi militer mereka yang relatif menguntungkan di garis depan. Namun Iran menolak — mereka menuntut agar Irak secara resmi diidentifikasi sebagai agresor, sebuah tuntutan yang tidak dipenuhi oleh resolusi tersebut.
+            </p>
+            <p class="text-justify mb-6">
+              Namun serangkaian pukulan militer besar pada awal 1988 — termasuk kehilangan semenanjung Faw yang telah direbut Iran dengan pengorbanan besar, serta tragedi tertembak jatuhnya pesawat penumpang Iran Air Penerbangan 655 oleh kapal perang USS Vincennes pada Juli 1988 yang menewaskan 290 orang sipil — memaksa kepemimpinan Iran untuk menghadapi kenyataan. Pada <strong class="text-accent font-semibold">18 Juli 1988</strong>, Iran akhirnya menerima Resolusi 598.
+            </p>
+
+            <div class="reflection-box">
+              <p class="reflection-header flex items-center gap-2.5 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5">"Meminum Cawan Racun"</p>
+              <p class="text-sm text-text-body leading-7 mb-3">Ayatollah Khomeini, dalam menerima gencatan senjata, mengeluarkan pernyataan yang akan tercatat dalam sejarah:</p>
+              <ul class="reflection-questions list-none p-0">
+                <li class="text-sm text-text-muted"><em>"Menerima resolusi ini lebih mematikan bagiku daripada menelan racun. Saya menundukkan diri di hadapan kehendak Tuhan dan meminum cawan racun ini demi kepuasan-Nya."</em></li>
+                <li class="text-sm text-text-muted">Ungkapan ini mencerminkan betapa pahit dan menyakitkannya keputusan untuk mengakhiri perang tanpa mencapai tujuan yang dijanjikan — sebuah keputusan yang secara simbolis menandai akhir dari harapan revolusioner Iran untuk mengekspor ideologinya melalui kekuatan militer.</li>
+              </ul>
+            </div>
+
+            <p class="text-justify mb-6 mt-6">
+              Gencatan senjata resmi berlaku pada <strong class="font-semibold text-text-primary">20 Agustus 1988</strong>. Tidak ada perayaan kemenangan, tidak ada parade kepahlawanan. Yang ada hanyalah kelelahan, kehancuran, dan kesadaran pahit bahwa delapan tahun pertumpahan darah telah berakhir tanpa pemenang yang jelas. Perbatasan kembali ke posisi semula sebelum perang, seolah mengejek jutaan nyawa yang telah dikorbankan untuk mendapatkan... tidak ada apa-apa.
+            </p>
+          </div>
+
+          <div class="part-footer-nav flex justify-between items-center gap-4 mt-10 pt-6 border-t border-border">
+            <a href="#intervensi" class="part-nav-btn flex items-center gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Intervensi Global</a>
+            <a href="#warisan-luka" class="part-nav-btn flex items-center flex-row-reverse gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline">Seksi 6: Warisan Luka<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- SEKSI 6 — WARISAN LUKA                 -->
+        <!-- ═══════════════════════════════════════ -->
+        <section class="part-section pt-16 pb-8 border-b border-border" id="warisan-luka">
+          <div class="part-header mb-9">
+            <p class="part-label inline-flex items-center gap-2 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5"><span class="part-label-line w-5 h-0.5 bg-accent"></span> Part 6</p>
+            <h1 class="part-title font-serif text-[clamp(1.6rem,3.5vw,2.15rem)] font-semibold leading-snug text-text-primary tracking-tight mb-5">Warisan Luka yang Abadi: Dampak Jangka Panjang</h1>
+          </div>
+
+          <div class="content-body">
+            <p class="text-justify mb-6">
+              Ketika senjata akhirnya bungkam pada Agustus 1988, warisan perang justru baru mulai menampakkan wajahnya yang paling mengerikan. Luka fisik dari pertempuran mungkin bisa dijahit, reruntuhan kota mungkin bisa dibangun kembali, tetapi <strong class="font-semibold text-text-primary">luka-luka yang tak terlihat — trauma psikologis, kehilangan yang tak tergantikan, dan kepahitan yang terpendam</strong> — akan menghantui kedua bangsa selama beberapa generasi ke depan.
+            </p>
+            <p class="text-justify mb-6">
+              Secara kuantitatif, skala kehancuran hampir tak terbayangkan. Iran menderita kerugian yang lebih besar dengan perkiraan <strong class="text-accent font-semibold">500.000 hingga 1 juta warga</strong> yang tewas. Di pihak Irak, angka korban diperkirakan antara 250.000 hingga 500.000 jiwa. Ratusan ribu lainnya mengalami luka permanen — banyak di antaranya akibat paparan senjata kimia yang efeknya terus merusak tubuh korban selama puluhan tahun kemudian. Infrastruktur kedua negara hancur, terutama industri minyak — sumber pendapatan utama — dan sektor pertanian yang lumpuh, menyebabkan krisis ekonomi yang berkepanjangan.
+            </p>
+
+            <div class="callout callout-note mb-6">
+              <span class="callout-icon text-base shrink-0 leading-7">💡</span>
+              <div class="callout-body flex-1">
+                <p class="callout-title text-[.73rem] font-bold tracking-wider uppercase mb-1">Dampak yang Masih Terasa</p>
+                <ul class="text-sm leading-relaxed list-disc pl-4">
+                  <li><strong>Korban Senjata Kimia:</strong> Ribuan veteran Iran masih menderita penyakit paru-paru kronis, kebutaan, dan kanker akibat paparan gas mustard dan agen saraf</li>
+                  <li><strong>Trauma Generasi:</strong> PTSD mempengaruhi tidak hanya veteran, tetapi juga keluarga dan anak-anak mereka</li>
+                  <li><strong>Hutang Perang:</strong> Irak menanggung hutang perang lebih dari $80 miliar, menjadi salah satu pemicu invasi Kuwait 1990</li>
+                  <li><strong>Militerisme:</strong> Garda Revolusi Iran tumbuh menjadi kekuatan politik-ekonomi terbesar di negara itu</li>
+                </ul>
+              </div>
+            </div>
+
+            <p class="text-justify mb-6">
+              Namun dampak yang paling mendalam mungkin adalah dampak psikologis dan identitas. Di Iran, perang ini — yang mereka sebut sebagai <em>"Pertahanan Suci"</em> (<strong class="font-semibold text-text-primary">Defa-e Moghaddas</strong>) — menjadi pilar utama identitas nasional pasca-revolusi. Trauma perang memperkuat narasi tentang Iran yang selalu dikepung dan dimusuhi oleh dunia, sebuah narasi yang hingga hari ini masih digunakan untuk membenarkan kebijakan-kebijakan pertahanan dan luar negeri. Garda Revolusi, yang lahir dan dibesarkan dalam ujian perang, tumbuh menjadi kekuatan politik, ekonomi, dan militer paling dominan di Iran — sebuah transformasi yang akan membentuk dinamika kekuasaan negara itu selama beberapa dekade ke depan.
+            </p>
+            <p class="text-justify mb-6">
+              Di pihak Irak, konsekuensinya bahkan lebih destruktif. Hutang perang yang mencapai lebih dari $80 miliar — sebagian besar kepada negara-negara Teluk — menjadi salah satu faktor yang mendorong Saddam Hussein untuk menginvasi Kuwait pada 1990, memicu Perang Teluk Pertama. Artinya, Perang Iran-Irak tidak hanya menghancurkan dua negara, tetapi juga menanam benih untuk konflik-konflik berikutnya yang akan terus mengguncang kawasan.
+            </p>
+            <p class="text-justify">
+              Yang paling menyedihkan, menurut pendapat saya, adalah kenyataan bahwa luka-luka ini <strong class="text-accent font-semibold">tidak pernah benar-benar sembuh</strong>. Bahkan hingga hari ini, isu kompensasi perang dan demarkasi batas wilayah masih menjadi bahan perdebatan. Dua bangsa yang seharusnya bisa menjadi mitra strategis di kawasan justru terjebak dalam lingkaran ketidakpercayaan yang diwariskan oleh delapan tahun kehancuran.
+            </p>
+          </div>
+
+          <div class="part-footer-nav flex justify-between items-center gap-4 mt-10 pt-6 border-t border-border">
+            <a href="#akhir-pahit" class="part-nav-btn flex items-center gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Akhir yang Pahit</a>
+            <a href="#pelajaran" class="part-nav-btn flex items-center flex-row-reverse gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline">Seksi 7: Pelajaran<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- SEKSI 7 — PELAJARAN YANG TERLUPAKAN     -->
+        <!-- ═══════════════════════════════════════ -->
+        <section class="part-section pt-16 pb-8" id="pelajaran">
+          <div class="part-header mb-9">
+            <p class="part-label inline-flex items-center gap-2 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5"><span class="part-label-line w-5 h-0.5 bg-accent"></span> Part 7 · Penutup</p>
+            <h1 class="part-title font-serif text-[clamp(1.6rem,3.5vw,2.15rem)] font-semibold leading-snug text-text-primary tracking-tight mb-5">Pelajaran yang Terlupakan? Refleksi dari Sebuah Tragedi</h1>
+            <div class="part-intro mt-5 p-4 bg-surface border border-border rounded-[10px] text-[.95rem] leading-7 text-text-muted italic border-l-[3px] border-l-accent">
+              Perang Iran-Irak menjadi studi kasus tentang bahaya regionalisme yang tidak terkendali, penggunaan senjata terlarang, dan kegagalan diplomasi. Konflik ini tidak menghasilkan pemenang yang jelas — hanya penderitaan massal dan benih ketidakpercayaan yang terus tumbuh di Timur Tengah.
+            </div>
+          </div>
+
+          <div class="content-body">
+            <p class="text-justify mb-6">
+              Ketika kita menarik napas dari perjalanan panjang menelusuri delapan tahun tragedi ini, pertanyaan paling fundamental yang harus kita ajukan adalah: <strong class="font-semibold text-text-primary">apa yang sudah kita pelajari?</strong> Dan jawaban yang jujur, sayangnya, membuat saya pesimis. Pola-pola yang sama — ambisi kekuasaan yang tak terkendali, eksploitasi sentimen agama dan etnis untuk tujuan militer, manipulasi konflik oleh kekuatan luar, dan diamnya komunitas internasional di hadapan kekejaman — terus berulang di berbagai belahan dunia.
+            </p>
+            <p class="text-justify mb-6">
+              Perang Iran-Irak seharusnya mengajarkan kita beberapa hal fundamental: Pertama, bahwa <strong class="font-semibold text-text-primary">diplomasi, seberapa pun lambat dan frustrasinya, selalu lebih murah daripada perang</strong> — bukan hanya dalam uang, tetapi dalam nyawa manusia. Jika sengketa Shatt al-Arab diselesaikan melalui mediasi yang sungguh-sungguh, jika ketakutan terhadap ekspor revolusi ditanggapi dengan dialog dan bukan invasi, mungkin jutaan nyawa bisa terselamatkan.
+            </p>
+            <p class="text-justify mb-6">
+              Kedua, bahwa <strong class="font-semibold text-text-primary">penggunaan senjata pemusnah massal tidak boleh pernah ditoleransi</strong>, dalam konteks apa pun. Kegagalan dunia untuk menghukum Irak atas penggunaan senjata kimia selama perang ini — karena kepentingan geopolitik mengalahkan prinsip kemanusiaan — mengirim pesan yang sangat berbahaya: bahwa ada harga yang bisa dibayar untuk melanggar norma-norma perang, asalkan Anda memiliki sekutu yang cukup kuat.
+            </p>
+
+            <div class="reflection-box">
+              <p class="reflection-header flex items-center gap-2.5 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5">Refleksi Akhir</p>
+              <p class="text-sm text-text-body leading-7 mb-3">Pertanyaan-pertanyaan yang layak kita renungkan bersama:</p>
+              <ul class="reflection-questions list-none p-0">
+                <li class="text-sm text-text-muted">Apakah kita sudah benar-benar belajar dari tragedi ini, atau hanya mengingatnya sebagai statistik sejarah?</li>
+                <li class="text-sm text-text-muted">Bagaimana masyarakat internasional bisa membangun mekanisme yang lebih efektif untuk mencegah konflik serupa?</li>
+                <li class="text-sm text-text-muted">Apakah hak asasi manusia benar-benar menjadi prioritas dalam kebijakan luar negeri negara-negara besar, atau hanya retorika kosong?</li>
+                <li class="text-sm text-text-muted">Apa tanggung jawab kita sebagai individu untuk terus mengingatkan dunia tentang pelajaran dari sejarah kelam ini?</li>
+              </ul>
+            </div>
+
+            <p class="text-justify mb-6 mt-6">
+              Ketiga, dan ini mungkin yang paling pribadi bagi saya: <strong class="text-accent font-semibold">kita harus terus menceritakan kisah-kisah ini</strong>. Setiap korban perang berhak untuk diingat, setiap cerita penderitaan layak untuk diceritakan, dan setiap pelajaran dari masa lalu patut untuk dijaga agar tetap hidup dalam memori kolektif kita. Ketika kita berhenti menceritakan kisah-kisah ini, kita tidak hanya mengkhianati mereka yang telah pergi — kita juga membuka jalan bagi tragedi serupa untuk terulang.
+            </p>
+            <p class="text-justify mb-6">
+              Perang Iran-Irak berakhir tanpa pemenang. Yang tersisa hanyalah luka, utang, kehancuran, dan benih-benih konflik baru. Tetapi jika kita mau belajar — benar-benar belajar, bukan sekadar membaca lalu melupakan — maka mungkin, hanya mungkin, jutaan nyawa yang hilang dalam konflik ini tidak akan sia-sia sepenuhnya. Mereka bisa menjadi pengingat abadi tentang <strong class="font-semibold text-text-primary">apa yang terjadi ketika kita gagal memilih perdamaian</strong>.
+            </p>
+
+            <div class="references-box mb-6">
+              <div class="references-header text-[.72rem] font-bold tracking-[.1em] uppercase text-text-muted">📚 Referensi & Bacaan Lanjutan</div>
+              <ul class="references-list list-none p-0 m-0">
+                <li class="p-3 flex items-start gap-2.5 text-sm"><span class="ref-num text-[.72rem] font-bold shrink-0 mt-0.5">1</span><span class="ref-text text-text-muted leading-relaxed">Murray, W. & Woods, K. (2014). <em>The Iran-Iraq War: A Military and Strategic History</em>. Cambridge University Press.</span></li>
+                <li class="p-3 flex items-start gap-2.5 text-sm"><span class="ref-num text-[.72rem] font-bold shrink-0 mt-0.5">2</span><span class="ref-text text-text-muted leading-relaxed">Hiro, Dilip. (1991). <em>The Longest War: The Iran-Iraq Military Conflict</em>. Routledge.</span></li>
+                <li class="p-3 flex items-start gap-2.5 text-sm"><span class="ref-num text-[.72rem] font-bold shrink-0 mt-0.5">3</span><span class="ref-text text-text-muted leading-relaxed">Razoux, Pierre. (2015). <em>The Iran-Iraq War</em>. Harvard University Press.</span></li>
+                <li class="p-3 flex items-start gap-2.5 text-sm"><span class="ref-num text-[.72rem] font-bold shrink-0 mt-0.5">4</span><span class="ref-text text-text-muted leading-relaxed"><a href="https://www.britannica.com/event/Iran-Iraq-War" target="_blank" class="text-accent font-medium">Encyclopedia Britannica — Iran-Iraq War</a> — Ringkasan komprehensif tentang konflik.</span></li>
+                <li class="p-3 flex items-start gap-2.5 text-sm"><span class="ref-num text-[.72rem] font-bold shrink-0 mt-0.5">5</span><span class="ref-text text-text-muted leading-relaxed"><a href="https://www.hrw.org/legacy/english/docs/2006/08/14/iraq13979.htm" target="_blank" class="text-accent font-medium">Human Rights Watch — Genocide in Iraq</a> — Dokumentasi penggunaan senjata kimia terhadap warga Kurdi.</span></li>
+              </ul>
+            </div>
+
+            <div class="tag-row flex flex-wrap gap-1.5 mt-7">
+              <span class="tag text-[.73rem] font-medium px-2.5 py-0.5">Sejarah</span>
+              <span class="tag text-[.73rem] font-medium px-2.5 py-0.5">Geopolitik</span>
+              <span class="tag text-[.73rem] font-medium px-2.5 py-0.5">Timur Tengah</span>
+              <span class="tag text-[.73rem] font-medium px-2.5 py-0.5">Iran</span>
+              <span class="tag text-[.73rem] font-medium px-2.5 py-0.5">Irak</span>
+              <span class="tag text-[.73rem] font-medium px-2.5 py-0.5">Perang</span>
+              <span class="tag text-[.73rem] font-medium px-2.5 py-0.5">Analisis</span>
+              <span class="tag text-[.73rem] font-medium px-2.5 py-0.5">HAM</span>
+            </div>
+          </div>
+
+          <div class="part-footer-nav flex justify-between items-center gap-4 mt-10 pt-6 border-t border-border">
+            <a href="#warisan-luka" class="part-nav-btn flex items-center gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Warisan Luka</a>
+            <a href="../../home/index.html" class="part-nav-btn flex items-center flex-row-reverse gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline bg-accent-soft border-accent-mid">
+              🏠 Kembali ke Beranda
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- SITE FOOTER -->
+      <footer class="site-footer col-span-full border-t border-border bg-surface">
+        <div class="footer-inner max-w-[1280px] mx-auto py-10 px-6 grid grid-cols-3 gap-8 max-[960px]:grid-cols-2 max-[600px]:grid-cols-1">
+          <div class="footer-brand">
+            <div class="font-serif text-lg font-semibold mb-2.5 flex items-center gap-2">
+              Lippbyte <span class="logo-badge font-sans text-[.65rem] font-bold tracking-wider uppercase bg-accent text-white px-2 py-0.5 rounded-full">Blog</span>
+            </div>
+            <p class="text-sm text-text-faint leading-relaxed">Analisis mendalam tentang sejarah, geopolitik, dan pelajaran dari konflik-konflik yang membentuk dunia modern.</p>
+          </div>
+          <div>
+            <p class="footer-col-title text-[.72rem] font-bold tracking-[.1em] uppercase text-text-faint mb-3">Navigasi Artikel</p>
+            <ul class="footer-links list-none p-0">
+              <li><a href="#pendahuluan" class="text-sm text-text-muted">Pendahuluan</a></li>
+              <li class="mt-1.5"><a href="#akar-konflik" class="text-sm text-text-muted">Part 1 — Akar Konflik</a></li>
+              <li class="mt-1.5"><a href="#invasi-perlawanan" class="text-sm text-text-muted">Part 2 — Invasi & Perlawanan</a></li>
+              <li class="mt-1.5"><a href="#kekejaman" class="text-sm text-text-muted">Part 3 — Perang Attrisi</a></li>
+              <li class="mt-1.5"><a href="#intervensi" class="text-sm text-text-muted">Part 4 — Intervensi Global</a></li>
+              <li class="mt-1.5"><a href="#akhir-pahit" class="text-sm text-text-muted">Part 5 — Akhir yang Pahit</a></li>
+              <li class="mt-1.5"><a href="#warisan-luka" class="text-sm text-text-muted">Part 6 — Warisan Luka</a></li>
+              <li class="mt-1.5"><a href="#pelajaran" class="text-sm text-text-muted">Part 7 — Pelajaran</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="footer-col-title text-[.72rem] font-bold tracking-[.1em] uppercase text-text-faint mb-3">Link</p>
+            <ul class="footer-links list-none p-0">
+              <li><a href="../../home/index.html" class="text-sm text-text-muted">🏠 Beranda</a></li>
+              <li class="mt-1.5"><a href="../laravel-blog/index.html" class="text-sm text-text-muted">⚡ Blog Laravel</a></li>
+              <li class="mt-1.5"><a href="../ulasan-can-this-love-be-translated/index.html" class="text-sm text-text-muted">🎬 Review K-Drama</a></li>
+              <li class="mt-1.5"><a href="https://github.com/lippbyte" target="_blank" class="text-sm text-text-muted">GitHub</a></li>
+            </ul>
+          </div>
+          <div class="footer-bottom col-span-full pt-6 border-t border-border flex justify-between items-center flex-wrap gap-2 text-xs text-text-faint">
+            <span>© 2026 Lippbyte · Muhammad Khalifa</span>
+            <span>Dibuat dengan ☕ dan semangat belajar</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
