@@ -43,5 +43,14 @@
     "emoji": "📄",
     "status": "active",
     "year": "2026"
+  },
+  {
+    "id": "kolom-karakter-dan-baris",
+    "title": "Kolom, Karakter, dan Baris",
+    "category": "Dokumentasi",
+    "description": "",
+    "emoji": "📄",
+    "status": "active",
+    "year": "2026"
   }
 ]
