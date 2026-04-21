@@ -1,0 +1,42 @@
+{
+  "topic": "oracle-apex-database-programming-with-sql",
+  "title": "Oracle APEX: Database Programming with SQL",
+  "updatedAt": "2024-07-30T10:00:00Z",
+  "parts": [
+    {
+      "id": "pendahuluan",
+      "partNumber": 0,
+      "title": "Oracle APEX: Database Programming with SQL",
+      "label": "Pendahuluan",
+      "type": "Teori",
+      "date": "2020-01-01",
+      "readTime": "7",
+      "intro": "Dokumen ini memperkenalkan konsep dasar perangkat lunak aplikasi dan sistem, serta penggunaan Oracle APEX sebagai alat untuk pemrograman database dengan SQL. Pembaca akan mempelajari cara masuk ke lingkungan praktik Oracle APEX, menjalankan kueri SQL dasar untuk mengambil data, dan memahami cara menampilkan semua kolom atau subset kolom berdasarkan kriteria tertentu.",
+      "tags": [
+        "Oracle APEX",
+        "SQL",
+        "Database Programming",
+        "Perangkat Lunak Aplikasi",
+        "Perangkat Lunak Sistem",
+        "Kueri SQL"
+      ],
+      "objectives": [
+        "Membedakan antara perangkat lunak aplikasi dan perangkat lunak sistem beserta contohnya.",
+        "Masuk ke lingkungan praktik Oracle APEX.",
+        "Menjalankan kueri sederhana untuk mengambil informasi dari database.",
+        "Menerapkan aturan SQL untuk menampilkan semua kolom dan subset kolom yang ditetapkan berdasarkan kriteria."
+      ],
+      "reflection": [
+        "Memahami perbedaan mendasar antara perangkat lunak aplikasi dan sistem sangat penting untuk mengapresiasi peran aplikasi dalam menyederhanakan interaksi pengguna dengan teknologi. Oracle APEX menyediakan platform yang efektif untuk mempelajari SQL dan mengembangkan aplikasi database, memungkinkan pengguna mengakses data yang kompleks dengan antarmuka yang ramah pengguna. Penguasaan sintaks SQL dasar dan pemecahan masalah kesalahan kueri adalah kunci untuk efisiensi dalam pengelolaan data."
+      ],
+      "references": [
+        {
+          "num": "1",
+          "text": "Panduan Pelajar dan Instruktur Oracle APEX",
+          "url": ""
+        }
+      ],
+      "content": "## Pendahuluan\nSetiap hari, kita berinteraksi dengan berbagai aplikasi komputer, mulai dari memeriksa email hingga berbelanja di toko kelontong. Aplikasi ini dirancang untuk menyederhanakan tugas pengguna. Dalam kursus ini, Anda akan mempelajari sintaks SQL menggunakan aplikasi yang disebut **Oracle APEX**.\n\n## Program Aplikasi vs. Perangkat Lunak Sistem\n### Program Aplikasi\nProgram aplikasi memungkinkan pengguna akhir, seperti kita, untuk menggunakan perangkat lunak yang sepenuhnya dikembangkan dan siap pakai tanpa perlu memahami cara kerjanya secara internal. Contohnya termasuk program untuk pemrosesan kata, database, game, email, dan grafis.\n\n> **Contoh:** Yahoo.com menggunakan database Oracle untuk menyimpan data, dan aplikasi webnya memungkinkan pengguna mengakses informasi tanpa perlu belajar SQL.\n\n### Perangkat Lunak Sistem\nBerbeda dengan program aplikasi, perangkat lunak sistem adalah program tingkat rendah yang dirancang untuk berinteraksi dengan perangkat keras komputer. Contoh perangkat lunak sistem meliputi sistem operasi, kompilator, dan utilitas sistem.\n\n### Analogi Penggunaan Aplikasi\nAplikasi dapat dianalogikan dengan mobil. Pengguna hanya perlu tahu cara mengendarainya (menggunakan antarmuka aplikasi) tanpa perlu memahami detail teknis mesin atau transmisi (kode pemrograman seperti SQL).\n\n## Oracle APEX\n**Oracle APEX** (Application Express) adalah aplikasi yang akan digunakan dalam kursus ini. Aplikasi ini memungkinkan banyak pengembang untuk membuat dan mengakses aplikasi seolah-olah aplikasi tersebut berjalan di database terpisah. Oracle APEX mempercepat proses pengembangan aplikasi berkat fitur bawaan seperti tema desain, kontrol navigasi, pengendali bentuk, dan laporan fleksibel.\n\n### Komponen Oracle APEX\nOracle APEX memiliki dua komponen utama:\n-   **SQL Workshop**: Digunakan untuk mempelajari dan menjalankan kueri SQL.\n-   **Application Builder**: Digunakan untuk merancang aplikasi.\n\nOracle APEX adalah alat utama untuk membuat tabel dan mengambil informasi dari database Oracle. Familiaritas dengan SQL akan membantu Anda lebih cepat menemukan informasi yang diperlukan. Akun Oracle APEX awalnya kosong, tetapi file skrip yang disediakan dalam kursus akan menambahkan tabel dan data yang diperlukan ke skema Anda.\n\n## Pernyataan SELECT Dasar\nPerintah SQL `SELECT` digunakan untuk mengambil informasi dari database.\n\n### Mengambil Semua Kolom dan Baris\nUntuk mengembalikan semua kolom dan baris di sebuah tabel, gunakan sintaks `SELECT *`:\n```sql\nSELECT *\nFROM <nama_tabel>;\n```\n**Contoh:**\n```sql\nSELECT *\nFROM employees;\n```\n\n### Mengambil Subset Data dengan Ketentuan\nUntuk mengembalikan subset data (kolom tertentu atau baris yang memenuhi kriteria), ubah pernyataan `SELECT`:\n```sql\nSELECT <nama_kolom_1, nama_kolom_2, ...>\nFROM <nama_tabel>\nWHERE <kondisi>;\n```\n**Contoh:**\n```sql\nSELECT first_name, last_name, job_id\nFROM employees\nWHERE job_id = 'SA_REP';\n```\n\n## Memperbaiki Kesalahan SQL\nKetika memasukkan perintah SQL, penting untuk menggunakan ejaan dan nama yang benar. Kesalahan akan menghasilkan pesan kesalahan. Berikut adalah contoh kesalahan umum dan cara memperbaikinya:\n\n-   **Kesalahan Ejaan Perintah:**\n    -   Salah: `SELCT * FROM employees;`\n    -   Benar: `SELECT * FROM employees;`\n\n-   **Kesalahan Nama Tabel:**\n    -   Salah: `SELECT * FROM employee;` (jika nama tabel seharusnya 'employees')\n    -   Benar: `SELECT * FROM employees;`\n\n-   **Kesalahan Nama Kolom:**\n    -   Salah: `SELECT name FROM employees;` (jika nama kolom seharusnya 'first_name')\n    -   Benar: `SELECT first_name FROM employees;`\n\nUntuk membetulkan kesalahan, cukup perbaiki ejaan atau nama yang salah lalu jalankan kembali perintah SQL tersebut.\n\n## Terminologi Penting\nBerikut adalah istilah-istilah penting yang dibahas dalam pelajaran ini:\n-   **Perangkat lunak aplikasi**: Program yang dirancang untuk pengguna akhir melakukan tugas tertentu.\n-   **Perangkat lunak sistem**: Program tingkat rendah yang mengelola perangkat keras komputer.\n-   **Oracle APEX**: Aplikasi pengembangan cepat untuk database Oracle.\n-   **Sintaks**: Aturan penulisan kode atau perintah.\n-   **Subset**: Bagian dari kumpulan data yang lebih besar.\n-   **Operator Perbandingan**: Simbol yang digunakan dalam kondisi untuk membandingkan nilai (misalnya, `=`, `>`, `<`)."
+    }
+  ]
+}
