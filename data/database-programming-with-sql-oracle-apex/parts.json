@@ -1,0 +1,4 @@
+{
+  "error": "Expected property name or '}' in JSON at position 1 (line 1 column 2)",
+  "raw": "\n{\n  \"topic\": \"database-programming-with-sql-oracle-apex\",\n  \"title\": \"Database Programming with SQL - Oracle APEX\",\n  \"updatedAt\": \"2023-10-27T10:00:00Z\",\n  \"parts\": [\n    {\n      \"id\": \"pendahuluan\""
+}
