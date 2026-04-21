@@ -34,5 +34,14 @@
     "emoji": "📄",
     "status": "active",
     "year": "2026"
+  },
+  {
+    "id": "database-programming-with-sql-oracle-apex",
+    "title": "Database Programming with SQL: Oracle APEX",
+    "category": "Dokumentasi",
+    "description": "",
+    "emoji": "📄",
+    "status": "active",
+    "year": "2026"
   }
 ]
