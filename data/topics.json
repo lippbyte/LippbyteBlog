@@ -60,5 +60,14 @@
     "emoji": "📄",
     "status": "active",
     "year": "2026"
+  },
+  {
+    "id": "laravel-log",
+    "title": "Laravel Blog",
+    "category": "Dokumentasi",
+    "description": "Dokumentasi Laravel dari HTML scrape",
+    "emoji": "📃",
+    "status": "active",
+    "year": "2026"
   }
 ]
