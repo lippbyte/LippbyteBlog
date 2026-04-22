@@ -157,76 +157,71 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ── 8. Fetch and render blog posts from blog/posts.json ── */
+  /* ── 8. Render blog posts from window.BLOG_POSTS (loaded by posts.js) ── */
   const homeBlogGrid = document.getElementById('homeBlogGrid');
   const semuapostGrid = document.getElementById('semuapostGrid');
 
-  if (homeBlogGrid || semuapostGrid) {
-    fetch('../blog/posts.json')
-      .then(res => res.json())
-      .then(posts => {
-        // Build card HTML for a single post
-        function buildCard(post) {
-          const color = post.color || 'linear-gradient(135deg, #1f2937 0%, #111827 100%)';
-          const emoji = post.emoji || '📄';
-          const link = `../blog/${post.slug}/index.html`;
+  if ((homeBlogGrid || semuapostGrid) && window.BLOG_POSTS) {
+    const posts = window.BLOG_POSTS;
 
-          return `
-          <a href="${link}" class="blog-card" style="opacity:0; transform:translateY(16px); transition: opacity .4s ease, transform .4s ease;">
-            <div class="card-cover" style="background: ${color}; display:flex; align-items:center; justify-content:center;">
-              <span style="font-size:2.8rem;">${emoji}</span>
-            </div>
-            <div class="card-body">
-              <p class="card-category">${post.category || 'Dokumentasi'}</p>
-              <h3 class="card-title">${post.title}</h3>
-              <p class="card-desc">${post.description || ''}</p>
-              <div class="card-footer">
-                <span class="card-meta">${post.year || ''}</span>
-                <span class="card-parts-badge card-done">✓ Baca</span>
-              </div>
-            </div>
-          </a>`;
-        }
+    // Build card HTML for a single post
+    function buildCard(post) {
+      const color = post.color || 'linear-gradient(135deg, #1f2937 0%, #111827 100%)';
+      const emoji = post.emoji || '📄';
+      const link = `../blog/${post.slug}/index.html`;
 
-        // Homepage: show 3 terbaru (last 3 entries from the array, reversed)
-        if (homeBlogGrid) {
-          const recent = posts.slice(-3).reverse();
-          let homeHtml = recent.map(buildCard).join('');
-          homeBlogGrid.innerHTML = homeHtml;
-        }
+      return `
+      <a href="${link}" class="blog-card" style="opacity:0; transform:translateY(16px); transition: opacity .4s ease, transform .4s ease;">
+        <div class="card-cover" style="background: ${color}; display:flex; align-items:center; justify-content:center;">
+          <span style="font-size:2.8rem;">${emoji}</span>
+        </div>
+        <div class="card-body">
+          <p class="card-category">${post.category || 'Dokumentasi'}</p>
+          <h3 class="card-title">${post.title}</h3>
+          <p class="card-desc">${post.description || ''}</p>
+          <div class="card-footer">
+            <span class="card-meta">${post.year || ''}</span>
+            <span class="card-parts-badge card-done">✓ Baca</span>
+          </div>
+        </div>
+      </a>`;
+    }
 
-        // Semuapost: show ALL posts
-        if (semuapostGrid) {
-          // Show newest first
-          const allReversed = [...posts].reverse();
-          semuapostGrid.innerHTML = allReversed.map(buildCard).join('');
-        }
+    // Homepage: show 3 terbaru (last 3 entries from the array, reversed)
+    if (homeBlogGrid) {
+      const recent = posts.slice(-3).reverse();
+      homeBlogGrid.innerHTML = recent.map(buildCard).join('');
+    }
 
-        // Trigger intersection observer for new cards
-        setTimeout(() => {
-          const newCards = document.querySelectorAll('.blog-card');
-          if (newCards.length && 'IntersectionObserver' in window) {
-            const observer = new IntersectionObserver(entries => {
-              entries.forEach((entry, i) => {
-                if (entry.isIntersecting) {
-                  setTimeout(() => {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                  }, i * 50);
-                  observer.unobserve(entry.target);
-                }
-              });
-            }, { threshold: 0.1 });
-            newCards.forEach(card => observer.observe(card));
-          } else {
-             newCards.forEach(card => {
-                card.style.opacity = '1';
-                card.style.transform = 'translateY(0)';
-             });
-          }
-        }, 50);
-      })
-      .catch(err => console.error('Gagal memuat daftar blog:', err));
+    // Semuapost: show ALL posts (newest first)
+    if (semuapostGrid) {
+      const allReversed = [...posts].reverse();
+      semuapostGrid.innerHTML = allReversed.map(buildCard).join('');
+    }
+
+    // Trigger intersection observer for new cards
+    setTimeout(() => {
+      const newCards = document.querySelectorAll('.blog-card');
+      if (newCards.length && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+              setTimeout(() => {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+              }, i * 50);
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+        newCards.forEach(card => observer.observe(card));
+      } else {
+         newCards.forEach(card => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+         });
+      }
+    }, 50);
   }
 
 });

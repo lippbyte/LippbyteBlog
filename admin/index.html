@@ -609,11 +609,14 @@
         // 6. Upload Final HTML
         await ghReq(`blog/${currentTopicId}/index.html`, 'PUT', htmlStr);
         
-        // 7. Update blog/posts.json manifest (auto-register post)
+        // 7. Update blog/posts.js manifest (auto-register post)
         let postsManifest = [];
         try {
-          let postsRes = await ghReq('blog/posts.json');
-          postsManifest = JSON.parse(atob(postsRes.content));
+          let postsRes = await ghReq('blog/posts.js');
+          let jsContent = decodeURIComponent(escape(atob(postsRes.content)));
+          // Extract JSON array from "window.BLOG_POSTS = [...];"
+          let match = jsContent.match(/window\.BLOG_POSTS\s*=\s*(\[[\s\S]*\]);/);
+          if (match) postsManifest = JSON.parse(match[1]);
         } catch(e) { postsManifest = []; }
         
         let existingIdx = postsManifest.findIndex(p => p.slug === currentTopicId);
@@ -631,7 +634,8 @@
         } else {
           postsManifest.push(postEntry);
         }
-        await ghReq('blog/posts.json', 'PUT', JSON.stringify(postsManifest, null, 2));
+        let postsJsContent = `/* Auto-generated blog posts manifest */\nwindow.BLOG_POSTS = ${JSON.stringify(postsManifest, null, 2)};\n`;
+        await ghReq('blog/posts.js', 'PUT', postsJsContent);
         
         showToast('Sukses! Blog dipublikasi dan daftar post diperbarui.');
         
