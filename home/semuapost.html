@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Lippbyte — Semua Blog Post" />
+  <title>Lippbyte — Semua Post</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+  <!-- ═══ NAVBAR ═══ -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="site-logo">
+        Lippbyte
+        <span class="logo-badge">Blog</span>
+      </a>
+      <div class="header-right">
+        <nav class="header-nav">
+          <a href="index.html">Beranda</a>
+          <a href="semuapost.html" class="active">Semua Post</a>
+        </nav>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle Dark Mode">
+          <svg id="themeToggleIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══ MAIN ═══ -->
+  <main>
+    <div class="index-wrap" style="padding-top: 40px; min-height: 60vh;">
+
+      <!-- BLOG LIST -->
+      <section id="blog-list">
+        <div class="section-header">
+          <h1 class="section-title" style="font-size: 2rem;">Semua Blog Post</h1>
+        </div>
+
+        <div class="blog-grid" id="semuapostGrid">
+          <!-- Blog cards will be dynamically loaded here by main.js -->
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="site-logo" style="font-family:var(--font-serif);font-size:1.05rem;font-weight:600;">
+          Lippbyte <span class="logo-badge">Blog</span>
+        </div>
+        <p>A journey of a student who wants to become a system thinking & architect backend with AI assisted. 
+        Then a Problem Solver & Build Real Solutions from real life problems. All content is written based on direct learning experience.</p>
+      </div>
+      <div>
+        <p class="footer-col-title">Blog Post</p>
+        <ul class="footer-links">
+          <li><a href="semuapost.html">Lihat Semua Post</a></li>
+          <li><a href="#" style="opacity:.4;pointer-events:none;">🐍 Belajar Python (soon)</a></li>
+          <li><a href="#" style="opacity:.4;pointer-events:none;">🌐 Belajar JavaScript (soon)</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Tentang</p>
+        <ul class="footer-links">
+          <li><a href="https://lippbyte.github.io/" target="_blank" class="text-sm text-text-muted">Lippbyte</a></li>
+          <li><a href="https://github.com/lippbyte" target="_blank">GitHub</a></li>
+          <li><a href="https://linkedin.com/in/muhammad-khalifa-72611b3b8" target="_blank">LinkedIn</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Lippbyte · Muhammad Khalifa</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -22,7 +22,7 @@
       <div class="header-right">
         <nav class="header-nav">
         <a href="index.html" class="active">Beranda</a>
-        <a href="#blog-list">Semua Post</a>
+        <a href="semuapost.html">Semua Post</a>
       </nav>
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle Dark Mode">
           <svg id="themeToggleIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -102,60 +102,12 @@
       <!-- BLOG LIST -->
       <section id="blog-list">
         <div class="section-header">
-          <h2 class="section-title">Semua Blog Post</h2>
-          <span class="section-sub" style="color:var(--accent);font-weight:500;font-size:.82rem;">Lihat Semua →</span>
+          <h2 class="section-title">Blog Post Terbaru</h2>
+          <a href="semuapost.html" class="section-sub" style="color:var(--accent);font-weight:500;font-size:.82rem;text-decoration:none;">Lihat Semua →</a>
         </div>
 
-        <div class="blog-grid">
-
-          <!-- CARD: Laravel -->
-          <a href="../blog/laravel-blog/index.html" class="blog-card">
-            <div class="card-cover">
-              <img src="assets/img/laravel.jpg" alt="Laravel">
-            </div>
-            <div class="card-body">
-              <p class="card-category">PHP · Framework</p>
-              <h3 class="card-title">Dokumentasi Belajar Laravel</h3>
-              <p class="card-desc">Catatan lengkap dari nol — pengenalan Framework, MVC, routing, Eloquent ORM, CRUD, autentikasi, hingga deployment.</p>
-              <div class="card-footer">
-                <span class="card-meta">2026 · 7 part</span>
-                <span class="card-parts-badge card-done">✓ Selesai</span>
-              </div>
-            </div>
-          </a>
-
-          <!-- COMING SOON: Python -->
-          <div class="blog-card" style="opacity:.45; cursor:default; pointer-events:none;">
-            <div class="card-cover" style="background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);">
-              <span style="font-size:2.8rem;">🐍</span>
-            </div>
-            <div class="card-body">
-              <p class="card-category">Python · Backend</p>
-              <h3 class="card-title">Dokumentasi Belajar Python</h3>
-              <p class="card-desc">Dari sintaks dasar, OOP, koneksi database, hingga proyek kecil berbasis Python.</p>
-              <div class="card-footer">
-                <span class="card-meta">Coming soon</span>
-                <span class="card-parts-badge">🔒 Belum tersedia</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- COMING SOON: JavaScript -->
-          <div class="blog-card" style="opacity:.45; cursor:default; pointer-events:none;">
-            <div class="card-cover" style="background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%);">
-              <span style="font-size:2.8rem;">🌐</span>
-            </div>
-            <div class="card-body">
-              <p class="card-category">JavaScript · Web</p>
-              <h3 class="card-title">Dokumentasi Belajar JavaScript</h3>
-              <p class="card-desc">DOM manipulation, ES6+, async/await, fetch API, dan pengembangan web modern.</p>
-              <div class="card-footer">
-                <span class="card-meta">Coming soon</span>
-                <span class="card-parts-badge">🔒 Belum tersedia</span>
-              </div>
-            </div>
-          </div>
-
+        <div class="blog-grid" id="homeBlogGrid">
+          <!-- Blog cards will be dynamically loaded here by main.js -->
         </div>
       </section>
 

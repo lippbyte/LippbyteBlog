@@ -608,7 +608,32 @@
         
         // 6. Upload Final HTML
         await ghReq(`blog/${currentTopicId}/index.html`, 'PUT', htmlStr);
-        showToast('Sukses! File statis HTML berhasil digenerate di GitHub.');
+        
+        // 7. Update blog/posts.json manifest (auto-register post)
+        let postsManifest = [];
+        try {
+          let postsRes = await ghReq('blog/posts.json');
+          postsManifest = JSON.parse(atob(postsRes.content));
+        } catch(e) { postsManifest = []; }
+        
+        let existingIdx = postsManifest.findIndex(p => p.slug === currentTopicId);
+        let postEntry = {
+          slug: currentTopicId,
+          title: tp.title,
+          category: tp.category || 'Dokumentasi',
+          description: tp.description || '',
+          emoji: tp.emoji || '📄',
+          color: tp.color || 'linear-gradient(135deg, #1f2937 0%, #111827 100%)',
+          year: tp.year || new Date().getFullYear().toString()
+        };
+        if (existingIdx >= 0) {
+          postsManifest[existingIdx] = postEntry;
+        } else {
+          postsManifest.push(postEntry);
+        }
+        await ghReq('blog/posts.json', 'PUT', JSON.stringify(postsManifest, null, 2));
+        
+        showToast('Sukses! Blog dipublikasi dan daftar post diperbarui.');
         
       } catch(e) { console.error(e); alert('Error Publish: ' + e.message); }
       btn.innerHTML = `<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg> Publish ke GitHub`;
