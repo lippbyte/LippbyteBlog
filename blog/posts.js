@@ -1,4 +1,4 @@
-/* Auto-generated blog posts manifest — used by homepage & semuapost */
+/* Auto-generated blog posts manifest */
 window.BLOG_POSTS = [
   {
     "slug": "database-programming-with-sql-1-1-oracle-apex",
@@ -88,6 +88,15 @@ window.BLOG_POSTS = [
     "description": "Pengalaman menikmati kesegaran Ultramilk Stroberi — review jujur.",
     "emoji": "🥛",
     "color": "linear-gradient(135deg, #fb7185 0%, #f43f5e 100%)",
+    "year": "2026"
+  },
+  {
+    "slug": "laravel-log",
+    "title": "Laravel Blog",
+    "category": "Dokumentasi",
+    "description": "Dokumentasi Laravel dari HTML scrape",
+    "emoji": "ð",
+    "color": "linear-gradient(135deg, #1f2937 0%, #111827 100%)",
     "year": "2026"
   }
 ];
