@@ -23,6 +23,12 @@
         "Mengenal fitur-fitur utama yang membuat Laravel populer",
         "Memahami konsep arsitektur MVC (Model-View-Controller)"
       ],
+      "subthemes": [
+        { "id": "peng-fr", "title": "Apa itu Framework?" },
+        { "id": "peng-apa", "title": "Apa itu Laravel?" },
+        { "id": "peng-fitur", "title": "Fitur Unggulan" },
+        { "id": "peng-mvc", "title": "Arsitektur MVC" }
+      ],
       "reflection": [
         "Apa perbedaan mendasar antara PHP murni dan menggunakan framework seperti Laravel?",
         "Dalam arsitektur MVC, bagian mana yang paling berperan saat user mengklik tombol Login?",
@@ -53,6 +59,12 @@
       "intro": "",
       "tags": [],
       "objectives": [],
+      "subthemes": [
+        { "id": "p1-prepare", "title": "Persiapan" },
+        { "id": "p1-install", "title": "Instalasi Laravel" },
+        { "id": "p1-struktur", "title": "Struktur Folder" },
+        { "id": "p1-views", "title": "Membuat Views & Route" }
+      ],
       "reflection": [],
       "references": [],
       "content": "Ini adalah teks biasa.\n\n> **Catatan**\n> Ini adalah sebuah info catatan."

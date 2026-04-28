@@ -259,6 +259,12 @@
         </div>
         
         <div class="meta-section">
+          <div class="form-label" style="color:var(--cms-accent)">SUBTEMA (Anchor ID | Judul)</div>
+          <ul class="dynamic-list" id="listSubthemes"></ul>
+          <button class="btn" style="margin-top:8px; font-size:11px;" onclick="addSubthemeRow()">+ Tambah Subtema</button>
+        </div>
+
+        <div class="meta-section">
           <div class="form-label" style="color:var(--cms-accent)">TAGS (Koma)</div>
           <input class="form-input" id="partTags" type="text" placeholder="Laravel, MVC, PHP" />
         </div>
@@ -297,9 +303,21 @@
     renderer.heading = (text, level) => {
       if(typeof text==='object') { level=text.depth; text=text.text; }
       if(level===1) return ''; // Title mapped elsewhere
-      if(level===2) return `<h2 class="font-serif text-xl font-semibold text-text-primary tracking-tight mt-[2.75em] mb-[.6em] pb-2.5 border-b-2 border-border">${text}</h2>`;
-      if(level===3) return `<h3 class="font-serif text-lg font-semibold text-text-primary tracking-tight mt-[2em] mb-[.5em]">${text}</h3>`;
-      return `<h${level}>${text}</h${level}>`;
+      
+      let idAttr = '';
+      let cleanText = text;
+      let match = text.match(/\{#([^}]+)\}$/);
+      if(match) {
+        idAttr = ` id="${match[1]}"`;
+        cleanText = text.replace(/\{#([^}]+)\}$/, '').trim();
+      } else {
+        let autoId = cleanText.replace(/<[^>]*>?/gm, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+        if(autoId) idAttr = ` id="${autoId}"`;
+      }
+
+      if(level===2) return `<h2${idAttr} class="font-serif text-xl font-semibold text-text-primary tracking-tight mt-[2.75em] mb-[.6em] pb-2.5 border-b-2 border-border">${cleanText}</h2>`;
+      if(level===3) return `<h3${idAttr} class="font-serif text-lg font-semibold text-text-primary tracking-tight mt-[2em] mb-[.5em]">${cleanText}</h3>`;
+      return `<h${level}${idAttr}>${cleanText}</h${level}>`;
     };
     renderer.list = (body, ordered) => {
       if(typeof body==='object') { ordered=body.ordered; body=body.text || body.items?.map(i=>renderer.listitem(i)).join('') || ''; }
@@ -475,7 +493,7 @@
         id: n===0?'pendahuluan':`part-${n}`,
         partNumber: n, title: 'Judul Baru', label: n===0?'Pendahuluan':`Part ${n}`,
         type: 'Teori', date: d.toISOString().split('T')[0], readTime: 10,
-        content: '', objectives: [], reflection: [], references: [], tags: []
+        content: '', objectives: [], reflection: [], references: [], tags: [], subthemes: []
       });
       currentPartIndex = n;
       renderPartsList();
@@ -514,6 +532,8 @@
       
       document.getElementById('listRefs').innerHTML = (p.references||[]).map(r => `<li style="flex-direction:column; gap:4px; padding:6px; background:var(--cms-bg); border:1px solid var(--cms-border); border-radius:4px;"><input class="form-input" placeholder="Teks" value="${escHtml(r.text||'')}" oninput="updatePreview()"><input class="form-input" placeholder="URL" value="${escHtml(r.url||'')}" oninput="updatePreview()"><button class="btn btn-primary" style="background:#f85149; border:none; width:max-content" onclick="this.parentElement.remove(); updatePreview()">Hapus</button></li>`).join('');
       
+      document.getElementById('listSubthemes').innerHTML = (p.subthemes||[]).map(s => `<li style="flex-direction:column; gap:4px; padding:6px; background:var(--cms-bg); border:1px solid var(--cms-border); border-radius:4px;"><input class="form-input" placeholder="Anchor ID (tanpa #)" value="${escHtml(s.id||'')}" oninput="updatePreview()"><input class="form-input" placeholder="Judul Subtema" value="${escHtml(s.title||'')}" oninput="updatePreview()"><button class="btn btn-primary" style="background:#f85149; border:none; width:max-content" onclick="this.parentElement.remove(); updatePreview()">Hapus</button></li>`).join('');
+      
       updatePreview();
     }
     
@@ -525,8 +545,13 @@
       document.getElementById('listRefs').insertAdjacentHTML('beforeend', `<li style="flex-direction:column; gap:4px; padding:6px; background:var(--cms-bg); border:1px solid var(--cms-border); border-radius:4px;"><input class="form-input" placeholder="Teks" oninput="updatePreview()"><input class="form-input" placeholder="URL" oninput="updatePreview()"><button class="btn btn-primary" style="background:#f85149; border:none; width:max-content" onclick="this.parentElement.remove(); updatePreview()">Hapus</button></li>`); 
       updatePreview();
     }
+    function addSubthemeRow() { 
+      document.getElementById('listSubthemes').insertAdjacentHTML('beforeend', `<li style="flex-direction:column; gap:4px; padding:6px; background:var(--cms-bg); border:1px solid var(--cms-border); border-radius:4px;"><input class="form-input" placeholder="Anchor ID (tanpa #)" oninput="updatePreview()"><input class="form-input" placeholder="Judul Subtema" oninput="updatePreview()"><button class="btn btn-primary" style="background:#f85149; border:none; width:max-content" onclick="this.parentElement.remove(); updatePreview()">Hapus</button></li>`); 
+      updatePreview();
+    }
     function getList(id) { return Array.from(document.getElementById(id).querySelectorAll('input')).map(i=>i.value).filter(v=>v.trim()); }
     function getRefs() { return Array.from(document.getElementById('listRefs').children).map((li,i) => { let inps=li.querySelectorAll('input'); return {num:String(i+1), text:inps[0].value, url:inps[1].value}; }).filter(r=>r.text); }
+    function getSubthemes() { return Array.from(document.getElementById('listSubthemes').children).map(li => { let inps=li.querySelectorAll('input'); return {id:inps[0].value.trim(), title:inps[1].value.trim()}; }).filter(s=>s.title); }
 
     function saveDraft() {
       if(currentTopicId && partsData && partsData.parts) {
@@ -549,6 +574,7 @@
         objectives: getList('listObj'),
         reflection: getList('listRefl'),
         references: getRefs(),
+        subthemes: getSubthemes(),
         content: document.getElementById('mdEditor').value
       };
       partsData.parts[currentPartIndex] = p;
@@ -703,7 +729,20 @@
         htmlStr = htmlStr.replace(/\[JUDUL TOPIK\]/g, tp.title);
         
         // 3. Generate Sidebar
-        let sbHtml = partsData.parts.map(p => `<li><a href="#${p.id}" class="nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent"><span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">${p.partNumber}</span><span class="nav-text flex-1">${escHtml(p.label)}</span><span class="nav-progress-ring"><svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg></span></a></li>`).join('\n');
+        let sbHtml = partsData.parts.map(p => {
+          let subHtml = '';
+          if(p.subthemes && p.subthemes.length > 0) {
+            let listItems = p.subthemes.map(s => `<li><a href="#${escHtml(s.id)}" class="block py-1 px-5 pl-[50px] text-xs text-text-faint border-l-2 border-transparent">${escHtml(s.title)}</a></li>`).join('\n            ');
+            subHtml = `\n          <ul class="toc-sub list-none p-0 m-0" id="toc-${p.id}">\n            ${listItems}\n          </ul>`;
+          }
+          return `<li>
+          <a href="#${p.id}" class="nav-link flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="${p.id}">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">${p.partNumber}</span>
+            <span class="nav-text flex-1">${escHtml(p.label)}</span>
+            <span class="nav-progress-ring" data-section="${p.id}"><svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg></span>
+          </a>${subHtml}
+        </li>`;
+        }).join('\n        ');
         
         // 4. Generate Content
         let contentHtml = '';
