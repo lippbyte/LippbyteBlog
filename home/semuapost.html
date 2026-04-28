@@ -39,8 +39,15 @@
 
       <!-- BLOG LIST -->
       <section id="blog-list">
-        <div class="section-header">
+        <div class="section-header" style="margin-bottom: 24px;">
           <h1 class="section-title" style="font-size: 2rem;">Semua Blog Post</h1>
+          <div class="filter-group" id="categoryFilter" style="display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap;">
+            <button class="filter-btn active" data-category="all">Semua</button>
+            <button class="filter-btn" data-category="produktif">Produktif</button>
+            <button class="filter-btn" data-category="belajar">Belajar</button>
+            <button class="filter-btn" data-category="trivia">Trivia</button>
+            <button class="filter-btn" data-category="refleksi">Refleksi</button>
+          </div>
         </div>
 
         <div class="blog-grid" id="semuapostGrid">

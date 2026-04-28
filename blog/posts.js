@@ -10,30 +10,12 @@ window.BLOG_POSTS = [
     "year": "2026"
   },
   {
-    "slug": "database-programming-with-sql-oracle-apex",
-    "title": "Database Programming with SQL — Oracle APEX",
-    "category": "Database · SQL",
-    "description": "Panduan lengkap Database Programming with SQL pada platform Oracle APEX.",
-    "emoji": "📄",
-    "color": "linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)",
-    "year": "2026"
-  },
-  {
     "slug": "kolom-karakter-dan-baris",
     "title": "Kolom, Karakter, dan Baris",
     "category": "Database · Dokumentasi",
     "description": "Memahami konsep kolom, karakter, dan baris dalam pemrograman database.",
     "emoji": "📄",
     "color": "linear-gradient(135deg, #14b8a6 0%, #0d9488 100%)",
-    "year": "2026"
-  },
-  {
-    "slug": "laravel-blog",
-    "title": "Dokumentasi Belajar Laravel",
-    "category": "PHP · Framework",
-    "description": "Catatan lengkap belajar Laravel dari nol — pengenalan MVC, routing, Eloquent ORM, CRUD, autentikasi, hingga deployment.",
-    "emoji": "⚡",
-    "color": "linear-gradient(135deg, #ff6b35 0%, #e8441a 55%, #c73a14 100%)",
     "year": "2026"
   },
   {
@@ -73,6 +55,24 @@ window.BLOG_POSTS = [
     "year": "2026"
   },
   {
+    "slug": "ultramilk-stroberi-blog",
+    "title": "Segarnya Ultramilk Stroberi",
+    "category": "Blog · Produk",
+    "description": "Pengalaman menikmati kesegaran Ultramilk Stroberi — review jujur.",
+    "emoji": "🥛",
+    "color": "linear-gradient(135deg, #fb7185 0%, #f43f5e 100%)",
+    "year": "2026"
+  },
+  {
+    "slug": "database-programming-with-sql-oracle-apex",
+    "title": "Database Programming with SQL — Oracle APEX",
+    "category": "Database · SQL",
+    "description": "Panduan lengkap Database Programming with SQL pada platform Oracle APEX.",
+    "emoji": "📄",
+    "color": "linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)",
+    "year": "2026"
+  },
+  {
     "slug": "ultramilk-stroberi",
     "title": "Ultramilk Stroberi",
     "category": "Review · Produk",
@@ -82,12 +82,12 @@ window.BLOG_POSTS = [
     "year": "2026"
   },
   {
-    "slug": "ultramilk-stroberi-blog",
-    "title": "Segarnya Ultramilk Stroberi",
-    "category": "Blog · Produk",
-    "description": "Pengalaman menikmati kesegaran Ultramilk Stroberi — review jujur.",
-    "emoji": "🥛",
-    "color": "linear-gradient(135deg, #fb7185 0%, #f43f5e 100%)",
+    "slug": "laravel-blog",
+    "title": "Dokumentasi Belajar Laravel",
+    "category": "PHP · Framework",
+    "description": "Catatan lengkap belajar Laravel dari nol — pengenalan MVC, routing, Eloquent ORM, CRUD, autentikasi, hingga deployment.",
+    "emoji": "⚡",
+    "color": "linear-gradient(135deg, #ff6b35 0%, #e8441a 55%, #c73a14 100%)",
     "year": "2026"
   }
 ];

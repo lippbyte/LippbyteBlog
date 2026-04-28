@@ -196,32 +196,64 @@ document.addEventListener('DOMContentLoaded', () => {
     // Semuapost: show ALL posts (newest first)
     if (semuapostGrid) {
       const allReversed = [...posts].reverse();
-      semuapostGrid.innerHTML = allReversed.map(buildCard).join('');
+      
+      const renderGrid = (filteredPosts) => {
+        semuapostGrid.innerHTML = filteredPosts.map(buildCard).join('');
+        // Re-trigger observer for new cards
+        triggerObserver();
+      };
+
+      renderGrid(allReversed);
+
+      // Filter Logic
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Update UI
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const cat = btn.dataset.category;
+          if (cat === 'all') {
+            renderGrid(allReversed);
+          } else {
+            const filtered = allReversed.filter(p => {
+              const pCat = (p.category || '').toLowerCase();
+              // Check if category includes the filter term (e.g. "Belajar" matches "Database · Belajar")
+              return pCat.includes(cat.toLowerCase());
+            });
+            renderGrid(filtered);
+          }
+        });
+      });
     }
 
     // Trigger intersection observer for new cards
-    setTimeout(() => {
-      const newCards = document.querySelectorAll('.blog-card');
-      if (newCards.length && 'IntersectionObserver' in window) {
-        const observer = new IntersectionObserver(entries => {
-          entries.forEach((entry, i) => {
-            if (entry.isIntersecting) {
-              setTimeout(() => {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-              }, i * 50);
-              observer.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.1 });
-        newCards.forEach(card => observer.observe(card));
-      } else {
-         newCards.forEach(card => {
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-         });
-      }
-    }, 50);
+    function triggerObserver() {
+      setTimeout(() => {
+        const newCards = document.querySelectorAll('.blog-card');
+        if (newCards.length && 'IntersectionObserver' in window) {
+          const observer = new IntersectionObserver(entries => {
+            entries.forEach((entry, i) => {
+              if (entry.isIntersecting) {
+                setTimeout(() => {
+                  entry.target.style.opacity = '1';
+                  entry.target.style.transform = 'translateY(0)';
+                }, i * 50);
+                observer.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.1 });
+          newCards.forEach(card => observer.observe(card));
+        } else {
+           newCards.forEach(card => {
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0)';
+           });
+        }
+      }, 50);
+    }
+    triggerObserver();
   }
 
 });
