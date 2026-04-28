@@ -1,7 +1,7 @@
 {
   "topic": "laravel-log",
   "title": "Laravel Blog",
-  "updatedAt": "2026-04-28T12:09:52.867Z",
+  "updatedAt": "2026-04-28T12:20:22.286Z",
   "parts": [
     {
       "id": "pengenalan",
@@ -139,15 +139,38 @@
       "date": "",
       "readTime": "10",
       "intro": "Controller dan Facade DB di Laravel merupakan dua komponen krusial dalam pengembangan aplikasi. Hari ini, kita akan memahami peran Controller dalam arsitektur MVC, langkah-langkah pembuatannya, serta cara berinteraksi dengan database untuk menampilkan dan mengelola data secara efektif menggunakan Facade DB dan Blade Template.",
-      "tags": [],
+      "tags": [
+        "Laravel",
+        "MVC"
+      ],
       "objectives": [
         "Apa itu Controller? ",
         "Membuat Controller  ",
         "Interaksi Database menggunakan Facade DB  ",
         "Query Database menggunakan Facade DB"
       ],
-      "reflection": [],
-      "references": [],
+      "reflection": [
+        "Kita dapat mengetahui bahwa Controller berperan penting dalam konsep MVC Laravel",
+        "Dengan menggunakan Blade Template membuat variabel pada controller dapat diteruskan ke views",
+        "Facade DB membuat sytax SQL dapat dilakukan pada controller "
+      ],
+      "references": [
+        {
+          "num": "1",
+          "text": "Modul Pembelajaran",
+          "url": "https://drive.google.com/file/d/1hqn-QwZgHwk_BGh-qz0F2ASdOHCYStX2/view "
+        },
+        {
+          "num": "2",
+          "text": "Video Pembelajaran",
+          "url": "https://youtu.be/5kYQkC4bHSs?si=CNwRz95NPzyuswHa"
+        },
+        {
+          "num": "3",
+          "text": "Laravel Documentation",
+          "url": "https://laravel.com/docs/13.x"
+        }
+      ],
       "content": "## Apa Itu Controller? Perannya dalam Arsitektur MVC Laravel\n\nController adalah komponen sistem yang memiliki tugas utama sebagai penghubung dan pengatur logika aplikasi dan jembatan alur data. Controller pada Konsep **MVC** (Model-View-Controller) framework **Laravel**, bertugas merespon request lalu menghubungkan Model (Database) dengan View (Tampilan).\n\nPada Konsep MVC, Controller adalah yang bertugas untuk menghubungkan Model dengan View. Biasanya satu Controller dibuat untuk satu Modul atau entitas seperti `KelasController` khusus untuk menangani proses berentitas Tabel Kelas.\n\n## Membuat Controller dan Menghubungkannya dengan Route\n\nKita dapat membuat Controller menggunakan command artisan bawaan Laravel. Sebagai contoh kita akan membuat controller `KelasController`.\n\n```\nphp artisan make:controller KelasController\n```\n\nSetelah controller berhasil dibuat, kita dapat menghubungkannya di file route `routes/web.php`. Ada bentuk umum yang direferensikan dalam dokumentasi Laravel untuk pemanggilan fungsi dari Controller class.\n\n```KelasController\nuse App\\Http\\Controllers\\SiswaController;\n\n// Bentuk Umum Route dengan Controller\nRoute::get('/nama-route', [NamaController::class, 'Namafungsi']);\n\n// Contoh implementasi\nRoute::get('/kelas', [KelasController::class, 'index']);\n```\nNama Controller usahakan **PascalCase** dan diakhiri dengan Controller (misal: `KelasController`). Nama fungsi / method pada Controller usahakan camelCase (misal: `index()`, `tambahSiswa()`).\n\n## Interaksi Database Laravel Menggunakan Facade DB\n\nUntuk menampikan data dari database, kita perlu terhubung dengan Database terlebih dahulu. Kali ini kita akan berkenalan dengan **Facade Database** (`DB`). Tapi sebelumnya mari kita coba buat query dummy terlebih dahulu di phpMyAdmin tabel `t_kelas`.\n\n![datadummy](https://raw.githubusercontent.com/lippbyte/LippbyteBlog/blogcms/blog/assets/img/laravel-log/1777372629468_datadummy.png)\n\nModifikasi `KelasController` yang dibentuk sebelumnya untuk mengambil data menggunakan Facade DB.\n\n```KelasController\nnamespace App\\Http\\Controllers;\n\nuse Illuminate\\Http\\Request;\nuse Illuminate\\Support\\Facades\\DB;\n\nclass KelasController extends Controller\n{\n    function index() {\n        $kelas = DB::table('t_kelas')->get();\n        return view('kelas', compact('kelas'));\n    }\n}\n```\n## Blade Template\n\nSesudah meneruskan variable `$kelas` ke view `kelas.index`, buat file view tersebut menjadi `resources/views/kelas/index.blade.php` dan kita dapat menampilkan semua data dengan direktif looping Blade.\n\n```kelas.blade.php\n<table border='1'>\n    <thead>\n        <tr>\n            <th>ID Kelas</th>\n            <th>Nama</th>\n            <th>Kelas</th>\n            <th>Jurusan</th>\n            <th>Lokasi Ruangan</th>\n            <th>Wali Kelas</th>\n        </tr>\n    </thead>\n    <tbody>\n        @foreach ($kelas as $row)\n        <tr>\n            <td>{{ $row->id }}</td>\n            <td>{{ $row->nama }}</td>\n            <td>{{ $row->kelas }}</td>\n            <td>{{ $row->jurusan }}</td>\n            <td>{{ $row->lokasi_ruangan }}</td>\n            <td>{{ $row->nama_wali_kelas }}</td>\n        </tr>\n        @endforeach\n    </tbody>\n</table>\n```\n\n`@foreach` Digunakan untuk melakukan looping data yang terdapat pada array atau object hasil passingan Controller. Bentuk umum nya sama seperti php: `foreach($object as $item)` dan ditutup menggunakan struktur `@endforeach` untuk menutup blok looping tersebut.\n![tampilanweb](https://raw.githubusercontent.com/lippbyte/LippbyteBlog/blogcms/blog/assets/img/laravel-log/1777376728208_tampilanweb.png)\n\n\n## Query Data menggunakan Facade DB\n\nFacade DB menyediakan banyak fitur dan syntax dasar SQL. Kita bisa melakukan filter dan pengurutan (ORDER BY, WHERE) dengan syntax langsung.\n\nContoh, **ORDER BY** Menampilkan data diurutkan berdasarkan parameter. Misalnya menampilkan kelas dan jurusan berdasarkan urutan nama karakter alfabet:\n\n\n```KelasController\nnamespace App\\Http\\Controllers;\n\nuse Illuminate\\Http\\Request;\nuse Illuminate\\Support\\Facades\\DB;\n\nclass KelasController extends Controller\n{\n    function index() {\n        $kelas = DB::table('t_kelas')\n            ->orderBy('kelas', 'asc')\n            ->orderBy('jurusan', 'asc')\n            ->get();\n        return view('kelas', compact('kelas'));\n    }\n}\n```\n![tampilanorderby](https://raw.githubusercontent.com/lippbyte/LippbyteBlog/blogcms/blog/assets/img/laravel-log/1777378164784_tampilanorderby.png)\n\nSementara, **WHERE** Menampilkan list filter spesifik. Misalnya hanya yang jurusan nya Rekayasa Perangkat Lunak:   \n ```KelasController\n namespace App\\Http\\Controllers;\n\nuse Illuminate\\Http\\Request;\nuse Illuminate\\Support\\Facades\\DB;\n\nclass KelasController extends Controller\n{\n    function index() {\n        $kelas = DB::table('t_kelas')\n            ->where('jurusan', 'Rekayasa Perangkat Lunak')\n            ->get();\n        return view('kelas', compact('kelas'));\n    }\n}\n```\n![tampilanwhere](https://raw.githubusercontent.com/lippbyte/LippbyteBlog/blogcms/blog/assets/img/laravel-log/1777378174447_tampilanwhere.png)\n\n"
     },
     {
