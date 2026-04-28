@@ -1,7 +1,7 @@
 {
   "topic": "laravel-log",
   "title": "Laravel Blog",
-  "updatedAt": "2026-04-28T12:20:22.286Z",
+  "updatedAt": "2026-04-28T12:26:39.710Z",
   "parts": [
     {
       "id": "pengenalan",
@@ -179,8 +179,8 @@
       "title": "Panduan Lengkap: Membuat & Memvalidasi Data di Laravel dengan FaÃÂ§ade DB",
       "label": "Part 4",
       "type": "Praktik",
-      "date": "10 April 2026",
-      "readTime": "Ã¢ÂÂ± 8",
+      "date": "2026-04-10",
+      "readTime": "",
       "intro": "Dokumen ini menyediakan panduan langkah demi langkah untuk membuat data baru dalam aplikasi Laravel menggunakan Facade DB, termasuk cara membuat form input, mengelola rute dan controller, serta menerapkan fitur keamanan CSRF. Pembahasan juga mencakup implementasi pesan sukses/gagal, validasi input, dan menampilkan kembali nilai input lama untuk meningkatkan pengalaman pengguna.",
       "tags": [],
       "objectives": [
