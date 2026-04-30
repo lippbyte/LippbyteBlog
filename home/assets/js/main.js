@@ -157,4 +157,103 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* ── 8. Render blog posts from window.BLOG_POSTS (loaded by posts.js) ── */
+  const homeBlogGrid = document.getElementById('homeBlogGrid');
+  const semuapostGrid = document.getElementById('semuapostGrid');
+
+  if ((homeBlogGrid || semuapostGrid) && window.BLOG_POSTS) {
+    const posts = window.BLOG_POSTS;
+
+    // Build card HTML for a single post
+    function buildCard(post) {
+      const color = post.color || 'linear-gradient(135deg, #1f2937 0%, #111827 100%)';
+      const emoji = post.emoji || '📄';
+      const link = `../blog/${post.slug}/index.html`;
+
+      return `
+      <a href="${link}" class="blog-card" style="opacity:0; transform:translateY(16px); transition: opacity .4s ease, transform .4s ease;">
+        <div class="card-cover" style="background: ${color}; display:flex; align-items:center; justify-content:center;">
+          <span style="font-size:2.8rem;">${emoji}</span>
+        </div>
+        <div class="card-body">
+          <p class="card-category">${post.category || 'Dokumentasi'}</p>
+          <h3 class="card-title">${post.title}</h3>
+          <p class="card-desc">${post.description || ''}</p>
+          <div class="card-footer">
+            <span class="card-meta">${post.year || ''}</span>
+            <span class="card-parts-badge card-done">✓ Baca</span>
+          </div>
+        </div>
+      </a>`;
+    }
+
+    // Homepage: show 3 terbaru (last 3 entries from the array, reversed)
+    if (homeBlogGrid) {
+      const recent = posts.slice(-3).reverse();
+      homeBlogGrid.innerHTML = recent.map(buildCard).join('');
+    }
+
+    // Semuapost: show ALL posts (newest first)
+    if (semuapostGrid) {
+      const allReversed = [...posts].reverse();
+      
+      const renderGrid = (filteredPosts) => {
+        semuapostGrid.innerHTML = filteredPosts.map(buildCard).join('');
+        // Re-trigger observer for new cards
+        triggerObserver();
+      };
+
+      renderGrid(allReversed);
+
+      // Filter Logic
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Update UI
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const cat = btn.dataset.category;
+          if (cat === 'all') {
+            renderGrid(allReversed);
+          } else {
+            const filtered = allReversed.filter(p => {
+              const pCat = (p.category || '').toLowerCase();
+              // Check if category includes the filter term (e.g. "Belajar" matches "Database · Belajar")
+              return pCat.includes(cat.toLowerCase());
+            });
+            renderGrid(filtered);
+          }
+        });
+      });
+    }
+
+    // Trigger intersection observer for new cards
+    function triggerObserver() {
+      setTimeout(() => {
+        const newCards = document.querySelectorAll('.blog-card');
+        if (newCards.length && 'IntersectionObserver' in window) {
+          const observer = new IntersectionObserver(entries => {
+            entries.forEach((entry, i) => {
+              if (entry.isIntersecting) {
+                setTimeout(() => {
+                  entry.target.style.opacity = '1';
+                  entry.target.style.transform = 'translateY(0)';
+                }, i * 50);
+                observer.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.1 });
+          newCards.forEach(card => observer.observe(card));
+        } else {
+           newCards.forEach(card => {
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0)';
+           });
+        }
+      }, 50);
+    }
+    triggerObserver();
+  }
+
 });

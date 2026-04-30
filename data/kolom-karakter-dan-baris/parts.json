@@ -1,4 +1,73 @@
 {
-  "error": "Expected property name or '}' in JSON at position 1 (line 1 column 2)",
-  "raw": "\n{\n  \"topic\": \"kolom-karakter-dan-baris\",\n  \"title\": \"Kolom, Karakter, dan Baris\",\n  \"updatedAt\": \"2024-07-30T10:00:00Z\",\n  \"parts\": [\n    {\n      \"id\": \"pendahuluan\",\n      \"partNumber\": 0,\n      \"ti"
+  "topic": "kolom-karakter-dan-baris",
+  "title": "Kolom, Karakter, dan Baris",
+  "updatedAt": "2024-07-30T10:00:00Z",
+  "parts": [
+    {
+      "id": "pendahuluan",
+      "partNumber": 0,
+      "title": "Pendahuluan",
+      "content": ""
+    },
+    {
+      "id": "pengenalan-kolom-karakter-dan-baris",
+      "partNumber": 1,
+      "title": "Pengenalan Kolom, Karakter, dan Baris",
+      "content": ""
+    },
+    {
+      "id": "membuat-tabel-dengan-kolom-karakter-dan-baris",
+      "partNumber": 2,
+      "title": "Membuat Tabel dengan Kolom Karakter dan Baris",
+      "content": ""
+    },
+    {
+      "id": "memasukkan-data-ke-kolom-karakter-dan-baris",
+      "partNumber": 3,
+      "title": "Memasukkan Data ke Kolom Karakter dan Baris",
+      "content": ""
+    },
+    {
+      "id": "mengambil-data-dari-kolom-karakter-dan-baris",
+      "partNumber": 4,
+      "title": "Mengambil Data dari Kolom Karakter dan Baris",
+      "content": ""
+    },
+    {
+      "id": "memperbarui-data-di-kolom-karakter-dan-baris",
+      "partNumber": 5,
+      "title": "Memperbarui Data di Kolom Karakter dan Baris",
+      "content": ""
+    },
+    {
+      "id": "menghapus-data-dari-kolom-karakter-dan-baris",
+      "partNumber": 6,
+      "title": "Menghapus Data dari Kolom Karakter dan Baris",
+      "content": ""
+    },
+    {
+      "id": "menggunakan-kolom-karakter-dan-baris-dalam-query",
+      "partNumber": 7,
+      "title": "Menggunakan Kolom Karakter dan Baris dalam Query",
+      "content": ""
+    },
+    {
+      "id": "menggunakan-kolom-karakter-dan-baris-dalam-aplikasi",
+      "partNumber": 8,
+      "title": "Menggunakan Kolom Karakter dan Baris dalam Aplikasi",
+      "content": ""
+    },
+    {
+      "id": "tips-dan-trik-menggunakan-kolom-karakter-dan-baris",
+      "partNumber": 9,
+      "title": "Tips dan Trik Menggunakan Kolom Karakter dan Baris",
+      "content": ""
+    },
+    {
+      "id": "kesimpulan",
+      "partNumber": 10,
+      "title": "Kesimpulan",
+      "content": ""
+    }
+  ]
 }

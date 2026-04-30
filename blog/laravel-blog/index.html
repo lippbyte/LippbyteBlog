@@ -27,15 +27,16 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="../template/css/style.css" />
 </head>
 <body class="font-sans text-base leading-7">
 
   <!-- TOP NAVBAR -->
   <header class="site-header fixed top-0 left-0 right-0 z-[200] h-14 bg-[var(--bg-translucent)] backdrop-blur-[14px] border-b border-border">
     <div class="header-inner max-w-[1280px] mx-auto px-6 h-full flex items-center justify-between gap-4">
-      <a href="#" class="site-logo font-serif text-lg font-semibold text-text-primary tracking-tight flex items-center gap-2">
+      <a href="../../home/index.html" class="site-logo font-serif text-lg font-semibold text-text-primary tracking-tight flex items-center gap-2">
         Lippbyte
+        <!-- ✏️ Jangan ganti badge blog -->
         <span class="logo-badge font-sans text-[.65rem] font-bold tracking-wider uppercase bg-accent text-white px-2 py-0.5 rounded-full">Blog</span>
       </a>
       <div class="flex items-center gap-3">
@@ -1332,10 +1333,7 @@ class Siswa extends Model
               Part 5
             </a>
             <!-- Tidak ada part selanjutnya, bisa menuju index -->
-            <a href="../../home/index.html" class="part-nav-btn flex items-center flex-row-reverse gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline">
-              Kembali ke Beranda
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
+            <a href="../../home/index.html" class="part-nav-btn flex items-center flex-row-reverse gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline bg-accent-soft border-accent-mid">🏠 Kembali ke Beranda</a>
           </div>
         </section>
 
@@ -1383,6 +1381,6 @@ class Siswa extends Model
 
   </div>
 
-  <script src="js/main.js"></script>
+  <script src="../template/js/main.js"></script>
 </body>
 </html>
