@@ -273,7 +273,10 @@
         </div>
         
         <div class="meta-section">
-          <div class="form-label" style="color:var(--cms-accent)">SUBTEMA (Anchor ID | Judul)</div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+            <div class="form-label" style="margin-bottom:0; color:var(--cms-accent)">SUBTEMA (Anchor ID | Judul)</div>
+            <button class="btn" style="padding: 2px 6px; font-size: 10px;" onclick="extractH2ToSubthemes()" title="Ekstrak otomatis dari H2 di editor">✨ Auto H2</button>
+          </div>
           <ul class="dynamic-list" id="listSubthemes"></ul>
           <button class="btn" style="margin-top:8px; font-size:11px;" onclick="addSubthemeRow()">+ Tambah Subtema</button>
         </div>
@@ -562,6 +565,46 @@
     function addSubthemeRow() { 
       document.getElementById('listSubthemes').insertAdjacentHTML('beforeend', `<li style="flex-direction:column; gap:4px; padding:6px; background:var(--cms-bg); border:1px solid var(--cms-border); border-radius:4px;"><input class="form-input" placeholder="Anchor ID (tanpa #)" oninput="updatePreview()"><input class="form-input" placeholder="Judul Subtema" oninput="updatePreview()"><button class="btn btn-primary" style="background:#f85149; border:none; width:max-content" onclick="this.parentElement.remove(); updatePreview()">Hapus</button></li>`); 
       updatePreview();
+    }
+    function extractH2ToSubthemes() {
+      let content = document.getElementById('mdEditor').value;
+      let lines = content.split('\n');
+      let subthemes = [];
+      let inCodeBlock = false;
+      
+      lines.forEach(line => {
+        if (line.trim().startsWith('```')) {
+          inCodeBlock = !inCodeBlock;
+        }
+        if (inCodeBlock) return;
+
+        let match = line.match(/^##\s+(.*)$/);
+        if (match) {
+          let text = match[1];
+          let idMatch = text.match(/\{#([^}]+)\}$/);
+          let id = '';
+          let title = text;
+          if (idMatch) {
+            id = idMatch[1];
+            title = text.replace(/\{#([^}]+)\}$/, '').trim();
+          } else {
+            title = title.replace(/<[^>]*>?/gm, '').trim();
+            id = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+          }
+          subthemes.push({ id, title });
+        }
+      });
+      
+      if (subthemes.length > 0) {
+        if (confirm(`Ditemukan ${subthemes.length} heading H2. Ganti daftar subtema saat ini?`)) {
+          let html = subthemes.map(s => `<li style="flex-direction:column; gap:4px; padding:6px; background:var(--cms-bg); border:1px solid var(--cms-border); border-radius:4px;"><input class="form-input" placeholder="Anchor ID (tanpa #)" value="${escHtml(s.id)}" oninput="updatePreview()"><input class="form-input" placeholder="Judul Subtema" value="${escHtml(s.title)}" oninput="updatePreview()"><button class="btn btn-primary" style="background:#f85149; border:none; width:max-content" onclick="this.parentElement.remove(); updatePreview()">Hapus</button></li>`).join('');
+          document.getElementById('listSubthemes').innerHTML = html;
+          updatePreview();
+          showToast(`Berhasil mengekstrak ${subthemes.length} subtema!`);
+        }
+      } else {
+        alert('Tidak ada heading H2 yang ditemukan di dalam konten.');
+      }
     }
     function getList(id) { return Array.from(document.getElementById(id).querySelectorAll('input')).map(i=>i.value).filter(v=>v.trim()); }
     function getRefs() { return Array.from(document.getElementById('listRefs').children).map((li,i) => { let inps=li.querySelectorAll('input'); return {num:String(i+1), text:inps[0].value, url:inps[1].value}; }).filter(r=>r.text); }
