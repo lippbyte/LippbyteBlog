@@ -1,7 +1,7 @@
 {
   "topic": "laravel-log",
   "title": "Laravel Blog",
-  "updatedAt": "2026-05-03T10:18:04.011Z",
+  "updatedAt": "2026-05-03T10:20:08.776Z",
   "parts": [
     {
       "id": "pengenalan",
@@ -51,8 +51,20 @@
       ],
       "subthemes": [
         {
-          "id": "pen-fr",
+          "id": "apa-itu-framework",
           "title": "Apa itu Framework?"
+        },
+        {
+          "id": "apa-itu-laravel",
+          "title": "Apa itu Laravel?"
+        },
+        {
+          "id": "fitur-unggulan-laravel",
+          "title": "Fitur Unggulan Laravel"
+        },
+        {
+          "id": "arsitektur-mvc",
+          "title": "Arsitektur MVC"
         }
       ],
       "content": "## Apa itu Framework?\n![](https://raw.githubusercontent.com/lippbyte/LippbyteBlog/blogcms/blog/assets/img/laravel-log/1777803081829_BG_Technova.png)\n\n\n**Framework** dalam bahasa Indonesia berarti kerangka. Biasanya kita kenal juga dengan istilah **template** atau **blueprint**. Kerangka diperlukan sebelum membuat atau membangun sesuatu. Kerangka dibuat untuk mempermudah pekerjaan membuat sesuatu.\n\nDalam dunia pemrograman, **Framework** adalah sebuah software untuk memudahkan programmer membuat aplikasi atau program pada web. Dengan menggunakan framework, sebuah aplikasi akan terstruktur dan tersusun rapi.\n\nHari ini, kita akan khusus membahas **Framework PHP**. **PHP** *adalah sebuah bahasa pemrograman open-source yang berjalan di sisi server (server-side) khusus untuk pengembangan aplikasi web dinamis dan interaktif.* Seperti yang sudah diketahui, framework diperlukan developer untuk membuat web/aplikasi yang terstruktur. Diantara banyak framwork PHP yang ada, **Laravel** merupakan framework yang saat ini paling populer.\n\n![frameworkphp](https://raw.githubusercontent.com/lippbyte/LippbyteBlog/blogcms/blog/assets/img/laravel-log/1777382741750_frameworkphp.jpg)\n\n\n> **Catatan**\n> Hingga awal 2026, repositori utama Laravel telah melampaui 80.000+ stars, menjadikannya framework PHP dengan dukungan komunitas terbesar di platform tersebut.\n\n## Apa itu Laravel?\n\n![laravell](https://raw.githubusercontent.com/lippbyte/LippbyteBlog/blogcms/blog/assets/img/laravel-log/1777383049989_laravell.jpg)\n\n**Laravel** adalah PHP web framework yang bersifat open-source, dibuat oleh **Taylor Otwell** dan pertama kali dirilis pada tahun 2011. Laravel dirancang untuk membuat proses pengembangan web menjadi lebih menyenangkan tanpa mengorbankan fungsionalitas aplikasi.\n\nFramework ini mengikuti pola arsitektur **MVC (Model-View-Controller)** dan menyediakan berbagai fitur bawaan seperti routing, autentikasi, session, caching, dan masih banyak lagi sehingga developer tidak perlu membangun semuanya dari nol.\n\n![mvc](https://raw.githubusercontent.com/lippbyte/LippbyteBlog/blogcms/blog/assets/img/laravel-log/1777383073636_mvc.jpg)\n\n## Fitur Unggulan Laravel\n\nBeberapa fitur yang membuat Laravel menonjol dibanding framework lain:\n\n- * **Command Line Tool (Artisan)** ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ Fitur Command Line untuk memudahkan programmer melakukan beberapa pekerjaan.\n* **RESTful Routing** ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ RESTful adalah cara baru dalam mengelola request seperti GET, POST, PUT, PATCH, DELETE, STORE.\n* **Composer** ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ Composer adalah Dependency Management PHP yang membantu programmer untuk menggunakan library.\n* **Beautiful Template Engine (Blade)** ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ Laravel dilengkapi dengan template engine dengan nama Blade Template Engine untuk memudahkan penggabungan kode PHP pada HTML.\n* **Database Migration** ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ Fitur untuk menjaga histori migrasi database (CREATE, ALTER, DROP), mengaplikasikan migrasi baru ataupun mengembalikannya.\n* Eloquent ORM ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ Fitur Eloquent ORM (Object Relational Model) memungkinkan penulisan kode yang berhubungan dengan objek (Entitas / Tabel pada Database) dioperasikan menggunakan konsep OOP.\n\n## Arsitektur MVC\n\nLaravel mengikuti pola **Model-View-Controller**. Setiap lapisan memiliki tanggung jawab yang jelas dan terpisah:\n\n* **Model** ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ Mewakili data dan logika bisnis. Berinteraksi langsung dengan database (insert, update, delete).\n* **View** ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ Bagian yang bertugas menampilkan informasi User Interface kepada pengguna, seperti halaman HTML atau tampilan aplikasi.\n* **Controller** ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ Bagian yang menghubungkan Model dan View. Controller menerima instruksi dari pengguna, memproses data melalui Model, dan memilih View untuk ditampilkan."
