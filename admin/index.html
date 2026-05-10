@@ -272,7 +272,7 @@
       <aside class="meta-panel" id="rightSidebar">
         <div class="meta-section">
           <div class="form-label" style="color:var(--cms-accent)">INFO DASAR</div>
-          <div class="form-group"><label class="form-label">ID / SLUG PART</label><input class="form-input" id="partId" type="text" placeholder="pengenalan" readonly style="opacity:0.6"/></div>
+          <div class="form-group"><label class="form-label">ID / PART</label><input class="form-input" id="partId" type="text" placeholder="pengenalan" readonly style="opacity:0.6"/></div>
           <div class="form-group"><label class="form-label">JUDUL PART</label><input class="form-input" id="partTitle" type="text" placeholder="Pendahuluan" /></div>
           <div class="form-group"><label class="form-label">LABEL NAVIGASI</label><input class="form-input" id="partLabel" type="text" placeholder="Part 1" /></div>
           <div style="display:flex; gap:10px;">
@@ -510,7 +510,7 @@
     function loadSelectedTopic() { currentTopicId = document.getElementById('topicSelect').value; loadTopicData(); }
 
     async function addTopic() {
-      let title = prompt('Nama Topik Baru? (ex: Belajar Python)');
+      let title = prompt('Nama Topik Baru?');
       if(!title) return;
       let id = title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
       // Add to topics.json
