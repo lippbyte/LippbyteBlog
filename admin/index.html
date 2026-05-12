@@ -480,7 +480,15 @@
 
     function logout() { localStorage.removeItem('lipp_cms'); location.reload(); }
     function showToast(msg) { let t = document.getElementById('toast'); t.innerText=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'), 3000); }
-    function escHtml(s) { let d=document.createElement('div'); d.innerText=s; return d.innerHTML; }
+    function escHtml(s) {
+      if (!s) return '';
+      return s.toString()
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
 
     // --- GITHUB API HELPER ---
     async function ghReq(path, method='GET', bodyContent=null) {
