@@ -1,71 +1,9 @@
 [
   {
-    "id": "laravel",
-    "title": "Dokumentasi Belajar Laravel",
-    "category": "PHP ÃÂ· Framework",
-    "description": "Catatan lengkap belajar Laravel dari nol Ã¢ÂÂ pengenalan MVC, routing, Eloquent ORM, CRUD, autentikasi, hingga deployment.",
-    "emoji": "Ã¢ÂÂ¡",
-    "color": "linear-gradient(135deg, #ff6b35 0%, #e8441a 55%, #c73a14 100%)",
-    "status": "active",
-    "year": "2025"
-  },
-  {
-    "id": "ultramilk-stroberi",
-    "title": "Ultramilk Stroberi",
-    "category": "Baru",
-    "description": "",
-    "emoji": "ð",
-    "status": "active"
-  },
-  {
-    "id": "oracle-apex-database-programming-with-sql",
-    "title": "oracle-apex-database-programming-with-sql",
-    "category": "Baru",
-    "description": "",
-    "emoji": "🚀",
-    "status": "active"
-  },
-  {
-    "id": "database-programming-with-sql-1-1-oracle-apex",
-    "title": "Database Programming with SQL 1-1 Oracle APEX",
-    "category": "Dokumentasi",
-    "description": "",
-    "emoji": "📄",
-    "status": "active",
-    "year": "2026"
-  },
-  {
-    "id": "oracle-apex-database-programming-with-sql",
-    "title": "Oracle APEX: Database Programming with SQL",
-    "category": "Dokumentasi",
-    "description": "",
-    "emoji": "📄",
-    "status": "active",
-    "year": "2026"
-  },
-  {
-    "id": "database-programming-with-sql-oracle-apex",
-    "title": "Database Programming with SQL: Oracle APEX",
-    "category": "Dokumentasi",
-    "description": "",
-    "emoji": "📄",
-    "status": "active",
-    "year": "2026"
-  },
-  {
-    "id": "kolom-karakter-dan-baris",
-    "title": "Kolom, Karakter, dan Baris",
-    "category": "Dokumentasi",
-    "description": "",
-    "emoji": "📄",
-    "status": "active",
-    "year": "2026"
-  },
-  {
     "id": "laravel-log",
     "title": "Laravel Blog",
     "category": "Dokumentasi",
-    "description": "Dokumentasi Laravel dari HTML scrape",
+    "description": "Dokumentasi Pembelajaran Laravel",
     "emoji": "📃",
     "status": "active",
     "year": "2026"
