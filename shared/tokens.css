@@ -1,0 +1,136 @@
+/* ================================================
+   LIPPBYTEBLOG — Design Tokens (Shared)
+   File ini adalah SATU-SATUNYA sumber variabel.
+   Jangan duplikasi variabel di file CSS lain!
+================================================ */
+
+/* ── Light Mode (Default) ── */
+:root {
+  /* Warna background */
+  --bg:              #fafaf8;
+  --bg-translucent:  rgba(250, 250, 248, 0.88);
+  --surface:         #ffffff;
+  --surface-2:       #f5f4f1;
+  --surface-3:       #eeedea;
+  --border:          #e8e6e1;
+  --border-strong:   #ccc9c2;
+
+  /* Warna teks */
+  --text-primary:    #000000;
+  --text-body:       #1a1a1a;
+  --text-muted:      #4d4d4d;
+  --text-faint:      #737373;
+
+  /* Warna aksen (warna utama brand: oranye-merah) */
+  --accent:          #e8441a;
+  --accent-hover:    #c73a14;
+  --accent-soft:     #fff5f2;
+  --accent-mid:      #fdd8cc;
+  --accent-glow:     rgba(232, 68, 26, 0.12);
+
+  /* Warna callout boxes */
+  --note-bg:     #f0f9ff;
+  --note-border: #7dd3fc;
+  --note-text:   #0c4a6e;
+  --warn-bg:     #fffbeb;
+  --warn-border: #fcd34d;
+  --warn-text:   #78350f;
+  --tip-bg:      #f0fdf4;
+  --tip-border:  #86efac;
+  --tip-text:    #14532d;
+  --danger-bg:     #fff1f2;
+  --danger-border: #fda4af;
+  --danger-text:   #881337;
+
+  /* Warna code block */
+  --code-bg:      #16161a;
+  --code-surface: #1e1e24;
+  --code-border:  #2e2e36;
+  --code-text:    #e4e4e7;
+  --code-comment: #6b6b7a;
+  --code-string:  #a3e635;
+  --code-keyword: #fb923c;
+  --code-fn:      #60a5fa;
+  --code-num:     #f472b6;
+  --code-class:   #34d399;
+  --code-var:     #e4e4e7;
+
+  /* Ukuran & layout */
+  --nav-h:      58px;
+  --sidebar-w:  264px;
+
+  /* Border radius */
+  --radius-xs:   4px;
+  --radius-sm:   8px;
+  --radius-md:   12px;
+  --radius-lg:   18px;
+  --radius-xl:   24px;
+  --radius-pill: 100px;
+
+  /* Shadow */
+  --shadow-xs:   0 1px 2px rgba(0,0,0,.04);
+  --shadow-sm:   0 2px 8px rgba(0,0,0,.06);
+  --shadow-md:   0 8px 24px rgba(0,0,0,.08);
+  --shadow-lg:   0 16px 48px rgba(0,0,0,.10);
+  --shadow-card: 0 2px 12px rgba(28,26,22,.05), 0 1px 2px rgba(28,26,22,.04);
+
+  /* Font */
+  --font-serif: 'Lora', Georgia, serif;
+  --font-sans:  'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-mono:  'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Transisi animasi */
+  --transition:      .18s ease;
+  --transition-slow: .3s ease;
+}
+
+/* ── Dark Mode ── */
+html.dark {
+  --bg:              #111110;
+  --bg-translucent:  rgba(17, 17, 16, 0.88);
+  --surface:         #1a1a18;
+  --surface-2:       #222220;
+  --surface-3:       #2a2a28;
+  --border:          #2e2e2a;
+  --border-strong:   #44443e;
+
+  --text-primary:    #f2f1ec;
+  --text-body:       #c8c5bc;
+  --text-muted:      #8a8780;
+  --text-faint:      #5a5750;
+
+  --accent:          #f06530;
+  --accent-hover:    #ff8a5c;
+  --accent-soft:     #2a1408;
+  --accent-mid:      #4a2010;
+  --accent-glow:     rgba(240, 101, 48, 0.15);
+
+  --note-bg:     #082f49;
+  --note-border: #0369a1;
+  --note-text:   #e0f2fe;
+  --warn-bg:     #451a03;
+  --warn-border: #b45309;
+  --warn-text:   #fef3c7;
+  --tip-bg:      #052e16;
+  --tip-border:  #15803d;
+  --tip-text:    #dcfce7;
+  --danger-bg:     #4c0519;
+  --danger-border: #9f1239;
+  --danger-text:   #fda4af;
+
+  --code-bg:      #0c0c0a;
+  --code-surface: #141412;
+  --code-border:  #242420;
+
+  --shadow-xs:   0 1px 2px rgba(0,0,0,.4);
+  --shadow-sm:   0 2px 8px rgba(0,0,0,.4);
+  --shadow-md:   0 8px 24px rgba(0,0,0,.5);
+  --shadow-lg:   0 16px 48px rgba(0,0,0,.6);
+  --shadow-card: 0 2px 12px rgba(0,0,0,.3), 0 1px 2px rgba(0,0,0,.2);
+}
+
+.callout-danger {
+  background: var(--danger-bg);
+  border-color: var(--danger-border);
+  color: var(--danger-text);
+}

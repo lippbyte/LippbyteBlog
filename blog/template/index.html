@@ -28,6 +28,8 @@
     }
   </script>
   <link rel="stylesheet" href="css/style.css" />
+  <!-- PrismJS for code highlighting -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
 </head>
 <body class="font-sans text-base leading-7">
 
@@ -58,7 +60,7 @@
   <!-- READING PROGRESS -->
   <div class="top-progress"><div class="top-progress-fill" id="topFill"></div></div>
 
-  <div class="layout grid grid-cols-[272px_1fr] max-w-[1280px] mx-auto min-h-screen pt-14 max-[960px]:grid-cols-1">
+  <div class="layout grid grid-cols-[272px_1fr] max-w-[1280px] mx-auto min-h-screen max-[960px]:grid-cols-1" style="padding-top: var(--nav-h)">
 
     <!-- LEFT SIDEBAR -->
     <nav class="left-sidebar sticky top-14 h-[calc(100vh-56px)] overflow-y-auto border-r border-border py-7 max-[960px]:static max-[960px]:h-auto" aria-label="Navigasi Part">
@@ -77,8 +79,7 @@
       <!-- Sidebar: Blog Lainnya -->
       <div class="sidebar-other-blogs mt-6 pt-5 border-t border-border px-5">
         <p class="text-[.67rem] font-bold tracking-[.12em] uppercase text-text-faint mb-3">Blog Lainnya</p>
-        <a href="#" class="flex items-center gap-2 py-1.5 text-xs text-text-muted opacity-50 pointer-events-none"><span>🐍</span> Belajar Python (soon)</a>
-        <a href="#" class="flex items-center gap-2 py-1.5 text-xs text-text-muted opacity-50 pointer-events-none"><span>🌐</span> Belajar JavaScript (soon)</a>
+        <div id="sidebarTopBlogs"></div>
       </div>
     </nav>
 
@@ -126,6 +127,13 @@
 
   </div>
 
+  <script src="../../blog/posts.js"></script>
   <script src="js/main.js"></script>
+  <!-- PrismJS Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup-templating.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-php.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
 </body>
 </html>
