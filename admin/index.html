@@ -215,46 +215,90 @@
 
       <!-- EDITOR -->
       <main class="editor-container">
-        <div class="toolbar">
-          <button class="toolbar-btn active-panel" id="toggleLeftBtn" onmousedown="event.preventDefault()" onclick="toggleSidebar('left')" title="Sembunyikan Sidebar Kiri">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>
-          </button>
-          <div class="toolbar-sep"></div>
-          <button class="toolbar-btn flex items-center justify-center gap-1.5 px-2" onmousedown="event.preventDefault()" onclick="insertFmt('**', '**')" title="Bold">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"></path><path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"></path></svg>
-          </button>
-          <button class="toolbar-btn flex items-center justify-center gap-1.5 px-2" onmousedown="event.preventDefault()" onclick="insertFmt('*', '*')" title="Italic">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="4" x2="10" y2="4"></line><line x1="14" y1="20" x2="5" y2="20"></line><line x1="15" y1="4" x2="9" y2="20"></line></svg>
-          </button>
-          <button class="toolbar-btn flex items-center justify-center gap-1.5 px-2" onmousedown="event.preventDefault()" onclick="insertFmt('`', '`')" title="Inline Code">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
-          </button>
-          <div class="toolbar-sep"></div>
-          <button class="toolbar-btn font-bold text-[13px] px-2" onmousedown="event.preventDefault()" onclick="insertFmt('## ', '')" title="Heading 2">H2</button>
-          <button class="toolbar-btn font-bold text-[12px] px-2" onmousedown="event.preventDefault()" onclick="insertFmt('### ', '')" title="Heading 3">H3</button>
-          <div class="toolbar-sep"></div>
-          <button class="toolbar-btn flex items-center gap-1.5 px-2.5" onmousedown="event.preventDefault()" onclick="insertFmt('- ', '')" title="List">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg> List
-          </button>
-          <button class="toolbar-btn flex items-center gap-1.5 px-2.5" onmousedown="event.preventDefault()" onclick="insertFmt('> ', '')" title="Info Block">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg> Info
-          </button>
-          <button class="toolbar-btn flex items-center gap-1.5 px-2.5" onmousedown="event.preventDefault()" onclick="insertFmt('```php\n', '\n```')" title="Code Block">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="8" y1="12" x2="16" y2="12"></line><line x1="12" y1="8" x2="12" y2="16"></line></svg> Code
-          </button>
-          <button class="toolbar-btn flex items-center gap-1.5 px-2.5" onmousedown="event.preventDefault()" onclick="document.getElementById('imgUploadInput').click()" title="Insert Image">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg> Image
-          </button>
-          <input type="file" id="imgUploadInput" accept="image/*" style="display:none" onchange="handleImageUpload(this)" />
-          <div style="flex:1"></div>
-          <!-- View Toggles -->
-          <button class="btn" onclick="setView('split')">Split</button>
-          <button class="btn" onclick="setView('write')">Write</button>
-          <button class="btn" onclick="setView('preview')">Preview</button>
-          <div class="toolbar-sep"></div>
-          <button class="toolbar-btn active-panel" id="toggleRightBtn" onclick="toggleSidebar('right')" title="Sembunyikan Panel Metadata">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="15" y1="3" x2="15" y2="21"></line></svg>
-          </button>
+        <div class="toolbar" style="padding-left: 12px; padding-right: 15px; flex-wrap: nowrap; overflow: hidden;">
+          <!-- Kiri: Fixed Sidebar Toggle -->
+          <div style="display: flex; align-items: center; flex-shrink: 0;">
+            <button class="toolbar-btn active-panel shrink-0" id="toggleLeftBtn" onmousedown="event.preventDefault()" onclick="toggleSidebar('left')" title="Sembunyikan Sidebar Kiri">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>
+            </button>
+            <div class="toolbar-sep shrink-0" style="margin: 0 10px;"></div>
+          </div>
+
+          <!-- Tengah: Scrollable Tools -->
+          <div style="flex: 1; display: flex; align-items: center; gap: 8px; overflow-x: auto; scrollbar-width: none; mask-image: linear-gradient(to right, black calc(100% - 20px), transparent); -webkit-overflow-scrolling: touch;" class="hide-scroll">
+            <style>.hide-scroll::-webkit-scrollbar { display: none; }</style>
+            
+            <!-- Format Text -->
+            <button class="toolbar-btn flex items-center justify-center gap-1.5 px-2 shrink-0" onmousedown="event.preventDefault()" onclick="insertFmt('**', '**')" title="Bold">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"></path><path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"></path></svg>
+            </button>
+            <button class="toolbar-btn flex items-center justify-center gap-1.5 px-2 shrink-0" onmousedown="event.preventDefault()" onclick="insertFmt('*', '*')" title="Italic">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="4" x2="10" y2="4"></line><line x1="14" y1="20" x2="5" y2="20"></line><line x1="15" y1="4" x2="9" y2="20"></line></svg>
+            </button>
+            <button class="toolbar-btn flex items-center justify-center gap-1.5 px-2 shrink-0" onmousedown="event.preventDefault()" onclick="insertFmt('`', '`')" title="Inline Code">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+            </button>
+            <div class="toolbar-sep shrink-0"></div>
+            
+            <!-- Headings -->
+            <button class="toolbar-btn font-bold text-[13px] px-2 shrink-0" onmousedown="event.preventDefault()" onclick="insertFmt('## ', '')" title="Heading 2">H2</button>
+            <button class="toolbar-btn font-bold text-[12px] px-2 shrink-0" onmousedown="event.preventDefault()" onclick="insertFmt('### ', '')" title="Heading 3">H3</button>
+            <div class="toolbar-sep shrink-0"></div>
+            
+            <!-- Lists & Tables -->
+            <button class="toolbar-btn flex items-center gap-1.5 px-2.5 shrink-0" onmousedown="event.preventDefault()" onclick="insertFmt('- ', '')" title="List">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg> List
+            </button>
+            <button class="toolbar-btn flex items-center gap-1.5 px-2.5 shrink-0" onmousedown="event.preventDefault()" onclick="insertNumberedList()" title="Numbered List (Ctrl+Shift+7)">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="10" y1="6" x2="21" y2="6"></line><line x1="10" y1="12" x2="21" y2="12"></line><line x1="10" y1="18" x2="21" y2="18"></line><path d="M4 6h1v4"></path><path d="M4 10h2"></path><path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"></path></svg> OL
+            </button>
+            <button class="toolbar-btn flex items-center gap-1.5 px-2.5 shrink-0" onmousedown="event.preventDefault()" onclick="insertTable()" title="Insert Table">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg> Table
+            </button>
+            <div class="toolbar-sep shrink-0"></div>
+
+            <!-- Insert Media -->
+            <button class="toolbar-btn flex items-center gap-1.5 px-2.5 shrink-0" onmousedown="event.preventDefault()" onclick="insertLink()" title="Insert Link (Ctrl+K)">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> Link
+            </button>
+            <button class="toolbar-btn flex items-center gap-1.5 px-2.5 shrink-0" onmousedown="event.preventDefault()" onclick="insertHR()" title="Horizontal Rule / Divider">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"/></svg> HR
+            </button>
+            <button class="toolbar-btn flex items-center gap-1.5 px-2.5 shrink-0" onmousedown="event.preventDefault()" onclick="document.getElementById('imgUploadInput').click()" title="Insert Image">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg> Image
+            </button>
+            <input type="file" id="imgUploadInput" accept="image/*" style="display:none" onchange="handleImageUpload(this)" />
+            <div class="toolbar-sep shrink-0"></div>
+            
+            <!-- Callouts -->
+            <button class="toolbar-btn flex items-center gap-1.5 px-2.5 shrink-0" onmousedown="event.preventDefault()" onclick="insertFmt('> ', '')" title="Info Block">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg> Info
+            </button>
+            <button class="toolbar-btn flex items-center gap-1.5 px-2.5 shrink-0" onmousedown="event.preventDefault()" onclick="insertFmt('> **Peringatan**\n> ', '')" title="Warning Callout">⚠</button>
+            <button class="toolbar-btn flex items-center gap-1.5 px-2.5 shrink-0" onmousedown="event.preventDefault()" onclick="insertFmt('> **Error**\n> ', '')" title="Danger/Error Callout">❌</button>
+            <button class="toolbar-btn flex items-center gap-1.5 px-2.5 shrink-0" onmousedown="event.preventDefault()" onclick="insertFmt('> **Tips**\n> ', '')" title="Tips/Success Callout">✅</button>
+            
+            <div class="toolbar-sep shrink-0"></div>
+            
+            <!-- Advanced -->
+            <button class="toolbar-btn flex items-center gap-1.5 px-2.5 shrink-0" onmousedown="event.preventDefault()" onclick="insertFmt('```php\n', '\n```')" title="Code Block">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="8" y1="12" x2="16" y2="12"></line><line x1="12" y1="8" x2="12" y2="16"></line></svg> Code
+            </button>
+            
+            <!-- Spasi cadangan di kanan scroll -->
+            <div style="padding-right: 20px;" class="shrink-0"></div>
+          </div>
+
+          <!-- Kanan: Fixed View Toggles -->
+          <div style="display: flex; align-items: center; gap: 8px; flex-shrink: 0; border-left: 1px solid var(--cms-border); padding-left: 12px; margin-left: 5px;">
+            <button class="btn view-btn shrink-0" id="viewSplitBtn" onclick="setView('split')" onmousedown="event.preventDefault()">Split</button>
+            <button class="btn view-btn shrink-0" id="viewWriteBtn" onclick="setView('write')" onmousedown="event.preventDefault()">Write</button>
+            <button class="btn view-btn shrink-0" id="viewPreviewBtn" onclick="setView('preview')" onmousedown="event.preventDefault()">Preview</button>
+            <div class="toolbar-sep shrink-0"></div>
+            <button class="toolbar-btn active-panel shrink-0" id="toggleRightBtn" onclick="toggleSidebar('right')" onmousedown="event.preventDefault()" title="Sembunyikan Panel Metadata">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="15" y1="3" x2="15" y2="21"></line></svg>
+            </button>
+          </div>
         </div>
         
         <div class="panes">
@@ -329,7 +373,7 @@
       if(typeof href==='object') { text=href.text; title=href.title; href=href.href; }
       return `<figure class="my-8">
         <div class="img-image text-sm max-w-sm mx-auto overflow-hidden rounded-xl border border-border"><img src="${href}" alt="${text||''}" class="w-full h-auto object-cover object-center"></div>
-        <figcaption class="text-center text-xs text-text-faint mt-2 italic"><strong>Gambar</strong> — ${text||''}</figcaption>
+        <figcaption class="text-center text-xs text-text-faint mt-2 italic"><strong>Gambar - ${text||''}</strong> Source : Pinterest</figcaption>
       </figure>`;
     };
     renderer.blockquote = q => {
@@ -338,7 +382,7 @@
       
       // Helper untuk membersihkan label pemicu dari konten agar tidak double
       const cleanHtml = (html) => {
-        return html.replace(/^<p>\s*(<strong>.*?<\/strong>|💡|📝|⚠️|☁️|✅|🎀)\s*/i, '<p>');
+        return html.replace(/^<p>\s*(<strong>.*?<\/strong>|💡|📝|⚠️|☁️|✅|🎀|❌)\s*/i, '<p>');
       };
 
       // Callout detection (Cute edition)
@@ -350,6 +394,9 @@
       }
       if(/^(\*\*Tips\*\*|✅|🎀)/i.test(text.substring(0,25))) {
         return `<div class="callout callout-tip"><span class="callout-icon shrink-0">🎀</span><div class="callout-body flex-1"><p class="callout-title text-[.7rem] tracking-wider uppercase mb-1">Pro Tip ⭐</p><div class="text-sm leading-relaxed">${cleanHtml(qStr)}</div></div></div>`;
+      }
+      if(/^(\*\*Error\*\*|❌|error|danger|penting)/i.test(text.substring(0,25))) {
+        return `<div class="callout callout-danger"><span class="callout-icon shrink-0">❌</span><div class="callout-body flex-1"><p class="callout-title text-[.7rem] tracking-wider uppercase mb-1">Perhatian! ❌</p><div class="text-sm leading-relaxed">${cleanHtml(qStr)}</div></div></div>`;
       }
       return `<blockquote class="italic text-text-muted">${qStr}</blockquote>`;
     };
@@ -383,7 +430,7 @@
     renderer.code = (code, language) => {
       if(typeof code==='object') { language=code.lang; code=code.text; }
       let title = language || 'terminal'; let t = title.split(':'); if(t.length>1){ title=t[1]; }
-      return `<div class="code-block"><div class="code-titlebar"><div class="traffic-lights flex items-center gap-1.5"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span></div><span class="code-filename font-mono text-xs text-zinc-500">${title}</span></div><pre><code>${escHtml(code)}</code></pre></div>`;
+      return `<div class="code-block"><div class="code-titlebar"><div class="traffic-lights flex items-center gap-1.5"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span></div><span class="code-filename font-mono text-xs text-zinc-500">${title}</span></div><pre><code class="language-${language || 'none'}">${escHtml(code)}</code></pre></div>`;
     };
     marked.use({ renderer });
 
@@ -406,6 +453,7 @@
         document.getElementById('setupOverlay').style.display = 'none';
         document.getElementById('headerRepoBadge').innerText = `${config.username}/${config.repo} (${config.branch})`;
         initData();
+        setView('split');
       }
     };
     
@@ -460,7 +508,9 @@
     async function initData() {
       try {
         let res = await ghReq('data/topics.json');
-        topics = JSON.parse(atob(res.content));
+        // Fix: Use UTF-8 safe Base64 decoding
+        let content = decodeURIComponent(escape(atob(res.content)));
+        topics = JSON.parse(content);
         let sel = document.getElementById('topicSelect');
         sel.innerHTML = topics.map(t => `<option value="${t.id}">${t.title}</option>`).join('');
         if(topics.length > 0) { 
@@ -478,7 +528,9 @@
     async function loadTopicData() {
       try {
         let res = await ghReq(`data/${currentTopicId}/parts.json`);
-        let ghData = JSON.parse(atob(res.content));
+        // Fix: Use UTF-8 safe Base64 decoding
+        let content = decodeURIComponent(escape(atob(res.content)));
+        let ghData = JSON.parse(content);
         
         let draft = localStorage.getItem('lipp_draft_' + currentTopicId);
         if(draft) {
@@ -713,9 +765,28 @@
     function setView(mode) {
       const w = document.getElementById('paneWrite');
       const p = document.getElementById('panePreview');
-      if(mode==='split'){ w.style.display='flex'; p.style.display='flex'; w.style.flex='1'; }
-      if(mode==='write'){ w.style.display='flex'; p.style.display='none'; w.style.flex='1'; }
-      if(mode==='preview'){ w.style.display='none'; p.style.display='flex'; }
+      const mp = document.getElementById('rightSidebar');
+      const btnR = document.getElementById('toggleRightBtn');
+      
+      // Update UI buttons
+      document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('btn-primary'));
+      
+      if(mode==='split'){ 
+        w.style.display='flex'; p.style.display='flex'; w.style.flex='1'; p.style.flex='1';
+        document.getElementById('viewSplitBtn').classList.add('btn-primary');
+        // In split mode, we usually hide metadata to save space, but let user toggle it back
+        if (!mp.classList.contains('collapsed')) {
+            mp.classList.add('collapsed');
+            btnR.classList.remove('active-panel');
+        }
+      } else if(mode==='write'){ 
+        w.style.display='flex'; p.style.display='none'; w.style.flex='1'; 
+        document.getElementById('viewWriteBtn').classList.add('btn-primary');
+      } else if(mode==='preview'){ 
+        w.style.display='none'; p.style.display='flex'; 
+        document.getElementById('viewPreviewBtn').classList.add('btn-primary');
+      }
+      updatePreview();
     }
 
     function toggleSidebar(side) {
@@ -727,6 +798,7 @@
       } else {
         const mp = document.getElementById('rightSidebar');
         const btn = document.getElementById('toggleRightBtn');
+        if(!mp) return;
         mp.classList.toggle('collapsed');
         btn.classList.toggle('active-panel', !mp.classList.contains('collapsed'));
       }
@@ -842,6 +914,164 @@
       }
       updatePreview();
     }
+
+    function insertNumberedList() {
+      let r = document.getElementById('mdEditor');
+      let start = r.selectionStart;
+      let end = r.selectionEnd;
+      let text = r.value;
+
+      let lineStart = text.lastIndexOf('\n', start - 1) + 1;
+      let lineEnd = text.indexOf('\n', end);
+      if (lineEnd === -1) lineEnd = text.length;
+
+      let selectedLinesText = text.substring(lineStart, lineEnd);
+      let lines = selectedLinesText.split('\n');
+
+      let alreadyNumbered = /^\d+\.\s/.test(lines[0]);
+
+      let replacement;
+      if (alreadyNumbered) {
+        replacement = lines.map(line => line.replace(/^\d+\.\s/, '')).join('\n');
+      } else {
+        replacement = lines.map((line, index) => `${index + 1}. ${line}`).join('\n');
+      }
+
+      r.value = text.substring(0, lineStart) + replacement + text.substring(lineEnd);
+      r.focus();
+      r.selectionStart = lineStart;
+      r.selectionEnd = lineStart + replacement.length;
+      updatePreview();
+    }
+
+    function insertTable() {
+      let cols = parseInt(prompt('Jumlah kolom?', '3'));
+      let rows = parseInt(prompt('Jumlah baris data? (tidak termasuk header)', '2'));
+
+      if (isNaN(cols) || isNaN(rows) || cols < 1 || rows < 1) return;
+
+      let headerCells = Array(cols).fill('Kolom').map((_, i) => `Kolom ${i+1}`).join(' | ');
+      let headerRow = `| ${headerCells} |`;
+
+      let separatorCells = Array(cols).fill('---------').join(' | ');
+      let separatorRow = `| ${separatorCells} |`;
+
+      let dataCells = Array(cols).fill('Data').join(' | ');
+      let dataRowTemplate = `| ${dataCells} |`;
+
+      let dataRows = Array(rows).fill(dataRowTemplate).join('\n');
+
+      let tableMarkdown = `\n${headerRow}\n${separatorRow}\n${dataRows}\n`;
+
+      let r = document.getElementById('mdEditor');
+      let start = r.selectionStart;
+      let text = r.value;
+
+      r.value = text.substring(0, start) + tableMarkdown + text.substring(start);
+
+      r.selectionStart = start + tableMarkdown.length;
+      r.selectionEnd   = start + tableMarkdown.length;
+      r.focus();
+      updatePreview();
+    }
+
+    function insertHR() {
+      let r = document.getElementById('mdEditor');
+      let start = r.selectionStart;
+      let text = r.value;
+
+      let hr = '\n\n---\n\n';
+
+      r.value = text.substring(0, start) + hr + text.substring(start);
+      r.selectionStart = r.selectionEnd = start + hr.length;
+      r.focus();
+      updatePreview();
+    }
+
+    function insertLink() {
+      let r = document.getElementById('mdEditor');
+      let start = r.selectionStart;
+      let end   = r.selectionEnd;
+      let text  = r.value;
+      let selectedText = text.substring(start, end);
+
+      let linkText = selectedText || prompt('Teks link:', '') || 'teks';
+      let linkUrl  = prompt('URL:', 'https://');
+
+      if (!linkUrl || linkUrl === 'https://') return;
+
+      let markdown = `[${linkText}](${linkUrl})`;
+
+      r.value = text.substring(0, start) + markdown + text.substring(end);
+
+      r.selectionStart = r.selectionEnd = start + markdown.length;
+      r.focus();
+      updatePreview();
+    }
+
+    document.getElementById('mdEditor').addEventListener('keydown', function(e) {
+      const ctrl = e.ctrlKey || e.metaKey;
+
+      if (ctrl && e.key === 'b') {
+        e.preventDefault();
+        insertFmt('**', '**');
+      }
+
+      if (ctrl && e.key === 'i') {
+        e.preventDefault();
+        insertFmt('*', '*');
+      }
+
+      if (ctrl && e.key === '`') {
+        e.preventDefault();
+        insertFmt('`', '`');
+      }
+
+      if (ctrl && e.key === 'k') {
+        e.preventDefault();
+        insertLink();
+      }
+
+      if (ctrl && e.shiftKey && e.key === '8') {
+        e.preventDefault();
+        insertFmt('- ', '');
+      }
+
+      if (ctrl && e.shiftKey && e.key === '7') {
+        e.preventDefault();
+        insertNumberedList();
+      }
+
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        let r = this;
+        let start = r.selectionStart;
+        let end   = r.selectionEnd;
+        let text  = r.value;
+
+        if (start !== end) {
+          let lineStart = text.lastIndexOf('\n', start - 1) + 1;
+          let lineEnd   = text.indexOf('\n', end);
+          if (lineEnd === -1) lineEnd = text.length;
+
+          let selectedLines = text.substring(lineStart, lineEnd).split('\n');
+
+          if (e.shiftKey) {
+            let unindented = selectedLines.map(line =>
+              line.startsWith('  ') ? line.substring(2) : line
+            ).join('\n');
+            r.value = text.substring(0, lineStart) + unindented + text.substring(lineEnd);
+          } else {
+            let indented = selectedLines.map(line => '  ' + line).join('\n');
+            r.value = text.substring(0, lineStart) + indented + text.substring(lineEnd);
+          }
+        } else {
+          r.value = text.substring(0, start) + '  ' + text.substring(end);
+          r.selectionStart = r.selectionEnd = start + 2;
+        }
+        updatePreview();
+      }
+    });
 
     // --- PUBLISH: SSG LOGIC ---
     async function publish() {

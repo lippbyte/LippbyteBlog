@@ -169,11 +169,19 @@ document.addEventListener('DOMContentLoaded', () => {
       const color = post.color || 'linear-gradient(135deg, #1f2937 0%, #111827 100%)';
       const emoji = post.emoji || '📄';
       const link = `../blog/${post.slug}/index.html`;
+      
+      // Feature: Support thumbnail image
+      let coverContent = `<span style="font-size:2.8rem;">${emoji}</span>`;
+      if (post.image) {
+        // Handle absolute or relative path
+        const imgPath = post.image.startsWith('http') ? post.image : `../${post.image}`;
+        coverContent = `<img src="${imgPath}" alt="${post.title}" style="width:100%; height:100%; object-fit:cover;">`;
+      }
 
       return `
       <a href="${link}" class="blog-card" style="opacity:0; transform:translateY(16px); transition: opacity .4s ease, transform .4s ease;">
-        <div class="card-cover" style="background: ${color}; display:flex; align-items:center; justify-content:center;">
-          <span style="font-size:2.8rem;">${emoji}</span>
+        <div class="card-cover" style="background: ${color}; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+          ${coverContent}
         </div>
         <div class="card-body">
           <p class="card-category">${post.category || 'Dokumentasi'}</p>
@@ -206,6 +214,23 @@ document.addEventListener('DOMContentLoaded', () => {
       renderGrid(allReversed);
 
       // Filter Logic
+      const categoryFilter = document.getElementById('categoryFilter');
+      if (categoryFilter) {
+        const categories = new Set();
+        posts.forEach(p => {
+          if (p.category) {
+            const mainCat = p.category.split('·')[0].trim();
+            categories.add(mainCat);
+          }
+        });
+        
+        let filterHtml = `<button class="filter-btn active" data-category="all">Semua</button>`;
+        categories.forEach(cat => {
+          filterHtml += `<button class="filter-btn" data-category="${cat.toLowerCase()}">${cat}</button>`;
+        });
+        categoryFilter.innerHTML = filterHtml;
+      }
+
       const filterBtns = document.querySelectorAll('.filter-btn');
       filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -219,13 +244,21 @@ document.addEventListener('DOMContentLoaded', () => {
           } else {
             const filtered = allReversed.filter(p => {
               const pCat = (p.category || '').toLowerCase();
-              // Check if category includes the filter term (e.g. "Belajar" matches "Database · Belajar")
               return pCat.includes(cat.toLowerCase());
             });
             renderGrid(filtered);
           }
         });
       });
+    }
+
+    // Sidebar Other Blogs
+    const sidebarTopBlogs = document.getElementById('sidebarTopBlogs');
+    if (sidebarTopBlogs) {
+      const recent = posts.slice(-2).reverse();
+      sidebarTopBlogs.innerHTML = recent.map(post => {
+        return `<a href="../../blog/${post.slug}/index.html" class="flex items-center gap-2 py-1.5 text-xs text-text-muted hover:text-accent transition-colors"><span>${post.emoji}</span> ${post.title}</a>`;
+      }).join('');
     }
 
     // Trigger intersection observer for new cards

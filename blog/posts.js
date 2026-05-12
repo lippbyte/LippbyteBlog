@@ -3,7 +3,7 @@ window.BLOG_POSTS = [
   {
     "slug": "laravel-log",
     "title": "Laravel Blog",
-    "category": "Dokumentasi",
+    "category": "Learning",
     "description": "Dokumentasi Pembelajaran Laravel",
     "image": "blog/assets/img/laravel-log/1777382922232_laravel.jpg",
     "emoji": "📃",

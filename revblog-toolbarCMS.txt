@@ -1,0 +1,1024 @@
+================================================================
+  DOKUMENTASI PEMBELAJARAN — LippbyteBlog
+  Topik  : Perkaya Toolbar CMS (Table, Numbered List, Shortcut)
+  Level  : Lengkap (logika, fungsi, konsep, implementasi)
+  Dibuat : 2026
+  Oleh   : Mentor Claude (untuk Muhammad Khalifa / Lippbyte)
+================================================================
+
+DAFTAR ISI
+----------
+1. Kondisi Toolbar Saat Ini
+2. Fitur yang Perlu Ditambahkan
+3. Konsep Dasar yang Perlu Dipahami
+4. Bagaimana Toolbar Bekerja (Trace Kode)
+5. Implementasi: Numbered List
+6. Implementasi: Table
+7. Implementasi: Keyboard Shortcut
+8. Implementasi: Callout Danger & Success
+9. Implementasi: Horizontal Rule (Divider)
+10. Implementasi: Link Insert
+11. Penjelasan Tiap Baris Kode Penting
+12. Checklist Setelah Implementasi
+13. Catatan Belajar
+
+================================================================
+1. KONDISI TOOLBAR SAAT INI
+================================================================
+
+File: admin/index.html
+
+Toolbar yang sudah ada:
+  [Bold] [Italic] [Code] | [H2] [H3] | [List] [Info] [Code Block] [Image]
+  ─────────────────────────────────────────────────────────────────────────
+  Keterangan:
+  - Bold       → **teks**
+  - Italic     → *teks*
+  - Code       → `teks` (inline code)
+  - H2         → ## Judul
+  - H3         → ### Judul
+  - List       → - item (unordered list / bullet)
+  - Info       → > **Catatan**\n> teks (blockquote callout)
+  - Code Block → ```php\n kode \n``` (fenced code block)
+  - Image      → upload ke GitHub, insert ![alt](url)
+
+Yang BELUM ada:
+  - Numbered list  (1. 2. 3.)
+  - Table          (| kolom | kolom |)
+  - Horizontal rule (---)
+  - Link           ([teks](url))
+  - Callout: Warning sudah ada via blockquote, tapi tidak ada
+             tombol khusus untuk Danger (error) dan Success (tip)
+  - Keyboard shortcut (Ctrl+B, Ctrl+I, dll)
+  - Undo/Redo tombol di toolbar
+
+
+================================================================
+2. FITUR YANG PERLU DITAMBAHKAN
+================================================================
+
+Prioritas berdasarkan frekuensi penggunaan di blog teknis:
+
+PRIORITAS TINGGI (sering dipakai):
+  1. Keyboard shortcut  → produktivitas menulis jauh meningkat
+  2. Numbered list      → untuk langkah-langkah (1, 2, 3, ...)
+  3. Link               → hyperlink teks
+  4. Table              → perbandingan, data
+
+PRIORITAS SEDANG:
+  5. Horizontal rule    → pemisah antar bagian
+  6. Callout Danger     → > **Error** \n> teks
+  7. Callout Success    → > **Tips** \n> teks (sudah ada via Tips)
+
+PRIORITAS RENDAH (nice to have):
+  8. Strikethrough      → ~~teks~~
+  9. Highlight/mark     → tidak ada di standard Markdown
+  10. Video embed       → butuh custom syntax
+
+
+================================================================
+3. KONSEP DASAR YANG PERLU DIPAHAMI
+================================================================
+
+---- 3A. Apa itu Markdown? -------------------------------------
+
+Markdown adalah bahasa markup ringan.
+Kamu menulis teks biasa dengan simbol-simbol tertentu,
+lalu "di-render" menjadi HTML oleh library (di project ini: marked.js).
+
+Contoh:
+  Yang kamu tulis di editor:
+    ## Judul Bagian
+    Ini adalah **teks tebal** dan *teks miring*.
+    - Item pertama
+    - Item kedua
+
+  Yang muncul di browser (HTML-nya):
+    <h2>Judul Bagian</h2>
+    <p>Ini adalah <strong>teks tebal</strong> dan <em>teks miring</em>.</p>
+    <ul>
+      <li>Item pertama</li>
+      <li>Item kedua</li>
+    </ul>
+
+Kenapa pakai Markdown dan bukan langsung HTML?
+  - Lebih mudah dibaca saat menulis
+  - Lebih cepat diketik
+  - Tidak perlu hafal tag HTML
+  - File teks yang bisa dibaca manusia
+
+
+---- 3B. Apa itu selectionStart dan selectionEnd? --------------
+
+Ini adalah properti dari elemen <textarea> di JavaScript.
+
+Bayangkan kamu punya teks di editor:
+  "Halo dunia yang indah"
+   0123456789...
+
+Kalau kamu select kata "dunia" (posisi 5-10):
+  textarea.selectionStart = 5
+  textarea.selectionEnd   = 10
+  textarea.value.substring(5, 10) = "dunia"
+
+Ini yang dipakai fungsi insertFmt() untuk tahu:
+  - Di mana kursor berada (selectionStart == selectionEnd = tidak ada seleksi)
+  - Teks apa yang sedang diseleksi (substring dari start ke end)
+  - Di mana harus menyisipkan karakter baru
+
+
+---- 3C. Bagaimana Teks Disisipkan di Textarea? ----------------
+
+Cara manual (tidak pakai execCommand yang sudah deprecated):
+
+  function sisipkanTeks(textarea, sebelum, sesudah) {
+    let start = textarea.selectionStart;  // posisi awal seleksi
+    let end   = textarea.selectionEnd;   // posisi akhir seleksi
+    let teks  = textarea.value;           // semua teks di editor
+
+    let selected = teks.substring(start, end); // teks yang diseleksi
+
+    // Gabungkan: teks sebelum kursor + format + teks sesudah kursor
+    textarea.value =
+      teks.substring(0, start) +   // teks sebelum seleksi
+      sebelum +                     // prefix format (misal: **)
+      selected +                    // teks yang diseleksi
+      sesudah +                     // suffix format (misal: **)
+      teks.substring(end);          // teks setelah seleksi
+
+    // Pindahkan kursor ke dalam format yang baru dibuat
+    textarea.selectionStart = start + sebelum.length;
+    textarea.selectionEnd   = end   + sebelum.length;
+
+    textarea.focus(); // kembalikan fokus ke textarea
+  }
+
+  Contoh penggunaan (bold):
+    sisipkanTeks(editor, '**', '**')
+    → sebelum = '**', sesudah = '**'
+    → "Halo [dunia] indah" jadi "Halo **dunia** indah"
+
+
+---- 3D. Apa itu Keyboard Event? -------------------------------
+
+Browser bisa mendeteksi tombol apa yang ditekan:
+
+  document.addEventListener('keydown', function(event) {
+    console.log(event.key);      // nama tombol: "b", "Enter", dll
+    console.log(event.ctrlKey);  // true kalau Ctrl ditekan
+    console.log(event.metaKey);  // true kalau Cmd ditekan (Mac)
+    console.log(event.shiftKey); // true kalau Shift ditekan
+  });
+
+  Untuk shortcut Ctrl+B:
+    event.ctrlKey === true && event.key === 'b'
+
+  Untuk kompatibilitas Mac (Cmd+B):
+    (event.ctrlKey || event.metaKey) && event.key === 'b'
+
+  event.preventDefault() mencegah aksi default browser.
+  Contoh: Ctrl+B di browser biasanya = bookmark halaman.
+  Dengan preventDefault(), kita bisa "curi" shortcut itu
+  untuk fungsi kita sendiri (bold di editor).
+
+
+---- 3E. Markdown Table Syntax ---------------------------------
+
+  | Kolom 1  | Kolom 2  | Kolom 3  |
+  |----------|----------|----------|
+  | Data A   | Data B   | Data C   |
+  | Data D   | Data E   | Data F   |
+
+  Aturan:
+  - Baris pertama = header
+  - Baris kedua   = separator (harus ada minimal tiga ---)
+  - Baris selanjutnya = data
+
+  Variasi alignment:
+  |:---------|  ← rata kiri (default)
+  |---------:|  ← rata kanan
+  |:--------:|  ← tengah
+
+
+---- 3F. Apa itu Template Literal (Backtick String)? -----------
+
+Di JavaScript, ada 3 cara tulis string:
+  'teks biasa'          ← single quote
+  "teks biasa"          ← double quote
+  `teks dengan ${var}`  ← template literal (backtick)
+
+Template literal punya kemampuan tambahan:
+  1. Bisa multiline tanpa \n:
+     let html = `
+       <div>
+         <p>Halo</p>
+       </div>
+     `;
+
+  2. Bisa menyisipkan variabel dengan ${}:
+     let nama = "Lip";
+     let pesan = `Halo, ${nama}!`;
+     // hasilnya: "Halo, Lip!"
+
+Di fungsi toolbar nanti, kita akan pakai ini untuk
+membuat template Markdown yang sudah diformat.
+
+
+================================================================
+4. BAGAIMANA TOOLBAR BEKERJA (TRACE KODE)
+================================================================
+
+Mari kita trace fungsi insertFmt() yang sudah ada
+di admin/index.html secara detail:
+
+```javascript
+function insertFmt(before, after) {
+  // [1] Ambil referensi ke textarea editor
+  let r = document.getElementById('mdEditor');
+
+  // [2] Simpan posisi kursor / seleksi saat ini
+  let start = r.selectionStart;
+  let end = r.selectionEnd;
+
+  // [3] Ambil semua teks yang ada di editor
+  let text = r.value;
+
+  // [4] Ambil teks yang sedang diseleksi
+  let selectedText = text.substring(start, end);
+
+  // [5] Cek apakah ini format level-baris atau inline
+  // isLineFmt = true kalau "before" adalah prefix baris
+  const isLineFmt = ['- ', '## ', '### ', '> **Catatan**\n> '].includes(before);
+
+  if (isLineFmt) {
+    // --- LOGIKA FORMAT BARIS (LINE-LEVEL) ---
+
+    // [6a] Cari awal baris pertama yang diseleksi
+    //      lastIndexOf('\n', start-1) cari newline terakhir sebelum start
+    //      +1 untuk melewati karakter newline itu sendiri
+    let lineStart = text.lastIndexOf('\n', start - 1) + 1;
+
+    // [6b] Cari akhir baris terakhir yang diseleksi
+    //      indexOf('\n', end) cari newline pertama setelah end
+    //      Kalau tidak ada (-1), pakai panjang teks (akhir dokumen)
+    let lineEnd = text.indexOf('\n', end);
+    if (lineEnd === -1) lineEnd = text.length;
+
+    // [6c] Ambil semua baris yang termasuk seleksi
+    let selectedLinesText = text.substring(lineStart, lineEnd);
+    let lines = selectedLinesText.split('\n');
+
+    // [6d] Toggle format untuk setiap baris
+    //      Kalau sudah ada prefix "- ", hapus
+    //      Kalau belum ada, tambahkan
+    let replacement = lines.map(line => {
+      if (before === '- ' && line.startsWith('- ')) return line.substring(2);
+      if (before === '## ' && line.startsWith('## ')) return line.substring(3);
+      if (before === '### ' && line.startsWith('### ')) return line.substring(4);
+      return before + line + after;  // tambahkan format
+    }).join('\n');
+
+    // [6e] Tulis ulang teks: sebelum seleksi + teks terformat + sesudah
+    r.value = text.substring(0, lineStart) + replacement + text.substring(lineEnd);
+
+    // [6f] Pindahkan seleksi ke area yang baru diformat
+    r.focus();
+    r.selectionStart = lineStart;
+    r.selectionEnd = lineStart + replacement.length;
+
+  } else {
+    // --- LOGIKA FORMAT INLINE (KARAKTER-LEVEL) ---
+
+    // [7a] Tulis ulang teks dengan format inline di sekitar seleksi
+    r.value = text.substring(0, start) + before + selectedText + after + text.substring(end);
+
+    r.focus();
+    if (start === end) {
+      // [7b] Kalau tidak ada seleksi, taruh kursor di dalam format
+      //      Misal klik Bold tanpa seleksi: |**| → kursor di antara **
+      r.selectionStart = start + before.length;
+      r.selectionEnd = start + before.length;
+    } else {
+      // [7c] Kalau ada seleksi, pertahankan seleksi teks tersebut
+      r.selectionStart = start + before.length;
+      r.selectionEnd = end + before.length;
+    }
+  }
+
+  // [8] Trigger update preview agar perubahan langsung terlihat
+  updatePreview();
+}
+```
+
+KESIMPULAN TRACE:
+  - insertFmt('**', '**')  → bold inline
+  - insertFmt('- ', '')    → bullet list (line-level, ada toggle)
+  - insertFmt('## ', '')   → heading (line-level, ada toggle)
+  - Format apapun bisa ditambahkan dengan pola yang sama
+
+
+================================================================
+5. IMPLEMENTASI: NUMBERED LIST
+================================================================
+
+Numbered list di Markdown:
+  1. Item pertama
+  2. Item kedua
+  3. Item ketiga
+
+Tantangan: berbeda dari bullet list yang pakai "- " (prefix sama
+untuk semua baris), numbered list pakai angka berbeda di tiap baris
+(1. 2. 3.).
+
+Solusi: buat fungsi khusus insertNumberedList():
+
+```javascript
+function insertNumberedList() {
+  let r = document.getElementById('mdEditor');
+  let start = r.selectionStart;
+  let end = r.selectionEnd;
+  let text = r.value;
+
+  // Cari batas baris yang diseleksi (sama dengan logika insertFmt)
+  let lineStart = text.lastIndexOf('\n', start - 1) + 1;
+  let lineEnd = text.indexOf('\n', end);
+  if (lineEnd === -1) lineEnd = text.length;
+
+  let selectedLinesText = text.substring(lineStart, lineEnd);
+  let lines = selectedLinesText.split('\n');
+
+  // Cek apakah baris pertama sudah bernomor
+  // Regex /^\d+\.\s/ artinya:
+  //   ^ = awal string
+  //   \d+ = satu atau lebih angka
+  //   \. = titik (harus di-escape karena . punya arti khusus di regex)
+  //   \s = spasi
+  let alreadyNumbered = /^\d+\.\s/.test(lines[0]);
+
+  let replacement;
+  if (alreadyNumbered) {
+    // Toggle off: hapus nomor dari semua baris
+    // "line.replace(/^\d+\.\s/, '')" → hapus "1. " dari awal baris
+    replacement = lines.map(line => line.replace(/^\d+\.\s/, '')).join('\n');
+  } else {
+    // Toggle on: tambahkan nomor ke semua baris
+    // index + 1 karena array mulai dari 0, tapi list dari 1
+    replacement = lines.map((line, index) => `${index + 1}. ${line}`).join('\n');
+  }
+
+  r.value = text.substring(0, lineStart) + replacement + text.substring(lineEnd);
+  r.focus();
+  r.selectionStart = lineStart;
+  r.selectionEnd = lineStart + replacement.length;
+  updatePreview();
+}
+```
+
+Cara menambahkan tombol di toolbar HTML:
+```html
+<!-- Tambahkan setelah tombol List yang sudah ada -->
+<button class="toolbar-btn flex items-center gap-1.5 px-2.5"
+        onclick="insertNumberedList()"
+        title="Numbered List (Ctrl+Shift+7)">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+       stroke="currentColor" stroke-width="2"
+       stroke-linecap="round" stroke-linejoin="round">
+    <line x1="10" y1="6" x2="21" y2="6"></line>
+    <line x1="10" y1="12" x2="21" y2="12"></line>
+    <line x1="10" y1="18" x2="21" y2="18"></line>
+    <path d="M4 6h1v4"></path>
+    <path d="M4 10h2"></path>
+    <path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"></path>
+  </svg>
+  OL
+</button>
+```
+
+Penjelasan SVG icon:
+  - Tiga <line> = garis teks di sebelah kanan
+  - <path> pertama dan kedua = angka "1" dengan serif
+  - <path> ketiga = angka "2"
+  Alternatif: pakai teks OL (Ordered List) saja kalau SVG terlalu rumit
+
+
+================================================================
+6. IMPLEMENTASI: TABLE
+================================================================
+
+Markdown table template yang ingin disisipkan:
+  | Kolom 1 | Kolom 2 | Kolom 3 |
+  |---------|---------|---------|
+  | Data    | Data    | Data    |
+  | Data    | Data    | Data    |
+
+Strategi: buat fungsi insertTable() yang meminta input
+jumlah baris dan kolom dari user, lalu generate template.
+
+```javascript
+function insertTable() {
+  // Tanya user berapa kolom dan baris yang diinginkan
+  // prompt() menampilkan dialog input bawaan browser
+  let cols = parseInt(prompt('Jumlah kolom?', '3'));
+  let rows = parseInt(prompt('Jumlah baris data? (tidak termasuk header)', '2'));
+
+  // Validasi: kalau user klik Cancel atau input bukan angka
+  if (isNaN(cols) || isNaN(rows) || cols < 1 || rows < 1) return;
+
+  // Buat baris header
+  // Array(cols).fill('Kolom') → array berisi 'Kolom' sebanyak cols kali
+  //   contoh cols=3: ['Kolom', 'Kolom', 'Kolom']
+  // .map((_, i) => ...) → ubah tiap elemen, _ = nilai (diabaikan), i = index
+  //   hasil: ['Kolom 1', 'Kolom 2', 'Kolom 3']
+  // .join(' | ') → gabungkan dengan ' | ' sebagai pemisah
+  //   hasil: 'Kolom 1 | Kolom 2 | Kolom 3'
+  let headerCells = Array(cols).fill('Kolom').map((_, i) => `Kolom ${i+1}`).join(' | ');
+  let headerRow = `| ${headerCells} |`;
+
+  // Buat baris separator (--- untuk setiap kolom)
+  let separatorCells = Array(cols).fill('---------').join(' | ');
+  let separatorRow = `| ${separatorCells} |`;
+
+  // Buat baris data (kosong, siap diisi)
+  let dataCells = Array(cols).fill('Data').join(' | ');
+  let dataRowTemplate = `| ${dataCells} |`;
+
+  // Buat semua baris data sesuai jumlah rows
+  let dataRows = Array(rows).fill(dataRowTemplate).join('\n');
+
+  // Gabungkan semua bagian tabel
+  // \n = newline (baris baru)
+  let tableMarkdown = `\n${headerRow}\n${separatorRow}\n${dataRows}\n`;
+
+  // Sisipkan ke editor di posisi kursor
+  let r = document.getElementById('mdEditor');
+  let start = r.selectionStart;
+  let text = r.value;
+
+  r.value = text.substring(0, start) + tableMarkdown + text.substring(start);
+
+  // Pindahkan kursor ke akhir tabel yang baru dibuat
+  r.selectionStart = start + tableMarkdown.length;
+  r.selectionEnd   = start + tableMarkdown.length;
+  r.focus();
+  updatePreview();
+}
+```
+
+Tambahkan tombol di toolbar:
+```html
+<button class="toolbar-btn flex items-center gap-1.5 px-2.5"
+        onclick="insertTable()"
+        title="Insert Table">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+       stroke="currentColor" stroke-width="2"
+       stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="3" width="18" height="18" rx="2"/>
+    <line x1="3"  y1="9"  x2="21" y2="9"/>
+    <line x1="3"  y1="15" x2="21" y2="15"/>
+    <line x1="9"  y1="3"  x2="9"  y2="21"/>
+    <line x1="15" y1="3"  x2="15" y2="21"/>
+  </svg>
+  Table
+</button>
+```
+
+Contoh output untuk 3 kolom, 2 baris:
+  | Kolom 1  | Kolom 2  | Kolom 3  |
+  |---------|---------|---------|
+  | Data    | Data    | Data    |
+  | Data    | Data    | Data    |
+
+
+================================================================
+7. IMPLEMENTASI: KEYBOARD SHORTCUT
+================================================================
+
+Tambahkan event listener di textarea atau document.
+Tempatkan kode ini di dalam <script>, SETELAH fungsi insertFmt:
+
+```javascript
+// Event listener untuk keyboard shortcut di editor
+document.getElementById('mdEditor').addEventListener('keydown', function(e) {
+
+  // Deteksi Ctrl (Windows/Linux) atau Cmd (Mac)
+  // e.metaKey = true kalau Cmd ditekan di Mac
+  // e.ctrlKey = true kalau Ctrl ditekan di Windows/Linux
+  const ctrl = e.ctrlKey || e.metaKey;
+
+  // ── Shortcut Ctrl+B → Bold ──
+  if (ctrl && e.key === 'b') {
+    e.preventDefault(); // cegah aksi default browser (bookmark, dll)
+    insertFmt('**', '**');
+  }
+
+  // ── Shortcut Ctrl+I → Italic ──
+  if (ctrl && e.key === 'i') {
+    e.preventDefault();
+    insertFmt('*', '*');
+  }
+
+  // ── Shortcut Ctrl+` → Inline Code ──
+  // Backtick (`) adalah karakter inline code di Markdown
+  if (ctrl && e.key === '`') {
+    e.preventDefault();
+    insertFmt('`', '`');
+  }
+
+  // ── Shortcut Ctrl+K → Insert Link ──
+  if (ctrl && e.key === 'k') {
+    e.preventDefault();
+    insertLink();
+  }
+
+  // ── Shortcut Ctrl+Shift+8 → Bullet List ──
+  // Kenapa Shift+8? Karena Shift+8 = * di keyboard
+  // Ini mirip dengan shortcut Google Docs
+  if (ctrl && e.shiftKey && e.key === '8') {
+    e.preventDefault();
+    insertFmt('- ', '');
+  }
+
+  // ── Shortcut Ctrl+Shift+7 → Numbered List ──
+  if (ctrl && e.shiftKey && e.key === '7') {
+    e.preventDefault();
+    insertNumberedList();
+  }
+
+  // ── Tab → Insert 2 spasi (indentasi) ──
+  // Default Tab di textarea = pindah fokus ke elemen berikutnya
+  // Kita override agar Tab menjadi indentasi
+  if (e.key === 'Tab') {
+    e.preventDefault();
+    let r = this; // 'this' di dalam event listener = elemen yang di-listen
+    let start = r.selectionStart;
+    let end   = r.selectionEnd;
+    let text  = r.value;
+
+    // Kalau ada teks yang diseleksi, indent semua baris
+    if (start !== end) {
+      let lineStart = text.lastIndexOf('\n', start - 1) + 1;
+      let lineEnd   = text.indexOf('\n', end);
+      if (lineEnd === -1) lineEnd = text.length;
+
+      let selectedLines = text.substring(lineStart, lineEnd).split('\n');
+
+      if (e.shiftKey) {
+        // Shift+Tab = unindent (hapus 2 spasi dari awal baris)
+        let unindented = selectedLines.map(line =>
+          line.startsWith('  ') ? line.substring(2) : line
+        ).join('\n');
+        r.value = text.substring(0, lineStart) + unindented + text.substring(lineEnd);
+      } else {
+        // Tab = indent (tambah 2 spasi di awal baris)
+        let indented = selectedLines.map(line => '  ' + line).join('\n');
+        r.value = text.substring(0, lineStart) + indented + text.substring(lineEnd);
+      }
+    } else {
+      // Tidak ada seleksi: insert 2 spasi di posisi kursor
+      r.value = text.substring(0, start) + '  ' + text.substring(end);
+      r.selectionStart = r.selectionEnd = start + 2;
+    }
+    updatePreview();
+  }
+});
+```
+
+PENTING — Kenapa harus e.preventDefault()?
+  Browser sudah punya makna untuk beberapa shortcut:
+    Ctrl+B = Bookmark (di beberapa browser)
+    Ctrl+I = Italic di rich text, atau Info bar
+    Ctrl+K = Hyperlink di beberapa editor, atau Focus URL bar
+    Tab    = Pindah fokus ke elemen berikutnya
+
+  Kalau tidak di-preventDefault(), shortcut kita dan browser
+  akan bentrok. e.preventDefault() = "batalkan aksi default browser,
+  saya yang handle sendiri."
+
+
+================================================================
+8. IMPLEMENTASI: CALLOUT DANGER & SUCCESS
+================================================================
+
+Saat ini sudah ada tombol "Info" yang menghasilkan:
+  > **Catatan**
+  > teks
+
+Kita tambahkan tombol untuk Warning (sudah ada via blockquote
+renderer), Danger, dan Success. Tapi tombol khususnya belum ada.
+
+Tambahkan ke toolbar:
+```html
+<!-- Tombol Callout Warning -->
+<button class="toolbar-btn flex items-center gap-1.5 px-2.5"
+        onclick="insertFmt('> **Peringatan**\n> ', '')"
+        title="Warning Callout">
+  ⚠
+</button>
+
+<!-- Tombol Callout Danger/Error -->
+<button class="toolbar-btn flex items-center gap-1.5 px-2.5"
+        onclick="insertFmt('> **Error**\n> ', '')"
+        title="Danger/Error Callout">
+  ❌
+</button>
+
+<!-- Tombol Callout Tips/Success -->
+<button class="toolbar-btn flex items-center gap-1.5 px-2.5"
+        onclick="insertFmt('> **Tips**\n> ', '')"
+        title="Tips/Success Callout">
+  ✅
+</button>
+```
+
+TAPI ADA MASALAH: renderer Markdown di admin/index.html hanya
+mendeteksi kata-kata tertentu untuk jenis callout:
+  - (catatan|note|info)     → callout-note (biru)
+  - (peringatan|warning)    → callout-warn (kuning)
+  - (tips|best practice|✅) → callout-tip  (hijau)
+
+Tidak ada handler untuk "Error" atau "Danger".
+Kita perlu tambahkan ke renderer.blockquote:
+
+```javascript
+// Cari bagian ini di script:
+renderer.blockquote = q => {
+  let qStr = typeof q === 'object' ? (q.text || q.raw || '') : q;
+  let text = String(qStr).replace(/<[^>]*>?/gm, '').trim();
+
+  if(/(catatan|note|info|fun fact)/i.test(text.substring(0,25))) {
+    return `...callout-note...`;
+  }
+  if(/(peringatan|warning|perhatian)/i.test(text.substring(0,25))) {
+    return `...callout-warn...`;
+  }
+  if(/(tips|best practice|✅)/i.test(text.substring(0,25))) {
+    return `...callout-tip...`;
+  }
+
+  // TAMBAHKAN INI — handler untuk Error/Danger:
+  if(/(error|danger|❌|penting)/i.test(text.substring(0,25))) {
+    return `<div class="callout callout-danger">
+      <span class="callout-icon text-base shrink-0 leading-7">❌</span>
+      <div class="callout-body flex-1">
+        <p class="callout-title text-[.73rem] font-bold tracking-wider uppercase mb-1">Perhatian!</p>
+        <div class="text-sm leading-relaxed">${qStr}</div>
+      </div>
+    </div>`;
+  }
+
+  return `<blockquote ...>${qStr}</blockquote>`;
+};
+```
+
+Tambahkan CSS untuk callout-danger di blog/template/css/style.css
+(atau shared/tokens.css kalau sudah diimplementasi dari dok sebelumnya):
+
+```css
+/* Tambahkan variabel callout-danger di :root */
+:root {
+  /* ... variabel yang sudah ada ... */
+  --danger-bg:     #fff1f2;
+  --danger-border: #fda4af;
+  --danger-text:   #881337;
+}
+
+html.dark {
+  /* ... variabel dark yang sudah ada ... */
+  --danger-bg:     #4c0519;
+  --danger-border: #9f1239;
+  --danger-text:   #fda4af;
+}
+
+/* Tambahkan class callout-danger */
+.callout-danger {
+  background: var(--danger-bg);
+  border-color: var(--danger-border);
+  color: var(--danger-text);
+}
+```
+
+
+================================================================
+9. IMPLEMENTASI: HORIZONTAL RULE (DIVIDER)
+================================================================
+
+Horizontal rule di Markdown = tiga tanda min: ---
+
+```javascript
+function insertHR() {
+  let r = document.getElementById('mdEditor');
+  let start = r.selectionStart;
+  let text = r.value;
+
+  // Horizontal rule harus diawali dan diakhiri baris kosong
+  // agar tidak dianggap bagian dari paragraf di atasnya
+  let hr = '\n\n---\n\n';
+
+  r.value = text.substring(0, start) + hr + text.substring(start);
+  r.selectionStart = r.selectionEnd = start + hr.length;
+  r.focus();
+  updatePreview();
+}
+```
+
+Tombol di toolbar:
+```html
+<button class="toolbar-btn flex items-center gap-1.5 px-2.5"
+        onclick="insertHR()"
+        title="Horizontal Rule / Divider">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+       stroke="currentColor" stroke-width="2"
+       stroke-linecap="round">
+    <line x1="3" y1="12" x2="21" y2="12"/>
+  </svg>
+  HR
+</button>
+```
+
+
+================================================================
+10. IMPLEMENTASI: LINK INSERT
+================================================================
+
+```javascript
+function insertLink() {
+  let r = document.getElementById('mdEditor');
+  let start = r.selectionStart;
+  let end   = r.selectionEnd;
+  let text  = r.value;
+  let selectedText = text.substring(start, end);
+
+  // Kalau ada teks yang diseleksi, jadikan sebagai teks link
+  // Kalau tidak, minta input dari user
+  let linkText = selectedText || prompt('Teks link:', '') || 'teks';
+  let linkUrl  = prompt('URL:', 'https://');
+
+  // Kalau user klik Cancel di prompt URL, batalkan
+  if (!linkUrl || linkUrl === 'https://') return;
+
+  // Format Markdown link: [teks](url)
+  let markdown = `[${linkText}](${linkUrl})`;
+
+  r.value = text.substring(0, start) + markdown + text.substring(end);
+
+  // Kursor di akhir link yang baru dibuat
+  r.selectionStart = r.selectionEnd = start + markdown.length;
+  r.focus();
+  updatePreview();
+}
+```
+
+Tombol di toolbar:
+```html
+<button class="toolbar-btn flex items-center gap-1.5 px-2.5"
+        onclick="insertLink()"
+        title="Insert Link (Ctrl+K)">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+       stroke="currentColor" stroke-width="2"
+       stroke-linecap="round" stroke-linejoin="round">
+    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+  </svg>
+  Link
+</button>
+```
+
+
+================================================================
+11. PENJELASAN TIAP BARIS KODE PENTING
+================================================================
+
+---- A. Array(n).fill(value).map() ----------------------------
+
+  Array(3).fill('Kolom').map((_, i) => `Kolom ${i+1}`)
+
+  Langkah per langkah:
+    1. Array(3)              → [empty, empty, empty] (array kosong 3 slot)
+    2. .fill('Kolom')        → ['Kolom', 'Kolom', 'Kolom']
+    3. .map((_, i) => ...)   → iterasi tiap elemen
+       _ = nilai elemen (kita tidak butuh, diabaikan dengan _)
+       i = index (0, 1, 2)
+       `Kolom ${i+1}`        → 'Kolom 1', 'Kolom 2', 'Kolom 3'
+    Hasil: ['Kolom 1', 'Kolom 2', 'Kolom 3']
+
+  .join(' | ')               → 'Kolom 1 | Kolom 2 | Kolom 3'
+
+
+---- B. Regex di JavaScript ------------------------------------
+
+  /^\d+\.\s/.test(lines[0])
+
+  Regex (Regular Expression) = pola untuk mencocokkan teks.
+
+  Breakdown pola /^\d+\.\s/:
+    /      → pembuka regex
+    ^      → awal string
+    \d+    → satu atau lebih digit (0-9)
+               \d = "digit character"
+               +  = "satu atau lebih"
+    \.     → titik literal
+               Di regex, titik (.) artinya "karakter apapun"
+               \. (backslash) = escape, artinya titik yang sebenarnya
+    \s     → satu whitespace (spasi, tab)
+               \s = "whitespace character"
+    /      → penutup regex
+
+  Contoh yang cocok:
+    "1. Item pertama"    → cocok ✓ (1, titik, spasi)
+    "12. Item"           → cocok ✓ (12, titik, spasi)
+  Contoh yang tidak cocok:
+    "- Item"             → tidak cocok ✗
+    "Item"               → tidak cocok ✗
+
+  .test(string) = return true kalau cocok, false kalau tidak
+
+
+---- C. 'this' di Event Listener --------------------------------
+
+  document.getElementById('mdEditor').addEventListener('keydown', function(e) {
+    let r = this; // 'this' = elemen yang menerima event
+    ...
+  });
+
+  Di dalam function biasa (bukan arrow function), 'this' otomatis
+  merujuk ke elemen yang di-addEventListener.
+
+  Kalau pakai arrow function:
+    addEventListener('keydown', (e) => {
+      let r = this; // SALAH! 'this' di arrow function = context luar
+    });
+
+  Lebih aman tulis eksplisit:
+    let r = document.getElementById('mdEditor');
+
+  Atau pakai e.target:
+    let r = e.target; // elemen yang menerima event (sama hasilnya)
+
+
+---- D. Kenapa e.preventDefault() harus sebelum logika? --------
+
+  if (ctrl && e.key === 'b') {
+    e.preventDefault(); // ← DULU ini
+    insertFmt('**', '**'); // ← baru ini
+  }
+
+  Kalau dibalik:
+    insertFmt('**', '**');
+    e.preventDefault();
+
+  Ada kemungkinan browser sempat menjalankan aksi defaultnya
+  sebelum preventDefault() dipanggil (tergantung implementasi browser).
+  Untuk keamanan, selalu panggil preventDefault() lebih dulu.
+
+
+---- E. String.prototype.startsWith() -------------------------
+
+  line.startsWith('- ')
+
+  Memeriksa apakah string dimulai dengan substring tertentu.
+  Return: true atau false
+
+  Contoh:
+    '- Item pertama'.startsWith('- ')  → true
+    'Item pertama'.startsWith('- ')    → false
+    '  - Item'.startsWith('- ')        → false (ada spasi dulu)
+
+  Dipakai di toggle: kalau sudah ada prefix, hapus. Kalau belum, tambah.
+
+
+---- F. String.prototype.substring() vs slice() ---------------
+
+  text.substring(0, start)
+  text.slice(0, start)
+
+  Keduanya hampir sama: ambil bagian string dari index ke index.
+
+  Perbedaan:
+    substring(start, end): kalau start > end, ditukar otomatis
+    slice(start, end):      kalau negatif, dihitung dari akhir string
+
+  Di kode ini, substring() lebih aman karena kita tidak pakai
+  index negatif.
+
+
+---- G. isNaN() -----------------------------------------------
+
+  if (isNaN(cols) || isNaN(rows) || cols < 1 || rows < 1) return;
+
+  isNaN() = "is Not a Number"
+  Return true kalau nilai BUKAN angka.
+
+  Contoh:
+    isNaN(3)        → false (3 adalah angka)
+    isNaN('abc')    → true  ('abc' bukan angka)
+    isNaN(parseInt('abc')) → true (parseInt gagal = NaN)
+
+  parseInt(prompt(...), '3') bisa menghasilkan NaN kalau
+  user input huruf atau klik Cancel.
+  Validasi ini mencegah loop atau crash.
+
+
+================================================================
+12. CHECKLIST SETELAH IMPLEMENTASI
+================================================================
+
+[ ] 1. Tambahkan fungsi insertNumberedList() ke <script>
+[ ] 2. Tambahkan fungsi insertTable() ke <script>
+[ ] 3. Tambahkan fungsi insertLink() ke <script>
+[ ] 4. Tambahkan fungsi insertHR() ke <script>
+[ ] 5. Tambahkan event listener keyboard shortcut ke <script>
+[ ] 6. Tambahkan tombol Numbered List di HTML toolbar
+[ ] 7. Tambahkan tombol Table di HTML toolbar
+[ ] 8. Tambahkan tombol Link di HTML toolbar
+[ ] 9. Tambahkan tombol HR di HTML toolbar
+[ ] 10. Tambahkan tombol callout Warning, Danger, Success
+[ ] 11. Update renderer.blockquote untuk handler Danger/Error
+[ ] 12. Tambahkan variabel --danger-bg dll ke CSS
+
+TEST MANUAL — WAJIB DICOBA SATU PER SATU:
+[ ] Bold: select teks → Ctrl+B → jadi **teks**?
+[ ] Italic: select teks → Ctrl+I → jadi *teks*?
+[ ] Bold tanpa seleksi: Ctrl+B → kursor di antara ****?
+[ ] Link: Ctrl+K → muncul prompt → format [teks](url)?
+[ ] Numbered list: select 3 baris → klik OL → semua jadi 1. 2. 3.?
+[ ] Numbered list toggle: klik OL lagi → nomor hilang?
+[ ] Table: klik Table → prompt kolom 3, baris 2 → tabel 3x2 muncul?
+[ ] Tab: di editor tekan Tab → muncul 2 spasi?
+[ ] Shift+Tab: ada indentasi → Shift+Tab → indentasi berkurang?
+[ ] Callout Danger: klik ❌ → > **Error** muncul → preview merah?
+[ ] HR: klik HR → --- muncul dengan baris kosong di atas-bawah?
+[ ] Preview update otomatis setelah setiap aksi?
+
+
+================================================================
+13. CATATAN BELAJAR
+================================================================
+
+KONSEP BESAR YANG DIPELAJARI DI SINI:
+
+1. DOM Manipulation (Manipulasi DOM)
+   → Kita mengakses dan mengubah elemen HTML melalui JavaScript.
+     document.getElementById(), .value, .selectionStart semua
+     adalah bagian dari DOM API (Document Object Model).
+     DOM = representasi HTML sebagai objek yang bisa dimanipulasi JS.
+
+2. Event-Driven Programming
+   → Kode kita tidak berjalan terus-menerus, tapi "menunggu" event
+     (klik tombol, tekan keyboard, scroll, dll) baru kemudian berjalan.
+     Ini adalah paradigma pemrograman yang sangat penting di web.
+
+3. String Manipulation
+   → Hampir semua fitur toolbar = memanipulasi string.
+     Memotong (.substring), menggabungkan (+), mencari (.indexOf),
+     mengganti (.replace), memisah (.split), menggabung (.join).
+     Kuasai ini, kamu sudah bisa buat editor teks sendiri.
+
+4. Regular Expression (Regex)
+   → Bahasa khusus untuk mencocokkan pola dalam teks.
+     Dipakai di toggle numbered list (/^\d+\.\s/).
+     Ini adalah skill yang sangat powerful untuk pemrosesan teks,
+     validasi form, parsing data, dan banyak lagi.
+
+5. Array Methods Fungsional (.map, .filter, .join)
+   → Cara modern memproses array di JavaScript tanpa for loop.
+     .map() = transformasi tiap elemen
+     .filter() = saring elemen berdasarkan kondisi
+     .join() = gabungkan array menjadi string
+     Ini adalah pola yang dipakai di React, Vue, dan framework modern.
+
+6. UX (User Experience) dalam Editor
+   → Keyboard shortcut bukan sekadar fitur keren — ini adalah
+     kebutuhan untuk produktivitas. Editor profesional seperti
+     VS Code, Notion, Google Docs semuanya punya shortcut konsisten.
+     Mendesain shortcut yang intuitif (Ctrl+B = bold sudah universal)
+     adalah bagian dari UX Design.
+
+7. Feature Toggle Pattern
+   → Tombol List dan Numbered List yang bisa di-toggle on/off
+     adalah contoh "toggle pattern": satu aksi melakukan dua hal
+     berlawanan tergantung kondisi saat ini.
+     Pola ini juga dipakai di dark mode toggle, checkbox, dll.
+
+PERTANYAAN REFLEKSI:
+  - Mengapa insertTable() menggunakan prompt() alih-alih modal HTML?
+    Apa kelebihan dan kekurangan prompt()?
+  - Bagaimana cara membuat toolbar button yang "aktif" (highlighted)
+    saat kursor berada di dalam teks yang bold?
+  - Apa bedanya e.key dan e.keyCode? Mana yang lebih modern?
+  - Bagaimana cara membuat shortcut Ctrl+Z untuk undo di textarea?
+    (Hint: browser sudah punya built-in undo untuk textarea!)
+  - Kenapa Array(n).fill().map() lebih baik dari for loop
+    dalam konteks ini?
+
+REFERENSI UNTUK BELAJAR LEBIH LANJUT:
+  - Keyboard Events: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
+  - String Methods: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String
+  - Array Methods: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
+  - Regular Expressions: https://regexr.com (latihan interaktif)
+  - Markdown Spec: https://commonmark.org/help/
+
+================================================================
+  END OF DOCUMENT
+  File ini adalah bagian dari seri dokumentasi LippbyteBlog.
+  Dokumentasi berikutnya: Fitur Preview as Reader di CMS
+================================================================
