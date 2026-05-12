@@ -1,8 +1,17 @@
 {
-  "cleanUrls": false,
-  "trailingSlash": false,
-  "routes": [
-    { "src": "^/$", "dest": "/home/index.html" },
-    { "src": "/(.*)", "dest": "/$1" }
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/home/index.html",
+      "permanent": false
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*).css",
+      "headers": [
+        { "key": "Content-Type", "value": "text/css" }
+      ]
+    }
   ]
 }
