@@ -95,7 +95,7 @@ window.BLOG_POSTS = [
     "title": "Laravel Blog",
     "category": "Dokumentasi",
     "description": "Dokumentasi Laravel dari HTML scrape",
-    "emoji": "ð",
+    "emoji": "📃",
     "color": "linear-gradient(135deg, #1f2937 0%, #111827 100%)",
     "year": "2026"
   }
