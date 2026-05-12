@@ -3,8 +3,6 @@
    Lippbyte Blog Template
 ══════════════════════════════════════ */
 
-@import url('../../../shared/tokens.css');
-
 /* ── Base ── */
 ::selection { background: #ffd4c8; color: var(--text-primary); }
 body { background: var(--bg); color: var(--text-body); -webkit-font-smoothing: antialiased; }
