@@ -7,5 +7,14 @@
     "emoji": "📃",
     "status": "active",
     "year": "2026"
+  },
+  {
+    "id": "native-php-crud-dan-validasi",
+    "title": "Native PHP: Membuat CRUD dengan Relasi dan Validasi Input",
+    "category": "Dokumentasi",
+    "description": "",
+    "emoji": "📄",
+    "status": "active",
+    "year": "2026"
   }
 ]
