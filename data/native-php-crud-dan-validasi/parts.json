@@ -1,4 +1,17 @@
 {
-  "error": "Expected property name or '}' in JSON at position 1 (line 1 column 2)",
-  "raw": "\n{\n  \"topic\": \"native-php-crud-dan-validasi\",\n  \"title\": \"Native PHP: Membuat CRUD dengan Relasi dan Validasi Input\",\n  \"updatedAt\": \"2023-10-27T08:30:00Z\",\n  \"parts\": [\n    {\n      \"id\": \"crud-dengan"
+  "topic": "native-php-crud-dan-validasi",
+  "title": "Native PHP: Membuat CRUD dengan Relasi dan Validasi Input",
+  "updatedAt": "2023-10-27T08:30:00Z",
+  "parts": [
+    {
+      "id": "crud-dengan-relasi",
+      "title": "CRUD dengan Relasi",
+      "content": ""
+    },
+    {
+      "id": "validasi-input",
+      "title": "Validasi Input",
+      "content": ""
+    }
+  ]
 }
