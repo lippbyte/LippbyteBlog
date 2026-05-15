@@ -53,15 +53,14 @@ body { background: var(--bg); color: var(--text-body); -webkit-font-smoothing: a
 
 /* ── Code Blocks ── */
 .code-block {
-  margin: 2em 0; border-radius: 8px; overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  background: #0d1117;
-  border: 1px solid #30363d;
+  margin: 2.5em 0; border-radius: 12px; overflow: hidden;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4);
+  background: #1e1e1e;
 }
 .code-titlebar {
   background: transparent; 
-  padding: 12px 16px 8px 16px; 
-  display: flex; align-items: center; gap: 12px;
+  padding: 16px 20px 10px 20px; 
+  display: flex; align-items: center; gap: 8px;
 }
 .dot { width: 12px; height: 12px; border-radius: 50%; }
 .dot-r { background: #ff5f56; }
@@ -73,25 +72,26 @@ body { background: var(--bg); color: var(--text-body); -webkit-font-smoothing: a
   color: #8b949e !important;
 }
 .code-block pre { 
-  padding: 8px 16px 20px 16px; 
+  padding: 8px 20px 24px 20px; 
   margin: 0; 
   white-space: pre-wrap;
   word-wrap: break-word;
 }
 .code-block code {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.85rem; line-height: 1.7; color: #e6edf3;
+  font-size: 0.85rem; line-height: 1.7; color: #d4d4d4; /* Text color VSCode */
   display: block; tab-size: 4;
   white-space: pre-wrap;
   word-wrap: break-word;
 }
-.kw { color: #ff7b72; }
-.fn { color: #d2a8ff; }
-.st { color: #a5d6ff; }
-.cm { color: #8b949e; font-style: italic; }
-.nm { color: #79c0ff; }
-.cl { color: #ffa657; }
-.vr { color: #c9d1d9; }
+.kw, .token.keyword, .token.tag { color: #569cd6 !important; } /* VSCode keyword blue */
+.fn, .token.function { color: #dcdcaa !important; } /* VSCode function yellow */
+.st, .token.string, .token.char, .token.attr-value, .token.regex { color: #ce9178 !important; } /* VSCode string orange */
+.cm, .token.comment, .token.prolog, .token.doctype, .token.cdata { color: #6a9955 !important; font-style: italic !important; } /* VSCode comment green */
+.nm, .token.number, .token.boolean { color: #b5cea8 !important; } /* VSCode number green */
+.cl, .token.class-name, .token.builtin { color: #4ec9b0 !important; } /* VSCode class green */
+.vr, .token.variable, .token.property, .token.attr-name { color: #9cdcfe !important; } /* VSCode variable light blue */
+.token.punctuation, .token.operator { color: #d4d4d4 !important; }
 
 /* ── Callouts ── */
 .callout {
