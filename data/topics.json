@@ -2,10 +2,19 @@
   {
     "id": "laravel-log",
     "title": "Laravel Blog",
-    "category": "Dokumentasi",
+    "category": "Learing",
     "description": "Dokumentasi Pembelajaran Laravel",
     "emoji": "📃",
     "status": "active",
     "year": "2026"  
+  },
+  {
+    "id": "membuat-aplikasi-crud-php-mysql",
+    "title": "Praktik: Membuat Aplikasi CRUD PHP & MySQL",
+    "category": "Learing",
+    "description": "Tutorial membuat CRUD dasar",
+    "emoji": "🐘",
+    "status": "active",
+    "year": "2026"
   }
 ]
