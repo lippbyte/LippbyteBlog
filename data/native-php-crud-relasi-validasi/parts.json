@@ -1,0 +1,38 @@
+{
+  "topic": "native-php-crud-relasi-validasi",
+  "title": "Native PHP: CRUD dengan Relasi dan Validasi Input",
+  "updatedAt": "2024-07-30T12:00:00Z",
+  "parts": [
+    {
+      "id": "pendahuluan",
+      "partNumber": 0,
+      "title": "Native PHP: CRUD dengan Relasi dan Validasi Input",
+      "label": "Pendahuluan",
+      "type": "Tutorial",
+      "date": "2024-07-30",
+      "readTime": "7",
+      "intro": "Dokumen ini membahas implementasi Create, Read, Update, Delete (CRUD) pada aplikasi PHP Native dengan melibatkan relasi dua tabel serta penambahan validasi input. Studi kasus yang digunakan adalah pengelolaan data siswa yang terhubung dengan data kelas yang bersifat dinamis. Panduan ini mencakup langkah-langkah persiapan database, modifikasi kode, hingga implementasi validasi form untuk memastikan integritas data.",
+      "tags": [
+        "PHP Native",
+        "CRUD",
+        "Relasi Tabel",
+        "Validasi Input",
+        "Database MySQL"
+      ],
+      "objectives": [
+        "Membuat sistem CRUD untuk data utama (master data) dan data dengan relasi tabel.",
+        "Mengimplementasikan relasi antar tabel (misalnya Siswa dengan Kelas) dalam operasi CRUD.",
+        "Mengubah struktur tabel untuk mendukung relasi (Foreign Key concept).",
+        "Menambahkan fungsionalitas validasi input pada form untuk mencegah data yang tidak sesuai.",
+        "Menampilkan pesan sukses dan error berdasarkan hasil validasi atau operasi database."
+      ],
+      "reflection": [
+        "Memahami pentingnya relasi tabel dalam database untuk menjaga konsistensi data dan mengurangi redundansi. Dengan mengelola data master secara terpisah, kita dapat memastikan data yang terkait selalu valid dan up-to-date.",
+        "Penerapan validasi input adalah krusial untuk keamanan dan integritas data aplikasi. Validasi mencegah data tidak valid masuk ke database dan meningkatkan pengalaman pengguna dengan memberikan umpan balik yang jelas.",
+        "Strukturisasi kode yang baik dengan memisahkan logika (controller) dan tampilan (view) serta penempatan validasi sebelum operasi database utama, akan membuat aplikasi lebih terorganisir dan mudah dikelola."
+      ],
+      "references": [],
+      "content": "## I. Implementasi CRUD dengan Relasi\nPanduan ini menjelaskan bagaimana mengimplementasikan operasi Create, Read, Update, dan Delete (CRUD) pada PHP Native yang melibatkan dua tabel berelasi. Contoh kasus yang diambil adalah data Siswa yang memiliki relasi dengan data Kelas, di mana data Kelas bersifat dinamis (master data).\n\n### 1. Persiapan Database\n- **Tabel `kelas`**: Pastikan Anda sudah memiliki tabel bernama `kelas` (atau `t_kelas`) yang akan menjadi master data.\n- **Truncate `siswa`**: Kosongkan tabel `siswa` (atau `t_siswa`) menggunakan perintah `TRUNCATE`. **Penting:** Gunakan `TRUNCATE`, bukan `DROP`, untuk hanya mengosongkan isi tabel tanpa menghapus strukturnya.\n- **Alter Tabel `siswa`**: Ubah struktur tabel `siswa`. Ganti kolom `kelas` menjadi `id_kelas` dengan tipe data `INT`. **Perhatian:** Pastikan tabel `siswa` dalam keadaan kosong sebelum melakukan perubahan ini untuk menghindari potensi error.\n\n### 2. Modifikasi Kode untuk Relasi\nModifikasi kode diperlukan di beberapa file untuk mengakomodasi relasi antar tabel:\n\n- **`index.php`**: Lakukan perubahan kode untuk menampilkan data siswa. Ini kemungkinan melibatkan *JOIN* ke tabel `kelas` untuk mengambil nama kelas yang relevan.\n\n- **`views/v_index.php`**: Dalam file tampilan ini, pastikan Anda merujuk pada `nama_kelas` yang merupakan nama field dari tabel `t_kelas` (setelah join). Ini akan menampilkan nama kelas bukannya hanya `id_kelas`.\n\n- **`tambah.php` (Penambahan Kode)**: Sebelum menyertakan (`include`) file view untuk form siswa (misalnya `views/v_tambah.php`), tambahkan baris kode untuk mengambil data kelas dari database. Data ini akan digunakan untuk mengisi pilihan pada dropdown form penambahan siswa.\n\n- **`views/v_tambah.php` (Perubahan Kode)**: Sesuaikan form penambahan siswa di file ini. Tambahkan elemen `select` atau dropdown untuk `id_kelas`, di mana pilihan-pilihannya diisi dengan data kelas yang sudah diambil dari database.\n\n- **`tambah.php` (Perubahan Kode)**: Saat memproses data dari form, pastikan untuk mengambil data `id_kelas` dari input `POST` dan menambahkannya ke dalam query `INSERT` untuk menyimpan data siswa beserta relasi kelasnya.\n\n- **`edit.php` (Perubahan Kode)**: Lakukan perubahan serupa seperti pada `tambah.php` untuk fungsionalitas edit data. Ini mencakup mengambil `id_kelas` dari form dan menggunakannya dalam query `UPDATE`.\n\n- **`edit.php` (Penambahan Kode)**: Jangan lupa untuk menambahkan query di `edit.php` untuk mengambil kembali semua data kelas (seperti di `tambah.php`) agar opsi kelas dapat ditampilkan dengan benar pada form edit, dan kelas siswa yang sedang diedit dapat terpilih secara otomatis.\n\n## II. Implementasi Validasi Input\nBagian ini menjelaskan bagaimana menambahkan validasi untuk setiap inputan pada form. Contoh kasusnya adalah validasi pada Data Siswa, di mana peringatan akan muncul jika user menginput data yang tidak sesuai.\n\n### 1. Modifikasi Tampilan untuk Pesan Validasi\n- **`v_tambah.php` (Perubahan Kode)**: Tambahkan baris kode di atas form (atau sesuaikan posisinya dengan layout Anda) untuk menampilkan pesan sukses atau error. Ini biasanya berupa elemen HTML yang akan menampilkan nilai dari variabel pesan (misalnya `$success` atau `$error`).\n\n### 2. Logika Validasi di `tambah.php`\n- **Penjelasan (Pesan Sukses)**: Baris kode digunakan untuk menampilkan pesan sukses yang berasal dari variabel `$success`. Jika variabel `$success` tidak bernilai kosong, maka tampilkan isi dari variabel tersebut. Ini bisa berupa kondisi `if (!empty($success)) { echo '<div class=\"alert success\">' . $success . '</div>'; }`.\n\n- **Penjelasan (Validasi Input)**: Baris kode digunakan untuk melakukan validasi. Contoh, jika variabel `$nis` kosong, maka munculkan pesan error menggunakan function `flash` atau mekanisme pesan temporer lainnya. Contoh sederhana bisa `if (empty($_POST['nis'])) { $error = 'NIS tidak boleh kosong!'; }`.\n\n- **Penjelasan (Penempatan Insert/Update)**: **Penting:** Pastikan Anda menyimpan kode untuk melakukan `INSERT` data ataupun `UPDATE` data pada blok `else` setelah semua validasi selesai dilakukan. Ini memastikan bahwa operasi database hanya dijalankan jika semua input valid.\n\n### 3. Alur Validasi (Flow)\nBerikut adalah alur proses validasi yang disarankan:\n- **Start**\n- **Validasi NIS**: Apakah NIS kosong?\n  - **YA**: Tampilkan pesan error bahwa NIS kosong.\n  - **TIDAK**: Lanjutkan ke validasi berikutnya.\n- **Validasi Nama Lengkap**: Apakah Nama Lengkap kosong?\n  - **YA**: Tampilkan pesan error bahwa Nama Lengkap kosong.\n  - **TIDAK**: Lanjutkan ke validasi berikutnya.\n- **Validasi Field `n`**: Apakah `field_n` (kolom lainnya) kosong?\n  - **YA**: Tampilkan pesan error bahwa `field_n` kosong.\n  - **TIDAK**: Lanjutkan ke operasi database.\n- **Operasi Database**: Jika semua validasi berhasil, lakukan `Insert / Update Data ke Database`.\n- **Finish**"
+    }
+  ]
+}

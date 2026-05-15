@@ -1,0 +1,38 @@
+{
+  "topic": "native-php-crud-relasi-dan-validasi",
+  "title": "Native PHP: Create Read Update Delete dengan Relasi dan Validasi Input",
+  "updatedAt": "2024-07-30T12:00:00Z",
+  "parts": [
+    {
+      "id": "pendahuluan",
+      "partNumber": 0,
+      "title": "Native PHP: Create Read Update Delete dengan Relasi dan Validasi Input",
+      "label": "Pendahuluan",
+      "type": "Tutorial",
+      "date": "2024-07-30",
+      "readTime": "10",
+      "intro": "Dokumen ini membahas implementasi operasi CRUD (Create, Read, Update, Delete) pada Native PHP dengan fokus pada penggunaan relasi antar dua tabel serta penerapan validasi input pada form. Studi kasus yang digunakan adalah pengelolaan data siswa yang berelasi dengan data kelas yang bersifat dinamis, serta validasi untuk memastikan data yang diinput sesuai ketentuan.",
+      "tags": [
+        "PHP",
+        "Native PHP",
+        "CRUD",
+        "Relasi Database",
+        "Validasi Input",
+        "MySQL",
+        "Tutorial"
+      ],
+      "objectives": [
+        "Memahami dan mengimplementasikan CRUD dengan relasi dua tabel di Native PHP.",
+        "Mampu memodifikasi struktur tabel untuk mendukung relasi antar data.",
+        "Mengintegrasikan data master (misalnya data kelas) secara dinamis ke dalam form input.",
+        "Menerapkan validasi input pada form untuk setiap field.",
+        "Menampilkan pesan error atau sukses berdasarkan hasil validasi input."
+      ],
+      "reflection": [
+        "Pentingnya mengelola data master secara terpisah untuk menjaga konsistensi dan kemudahan manajemen data dinamis.\n"
+      ],
+      "references": [],
+      "content": "Dalam panduan ini, kita akan membangun aplikasi Native PHP untuk mengelola data siswa yang terhubung dengan data kelas, serta menambahkan mekanisme validasi pada inputan form.\n\n## 1. Implementasi CRUD dengan Relasi Dua Tabel\nStudi kasus ini melibatkan dua tabel: `t_siswa` dan `t_kelas`. Data kelas akan bersifat dinamis, yang berarti kita akan membuat CRUD untuk tabel `t_kelas` juga sebagai data master. Saat menambahkan siswa, pilihan kelas akan diambil dari tabel `t_kelas`.\n\n### 1.1 Persiapan Database\nSebelum memulai, pastikan struktur tabel sudah sesuai:\n- Pastikan Anda sudah memiliki tabel `t_kelas`.\n- **Kosongkan tabel `t_siswa`** menggunakan perintah `TRUNCATE` (bukan `DROP`) untuk menghindari potensi error saat mengubah struktur kolom.\n- **Ubah tabel `t_siswa`**: Ganti kolom `kelas` menjadi `id_kelas` dengan tipe data `INT`. **Perhatian**: Pastikan tabel `t_siswa` dalam keadaan kosong saat melakukan perubahan ini.\n\n### 1.2 Perubahan Kode untuk Relasi\nBeberapa file PHP perlu diubah untuk mengimplementasikan relasi ini:\n\n#### `index.php`\n- Perubahan kode di file `index.php` akan diperlukan untuk menampilkan data siswa yang berelasi dengan kelas.\n\n#### `views/v_index.php`\n- Dalam tampilan ini, saat menampilkan data siswa, pastikan untuk mengakses `nama_kelas` yang merupakan nama field dari tabel `t_kelas` (ini mengimplikasikan adanya operasi JOIN dalam query untuk mendapatkan nama kelas dari `id_kelas`).\n\n#### `tambah.php` (Penambahan Data)\n- **Sebelum `include` view form siswa**: Tambahkan kode untuk mengambil data kelas dari tabel `t_kelas`. Data ini akan digunakan untuk mengisi opsi pada dropdown pemilihan kelas di form tambah siswa.\n- **Mengambil POST data**: Pastikan untuk mengambil `id_kelas` dari form POST dan menambahkannya ke dalam query `INSERT` untuk menyimpan data siswa beserta relasinya.\n\n#### `views/v_tambah.php`\n- Perubahan kode di file ini akan melibatkan penambahan elemen form berupa dropdown ( `<select>` ) untuk memilih kelas, yang opsinya diisi secara dinamis dari data kelas yang telah diambil.\n\n#### `edit.php` (Pengubahan Data)\n- **Mirip dengan `tambah.php`**: Lakukan hal yang sama pada saat edit data. Ambil `id_kelas` dari form POST dan perbarui dalam query `UPDATE`.\n- **Sebelum `include` view form edit siswa**: Tambahkan query untuk mengambil data kelas yang ada (untuk ditampilkan sebagai opsi di form) dan juga data siswa yang akan diedit untuk mengisi form.\n\n## 2. Implementasi Validasi Input\nBagian ini berfokus pada penambahan validasi untuk setiap inputan pada form. Contoh kasusnya adalah validasi pada Data Siswa, di mana peringatan akan muncul jika user menginput data yang tidak sesuai.\n\n### 2.1 Perubahan Kode untuk Validasi\n\n#### `v_tambah.php`\n- Tambahkan baris kode untuk menampilkan pesan sukses atau error di bagian atas form, atau sesuaikan posisinya dengan desain layout Anda. Ini biasanya berupa elemen `div` atau `p` yang akan menampilkan `$success` atau `$error` message.\n\n#### `tambah.php` (Logika Validasi)\n- Terapkan logika validasi untuk setiap field. Contoh: Periksa apakah variabel `$nis` kosong. Jika kosong, gunakan sebuah `function flash` (atau mekanisme serupa) untuk menampilkan pesan error bahwa NIS tidak boleh kosong. Lakukan ini untuk semua field yang diperlukan (`nama_lengkap`, dll.).\n- **Penting**: Pastikan Anda menyimpan kode untuk melakukan `INSERT` data (atau `UPDATE` data pada `edit.php`) pada blok `else` setelah semua validasi selesai dilakukan dan tidak ada error yang ditemukan. Ini memastikan bahwa data hanya akan disimpan jika semua input valid.\n\n#### Penjelasan Alur Validasi\n- **Pesan Sukses**: Baris kode khusus digunakan untuk menampilkan pesan sukses yang berasal dari variabel `$success`. Jika `$success` tidak kosong, maka tampilkan isinya.\n- **Pesan Error**: Untuk setiap field yang akan divalidasi, seperti `$nis`, periksa kekosongannya. Jika kosong, munculkan pesan error menggunakan fungsi `flash` (atau sejenisnya).\n- **Urutan Eksekusi**: Proses validasi akan mengikuti alur seperti ini:\n    1.  **Start**\n    2.  Apakah NIS kosong? Jika 'Ya', tampilkan pesan error bahwa NIS kosong. Jika 'Tidak', lanjutkan.\n    3.  Apakah Nama Lengkap kosong? Jika 'Ya', tampilkan pesan error bahwa Nama Lengkap kosong. Jika 'Tidak', lanjutkan.\n    4.  Ulangi untuk `field_n` (field lainnya).\n    5.  Jika semua validasi berhasil (semua 'Tidak'), maka lakukan `Insert / Update Data ke Database`.\n    6.  **Finish**"
+    }
+  ]
+}
