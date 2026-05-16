@@ -1,0 +1,13 @@
+{
+  "updatedAt": "2026-05-16T03:23:34.066Z",
+  "parts": [
+    {
+      "error": "Unexpected token 'S', \"Saya tidak\"... is not valid JSON",
+      "raw": "Saya tidak dapat secara langsung \"memparse\" atau membaca file PDF dari perangkat Anda. Sebagai model bahasa, saya hanya bisa memproses teks yang Anda berikan kepada saya.\n\nMohon salin dan tempelkan *isi teks* dari dokumen PDF tersebut di sini, dan saya akan merangkumnya ke dalam format JSON yang Anda inginkan.",
+      "date": "2026-05-16",
+      "readTime": "10",
+      "type": "Praktik",
+      "partNumber": 0
+    }
+  ]
+}
