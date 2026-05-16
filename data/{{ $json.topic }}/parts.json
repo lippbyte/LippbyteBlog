@@ -1,0 +1,80 @@
+{
+  "topic": "membuat-aplikasi-crud-sederhana-dengan-php-dan-mysql",
+  "title": "Membuat Aplikasi CRUD Sederhana dengan PHP dan MySQL",
+  "updatedAt": "2026-05-16T04:34:48.760Z",
+  "parts": [
+    {
+      "id": "membuat-aplikasi-crud-sederhana-dengan-php-dan-mysql",
+      "partNumber": 0,
+      "title": "Membuat Aplikasi CRUD Sederhana dengan PHP dan MySQL",
+      "label": "Part 1",
+      "type": "Praktik",
+      "date": "2026-05-15",
+      "readTime": "20",
+      "intro": "Panduan ini akan memandu Anda langkah demi langkah dalam membangun aplikasi CRUD (Create, Read, Update, Delete) dasar menggunakan bahasa pemrograman PHP dan database MySQL. Anda akan belajar mengelola data secara efektif mulai dari koneksi database hingga implementasi fungsionalitas CRUD, serta membangun antarmuka web sederhana untuk interaksi data.",
+      "tags": [
+        "PHP",
+        "MySQL",
+        "CRUD",
+        "Web Development"
+      ],
+      "objectives": [
+        "Memahami konsep dasar operasi CRUD.",
+        "Mampu mengimplementasikan koneksi database MySQL dengan PHP.",
+        "Mampu membuat fungsionalitas tambah, baca, ubah, dan hapus data menggunakan PHP.",
+        "Mampu membangun antarmuka web sederhana untuk interaksi data."
+      ],
+      "reflection": [
+        "Tantangan apa yang Anda hadapi saat menghubungkan PHP dengan database dan bagaimana Anda mengatasinya?",
+        "Fitur tambahan apa yang bisa dikembangkan dari aplikasi CRUD dasar ini?",
+        "Bagaimana cara memastikan keamanan data dalam aplikasi CRUD yang Anda buat?"
+      ],
+      "references": [
+        {
+          "num": "1",
+          "text": "Panduan Pengembangan Aplikasi CRUD PHP-MySQL",
+          "url": ""
+        }
+      ],
+      "subthemes": [
+        {
+          "id": "memahami-konsep-crud",
+          "title": "Memahami Konsep CRUD"
+        },
+        {
+          "id": "persiapan-lingkungan-pengembangan",
+          "title": "Persiapan Lingkungan Pengembangan"
+        },
+        {
+          "id": "membuat-database-dan-tabel",
+          "title": "Membuat Database dan Tabel"
+        },
+        {
+          "id": "koneksi-database",
+          "title": "Koneksi Database"
+        },
+        {
+          "id": "fungsionalitas-create-menambah-data",
+          "title": "Fungsionalitas CREATE (Menambah Data)"
+        },
+        {
+          "id": "fungsionalitas-read-membaca-data",
+          "title": "Fungsionalitas READ (Membaca Data)"
+        },
+        {
+          "id": "fungsionalitas-update-mengubah-data",
+          "title": "Fungsionalitas UPDATE (Mengubah Data)"
+        },
+        {
+          "id": "fungsionalitas-delete-menghapus-data",
+          "title": "Fungsionalitas DELETE (Menghapus Data)"
+        },
+        {
+          "id": "struktur-proyek-dan-file",
+          "title": "Struktur Proyek dan File"
+        }
+      ],
+      "content": "## Memahami Konsep CRUD\n\nCRUD adalah singkatan dari Create, Read, Update, dan Delete, empat operasi dasar yang menjadi fondasi hampir semua aplikasi yang berinteraksi dengan data. Dalam konteks pengembangan web dengan PHP dan MySQL, operasi ini sangat fundamental untuk mengelola informasi pengguna, produk, artikel, dan lain sebagainya.\n\n*   **Create (Buat):** Menambahkan data baru ke database.\n*   **Read (Baca):** Mengambil atau menampilkan data dari database.\n*   **Update (Ubah):** Memodifikasi data yang sudah ada di database.\n*   **Delete (Hapus):** Menghapus data dari database.\n\n## Persiapan Lingkungan Pengembangan\n\nSebelum memulai, pastikan Anda memiliki lingkungan pengembangan web yang berfungsi. Kami merekomendasikan penggunaan XAMPP atau WAMP/LAMP stack yang sudah terintegrasi.\n\n### Instalasi XAMPP/WAMP/LAMP\n\nJika belum terinstal, unduh dan instal XAMPP (untuk Windows/Linux/macOS) atau WAMP (untuk Windows) / LAMP (untuk Linux). Pastikan Apache dan MySQL server berjalan setelah instalasi.\n\n### Editor Kode\n\nSiapkan editor kode favorit Anda (misalnya VS Code, Sublime Text, PHPStorm) untuk menulis kode PHP dan SQL.\n\n## Membuat Database dan Tabel\n\nLangkah pertama adalah membuat database dan tabel yang akan digunakan untuk menyimpan data. Kita akan membuat database `crud_app` dan tabel `users`.\n\n### Membuat Database\n\nBuka phpMyAdmin (biasanya dapat diakses melalui `http://localhost/phpmyadmin` setelah XAMPP/WAMP berjalan), lalu buat database baru dengan nama `crud_app`.\n\n### Membuat Tabel `users`\n\nSetelah database `crud_app` dibuat, buatlah tabel `users` dengan struktur sebagai berikut:\n\nsql\nCREATE TABLE users (\n    id INT AUTO_INCREMENT PRIMARY KEY,\n    name VARCHAR(100) NOT NULL,\n    email VARCHAR(100) NOT NULL UNIQUE,\n    phone VARCHAR(20) NOT NULL\n);\n\n\n## Koneksi Database\n\nBuat file `config.php` yang berisi informasi koneksi ke database Anda. File ini akan di-`include` di setiap halaman yang membutuhkan koneksi ke database.\n\nphp\n<?php\n$servername = \"localhost\";\n$username = \"root\"; // Ganti dengan username MySQL Anda\n$password = \"\"; // Ganti dengan password MySQL Anda\n$dbname = \"crud_app\";\n\n// Membuat koneksi\n$conn = new mysqli($servername, $username, $password, $dbname);\n\n// Memeriksa koneksi\nif ($conn->connect_error) {\n    die(\"Koneksi gagal: \" . $conn->connect_error);\n}\n?>\n\n\n## Fungsionalitas CREATE (Menambah Data)\n\nKita akan membuat form untuk menambah data user baru ke tabel `users`. Buat file `create.php`.\n\nphp\n<?php\ninclude 'config.php';\n\nif ($_SERVER['REQUEST_METHOD'] == 'POST') {\n    $name = $_POST['name'];\n    $email = $_POST['email'];\n    $phone = $_POST['phone'];\n\n    $sql = \"INSERT INTO users (name, email, phone) VALUES (?, ?, ?)\";\n    $stmt = $conn->prepare($sql);\n    $stmt->bind_param(\"sss\", $name, $email, $phone);\n\n    if ($stmt->execute()) {\n        echo \"<p>Data user berhasil ditambahkan.</p>\";\n    } else {\n        echo \"<p>Error: \" . $stmt->error . \"</p>\";\n    }\n    $stmt->close();\n}\n$conn->close();\n?>\n\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Tambah User Baru</title>\n</head>\n<body>\n    <h1>Tambah User Baru</h1>\n    <form action=\"create.php\" method=\"POST\">\n        <label for=\"name\">Nama:</label><br>\n        <input type=\"text\" id=\"name\" name=\"name\" required><br><br>\n        <label for=\"email\">Email:</label><br>\n        <input type=\"email\" id=\"email\" name=\"email\" required><br><br>\n        <label for=\"phone\">Telepon:</label><br>\n        <input type=\"text\" id=\"phone\" name=\"phone\" required><br><br>\n        <button type=\"submit\">Simpan</button>\n    </form>\n    <br><a href=\"index.php\">Lihat Daftar User</a>\n</body>\n</html>\n\n\n## Fungsionalitas READ (Membaca Data)\n\nFungsionalitas ini akan menampilkan semua data user yang ada di database. Buat file `index.php`.\n\nphp\n<?php\ninclude 'config.php';\n\n$sql = \"SELECT id, name, email, phone FROM users\";\n$result = $conn->query($sql);\n\n$users = [];\nif ($result->num_rows > 0) {\n    while($row = $result->fetch_assoc()) {\n        $users[] = $row;\n    }\n}\n$conn->close();\n?>\n\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Daftar User</title>\n</head>\n<body>\n    <h1>Daftar User</h1>\n    <a href=\"create.php\">Tambah User Baru</a><br><br>\n\n    <?php if (count($users) > 0): ?>\n    <table border=\"1\">\n        <thead>\n            <tr>\n                <th>ID</th>\n                <th>Nama</th>\n                <th>Email</th>\n                <th>Telepon</th>\n                <th>Aksi</th>\n            </tr>\n        </thead>\n        <tbody>\n            <?php foreach ($users as $user): ?>\n            <tr>\n                <td><?php echo $user['id']; ?></td>\n                <td><?php echo $user['name']; ?></td>\n                <td><?php echo $user['email']; ?></td>\n                <td><?php echo $user['phone']; ?></td>\n                <td>\n                    <a href=\"update.php?id=<?php echo $user['id']; ?>\">Edit</a> |\n                    <a href=\"delete.php?id=<?php echo $user['id']; ?>\" onclick=\"return confirm('Apakah Anda yakin ingin menghapus user ini?');\">Hapus</a>\n                </td>\n            </tr>\n            <?php endforeach; ?>\n        </tbody>\n    </table>\n    <?php else: ?>\n    <p>Belum ada data user.</p>\n    <?php endif; ?>\n</body>\n</html>\n\n\n## Fungsionalitas UPDATE (Mengubah Data)\n\nKita akan membuat form untuk mengedit data user yang sudah ada. Buat file `update.php`.\n\nphp\n<?php\ninclude 'config.php';\n\n$user = null;\nif (isset($_GET['id'])) {\n    $id = $_GET['id'];\n    $sql = \"SELECT id, name, email, phone FROM users WHERE id = ?\";\n    $stmt = $conn->prepare($sql);\n    $stmt->bind_param(\"i\", $id);\n    $stmt->execute();\n    $result = $stmt->get_result();\n    $user = $result->fetch_assoc();\n    $stmt->close();\n\n    if (!$user) {\n        die(\"User tidak ditemukan.\");\n    }\n}\n\nif ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])) {\n    $id = $_POST['id'];\n    $name = $_POST['name'];\n    $email = $_POST['email'];\n    $phone = $_POST['phone'];\n\n    $sql = \"UPDATE users SET name = ?, email = ?, phone = ? WHERE id = ?\";\n    $stmt = $conn->prepare($sql);\n    $stmt->bind_param(\"sssi\", $name, $email, $phone, $id);\n\n    if ($stmt->execute()) {\n        echo \"<p>Data user berhasil diperbarui.</p>\";\n    } else {\n        echo \"<p>Error: \" . $stmt->error . \"</p>\";\n    }\n    $stmt->close();\n    header(\"Location: index.php\");\n    exit();\n}\n\n$conn->close();\n?>\n\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Edit User</title>\n</head>\n<body>\n    <h1>Edit User</h1>\n    <?php if ($user): ?>\n    <form action=\"update.php\" method=\"POST\">\n        <input type=\"hidden\" name=\"id\" value=\"<?php echo $user['id']; ?>\">\n        <label for=\"name\">Nama:</label><br>\n        <input type=\"text\" id=\"name\" name=\"name\" value=\"<?php echo $user['name']; ?>\" required><br><br>\n        <label for=\"email\">Email:</label><br>\n        <input type=\"email\" id=\"email\" name=\"email\" value=\"<?php echo $user['email']; ?>\" required><br><br>\n        <label for=\"phone\">Telepon:</label><br>\n        <input type=\"text\" id=\"phone\" name=\"phone\" value=\"<?php echo $user['phone']; ?>\" required><br><br>\n        <button type=\"submit\">Perbarui</button>\n    </form>\n    <?php else: ?>\n    <p>User tidak ditemukan.</p>\n    <?php endif; ?>\n    <br><a href=\"index.php\">Kembali ke Daftar User</a>\n</body>\n</html>\n\n\n## Fungsionalitas DELETE (Menghapus Data)\n\nFungsionalitas ini akan menghapus data user dari database berdasarkan ID. Buat file `delete.php`.\n\nphp\n<?php\ninclude 'config.php';\n\nif (isset($_GET['id'])) {\n    $id = $_GET['id'];\n\n    $sql = \"DELETE FROM users WHERE id = ?\";\n    $stmt = $conn->prepare($sql);\n    $stmt->bind_param(\"i\", $id);\n\n    if ($stmt->execute()) {\n        echo \"<p>Data user berhasil dihapus.</p>\";\n    } else {\n        echo \"<p>Error: \" . $stmt->error . \"</p>\";\n    }\n    $stmt->close();\n}\n$conn->close();\n\nheader(\"Location: index.php\");\nexit();\n?>\n\n\n## Struktur Proyek dan File\n\nBerikut adalah struktur file dan folder yang direkomendasikan untuk proyek ini:\n\n\ncrud_app/\n├── config.php\n├── index.php (READ)\n├── create.php (CREATE)\n├── update.php (UPDATE)\n├── delete.php (DELETE)\n\n\nPastikan semua file ini berada dalam direktori yang dapat diakses oleh server web Anda (misalnya `htdocs` di XAMPP)."
+    }
+  ]
+}
