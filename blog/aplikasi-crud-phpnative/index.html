@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Lippbyte — Dokumentasi Belajar Praktik: Aplikasi CRUD PHP Native" />
+  <title>Lippbyte — Praktik: Aplikasi CRUD PHP Native</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { serif: ['Lora','serif'], sans: ['DM Sans','sans-serif'], mono: ['JetBrains Mono','monospace'] },
+          colors: {
+            bg: 'var(--bg)', surface: 'var(--surface)', 'surface-2': 'var(--surface-2)',
+            border: 'var(--border)', 'border-strong': 'var(--border-strong)',
+            'text-primary': 'var(--text-primary)', 'text-body': 'var(--text-body)',
+            'text-muted': 'var(--text-muted)', 'text-faint': 'var(--text-faint)',
+            accent: 'var(--accent)', 'accent-hover': 'var(--accent-hover)',
+            'accent-soft': 'var(--accent-soft)', 'accent-mid': 'var(--accent-mid)',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="../../shared/tokens.css" />
+  <link rel="stylesheet" href="../template/css/style.css" />
+  <!-- PrismJS for code highlighting -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+</head>
+<body class="font-sans text-base leading-7">
+
+  <!-- TOP NAVBAR -->
+  <header class="site-header fixed top-0 left-0 right-0 z-[200] h-14 bg-[var(--bg-translucent)] backdrop-blur-[14px] border-b border-border">
+    <div class="header-inner max-w-[1280px] mx-auto px-6 h-full flex items-center justify-between gap-4">
+      <a href="../../home/index.html" class="site-logo font-serif text-lg font-semibold text-text-primary tracking-tight flex items-center gap-2">
+        Lippbyte
+        <!-- ✏️ Jangan ganti badge blog -->
+        <span class="logo-badge font-sans text-[.65rem] font-bold tracking-wider uppercase bg-accent text-white px-2 py-0.5 rounded-full">Blog</span>
+      </a>
+      <div class="flex items-center gap-3">
+        <!-- Tombol Kembali ke Home -->
+        <a href="../../home/index.html" class="nav-home-btn flex items-center gap-1.5 text-xs font-medium text-text-muted px-3 py-1.5 rounded-lg border border-border bg-surface hover:border-accent hover:text-accent hover:bg-accent-soft transition-all duration-200">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Home
+        </a>
+        <!-- Tombol Toggle Dark Mode -->
+        <button id="themeToggle" class="p-1.5 rounded-md bg-surface-2 text-text-muted hover:text-accent border border-border transition-colors duration-200" aria-label="Toggle Dark Mode">
+          <svg id="themeToggleIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- READING PROGRESS -->
+  <div class="top-progress"><div class="top-progress-fill" id="topFill"></div></div>
+
+  <div class="layout grid grid-cols-[272px_1fr] max-w-[1280px] mx-auto min-h-screen max-[960px]:grid-cols-1" style="padding-top: var(--nav-h)">
+
+    <!-- LEFT SIDEBAR -->
+    <nav class="left-sidebar sticky top-14 h-[calc(100vh-56px)] overflow-y-auto border-r border-border py-7 max-[960px]:static max-[960px]:h-auto" aria-label="Navigasi Part">
+
+      <!-- Sidebar Back Button -->
+      <a href="../../home/index.html" class="sidebar-back flex items-center gap-2 px-5 pb-4 mb-4 text-xs font-medium text-text-muted border-b border-border hover:text-accent transition-colors">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Kembali ke Beranda
+      </a>
+
+      <p class="sidebar-section-label text-[.67rem] font-bold tracking-[.12em] uppercase text-text-faint px-5 mb-2">Dokumentasi</p>
+      <ul class="part-nav list-none p-0 m-0" id="partNav">
+        <li>
+          <a href="#native-php-crud-relasi-validasi" class="flex items-center gap-2.5 py-2 px-5 text-sm font-medium text-text-muted border-l-2 border-transparent" data-part="native-php-crud-relasi-validasi">
+            <span class="part-num inline-flex items-center justify-center w-5 h-5 text-[.7rem] font-bold bg-surface-2 rounded text-text-faint shrink-0">0</span>
+            <span class="flex-1">CRUD Relasi &amp; Validasi</span>
+            <span class="nav-progress-ring" data-section="native-php-crud-relasi-validasi"><svg width="18" height="18" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="var(--border)" stroke-width="2.5"/><circle class="progress-circle" cx="18" cy="18" r="15.5" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="97.4" stroke-dashoffset="97.4" stroke-linecap="round" transform="rotate(-90 18 18)"/></svg></span>
+          </a>
+          <ul class="toc-sub list-none p-0 m-0" id="toc-native-php-crud-relasi-validasi">
+            <li><a href="#crud-relasi-dua-tabel" class="block py-1 px-5 pl-[50px] text-xs text-text-faint border-l-2 border-transparent">CRUD dengan Relasi Dua Tabel</a></li>
+            <li><a href="#persiapan-database" class="block py-1 px-5 pl-[50px] text-xs text-text-faint border-l-2 border-transparent">Persiapan Database</a></li>
+            <li><a href="#modifikasi-tampilan-daftar-siswa" class="block py-1 px-5 pl-[50px] text-xs text-text-faint border-l-2 border-transparent">Memodifikasi Tampilan Daftar Siswa</a></li>
+            <li><a href="#menambahkan-data-siswa" class="block py-1 px-5 pl-[50px] text-xs text-text-faint border-l-2 border-transparent">Menambahkan Data Siswa</a></li>
+            <li><a href="#mengubah-data-siswa" class="block py-1 px-5 pl-[50px] text-xs text-text-faint border-l-2 border-transparent">Mengubah Data Siswa</a></li>
+            <li><a href="#validasi-input" class="block py-1 px-5 pl-[50px] text-xs text-text-faint border-l-2 border-transparent">Validasi Input</a></li>
+            <li><a href="#implementasi-validasi-form-tambah" class="block py-1 px-5 pl-[50px] text-xs text-text-faint border-l-2 border-transparent">Implementasi Validasi pada Form Tambah Siswa</a></li>
+            <li><a href="#penjelasan-mekanisme-validasi" class="block py-1 px-5 pl-[50px] text-xs text-text-faint border-l-2 border-transparent">Penjelasan Mekanisme Validasi</a></li>
+            <li><a href="#alur-validasi-input" class="block py-1 px-5 pl-[50px] text-xs text-text-faint border-l-2 border-transparent">Alur Validasi Input</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- Sidebar: Blog Lainnya -->
+      <div class="sidebar-other-blogs mt-6 pt-5 border-t border-border px-5">
+        <p class="text-[.67rem] font-bold tracking-[.12em] uppercase text-text-faint mb-3">Blog Lainnya</p>
+        <div id="sidebarTopBlogs"></div>
+      </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div>
+      <main class="main-content px-12 pb-28 max-w-[820px] max-[960px]:px-5">
+
+        
+          <section class="part-section pt-16 pb-8 " id="native-php-crud-relasi-validasi">
+            <div class="part-header mb-9">
+              <p class="part-label inline-flex items-center gap-2 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5"><span class="part-label-line w-5 h-0.5 bg-accent"></span> CRUD Relasi &amp; Validasi</p>
+              <h1 class="part-title font-serif text-[clamp(1.6rem,3.5vw,2.15rem)] font-semibold leading-snug text-text-primary tracking-tight mb-5">Native PHP: Implementasi CRUD dengan Relasi dan Validasi Input</h1>
+              <div class="part-meta flex flex-wrap items-center gap-x-4 gap-y-1.5 text-sm text-text-muted">
+                <span class="flex items-center gap-1">2024-07-28</span>
+                <span class="w-1 h-1 rounded-full bg-border-strong"></span>
+                <span class="flex items-center gap-1">🏷 Praktik</span>
+              </div>
+              <div class="part-intro mt-5 p-4 bg-surface border border-border rounded-[10px] text-[.95rem] leading-7 text-text-muted italic border-l-[3px] border-l-accent">Praktik ini membahas implementasi operasi CRUD (Create, Read, Update, Delete) pada PHP native dengan relasi dua tabel, yakni siswa dan kelas. Anda akan belajar mengelola data siswa yang terhubung dengan pilihan kelas dinamis dari tabel master. Selain itu, praktik ini juga mencakup penerapan validasi input pada form untuk memastikan integritas data dan memberikan peringatan kepada pengguna.</div>
+            </div>
+            <div class="content-body"><div class="objectives-box"><div class="objectives-header text-[.72rem] font-bold tracking-[.1em] uppercase text-text-muted">🎯 Tujuan Pembelajaran</div><div class="objectives-body p-4"><ul class="pl-5"><li class="text-sm text-text-body py-0.5">Memahami konsep relasi antar tabel dalam aplikasi CRUD PHP native.</li><li class="text-sm text-text-body py-0.5">Mampu membuat operasi CRUD (Create, Read, Update, Delete) untuk data yang memiliki relasi.</li><li class="text-sm text-text-body py-0.5">Mampu mengimplementasikan validasi input pada form PHP native.</li><li class="text-sm text-text-body py-0.5">Mampu menampilkan pesan error atau sukses berdasarkan hasil validasi.</li></ul></div></div><h2 id="crud-dengan-relasi-dua-tabel" class="font-serif text-xl font-semibold text-text-primary tracking-tight mt-[2.75em] mb-[.6em] pb-2.5 border-b-2 border-border">CRUD dengan Relasi Dua Tabel</h2><p>Pada bagian ini, kita akan fokus membangun fungsionalitas CRUD dengan konsep relasi antar dua tabel: <code>siswa</code> dan <code>kelas</code>.</p>
+<h3 id="persiapan-database" class="font-serif text-lg font-semibold text-text-primary tracking-tight mt-[2em] mb-[.5em]">Persiapan Database</h3><ul class="pl-6"><li class="my-[.3em]">**Memastikan Tabel Kelas:**
+Pastikan Anda sudah memiliki tabel `kelas` yang berisi data master kelas.
+</li><li class="my-[.3em]">**Mengosongkan Tabel Siswa:**
+Kosongkan tabel `siswa` menggunakan perintah `TRUNCATE`. **Perhatian!** Pastikan Anda menggunakan `TRUNCATE` dan bukan `DROP`.
+</li><li class="my-[.3em]">**Mengubah Struktur Tabel Siswa:**
+Ubah tabel `siswa` dengan mengganti kolom `kelas` menjadi `id_kelas` dengan tipe data `INT`.
+**Perhatian!** Pastikan tabel `siswa` dalam keadaan kosong untuk menghindari potensi error saat mengubah struktur.</li></ul><h3 id="memodifikasi-tampilan-daftar-siswa" class="font-serif text-lg font-semibold text-text-primary tracking-tight mt-[2em] mb-[.5em]">Memodifikasi Tampilan Daftar Siswa</h3><ul class="pl-6"><li class="my-[.3em]">**File `index.php`:**
+Lakukan perubahan kode pada file `index.php` untuk menampilkan data siswa beserta nama kelas dari tabel relasi.
+
+php
+// Contoh perubahan yang mungkin diperlukan di index.php
+// Query untuk mengambil data siswa dan nama kelas
+$query = "SELECT s.*, k.nama_kelas FROM siswa s JOIN kelas k ON s.id_kelas = k.id";
+// ...
+
+</li><li class="my-[.3em]">**File `views/v_index.php`:**
+Sesuaikan kode pada file `views/v_index.php` agar dapat menampilkan `nama_kelas` yang diambil dari tabel `kelas`. Perhatikan bahwa `nama_kelas` adalah nama field pada tabel `kelas`.
+
+html
+<!-- Contoh perubahan yang mungkin diperlukan di views/v_index.php -->
+<td><?php echo $siswa['nama_kelas']; ?></td></li></ul><h3 id="menambahkan-data-siswa" class="font-serif text-lg font-semibold text-text-primary tracking-tight mt-[2em] mb-[.5em]">Menambahkan Data Siswa</h3><ul class="pl-6"><li class="my-[.3em]">**File `tambah.php` (Mengambil Data Kelas):**
+Tambahkan kode untuk mengambil data kelas dari database sebelum menyertakan form view `v_tambah.php`. Data ini akan digunakan untuk mengisi opsi pilihan kelas pada form.
+
+php
+<?php
+// ... (kode koneksi database)
+$query_kelas = "SELECT * FROM kelas";
+$result_kelas = mysqli_query($conn, $query_kelas);
+$kelas_options = [];
+while ($row = mysqli_fetch_assoc($result_kelas)) {
+    $kelas_options[] = $row;
+}
+// ...
+include 'views/v_tambah.php';
+?>
+
+</li><li class="my-[.3em]">**File `views/v_tambah.php` (Form Pilihan Kelas):**
+Ubah kode pada file `views/v_tambah.php` untuk menambahkan elemen `select` yang akan menampilkan daftar kelas secara dinamis.
+
+html
+<!-- Contoh perubahan di views/v_tambah.php -->
+<div class="form-group">
+    <label for="id_kelas">Kelas:</label>
+    <select class="form-control" id="id_kelas" name="id_kelas" required>
+        <?php foreach ($kelas_options as $kelas) : ?>
+            <option value="<?php echo $kelas['id']; ?>"><?php echo $kelas['nama_kelas']; ?></option>
+        <?php endforeach; ?>
+    </select>
+</div>
+
+</li><li class="my-[.3em]">**File `tambah.php` (Proses Insert):**
+Sesuaikan kode pada file `tambah.php` untuk mengambil data `id_kelas` dari `POST` dan menambahkannya ke dalam query `INSERT` data siswa.
+
+php
+<?php
+// ... (kode koneksi database dan ambil data kelas)
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $nis = $_POST['nis'];
+    $nama_lengkap = $_POST['nama_lengkap'];
+    $id_kelas = $_POST['id_kelas']; // Ambil id_kelas
+    // ... (validasi jika ada)
+    $query = "INSERT INTO siswa (nis, nama_lengkap, id_kelas) VALUES ('$nis', '$nama_lengkap', '$id_kelas')";
+    // ... (eksekusi query dan penanganan error/sukses)
+}
+// ...
+?></li></ul><h3 id="mengubah-data-siswa" class="font-serif text-lg font-semibold text-text-primary tracking-tight mt-[2em] mb-[.5em]">Mengubah Data Siswa</h3><ul class="pl-6"><li class="my-[.3em]">**File `edit.php` (Proses Update):**
+Lakukan hal yang sama seperti pada proses `tambah.php`. Ambil data `id_kelas` dari `POST` dan masukkan ke dalam query `UPDATE` untuk data siswa.
+
+php
+<?php
+// ... (kode koneksi database dan ambil data siswa yang akan diedit)
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $id = $_POST['id'];
+    $nis = $_POST['nis'];
+    $nama_lengkap = $_POST['nama_lengkap'];
+    $id_kelas = $_POST['id_kelas'];
+    // ... (validasi jika ada)
+    $query = "UPDATE siswa SET nis='$nis', nama_lengkap='$nama_lengkap', id_kelas='$id_kelas' WHERE id=$id";
+    // ... (eksekusi query dan penanganan error/sukses)
+}
+// ...
+?>
+
+</li><li class="my-[.3em]">**File `edit.php` (Mengambil Data Kelas untuk Form):**
+Tambahkan query untuk mengambil data kelas (sama seperti di `tambah.php`) agar daftar pilihan kelas dapat ditampilkan pada form edit. Selain itu, pastikan untuk menandai kelas yang sedang aktif (yang dimiliki oleh siswa yang diedit).
+
+php
+<?php
+// ... (kode koneksi database dan ambil data siswa yang akan diedit)
+
+// Ambil data kelas untuk dropdown
+$query_kelas = "SELECT * FROM kelas";
+$result_kelas = mysqli_query($conn, $query_kelas);
+$kelas_options = [];
+while ($row = mysqli_fetch_assoc($result_kelas)) {
+    $kelas_options[] = $row;
+}
+// ...
+// Di views/v_edit.php, Anda perlu menambahkan logika untuk menandai opsi yang terpilih:
+// <option value="..." <?php echo ($kelas['id'] == $siswa['id_kelas']) ? 'selected' : ''; ?> >...</option>
+
+include 'views/v_edit.php';
+?></li></ul><h2 id="validasi-input" class="font-serif text-xl font-semibold text-text-primary tracking-tight mt-[2.75em] mb-[.6em] pb-2.5 border-b-2 border-border">Validasi Input</h2><p>Pada bagian ini, kita akan mengimplementasikan validasi input untuk setiap form guna memastikan data yang dimasukkan valid dan memberikan umpan balik kepada pengguna.</p>
+<h3 id="implementasi-validasi-pada-form-tambah-siswa" class="font-serif text-lg font-semibold text-text-primary tracking-tight mt-[2em] mb-[.5em]">Implementasi Validasi pada Form Tambah Siswa</h3><ul class="pl-6"><li class="my-[.3em]">**File `views/v_tambah.php` (Menampilkan Pesan):**
+Tambahkan baris kode ini di atas form, atau sesuaikan posisinya dengan desain layout Anda, untuk menampilkan pesan sukses atau error.
+
+html
+<!-- Contoh di views/v_tambah.php -->
+<?php if (isset($success) && $success != '') : ?>
+    <div class="alert alert-success"><?php echo $success; ?></div>
+<?php endif; ?>
+
+<?php if (isset($errors) && count($errors) > 0) : ?>
+    <div class="alert alert-danger">
+        <ul>
+            <?php foreach ($errors as $error) : ?>
+                <li><?php echo $error; ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>
+
+<!-- Form Anda dimulai di sini -->
+
+</li><li class="my-[.3em]">**File `tambah.php` (Logika Validasi):**
+Tambahkan dan ubah kode pada `tambah.php` untuk menyertakan logika validasi. Contoh ini menunjukkan validasi untuk `nis` dan `nama_lengkap`. Anda bisa memperluasnya untuk field lain.
+
+php
+<?php
+// ... (kode koneksi database)
+$errors = [];
+$success = '';
+
+// Bagian untuk mengambil data kelas untuk dropdown (seperti di atas)
+// ...
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $nis = trim($_POST['nis']);
+    $nama_lengkap = trim($_POST['nama_lengkap']);
+    $id_kelas = $_POST['id_kelas'];
+
+    // Validasi NIS
+    if (empty($nis)) {
+        $errors[] = "NIS tidak boleh kosong.";
+    }
+    // Validasi Nama Lengkap
+    if (empty($nama_lengkap)) {
+        $errors[] = "Nama lengkap tidak boleh kosong.";
+    }
+    // Tambahkan validasi lain sesuai kebutuhan, misalnya untuk id_kelas
+
+    if (count($errors) == 0) {
+        // Semua validasi sukses, lakukan insert data
+        $query = "INSERT INTO siswa (nis, nama_lengkap, id_kelas) VALUES ('$nis', '$nama_lengkap', '$id_kelas')";
+        if (mysqli_query($conn, $query)) {
+            $success = "Data siswa berhasil ditambahkan.";
+            // Opsional: kosongkan input form setelah sukses
+        } else {
+            $errors[] = "Error: " . mysqli_error($conn);
+        }
+    }
+}
+// ...
+// Bagian include views/v_tambah.php
+include 'views/v_tambah.php';
+?></li></ul><h3 id="penjelasan-mekanisme-validasi" class="font-serif text-lg font-semibold text-text-primary tracking-tight mt-[2em] mb-[.5em]">Penjelasan Mekanisme Validasi</h3><ul class="pl-6"><li class="my-[.3em]">**Menampilkan Pesan Sukses:**
+Baris kode untuk `if (isset($success) && $success != '')` digunakan untuk menampilkan pesan sukses yang berasal dari variabel `$success`. Jika variabel tersebut tidak bernilai kosong, maka tampilkan isi dari variabel tersebut dalam bentuk `alert-success`.
+</li><li class="my-[.3em]">**Menangani Pesan Error:**
+Baris kode untuk `if (isset($errors) && count($errors) > 0)` digunakan untuk melakukan validasi. Misalnya, jika variabel `$nis` kosong, maka tambahkan pesan error ke array `$errors` dan tampilkan menggunakan function `flash` (jika Anda memiliki implementasi `flash message`) atau secara langsung di bagian atas form dalam bentuk `alert-danger` dengan daftar `<ul><li>` dari semua error.
+</li><li class="my-[.3em]">**Lokasi Insert/Update Data:**
+Pastikan Anda menyimpan kode untuk melakukan operasi `INSERT` data ataupun `UPDATE` data pada blok `if (count($errors) == 0)` setelah semua validasi selesai dilakukan dan tidak ada error yang ditemukan.</li></ul><h3 id="alur-validasi-input" class="font-serif text-lg font-semibold text-text-primary tracking-tight mt-[2em] mb-[.5em]">Alur Validasi Input</h3><p>Berikut adalah gambaran alur proses validasi input data:</p>
+<ul class="pl-6"><li class="my-[.3em]">**Start:** Proses validasi dimulai.</li><li class="my-[.3em]">**NIS Kosong?**
+*   Jika `Ya`: Tampilkan pesan error bahwa NIS kosong, lalu lanjutkan ke validasi berikutnya (atau hentikan dan tampilkan semua error).
+*   Jika `Tidak`: Lanjutkan ke validasi berikutnya.</li><li class="my-[.3em]">**Nama Lengkap Kosong?**
+*   Jika `Ya`: Tampilkan pesan error bahwa Nama Lengkap kosong, lalu lanjutkan ke validasi berikutnya.
+*   Jika `Tidak`: Lanjutkan ke validasi berikutnya.</li><li class="my-[.3em]">**Field ke-N Kosong?** (Lanjutkan untuk semua field yang perlu divalidasi).
+*   Jika `Ya`: Tampilkan pesan error bahwa field ke-N kosong.
+*   Jika `Tidak`: Lanjutkan.</li><li class="my-[.3em]">**Semua Validasi Sukses:** Jika tidak ada error yang terkumpul, lakukan operasi `Insert` atau `Update` Data ke Database.</li><li class="my-[.3em]">**Finish:** Proses validasi dan penyimpanan data selesai.</li></ul></div>
+            <div class="reflection-box"><p class="reflection-header flex items-center gap-2.5 text-[.72rem] font-bold tracking-[.1em] uppercase text-accent mb-3.5">Refleksi</p><p class="text-sm text-text-body leading-7 mb-3">Renungkan materi ini:</p><ul class="reflection-questions list-none p-0"><li class="text-sm text-text-muted">Apa tantangan utama yang Anda hadapi saat mengimplementasikan relasi antar tabel dan validasi input?</li><li class="text-sm text-text-muted">Bagaimana struktur kode PHP native ini membantu dalam memahami alur kerja CRUD dan validasi?</li><li class="text-sm text-text-muted">Bagaimana Anda akan mengembangkan lebih lanjut fitur validasi atau relasi ini di proyek lain?</li></ul></div><div class="references-box"><div class="references-header text-[.72rem] font-bold tracking-[.1em] uppercase text-text-muted">📚 Referensi</div><ul class="references-list list-none p-0 m-0"><li class="p-3 flex items-start gap-2.5 text-sm"><span class="ref-num text-[.72rem] font-bold shrink-0 mt-0.5">1</span><span class="ref-text text-text-muted leading-relaxed">Dokumen Instruksi Praktik PHP Native CRUD Relasi &amp; Validasi</span></li></ul></div><div class="tag-row flex flex-wrap gap-1.5 mt-7"><span class="tag text-[.73rem] font-medium px-2.5 py-0.5">PHP</span><span class="tag text-[.73rem] font-medium px-2.5 py-0.5">CRUD</span><span class="tag text-[.73rem] font-medium px-2.5 py-0.5">Relasi Database</span><span class="tag text-[.73rem] font-medium px-2.5 py-0.5">Validasi Input</span><span class="tag text-[.73rem] font-medium px-2.5 py-0.5">Native PHP</span></div><div class="part-footer-nav flex justify-between items-center gap-4 mt-10 pt-6 border-t border-border"><span></span><a href="../../home/index.html" class="part-nav-btn flex items-center flex-row-reverse gap-2 py-2.5 px-4 text-sm font-medium text-text-muted no-underline bg-accent-soft border-accent-mid">🏠 Kembali ke Beranda</a></div>
+          </section>
+
+      </main>
+
+      <!-- SITE FOOTER -->
+      <footer class="site-footer col-span-full border-t border-border bg-surface">
+        <div class="footer-inner max-w-[1280px] mx-auto py-10 px-6 grid grid-cols-3 gap-8 max-[960px]:grid-cols-2 max-[600px]:grid-cols-1">
+          <div class="footer-brand">
+            <div class="font-serif text-lg font-semibold mb-2.5 flex items-center gap-2">
+              Lippbyte <span class="logo-badge font-sans text-[.65rem] font-bold tracking-wider uppercase bg-accent text-white px-2 py-0.5 rounded-full">Blog</span>
+            </div>
+            <p class="text-sm text-text-faint leading-relaxed">Dokumentasi perjalanan belajar — disesuaikan dengan topik</p> 
+          </div>
+          <div>
+            <p class="footer-col-title text-[.72rem] font-bold tracking-[.1em] uppercase text-text-faint mb-3">Navigasi</p>
+            <ul class="footer-links list-none p-0">
+              <li><a href="#pendahuluan" class="text-sm text-text-muted">Pendahuluan</a></li>
+              <li class="mt-1.5"><a href="#part1" class="text-sm text-text-muted">Part 1 — Judul Part 1</a></li>
+              <li class="mt-1.5"><a href="#part2" class="text-sm text-text-muted">Part 2 — Judul Part 2</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="footer-col-title text-[.72rem] font-bold tracking-[.1em] uppercase text-text-faint mb-3">Link</p>
+            <ul class="footer-links list-none p-0">
+              <li><a href="https://lippbyte.github.io/" class="text-sm text-text-muted" target="_blank">Lippbyte</a></li>
+              <li><a href="../../home/index.html" class="text-sm text-text-muted">Home</a></li>
+              <li><a href="../../home/index.html#blog-list" class="text-sm text-text-muted">Blog</a></li>
+              <li><a href="https://linkedin.com/in/muhammad-khalifa-72611b3b8" target="_blank" class="text-sm text-text-muted">LinkedIn</a></li>
+              <li><a href="https://github.com/lippbyte" target="_blank" class="text-sm text-text-muted">GitHub</a></li>
+            </ul>
+          </div>
+          <div class="footer-bottom col-span-full pt-6 border-t border-border flex justify-between items-center flex-wrap gap-2 text-xs text-text-faint">
+            <span>© 2026 Lippbyte · [Judul Topik]</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+  </div>
+
+  <script src="../../blog/posts.js"></script>
+  <script src="../template/js/main.js"></script>
+  <!-- PrismJS Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup-templating.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-php.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+</body>
+</html>
