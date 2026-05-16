@@ -15,7 +15,7 @@ window.BLOG_POSTS = [
     "category": "Learning",
     "description": "Implementasi CRUD dengan Relasi dan Validasi Input pada PHP Native",
     "emoji": "🐘",
-    "color": "linear-gradient(135deg, #4f46e5 0%, #312e81 100%)",
+    "color": "linear-gradient(135deg, #1f2937 0%, #111827 100%)",
     "year": "2026"
   }
 ];
