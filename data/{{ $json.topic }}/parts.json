@@ -1,0 +1,81 @@
+{
+  "topic": "native-php-crud-relasi-validasi",
+  "title": "Native PHP: Implementasi CRUD dengan Relasi dan Validasi Input",
+  "updatedAt": "2026-05-16T04:39:46.728Z",
+  "parts": [
+    {
+      "id": "native-php-crud-relasi-validasi",
+      "partNumber": 0,
+      "title": "Native PHP: Implementasi CRUD dengan Relasi dan Validasi Input",
+      "label": "CRUD Relasi & Validasi",
+      "type": "Praktik",
+      "date": "2024-07-28",
+      "readTime": "15",
+      "intro": "Praktik ini membahas implementasi operasi CRUD (Create, Read, Update, Delete) pada PHP native dengan relasi dua tabel, yakni siswa dan kelas. Anda akan belajar mengelola data siswa yang terhubung dengan pilihan kelas dinamis dari tabel master. Selain itu, praktik ini juga mencakup penerapan validasi input pada form untuk memastikan integritas data dan memberikan peringatan kepada pengguna.",
+      "tags": [
+        "PHP",
+        "CRUD",
+        "Relasi Database",
+        "Validasi Input",
+        "Native PHP"
+      ],
+      "objectives": [
+        "Memahami konsep relasi antar tabel dalam aplikasi CRUD PHP native.",
+        "Mampu membuat operasi CRUD (Create, Read, Update, Delete) untuk data yang memiliki relasi.",
+        "Mampu mengimplementasikan validasi input pada form PHP native.",
+        "Mampu menampilkan pesan error atau sukses berdasarkan hasil validasi."
+      ],
+      "reflection": [
+        "Apa tantangan utama yang Anda hadapi saat mengimplementasikan relasi antar tabel dan validasi input?",
+        "Bagaimana struktur kode PHP native ini membantu dalam memahami alur kerja CRUD dan validasi?",
+        "Bagaimana Anda akan mengembangkan lebih lanjut fitur validasi atau relasi ini di proyek lain?"
+      ],
+      "references": [
+        {
+          "num": "1",
+          "text": "Dokumen Instruksi Praktik PHP Native CRUD Relasi & Validasi",
+          "url": ""
+        }
+      ],
+      "subthemes": [
+        {
+          "id": "crud-relasi-dua-tabel",
+          "title": "CRUD dengan Relasi Dua Tabel"
+        },
+        {
+          "id": "persiapan-database",
+          "title": "Persiapan Database"
+        },
+        {
+          "id": "modifikasi-tampilan-daftar-siswa",
+          "title": "Memodifikasi Tampilan Daftar Siswa"
+        },
+        {
+          "id": "menambahkan-data-siswa",
+          "title": "Menambahkan Data Siswa"
+        },
+        {
+          "id": "mengubah-data-siswa",
+          "title": "Mengubah Data Siswa"
+        },
+        {
+          "id": "validasi-input",
+          "title": "Validasi Input"
+        },
+        {
+          "id": "implementasi-validasi-form-tambah",
+          "title": "Implementasi Validasi pada Form Tambah Siswa"
+        },
+        {
+          "id": "penjelasan-mekanisme-validasi",
+          "title": "Penjelasan Mekanisme Validasi"
+        },
+        {
+          "id": "alur-validasi-input",
+          "title": "Alur Validasi Input"
+        }
+      ],
+      "content": "## CRUD dengan Relasi Dua Tabel\n\nPada bagian ini, kita akan fokus membangun fungsionalitas CRUD dengan konsep relasi antar dua tabel: `siswa` dan `kelas`.\n\n### Persiapan Database\n\n1.  **Memastikan Tabel Kelas:**\n    Pastikan Anda sudah memiliki tabel `kelas` yang berisi data master kelas.\n\n2.  **Mengosongkan Tabel Siswa:**\n    Kosongkan tabel `siswa` menggunakan perintah `TRUNCATE`. **Perhatian!** Pastikan Anda menggunakan `TRUNCATE` dan bukan `DROP`.\n\n3.  **Mengubah Struktur Tabel Siswa:**\n    Ubah tabel `siswa` dengan mengganti kolom `kelas` menjadi `id_kelas` dengan tipe data `INT`.\n    **Perhatian!** Pastikan tabel `siswa` dalam keadaan kosong untuk menghindari potensi error saat mengubah struktur.\n\n### Memodifikasi Tampilan Daftar Siswa\n\n1.  **File `index.php`:**\n    Lakukan perubahan kode pada file `index.php` untuk menampilkan data siswa beserta nama kelas dari tabel relasi.\n\n    php\n    // Contoh perubahan yang mungkin diperlukan di index.php\n    // Query untuk mengambil data siswa dan nama kelas\n    $query = \"SELECT s.*, k.nama_kelas FROM siswa s JOIN kelas k ON s.id_kelas = k.id\";\n    // ...\n    \n\n2.  **File `views/v_index.php`:**\n    Sesuaikan kode pada file `views/v_index.php` agar dapat menampilkan `nama_kelas` yang diambil dari tabel `kelas`. Perhatikan bahwa `nama_kelas` adalah nama field pada tabel `kelas`.\n\n    html\n    <!-- Contoh perubahan yang mungkin diperlukan di views/v_index.php -->\n    <td><?php echo $siswa['nama_kelas']; ?></td>\n    \n\n### Menambahkan Data Siswa\n\n1.  **File `tambah.php` (Mengambil Data Kelas):**\n    Tambahkan kode untuk mengambil data kelas dari database sebelum menyertakan form view `v_tambah.php`. Data ini akan digunakan untuk mengisi opsi pilihan kelas pada form.\n\n    php\n    <?php\n    // ... (kode koneksi database)\n    $query_kelas = \"SELECT * FROM kelas\";\n    $result_kelas = mysqli_query($conn, $query_kelas);\n    $kelas_options = [];\n    while ($row = mysqli_fetch_assoc($result_kelas)) {\n        $kelas_options[] = $row;\n    }\n    // ...\n    include 'views/v_tambah.php';\n    ?>\n    \n\n2.  **File `views/v_tambah.php` (Form Pilihan Kelas):**\n    Ubah kode pada file `views/v_tambah.php` untuk menambahkan elemen `select` yang akan menampilkan daftar kelas secara dinamis.\n\n    html\n    <!-- Contoh perubahan di views/v_tambah.php -->\n    <div class=\"form-group\">\n        <label for=\"id_kelas\">Kelas:</label>\n        <select class=\"form-control\" id=\"id_kelas\" name=\"id_kelas\" required>\n            <?php foreach ($kelas_options as $kelas) : ?>\n                <option value=\"<?php echo $kelas['id']; ?>\"><?php echo $kelas['nama_kelas']; ?></option>\n            <?php endforeach; ?>\n        </select>\n    </div>\n    \n\n3.  **File `tambah.php` (Proses Insert):**\n    Sesuaikan kode pada file `tambah.php` untuk mengambil data `id_kelas` dari `POST` dan menambahkannya ke dalam query `INSERT` data siswa.\n\n    php\n    <?php\n    // ... (kode koneksi database dan ambil data kelas)\n    if ($_SERVER['REQUEST_METHOD'] == 'POST') {\n        $nis = $_POST['nis'];\n        $nama_lengkap = $_POST['nama_lengkap'];\n        $id_kelas = $_POST['id_kelas']; // Ambil id_kelas\n        // ... (validasi jika ada)\n        $query = \"INSERT INTO siswa (nis, nama_lengkap, id_kelas) VALUES ('$nis', '$nama_lengkap', '$id_kelas')\";\n        // ... (eksekusi query dan penanganan error/sukses)\n    }\n    // ...\n    ?>\n    \n\n### Mengubah Data Siswa\n\n1.  **File `edit.php` (Proses Update):**\n    Lakukan hal yang sama seperti pada proses `tambah.php`. Ambil data `id_kelas` dari `POST` dan masukkan ke dalam query `UPDATE` untuk data siswa.\n\n    php\n    <?php\n    // ... (kode koneksi database dan ambil data siswa yang akan diedit)\n    if ($_SERVER['REQUEST_METHOD'] == 'POST') {\n        $id = $_POST['id'];\n        $nis = $_POST['nis'];\n        $nama_lengkap = $_POST['nama_lengkap'];\n        $id_kelas = $_POST['id_kelas'];\n        // ... (validasi jika ada)\n        $query = \"UPDATE siswa SET nis='$nis', nama_lengkap='$nama_lengkap', id_kelas='$id_kelas' WHERE id=$id\";\n        // ... (eksekusi query dan penanganan error/sukses)\n    }\n    // ...\n    ?>\n    \n\n2.  **File `edit.php` (Mengambil Data Kelas untuk Form):**\n    Tambahkan query untuk mengambil data kelas (sama seperti di `tambah.php`) agar daftar pilihan kelas dapat ditampilkan pada form edit. Selain itu, pastikan untuk menandai kelas yang sedang aktif (yang dimiliki oleh siswa yang diedit).\n\n    php\n    <?php\n    // ... (kode koneksi database dan ambil data siswa yang akan diedit)\n\n    // Ambil data kelas untuk dropdown\n    $query_kelas = \"SELECT * FROM kelas\";\n    $result_kelas = mysqli_query($conn, $query_kelas);\n    $kelas_options = [];\n    while ($row = mysqli_fetch_assoc($result_kelas)) {\n        $kelas_options[] = $row;\n    }\n    // ...\n    // Di views/v_edit.php, Anda perlu menambahkan logika untuk menandai opsi yang terpilih:\n    // <option value=\"...\" <?php echo ($kelas['id'] == $siswa['id_kelas']) ? 'selected' : ''; ?> >...</option>\n    \n    include 'views/v_edit.php';\n    ?>\n    \n\n## Validasi Input\n\nPada bagian ini, kita akan mengimplementasikan validasi input untuk setiap form guna memastikan data yang dimasukkan valid dan memberikan umpan balik kepada pengguna.\n\n### Implementasi Validasi pada Form Tambah Siswa\n\n1.  **File `views/v_tambah.php` (Menampilkan Pesan):**\n    Tambahkan baris kode ini di atas form, atau sesuaikan posisinya dengan desain layout Anda, untuk menampilkan pesan sukses atau error.\n\n    html\n    <!-- Contoh di views/v_tambah.php -->\n    <?php if (isset($success) && $success != '') : ?>\n        <div class=\"alert alert-success\"><?php echo $success; ?></div>\n    <?php endif; ?>\n\n    <?php if (isset($errors) && count($errors) > 0) : ?>\n        <div class=\"alert alert-danger\">\n            <ul>\n                <?php foreach ($errors as $error) : ?>\n                    <li><?php echo $error; ?></li>\n                <?php endforeach; ?>\n            </ul>\n        </div>\n    <?php endif; ?>\n\n    <!-- Form Anda dimulai di sini -->\n    \n\n2.  **File `tambah.php` (Logika Validasi):**\n    Tambahkan dan ubah kode pada `tambah.php` untuk menyertakan logika validasi. Contoh ini menunjukkan validasi untuk `nis` dan `nama_lengkap`. Anda bisa memperluasnya untuk field lain.\n\n    php\n    <?php\n    // ... (kode koneksi database)\n    $errors = [];\n    $success = '';\n\n    // Bagian untuk mengambil data kelas untuk dropdown (seperti di atas)\n    // ...\n\n    if ($_SERVER['REQUEST_METHOD'] == 'POST') {\n        $nis = trim($_POST['nis']);\n        $nama_lengkap = trim($_POST['nama_lengkap']);\n        $id_kelas = $_POST['id_kelas'];\n\n        // Validasi NIS\n        if (empty($nis)) {\n            $errors[] = \"NIS tidak boleh kosong.\";\n        }\n        // Validasi Nama Lengkap\n        if (empty($nama_lengkap)) {\n            $errors[] = \"Nama lengkap tidak boleh kosong.\";\n        }\n        // Tambahkan validasi lain sesuai kebutuhan, misalnya untuk id_kelas\n\n        if (count($errors) == 0) {\n            // Semua validasi sukses, lakukan insert data\n            $query = \"INSERT INTO siswa (nis, nama_lengkap, id_kelas) VALUES ('$nis', '$nama_lengkap', '$id_kelas')\";\n            if (mysqli_query($conn, $query)) {\n                $success = \"Data siswa berhasil ditambahkan.\";\n                // Opsional: kosongkan input form setelah sukses\n            } else {\n                $errors[] = \"Error: \" . mysqli_error($conn);\n            }\n        }\n    }\n    // ...\n    // Bagian include views/v_tambah.php\n    include 'views/v_tambah.php';\n    ?>\n    \n\n### Penjelasan Mekanisme Validasi\n\n1.  **Menampilkan Pesan Sukses:**\n    Baris kode untuk `if (isset($success) && $success != '')` digunakan untuk menampilkan pesan sukses yang berasal dari variabel `$success`. Jika variabel tersebut tidak bernilai kosong, maka tampilkan isi dari variabel tersebut dalam bentuk `alert-success`.\n\n2.  **Menangani Pesan Error:**\n    Baris kode untuk `if (isset($errors) && count($errors) > 0)` digunakan untuk melakukan validasi. Misalnya, jika variabel `$nis` kosong, maka tambahkan pesan error ke array `$errors` dan tampilkan menggunakan function `flash` (jika Anda memiliki implementasi `flash message`) atau secara langsung di bagian atas form dalam bentuk `alert-danger` dengan daftar `<ul><li>` dari semua error.\n\n3.  **Lokasi Insert/Update Data:**\n    Pastikan Anda menyimpan kode untuk melakukan operasi `INSERT` data ataupun `UPDATE` data pada blok `if (count($errors) == 0)` setelah semua validasi selesai dilakukan dan tidak ada error yang ditemukan.\n\n### Alur Validasi Input\n\nBerikut adalah gambaran alur proses validasi input data:\n\n1.  **Start:** Proses validasi dimulai.\n2.  **NIS Kosong?**\n    *   Jika `Ya`: Tampilkan pesan error bahwa NIS kosong, lalu lanjutkan ke validasi berikutnya (atau hentikan dan tampilkan semua error).\n    *   Jika `Tidak`: Lanjutkan ke validasi berikutnya.\n3.  **Nama Lengkap Kosong?**\n    *   Jika `Ya`: Tampilkan pesan error bahwa Nama Lengkap kosong, lalu lanjutkan ke validasi berikutnya.\n    *   Jika `Tidak`: Lanjutkan ke validasi berikutnya.\n4.  **Field ke-N Kosong?** (Lanjutkan untuk semua field yang perlu divalidasi).\n    *   Jika `Ya`: Tampilkan pesan error bahwa field ke-N kosong.\n    *   Jika `Tidak`: Lanjutkan.\n5.  **Semua Validasi Sukses:** Jika tidak ada error yang terkumpul, lakukan operasi `Insert` atau `Update` Data ke Database.\n6.  **Finish:** Proses validasi dan penyimpanan data selesai."
+    }
+  ]
+}
