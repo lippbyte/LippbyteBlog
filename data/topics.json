@@ -6,7 +6,7 @@
     "description": "Dokumentasi Pembelajaran Laravel",
     "emoji": "📃",
     "status": "active",
-    "year": "2026"  
+    "year": "2026"
   },
   {
     "id": "aplikasi-crud-phpnative",
@@ -15,6 +15,14 @@
     "description": "Implementasi CRUD dengan Relasi dan Validasi Input pada PHP Native",
     "emoji": "🐘",
     "status": "active",
-    "year": "2026"  
+    "year": "2026"
+  },
+  {
+    "id": "searching-ordering-sorting",
+    "title": "SEARCHING, ORDERING & SORTING",
+    "category": "Baru",
+    "description": "",
+    "emoji": "🚀",
+    "status": "active"
   }
 ]
