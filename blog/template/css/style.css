@@ -189,17 +189,32 @@ figure img { border-radius: var(--radius-md); border: 1px solid var(--border); b
 /* ── Mobile ── */
 @media (max-width: 960px) {
   .left-sidebar {
-    position: static !important; height: auto !important;
-    border-right: none !important; border-bottom: 1px solid var(--border);
-    overflow-x: auto; overflow-y: hidden;
-    display: flex; flex-direction: row; white-space: nowrap;
+    position: sticky !important; 
+    top: 56px !important; 
+    z-index: 150;
+    height: auto !important;
+    background: var(--bg-translucent);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-right: none !important; 
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto; 
+    overflow-y: hidden;
+    display: flex; 
+    flex-direction: row; 
+    align-items: center;
+    white-space: nowrap;
+    padding: 0 !important;
+    scrollbar-width: none; /* Firefox */
   }
+  .left-sidebar::-webkit-scrollbar { display: none; } /* Chrome/Safari */
   .sidebar-section-label { display: none !important; }
   .sidebar-back { display: none !important; }
   .sidebar-other-blogs { display: none !important; }
-  .part-nav { display: flex !important; flex-direction: row !important; padding: 0 16px; }
-  .part-nav li a { border-left: none !important; border-bottom: 2px solid transparent; white-space: nowrap; }
-  .part-nav li a.active { border-bottom-color: var(--accent) !important; border-left: none !important; }
+  .part-nav { display: flex !important; flex-direction: row !important; padding: 0 8px; width: max-content; }
+  .part-nav li { display: flex; align-items: center; }
+  .part-nav li a { border-left: none !important; border-bottom: 2px solid transparent; padding: 12px 14px; white-space: nowrap; }
+  .part-nav li a.active { border-bottom-color: var(--accent) !important; border-left: none !important; background: transparent; }
   .toc-sub { display: none !important; }
   .nav-progress-ring { display: none !important; }
 }
@@ -207,4 +222,13 @@ figure img { border-radius: var(--radius-md); border: 1px solid var(--border); b
 @media (max-width: 600px) {
   .part-footer-nav { flex-direction: column !important; }
   .part-nav-btn { width: 100% !important; justify-content: center !important; }
+  .main-content { padding: 0 16px 60px !important; }
+  .part-title { font-size: 1.8rem; line-height: 1.25; }
+  .content-body h2 { font-size: 1.3rem; margin-top: 2.2em; }
+  .code-block pre { padding: 12px 16px 20px 16px; }
+  .callout { flex-direction: column; gap: 8px; }
+}
+
+.part-section {
+  scroll-margin-top: calc(var(--nav-h) + 60px);
 }
