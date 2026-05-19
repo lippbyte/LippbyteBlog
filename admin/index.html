@@ -149,9 +149,15 @@
     }
     
   </style>
+  <script>
+    let initTheme = localStorage.getItem('lipp_theme') || 'dark-mode';
+    if (initTheme === 'dark-mode') document.documentElement.classList.add('dark');
+  </script>
 </head>
-<body class="dark-mode">
-
+<body>
+<script>
+  document.body.className = localStorage.getItem('lipp_theme') || 'dark-mode';
+</script>
   <!-- LOGIN/SETUP SCREEN -->
   <div class="overlay" id="setupOverlay">
     <div class="login-card">
