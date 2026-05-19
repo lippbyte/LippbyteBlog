@@ -1,8 +1,9 @@
 {
   "id": "laravel-log",
-  "title": "Laravel Blog",
-  "category": "Documentation",
-  "description": "Dokumentasi Laravel dari HTML scrape",
+  "title": "Dokumentasi Pembelajaran Laravel",
+  "category": "Learning",
+  "description": "Implementasi MVC dan Manajemen Basis Data dalam Framework Laravel",
   "emoji": "📃",
-  "status": "active"
+  "status": "active",
+  "year": "2026"
 }

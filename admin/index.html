@@ -371,9 +371,21 @@
     renderer.em = t => { let txt=typeof t==='string'?t:t.text; return `<em>${txt}</em>`; };
     renderer.image = (href, title, text) => {
       if(typeof href==='object') { text=href.text; title=href.title; href=href.href; }
+      
+      let captionHTML = text || '';
+      let parts = captionHTML.split(' - Source');
+      if (parts.length > 1) {
+          captionHTML = `<strong>${parts[0]}</strong> - Source${parts[1]}`;
+      } else if (captionHTML.includes(' - Source:')) {
+          let p = captionHTML.split(' - Source:');
+          captionHTML = `<strong>${p[0]}</strong> - Source:${p[1]}`;
+      } else {
+          captionHTML = `<strong>${captionHTML}</strong>`;
+      }
+
       return `<figure class="my-8">
         <div class="img-image text-sm max-w-sm mx-auto overflow-hidden rounded-xl border border-border"><img src="${href}" alt="${text||''}" class="w-full h-auto object-cover object-center"></div>
-        <figcaption class="text-center text-xs text-text-faint mt-2 italic"><strong>Gambar - ${text||''}</strong> Source : Pinterest</figcaption>
+        <figcaption class="text-center text-xs text-text-faint mt-2 italic">${captionHTML}</figcaption>
       </figure>`;
     };
     renderer.blockquote = q => {

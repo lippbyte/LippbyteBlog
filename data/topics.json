@@ -1,28 +1,20 @@
 [
   {
     "id": "laravel-log",
-    "title": "Laravel Blog",
+    "title": "Dokumentasi Pembelajaran Laravel",
     "category": "Learning",
-    "description": "Dokumentasi Pembelajaran Laravel",
+    "description": "Implementasi MVC dan Manajemen Basis Data dalam Framework Laravel",
     "emoji": "📃",
     "status": "active",
     "year": "2026"
   },
   {
     "id": "aplikasi-crud-phpnative",
-    "title": "Praktik: Aplikasi CRUD PHP Native",
+    "title": "CRUD PHP Native",
     "category": "Learning",
     "description": "Implementasi CRUD dengan Relasi dan Validasi Input pada PHP Native",
     "emoji": "🐘",
     "status": "active",
     "year": "2026"
-  },
-  {
-    "id": "searching-ordering-sorting",
-    "title": "SEARCHING, ORDERING & SORTING",
-    "category": "Baru",
-    "description": "",
-    "emoji": "🚀",
-    "status": "active"
   }
 ]
